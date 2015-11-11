@@ -1,0 +1,4 @@
+Run in PS console this command:
+---
+Set-ExecutionPolicy RemoteSigned
+---
