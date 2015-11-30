@@ -1,0 +1,56 @@
+Send-Keys
+30.3.2007 — Xaegr  
+
+Небольшая функция — обёртка для SendKeys, те кто работал с vbscript наверняка узнают :) Позволяет автоматизировать графические приложения методом имитации нажатий на клавиши…
+function Send-Keys ([string]$Window; [int]$Interval=100) #Устанавливаем аргументы и значение по умолчанию для $interval
+{
+    begin #Блок begin выполняется 1 раз в начале скрипта
+    {
+        $shell = new-object -com WScript.Shell #Создаем объект WScript.Shell
+        if ($window) #Если переменная $window не пуста
+        {
+            write-host "Waiting for window '$Window'" #Пишем на консоль состояние
+            while (!$shell.AppActivate($Window)) #Пока не активируем указанное окно...
+            {
+                start-sleep -milliseconds $Interval #...Ждем заданное время
+            }
+        }
+    }
+
+    process #Блок process выполняется для каждого объекта пришедшего через конвеер |, текущий объект доступен в переменной $_
+    {
+        write-host "Sending keys '$_'" #Пишем на консоль
+        $shell.SendKeys($_) #Нажимаем клавиши
+        start-sleep -milliseconds $Interval #Ждем
+    }
+}
+
+Используется просто: клавиши берутся из пайпа, в качестве аргумента можно указать текст окна в котором эти клавиши надо нажимать (Скрипт будет ждать пока это окно не откроется и сделает его активным). 
+
+Например так:
+PS D:\PowerShell> calc; "486 {+} 1024 / 4 = ^c %{F4}".split()| Send-Keys "Калькулятор"
+Waiting for window 'Калькулятор'
+Sending keys '486'
+Sending keys '{+}'
+Sending keys '1024'
+Sending keys '/'
+Sending keys '4'
+Sending keys '='
+Sending keys '^c'
+Sending keys '%{F4}'
+PS D:\PowerShell> notepad.exe; "The result is: ","^v","^{LEFT}","^+{RIGHT}" | Send-Keys "Untitled"
+Waiting for window 'Untitled'
+Sending keys 'The result is: '
+Sending keys '^v'
+Sending keys '^{LEFT}'
+Sending keys '^+{RIGHT}'
+
+
+Можно последовательность нажатий просто загнать в текстовый файл, и вызывать так:
+PS D:\PowerShell> Get-Content File.txt | Send-Keys "MyProg"
+
+
+Правила обозначений клавиш можно посмотреть тут.
+
+
+http%3A%2F%2Fmsdn.microsoft.com%2Flibrary%2Fdefault.asp%3Furl%3D%2Flibrary%2Fen-us%2Fscript56%2Fhtml%2F4b032417-ebda-4d30-88a4-2b56c24affdd.asp&xguid=856cca8d563e42c042a5bf84f5ee23ed&xuuid=d2062f201dded96aad2d75081e2b972b&xsessid=1f8519a11ea90bba2921aff63a32fab7&xcreo=0&xed=0&sref=https%3A%2F%2Fxaegr.wordpress.com%2F2007%2F03%2F30%2Fsend-keys%2F&pref=http%3A%2F%2Fyandex.ru%2Fclck%2Fjsredir%3Ffrom%3Dyandex.ru%253Bsearch%252F%253Bweb%253B%253B%26text%3Dpowershell%2520keys%26url%3Dhttps%253A%252F%252Fxaegr.wordpress.com%252F2007%252F03%252F30%252Fsend-keys%252F%26uuid%3D%26state%3DPEtFfuTeVD5kpHnK9lio9daDl0Ow0EQqBnwXqr2CGSTlhSDEzIy2U7BBTY65%252Fy93Of3lHSl05Otfr0mPr43GHg%253D%253D%26data%3D%26b64e%3D3%26sign%3Dce63c310ddfe5e907efcf324af2364a2%26keyno%3D0%26cst%3DAiuY0DBWFJ5fN_r-AEszk9rzr56FSzAd3nx5JcppUREqV0syv8eDKiF-w2otpFjsW5iEJ-bolejs9e85ycC9g8DN1BFlY9pCouwMDDZ5ziOjVTqbz0fQH_C_lVsrGRGF2LewnmXgAqZ1cPj4yCioQ05_7BqNlVwACbG4x3UsbD4U0XyiW3VIA8uOoAxSK1MPkmwkchbSSeUJE_S_plpwbetUkAOiXkUpW6kzhe_tXowpvhS9Za4X7qPmq6xZtseWaBL3N-vI2E84z_hJO5R-mCahz4S6-iVphQ_s8CHp_ijtNPO_gcTmLF9xC-aZtC5PLa3uyWOe0ctnWxrKjhZUW2L5fD_kOMaWsiGN-55oyIX1JZyxV7hQm2b7iSqLwyOCWMBTsw2u6lGoqQyRVgRUqFLgRpUKxGIqXeQkRTMpvIkjReZ83WkjCQwDxu9eZEQwzXDj4wu5oAE6I9meO-HYi2jn4t8gqlfgh4H553oznF-Gerlsch66WrriU1mRfHxHoB1AluWu58OvU1A1SOgwtIS-aLLVjPfiXsrt9S2VYKNpWQireulmKarVJuxJYbMe2QRCKX2w-LiGysW6tRLDlwv-tFeBPEu5%26ref%3DcM777e4sMOAycdZhdUbYHpMQ80108_UCGNFuA2FHI6tEsCmR7lixZ51wkQOO90dn%26l10n%3Dru%26cts%3D1447755995825%26mc%3D4.133660689688186&xtz=-180

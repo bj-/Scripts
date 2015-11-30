@@ -3,6 +3,11 @@
 # When file found - show message box Abort / nothing do / rename file to *.* Current time
 #
 #
+# Histry
+#
+# 1.0.3 - Копирование сожержимого файла в клипбоард
+#
+
 param (
 	[string]$ErrLogPath = "D:\Shturman\Bin\Errors"
 	#,
@@ -10,7 +15,7 @@ param (
 )
 
 # Script Version
-$scriptver = "1.0.2";
+$scriptver = "1.0.3";
 
 #$ErrLogPath = "D:\Shturman\Bin\Errors"
 
@@ -44,9 +49,12 @@ function errFile ($FilePath, $b)
 		}
 		"5"
 		{	
+			# Copy lines to clipboard
+			$Lines | GetSet-Clipboard;
+
 			# переименовым еггог файл (добавляем текущее время в окончание) и продолжаем работу
 			Rename-Item -Path $FilePath -NewName $newName
-			write-host "File $FilePath was renamed `r`n to $newName" -ForegroundColor yellow
+			write-host "File $FilePath was renamed `r`n to $newName `r`nAnd copied into Clipboard" -ForegroundColor yellow
 			Start-Sleep -Seconds 3;
 		}
 		default 
@@ -71,7 +79,8 @@ while (1)
 		$path = $ErrLogPath + "\" + $errFile;
 
 #		Get-Content -Path $path -Tail 10
-		Get-Content -Path $path;
+		$Lines = Get-Content -Path $path;
+		$Lines;
 		$b = $a.popup("Found Errors in " + $errFile,0,"Found Errors",2)
 		errFile $path $b;
 	}

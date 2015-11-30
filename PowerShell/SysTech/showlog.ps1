@@ -1,7 +1,7 @@
 #
 # Show Log. Show log ShturmanHub Service
 #
-#  Version 1.0.04
+#  Version 1.0.05
 #
 
 # Settings
@@ -22,7 +22,8 @@ Clear;
 #$FilePath = "Z:\";
 #$MaxRow = 55;
 
-$ExcludeFromLog = "ALIVE|Получен пакет|Передан пакет|Скорость приема данных";
+$ExcludeFromLog = "ALIVE|DBEVT|TICKET|Получен пакет|Передан пакет|Скорость приема данных|скорость передачи данных";
+#$ExcludeFromLog = "ALIVE|Получен пакет|Передан пакет|Скорость приема данных|скорость передачи данных";
 #$ExcludeFromLog = "";
 
 
@@ -56,7 +57,7 @@ while (1)
 
 		# если файл уже читали, то последняя строка записана в переменную $LastLine, ее и ищем в полученном массиве строк из файла
 		# если не читали - показываем все что прочитали из файла
-		if ($LastLine)
+		if ($LastLine -and $Lines.Count)
 		{
 
 			#Log Errors
@@ -75,7 +76,7 @@ while (1)
 			Else 
 			{
 				$i = 0;
-				write-host "...`n`rSome Lines were missed`n`r..." -foregroundcolor "gray";
+				write-host "...`n`rSome Lines were missed or skipped (by filter) a lot of lines`n`r..." -foregroundcolor "gray";
 			}
 		}
 		else

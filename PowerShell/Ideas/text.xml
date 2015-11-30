@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Addresses version="1.0">
+     <Contacts>
+          <Contact name="ABC Company" type="business">
+               <Street>123 Anywhere St</Street>
+               <City>Someplace</City>
+               <State>AA</State>
+               <Zip>12345</Zip>
+               <Phone>555-123-4567</Phone>
+          </Contact>
+          <Contact name="John Doe" type="personal">
+               <Phone>555-333-4444</Phone>
+          </Contact>
+     </Contacts>
+</Addresses>
