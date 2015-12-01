@@ -1,8 +1,8 @@
 #
 #
-# Запуск сервисов и штурмана в один клик
+# Р—Р°РїСѓСЃРє СЃРµСЂРІРёСЃРѕРІ Рё С€С‚СѓСЂРјР°РЅР° РІ РѕРґРёРЅ РєР»РёРє
 #
-# поверяет наличие сервиса SQL сервера, 
+# РїРѕРІРµСЂСЏРµС‚ РЅР°Р»РёС‡РёРµ СЃРµСЂРІРёСЃР° SQL СЃРµСЂРІРµСЂР°, 
 #
 #
 param (
@@ -39,13 +39,13 @@ clear;
 #Invoke-Item $ShturmanEXELink
 #cd "D:\Shturman\Bin\"
 
-# проверка наличия административных привилегий. если их нет - отваливаемся
+# РїСЂРѕРІРµСЂРєР° РЅР°Р»РёС‡РёСЏ Р°РґРјРёРЅРёСЃС‚СЂР°С‚РёРІРЅС‹С… РїСЂРёРІРёР»РµРіРёР№. РµСЃР»Рё РёС… РЅРµС‚ - РѕС‚РІР°Р»РёРІР°РµРјСЃСЏ
 if(isAdmin)
 {
-	WriteLog "Админские права: есть." "MESS"
+	WriteLog "РђРґРјРёРЅСЃРєРёРµ РїСЂР°РІР°: РµСЃС‚СЊ." "MESS"
 };
 
-# Дествия с сервисами. регистрация / разрегистрация
+# Р”РµСЃС‚РІРёСЏ СЃ СЃРµСЂРІРёСЃР°РјРё. СЂРµРіРёСЃС‚СЂР°С†РёСЏ / СЂР°Р·СЂРµРіРёСЃС‚СЂР°С†РёСЏ
 $ShturmanServices = "ShturmanQuality","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp","ShturmanGPS",
 	"ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga","ShturmanMetroLocations",
 	"ShturmanDataStorage","ShturmanHub","ShturmanLog"
@@ -53,7 +53,7 @@ $ShturmanServices = "ShturmanQuality","ShturmanRRs","ShturmanDataSync","Shturman
 #$ShturmanServices = "ShturmanQuality","ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog"
 
 
-# TODO сделать чтоб сам искал все фалы *.Server.exe
+# TODO СЃРґРµР»Р°С‚СЊ С‡С‚РѕР± СЃР°Рј РёСЃРєР°Р» РІСЃРµ С„Р°Р»С‹ *.Server.exe
 $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
 		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
 		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe"
@@ -61,7 +61,7 @@ $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.e
 #$ShturmanExeFiles = "DataStorageServer.exe","HubServer.exe","LogServer.exe","MetroLocationsServer.exe","QualityServer.exe"
 
 
-# Удаление всех сервисов
+# РЈРґР°Р»РµРЅРёРµ РІСЃРµС… СЃРµСЂРІРёСЃРѕРІ
 if ($ServicesUninstall)
 {
 	foreach($item in $ShturmanServices)
@@ -97,7 +97,7 @@ if ($ServicesInstall)
 {
 
 	WriteLog "Services Installer" "MESS"
-	# TODO Переписать по нормлальному
+	# TODO РџРµСЂРµРїРёСЃР°С‚СЊ РїРѕ РЅРѕСЂРјР»Р°Р»СЊРЅРѕРјСѓ
 
 WriteLog "cd $AppPath"
 cd $AppPath
@@ -131,7 +131,7 @@ invoke-Item (".\$item /install")
 
 	Start-Sleep -Second 15
 
-	# Проставляем мануальный запуск для всех
+	# РџСЂРѕСЃС‚Р°РІР»СЏРµРј РјР°РЅСѓР°Р»СЊРЅС‹Р№ Р·Р°РїСѓСЃРє РґР»СЏ РІСЃРµС…
 	foreach($item in $ShturmanServices)
 	{
 
@@ -165,34 +165,34 @@ invoke-Item (".\$item /install")
 }
 
 
-WriteLog "Ждем $SleepBeforeSQLService сек, пока система придет в себя после загрузки" "INFO"
+WriteLog "Р–РґРµРј $SleepBeforeSQLService СЃРµРє, РїРѕРєР° СЃРёСЃС‚РµРјР° РїСЂРёРґРµС‚ РІ СЃРµР±СЏ РїРѕСЃР»Рµ Р·Р°РіСЂСѓР·РєРё" "INFO"
 Start-Sleep -Seconds $SleepBeforeSQLService; 
 
 
-# Ждем запуска MS SQL
+# Р–РґРµРј Р·Р°РїСѓСЃРєР° MS SQL
 while ((Check-Service -ServiceName $SQLServiceName -verbose) -ne $TRUE)
 {
 	Start-Sleep -Seconds 5; 
 }
 
 
-WriteLog "Ждем $SleepAfterSQLService сек, после запуска SQL Сервера. т.к. не всегда сразу к нему можно приконнектиться" "INFO"
-# тупим еще минуту после старта... на всякий случай
+WriteLog "Р–РґРµРј $SleepAfterSQLService СЃРµРє, РїРѕСЃР»Рµ Р·Р°РїСѓСЃРєР° SQL РЎРµСЂРІРµСЂР°. С‚.Рє. РЅРµ РІСЃРµРіРґР° СЃСЂР°Р·Сѓ Рє РЅРµРјСѓ РјРѕР¶РЅРѕ РїСЂРёРєРѕРЅРЅРµРєС‚РёС‚СЊСЃСЏ" "INFO"
+# С‚СѓРїРёРј РµС‰Рµ РјРёРЅСѓС‚Сѓ РїРѕСЃР»Рµ СЃС‚Р°СЂС‚Р°... РЅР° РІСЃСЏРєРёР№ СЃР»СѓС‡Р°Р№
 
 
 Start-Sleep -Seconds $SleepAfterSQLService; 
 
-WriteLog "Выполнение инициализационного скрипта" "INFO"
+WriteLog "Р’С‹РїРѕР»РЅРµРЅРёРµ РёРЅРёС†РёР°Р»РёР·Р°С†РёРѕРЅРЅРѕРіРѕ СЃРєСЂРёРїС‚Р°" "INFO"
 
-# Выполняем инициализационный скрипт
+# Р’С‹РїРѕР»РЅСЏРµРј РёРЅРёС†РёР°Р»РёР·Р°С†РёРѕРЅРЅС‹Р№ СЃРєСЂРёРїС‚
 WriteLog "Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
 Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
 
-# опять тупим
+# РѕРїСЏС‚СЊ С‚СѓРїРёРј
 Start-Sleep -Seconds $SleepAfterSQLScript; 
 
 
-WriteLog "Запуск сервисов" "INFO"
+WriteLog "Р—Р°РїСѓСЃРє СЃРµСЂРІРёСЃРѕРІ" "INFO"
 #net start ShturmanLog
 #net start ShturmanHub
 #net start ShturmanDataStorage
@@ -216,7 +216,7 @@ foreach($item in $ShturmanServices)
 	{
 		WriteLog "Starting Service: [$item]" "MESS"
 
-		# TODO Переписать Запуск по человечески
+		# TODO РџРµСЂРµРїРёСЃР°С‚СЊ Р—Р°РїСѓСЃРє РїРѕ С‡РµР»РѕРІРµС‡РµСЃРєРё
 		net start $item
 
 		if((Check-Service -ServiceName $item) -eq $FALSE)
@@ -229,18 +229,18 @@ foreach($item in $ShturmanServices)
 
 #	if (Start-Service $item)
 #	{
-#		WriteLog "succсов" "INFO"
+#		WriteLog "succСЃРѕРІ" "INFO"
 #	}
 #	Else
 #	{
-#		WriteLog "fuckвисов" "err"	
+#		WriteLog "fuckРІРёСЃРѕРІ" "err"	
 #	}
 }
 
 
 #Write-Host 
 #Start-Sleep -Seconds 100; 
-WriteLog "Запуск приложения" "MESS"
+WriteLog "Р—Р°РїСѓСЃРє РїСЂРёР»РѕР¶РµРЅРёСЏ" "MESS"
 
 D:\ShturmanMOSStep8_u16\BIN\Shturman_MosMetro.lnk
 

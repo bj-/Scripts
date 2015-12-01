@@ -1,6 +1,6 @@
 
 #
-# Поиск заданной строки в файлах
+# РџРѕРёСЃРє Р·Р°РґР°РЅРЅРѕР№ СЃС‚СЂРѕРєРё РІ С„Р°Р№Р»Р°С…
 # 
 #
 
@@ -19,7 +19,7 @@ $scriptver = "1.0.0";
 
 
 
-$arr = Get-ChildItem -Path $Path -Force -Recurse -Include $FileFilter -Name; # рекурсивно список всех файлов в каталоге и подкаталогах
+$arr = Get-ChildItem -Path $Path -Force -Recurse -Include $FileFilter -Name; # СЂРµРєСѓСЂСЃРёРІРЅРѕ СЃРїРёСЃРѕРє РІСЃРµС… С„Р°Р№Р»РѕРІ РІ РєР°С‚Р°Р»РѕРіРµ Рё РїРѕРґРєР°С‚Р°Р»РѕРіР°С…
 
 $Lines = "";
 
@@ -30,11 +30,11 @@ Foreach ($File in $arr)
 	write-host "File: $FullPath "
 
 #		Get-Content -Path $path -Tail 10
-	Get-Content -Path $FullPath -Tail 1000 | where {$_ -match $LookFor}; # Выбираем строки датафрейм
+	Get-Content -Path $FullPath -Tail 1000 | where {$_ -match $LookFor}; # Р’С‹Р±РёСЂР°РµРј СЃС‚СЂРѕРєРё РґР°С‚Р°С„СЂРµР№Рј
 #	write-host $s
 
-#	$ss = $ss -replace ".*Name=""", "" # убираем то что до назвния фрема
-#	$ss = $ss -replace """ .*", ""     # и то что после
+#	$ss = $ss -replace ".*Name=""", "" # СѓР±РёСЂР°РµРј С‚Рѕ С‡С‚Рѕ РґРѕ РЅР°Р·РІРЅРёСЏ С„СЂРµРјР°
+#	$ss = $ss -replace """ .*", ""     # Рё С‚Рѕ С‡С‚Рѕ РїРѕСЃР»Рµ
 
 
 
