@@ -1,55 +1,55 @@
 #
-# РР·РјРµРЅСЏР»РєР° РІРµСЂСЃРёРё СЃРѕР±РёСЂР°РµРјРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ РІ С„Р°Р№Р»Р°С… *.dproj
-# РС‰РµС‚ *.dproj РІ РєР°С‚Р°Р»РѕРіРµ Рё РїРѕРґРєР°С‚Р°Р»РѕРіР°С… СѓРєР°Р·Р°РЅРЅС‹С… РІ $Path
-# Рё РјРµРЅСЏРµС‚ РёРј РІРµСЂСЃРёСЋ РЅР° СѓРєР°Р·Р°РЅРЅСѓСЋ РІ Р±Р»РѕРєРµ Param. Р»РёР±Рѕ РІ РєР»СЋС‡Р°С….
+# Изменялка версии собираемого приложения в файлах *.dproj
+# Ищет *.dproj в каталоге и подкаталогах указанных в $Path
+# и меняет им версию на указанную в блоке Param. либо в ключах.
 
-# Р—Р°РїСѓСЃРє:
-# Р»РёР±Рѕ РїСЂР°РІРєРѕР№ Р±Р»РѕРєР° Param - РІРµСЂСЃРёРё РїСЂРѕРїРёСЃС‹РІР°РµРј РІ РЅРµРј
-# Р»РёР±Рѕ РёР· РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё PS:
+# Запуск:
+# либо правкой блока Param - версии прописываем в нем
+# либо из командной строки PS:
 # .\ChangeVersion.ps1 
-#	РљР»СЋС‡Рё РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ. РїСЂРё РѕС‚СЃСѓС‚РІРёРё Р»СЋР±РѕРіРѕ - РІРѕР·РјРµС‚ РґРµС„РѕР»С‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РёР· param
-# 	[-Path "[РџСѓС‚СЊ РґРѕ С„РѕР»РґРµСЂР° РІ РєРѕС‚РѕСЂРѕРј РјРµРЅСЏС‚СЊ]"]  (Р±РµР· РѕРєРѕРЅРµС‡РЅРѕРіРѕ СЃР»РµС€Р°) TODO СЃРґРµР»Р°С‚СЊ С‚РѕР»РµСЂР°СЃС‚РѕРј
+#	Ключи не обязательные. при отсутвии любого - возмет дефолтное значение из param
+# 	[-Path "[Путь до фолдера в котором менять]"]  (без оконечного слеша) TODO сделать толерастом
 #	[-MajorVersion "[Major]"] 
 #	[-MinorVersion "[Minor]"]
 #	[-Build "[Build]"] 
 #	[-Revision "[Revision]"]
-#	[-Comment "[РљРѕРјРµРЅС‚Р°СЂРёР№]"]
-#	[-ClearComment]		- РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ РєРѕРјРµРЅС‚Р°СЂРёР№ РЅРѕРІС‹Рј (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: РґРѕР±Р°РІРёС‚СЊ)
-#	[-Debug]		- РІ РєРѕРЅСЃРѕР»СЊ СЃС‹РїР°С‚СЊ РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ Р»РѕРіР°, Default = РѕС‚РєР»СЋС‡РµРЅРѕ
+#	[-Comment "[Коментарий]"]
+#	[-ClearComment]		- перезаписать коментарий новым (по умолчанию: добавить)
+#	[-Debug]		- в консоль сыпать все сообщения для лога, Default = отключено
 #
-# РџСЂРёРјРµСЂ:
-#   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion "0" -MinorVersion "16" -Build "005" -Revision "00" -Comment "РҐР°Р°Р°Р°-С…Р°-С…Р° (Р°РґСЃРєРёР№ СЃРјРµС…)" -ClearComment
+# Пример:
+#   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion "0" -MinorVersion "16" -Build "005" -Revision "00" -Comment "Хаааа-ха-ха (адский смех)" -ClearComment
 #
-#  РџРѕР»РЅС‹Р№ РїСѓС‚СЊ РґР»СЏ Р·Р°РїСѓСЃРєР° СЃРєСЂРёРїС‚РѕРІ (С€РѕС‚РєР°С‚РѕРј РЅР°РїСЂРёРјРµСЂ) РІС‹РіР»СЏРґРёС‚ С‚Р°Рє:
-# C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Р’СЃРµ РїРѕС‡РёРЅРёР»'" -ClearComment
+#  Полный путь для запуска скриптов (шоткатом например) выглядит так:
+# C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Все починил'" -ClearComment
 # 
 #
-#   Р•СЃР»Рё СЃРєСЂРёРїС‚ РЅРµ Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ Рё СЂСѓРіР°РµС‚СЃСЏ С‡С‚Рѕ Р·Р°РїСЂРµС‰РµРЅРѕ Р·Р°РїСѓСЃРєР°С‚СЊ РЅРµРїРѕРґРїРёСЃР°РЅРЅС‹Рµ СЃРєСЂРёРїС‚С‹ - РІС‹РїРѕР»РЅРёС‚СЊ РІ PS РґР°РЅРЅСѓСЋ РєРѕРјР°РЅРґСѓ
+#   Если скрипт не запускается и ругается что запрещено запускать неподписанные скрипты - выполнить в PS данную команду
 #   Set-ExecutionPolicy RemoteSigned
 #
 
 # History:
 # [1.0.3]
-#   - Debug Mode РґР»СЏ Р»РѕРіРіРёСЂРѕРІР°РЅРёСЏ РІ РєРѕРЅСЃРѕР»Рё
-#   - РџСЂРѕРІРµСЂРєР° С‡С‚Рѕ РЅРѕРІС‹Рµ РґР°РЅРЅС‹Рµ Р·Р°Р°РїР»Р°РёР»РёСЃСЊ РІ РЅРѕРґСѓ
-#   - РѕС‚РєР»СЋС‡РµРЅРѕ СЃРѕР·РґР°РЅРёРµ С„Р°Р№Р»РѕРІ *.BAK
-# [1.0.4]
-#   - РђСЂРіСѓРјРµРЅС‚С‹ -Debug -ClearComment С‚РµРїРµСЂСЊ СЃРІРёС‚С‡Рё. С‚.Рµ. РµСЃР»Рё СѓРєР°Р·Р°РЅ = True, РµСЃР»Рё РЅРµ СѓРєР°Р·Р°РЅ - False
-#   - help. РІС‹Р·С‹РІР°РµС‚СЃСЏ Р°СЂРіСѓРјРµРЅС‚РѕРј [-help]
+#   - Debug Mode для логгирования в консоли
+#   - Проверка что новые данные зааплаились в ноду
+#   - отключено создание файлов *.BAK
+# TODO [1.0.4]
+#   - Аргументы -Debug -ClearComment теперь свитчи. т.е. если указан = True, если не указан - False
+#   - help. вызывается аргументом [-help]
+#   - Во всех нодах, кроме $ProgGroupName убивает все ключи <VerInfo_*> (MajorVer/MinorVer/Build/Release/Keys)
 #
 # TODO
-#   TODO [HIGH] Р’Рѕ РІСЃРµС… РЅРѕРґР°С…, РєСЂРѕРјРµ $ProgGroupName СѓР±РёРІР°С‚СЊ РІСЃРµ РєР»СЋС‡Рё РїРѕ РјР°СЃРєРµ <VerInfo_*>
-#   TODO [HIGH] Р•СЃР»Рё РЅРѕРґС‹ РґР»СЏ РІРµСЂСЃРёР№ РЅРµС‚ РІ XML, РЅРѕ РІ РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРµ СѓРєР°Р·Р°РЅРѕ РїСЂРѕРїРёСЃР°С‚СЊ С‚СѓРґР° РІРµСЂСЃРёСЋ - СЃРѕР·РґР°С‚СЊ РЅРѕРґСѓ. $MajorVersion-$Revision
-#   TODO [HIGH] Default $Path - С‚РµРєСѓС‰РёР№ С„РѕР»РґРµСЂ СЃРєСЂРёРїС‚Р°. РІРѕР·РјРѕР¶РЅРѕ РѕС‚РґРµР»СЊРЅС‹Рј СЃРІРёС‚С‡РµРј. С‡С‚РѕР± СЃР»СѓС‡Р°Р№РЅРѕ РІ C: РЅРµ Р·Р°РїСѓСЃС‚РёР»Рё
-#   TODO [HIGH] Р—Р°РїСѓСЃРє РёР· CMD  С‚Р°Рє С‡С‚РѕР± РЅРµ Р±РёР»Р°СЃСЊ РєРѕРґРёСЂРѕРІРєР° (РїРѕРїСЂРѕР±РѕРІР°С‚СЊ cmd РІ СЋРЅРёРєРѕРґРµ)
-#   TODO [HIGH] С„РѕСЂРјР°С‚РёСЂРѕРІР°РЅРёРµ XML С„Р°Р№Р»Р° СЃРґРµР»Р°С‚СЊ С‚Р°РєР¶Рµ СѓР±РѕРіРѕ РєР°Рє РІ РґРµР»С„Рё. :) РґР°Р±С‹ РїСЂРё РєРѕРјРјРёС‚Рµ РЅРѕСЂРјР°Р»СЊРЅРѕ СЂРµРїР»РµР№СЃРёР»РёСЃСЊ С‚РѕР»СЊРєРѕ РёР·РјРµРЅРµРЅРЅС‹Рµ СЃС‚СЂРѕРєРё.
-#   TODO - Р·Р°С‡РёС‚Р°С‚СЊ СЃРѕС…СЂР°РЅРµРЅРЅС‹Р№ С„Р°Р№Р» Рё РїСЂРѕРІРµСЂРёС‚СЊ С‡С‚Рѕ РІ РЅРµРј РґРµСЃС‚РІРёС‚РµР»СЊРЅРѕ СЃРѕС…СЂР°РЅРµРЅС‹ РЅРѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ
-#   TODO - РїСЂРёРЅРёРјР°С‚СЊ РІ РєР°С‡РµСЃС‚РІРµ РїСѓС‚Рё Р·РЅР°С‡РµРЅРёСЏ РѕРєР°РЅС‡РёРІР°СЋС‰РјСЏРµСЃСЏ РєР°Рє РЅР° \ С‚Р°Рє Рё Р±РµР· РѕРЅРѕР№  
-#   TODO - Р°РІС‚РѕРјР°С‚РѕРј РїРѕРєР°Р·С‹РІР°С‚СЊ С…РµР»Рї, (РµСЃР»Рё РЅРµС‚ РєРѕСЂСЂРµРєС‚РЅС‹С… Р°СЂРіСѓРјРµРЅС‚РѕРІ РЅР° РІС…РѕРґРµ.)
+#   TODO [HIGH] Если ноды для версий нет в XML, но в командной строке указано прописать туда версию - создать ноду. $MajorVersion-$Revision
+#   TODO [HIGH] Default $Path - текущий фолдер скрипта. возможно отдельным свитчем. чтоб случайно в C: не запустили
+#   TODO [HIGH] Запуск из CMD  так чтоб не билась кодировка (попробовать cmd в юникоде)
+#   TODO [HIGH] форматирование XML файла сделать также убого как в делфи. :) дабы при коммите нормально реплейсились только измененные строки.
+#   TODO - зачитать сохраненный файл и проверить что в нем дествительно сохранены новые значения
+#   TODO - принимать в качестве пути значения оканчивающмяеся как на \ так и без оной  
+#   TODO - автоматом показывать хелп, (если нет корректных аргументов на входе.)
 
 param (
-	[string]$Path = ".\DEFAULTPATH", # РџСѓС‚СЊ Рє С„РѕР»РґРµСЂСѓ РІ РєРѕС‚РѕСЂРѕРј РјРµРЅСЏС‚СЊ С„Р°Р№Р»С‹. Р±РµР· РѕРєРѕРЅРµС‡РЅРѕРіРѕ \. РЅР°РїСЂРёРјРµСЂ "D:\projects"
-	# РЈСЃС‚Р°РЅР°РІР»РёРІР°РµРјР°СЏ РІРµСЂСЃРёСЏ [Major].[Minor].[Build].[Revision]
+	[string]$Path = ".\DEFAULTPATH", # Путь к фолдеру в котором менять файлы. без оконечного \. например "D:\projects"
+	# Устанавливаемая версия [Major].[Minor].[Build].[Revision]
 	[string]$MajorVersion 	= "0",
 	[string]$MinorVersion 	= "00",
 	[string]$Build	 	= "000",
@@ -63,13 +63,13 @@ param (
 # Script Version
 [string]$scriptver = "1.0.4";
 
-#С‚СЂРµР±СѓРµРјС‹Р№ Condition РІ PropertyGroup
-[string]$ProgGroupName = "'`$(Base)'!=''"; # РїРµСЂРµРґ !РїРµСЂРІС‹Рј! Р·РЅР°РєРѕРј $ РѕР±СЏР·Р°С‚РµР»СЊРЅР° РѕР±СЂР°С‚РЅР°СЏ РєР°РІС‹С‡РєР°. Рё С‚РѕР»СЊРєРѕ РїРµСЂРµРґ РїРµСЂРІС‹Рј. СЌРєСЂР°РЅРёСЂРѕРІР°РЅРёРµ С‚Р°Рє РІ ps СЂР°Р±РѕС‚Р°РµС‚
+#требуемый Condition в PropertyGroup
+[string]$ProgGroupName = "'`$(Base)'!=''"; # перед !первым! знаком $ обязательна обратная кавычка. и только перед первым. экранирование так в ps работает
 
 # 
 # [LOG]
 #
-# Р›РѕРіРіРёСЂСѓРјС‹Рµ СЃРѕРѕР±С‰РµРЅРёСЏ (СЂРµРіСѓР»СЏСЂРЅРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ). Р”РѕСЃС‚СѓРїРЅС‹ СЃРѕРѕР±С‰РµРЅРёСЏ  INFO|WARN|ERRr|MESS|DUMP
+# Логгирумые сообщения (регулярное выражение). Доступны сообщения  INFO|WARN|ERRr|MESS|DUMP
 [string]$FullErrorLevel = "INFO|WARN|ERRr|MESS|DUMP";
 [string]$LogErrorLevel = $FullErrorLevel;
 if ($Debug)
@@ -81,10 +81,10 @@ Else
 	[string]$HostErrorLevel = "INFO|WARN|ERRr|MESS";
 }
 
-# Р¤РѕСЂРјР°С‚ РґР°С‚С‹ РІСЂРµРјРµРЅРё РґР»СЏ Р»РѕРіР°
+# Формат даты времени для лога
 [string]$DateFormat = "yyyy-MM-dd HH-mm-ss";
 
-# Р—РЅР°С‡РµРЅРёСЏ Рё РїРµСЂРµРјРµРЅРЅС‹Рµ.
+# Значения и переменные.
 [string]$LogFile = ".\ChVer.log";
 
 if ($Help)
@@ -94,40 +94,40 @@ if ($Help)
 # ChangeVersion.ps1
 # ver: $scriptver
 #
-# Update РІРµСЂСЃРёРё СЃРѕР±РёСЂР°РµРјРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ РІ С„Р°Р№Р»Р°С… *.dproj
-# РС‰РµС‚ *.dproj РІ РєР°С‚Р°Р»РѕРіРµ Рё РїРѕРґРєР°С‚Р°Р»РѕРіР°С… СѓРєР°Р·Р°РЅРЅС‹С… РІ Р°СЂРіСѓРјРµРЅС‚Рµ -Path
-# Рё РјРµРЅСЏРµС‚ РёРј РІРµСЂСЃРёСЋ РЅР° СѓРєР°Р·Р°РЅРЅСѓСЋ РІ Р±Р»РѕРєРµ Param. Р»РёР±Рѕ РІ РєР»СЋС‡Р°С….
+# Update версии собираемого приложения в файлах *.dproj
+# Ищет *.dproj в каталоге и подкаталогах указанных в аргументе -Path
+# и меняет им версию на указанную в блоке Param. либо в ключах.
 #
-# Р—Р°РїСѓСЃРє:
-# Р»РёР±Рѕ РїСЂР°РІРєРѕР№ Р±Р»РѕРєР° Param - РІРµСЂСЃРёРё РїСЂРѕРїРёСЃС‹РІР°РµРј РІ РЅРµРј
-# Р»РёР±Рѕ РёР· РєРѕРјР°РЅРґРЅРѕР№ СЃС‚СЂРѕРєРё PS:
+# Запуск:
+# либо правкой блока Param - версии прописываем в нем
+# либо из командной строки PS:
 # .\ChangeVersion.ps1 
-#	РљР»СЋС‡Рё РЅРµ РѕР±СЏР·Р°С‚РµР»СЊРЅС‹Рµ. РїСЂРё РѕС‚СЃСѓС‚РІРёРё Р»СЋР±РѕРіРѕ - РІРѕР·РјРµС‚ РґРµС„РѕР»С‚РЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РёР· param
-# 	[-Path '[РџСѓС‚СЊ РґРѕ С„РѕР»РґРµСЂР° РІ РєРѕС‚РѕСЂРѕРј РјРµРЅСЏС‚СЊ]']  (Р±РµР· РѕРєРѕРЅРµС‡РЅРѕРіРѕ СЃР»РµС€Р°) TODO СЃРґРµР»Р°С‚СЊ С‚РѕР»РµСЂР°СЃС‚РѕРј
+#	Ключи не обязательные. при отсутвии любого - возмет дефолтное значение из param
+# 	[-Path '[Путь до фолдера в котором менять]']  (без оконечного слеша) TODO сделать толерастом
 #	[-MajorVersion '[Major]'] 
 #	[-MinorVersion '[Minor]']
 #	[-Build '[Build]'] 
 #	[-Revision '[Revision]']
-#	[-Comment '[РљРѕРјРµРЅС‚Р°СЂРёР№]']
-#	[-ClearComment]		- РїРµСЂРµР·Р°РїРёСЃР°С‚СЊ РєРѕРјРµРЅС‚Р°СЂРёР№ РЅРѕРІС‹Рј (РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: РґРѕР±Р°РІРёС‚СЊ)
-#	[-Debug]		- РІ РєРѕРЅСЃРѕР»СЊ СЃС‹РїР°С‚СЊ РІСЃРµ СЃРѕРѕР±С‰РµРЅРёСЏ РґР»СЏ Р»РѕРіР°, Default = РѕС‚РєР»СЋС‡РµРЅРѕ
-#       [-Help]			- Р”Р°РЅРЅС‹Р№ РҐРµР»Рї. РїСЂРё РёСЃРїРѕР»СЊР·РѕРІР°РЅРёРё РґР°РЅРЅРѕРіРѕ РєР»СЋС‡Р° - РґСЂСѓРіРёРµ РєР»СЋС‡Рё РёРіРЅРѕСЂРёСЂСѓСЋС‚СЃСЏ Рё СЃРєСЂРёРїС‚ РЅРµ РІС‹РїРѕР»РЅСЏРµС‚СЃСЏ.
+#	[-Comment '[Коментарий]']
+#	[-ClearComment]		- перезаписать коментарий новым (по умолчанию: добавить)
+#	[-Debug]		- в консоль сыпать все сообщения для лога, Default = отключено
+#       [-Help]			- Данный Хелп. при использовании данного ключа - другие ключи игнорируются и скрипт не выполняется.
 #
-# РџСЂРёРјРµСЂ:
-#   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion '0' -MinorVersion '16' -Build '005' -Revision '00' -Comment 'РҐР°Р°Р°Р°-С…Р°-С…Р° (Р°РґСЃРєРёР№ СЃРјРµС…)' -ClearComment
+# Пример:
+#   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion '0' -MinorVersion '16' -Build '005' -Revision '00' -Comment 'Хаааа-ха-ха (адский смех)' -ClearComment
 #
-#  РџРѕР»РЅС‹Р№ РїСѓС‚СЊ РґР»СЏ Р·Р°РїСѓСЃРєР° СЃРєСЂРёРїС‚РѕРІ (С€РѕС‚РєР°С‚РѕРј РЅР°РїСЂРёРјРµСЂ) РІС‹РіР»СЏРґРёС‚ С‚Р°Рє:
-# C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe ""C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Р’СЃРµ РїРѕС‡РёРЅРёР»' -ClearComment""
+#  Полный путь для запуска скриптов (шоткатом например) выглядит так:
+# C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe ""C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Все починил' -ClearComment""
 # 
 #
-#   Р•СЃР»Рё СЃРєСЂРёРїС‚ РЅРµ Р·Р°РїСѓСЃРєР°РµС‚СЃСЏ Рё СЂСѓРіР°РµС‚СЃСЏ С‡С‚Рѕ Р·Р°РїСЂРµС‰РµРЅРѕ Р·Р°РїСѓСЃРєР°С‚СЊ РЅРµРїРѕРґРїРёСЃР°РЅРЅС‹Рµ СЃРєСЂРёРїС‚С‹ - РІС‹РїРѕР»РЅРёС‚СЊ РІ PS РґР°РЅРЅСѓСЋ РєРѕРјР°РЅРґСѓ
+#   Если скрипт не запускается и ругается что запрещено запускать неподписанные скрипты - выполнить в PS данную команду
 #   Set-ExecutionPolicy RemoteSigned
 ";
 	break;
 }
 
 
-# Р’Р°Р»РёРґР°С†РёСЏ РІС…РѕРґСЏС‰РёС… РґР°РЅРЅС‹С…
+# Валидация входящих данных
 $MajorVersion 	= $MajorVersion -replace "\D";
 $MinorVersion 	= $MinorVersion -replace "\D";
 $Build	 	= $Build -replace "\D";
@@ -164,12 +164,12 @@ function WriteLog($message, $messagetype = "INFO")
 		}
 	}
 
-	# Р’ РєРѕРЅСЃРѕР»СЊ 
+	# В консоль 
 	if ($messagetype -match $HostErrorLevel)
 	{
 		Write-Host $message -foregroundcolor $color;
 	}
-	# Р’ Р»РѕРі
+	# В лог
 	if ($messagetype -match $LogErrorLevel)
 	{
 		"$currDateTime $messagetype $message" | Out-File $LogFile -Encoding "default" -Append
@@ -177,10 +177,10 @@ function WriteLog($message, $messagetype = "INFO")
 
 };
 
-# С‡РёСЃС‚РѕС‚Р° РЅР° СЌРєСЂР°РЅРµ - РєР°Рє Р·Р°РІРµС‰Р°Р» РјРѕР№РґРѕРґС‹СЂРѕРє.
+# чистота на экране - как завещал мойдодырок.
 Clear;
 
-# РїСЂРёРІРµС‚СЃС‚РІРёРµ
+# приветствие
 WriteLog "Version changer [version: $scriptver]" "MESS"
 WriteLog "Changing app version in *.dproj files in folder $Path" "MESS"
 
@@ -188,10 +188,10 @@ WriteLog "Changing app version in *.dproj files in folder $Path" "MESS"
 # Get files in start folder (recursive)
 $arr = Get-ChildItem -Path $Path -Force -Recurse -Include *.dproj -Name;
 
-# Рё РґР»СЏ РєР°РґРѕРіРѕ:
+# и для кадого:
 Foreach ($File in $arr) 
 {
-	# СЃС‚СЂРѕРёРј РїРѕР»РЅС‹Р№ РїСѓС‚СЊ РґРѕ СЃР»РµРґСѓСЋС‰РµРіРѕ С„Р°Р№Р»Р°
+	# строим полный путь до следующего файла
 	$FileFullPath = $Path + "\" + $File;
 
 	if ($ClearComment) {$CommentMode = "New"} Else {$CommentMode = "Append"}
@@ -203,7 +203,7 @@ Foreach ($File in $arr)
 	# searching <PropertyGroup Condition= $ProgGroupName >
 	$node = $xml.Project.PropertyGroup | where {$_.Condition -eq $ProgGroupName}
 	# Change version in properties
-	if ($node.VerInfo_MajorVer -ne $null) # РєР°Р¶РґСѓСЋ РЅРѕРґСѓ РїСЂРѕРІРµСЂСЏРµ РјРЅР° СЃСѓС‰РµСЃС‚РІРѕРІР°РЅРёРµ. РїСЂРѕСЃС‚Рѕ С‡С‚РѕР± СЃРєСЂРёРїС‚ РЅРµ СЂСѓРіР°Р»СЃСЏ РІ РєРѕРЅСЃРѕР»Рё.
+	if ($node.VerInfo_MajorVer -ne $null) # каждую ноду проверяе мна существование. просто чтоб скрипт не ругался в консоли.
 	{
 		WriteLog ("Old VerInfo_MajorVer: " + $node.VerInfo_MajorVer) "DUMP" # Dumping edited values
 		$node.VerInfo_MajorVer = $MajorVersion;
@@ -240,12 +240,12 @@ Foreach ($File in $arr)
 	{
 		WriteLog ("Old VerInfo_Keys: " + $node.VerInfo_Keys) "DUMP"
 
-		# СЂРµРіСѓР»СЏСЂРєР° РґР»СЏ Р·Р°РјРµРЅС‹ РІРµСЂСЃРёРё РІ РёРЅС„Рѕ С„Р°Р№Р»Р° (РґР°, СЏ СЂРµРіСѓР»СЏСЂРЅС‹Рµ РІС‹СЂР°Р¶РµРЅРёСЏ Р·РЅР°СЋ РІРµСЃСЊРјР° С…СЂРµРЅРѕРІРѕ)
+		# регулярка для замены версии в инфо файла (да, я регулярные выражения знаю весьма хреново)
 #		$node.VerInfo_Keys = $node.VerInfo_Keys -replace '(ersion=[0-9]{1,10}\.[0-9]{1,10}\.[0-9]{1,10}\.[0-9]{1,10})', "ersion=$MajorVersion.$MinorVersion.$Build.$Revision"
 		$node.VerInfo_Keys = $node.VerInfo_Keys -replace 'ersion=([0-9]*(\.)?){1,4}', "ersion=$MajorVersion.$MinorVersion.$Build.$Revision"
 #		$node.VerInfo_Keys = $node.VerInfo_Keys -replace 'ersion=(.*?;)', "ersion=$MajorVersion.$MinorVersion.$Build.$Revision;"
 
-		# Рё СЂР°Р·Р±РёСЂР°РµРј Рё РѕР±СЂР°Р±Р°С‚С‹РІР°РµРј РєРѕРјРµРЅС‚Р°СЂРёР№
+		# и разбираем и обрабатываем коментарий
 		$arr = $node.VerInfo_Keys.Split("{;}")
 		$i = 0;
 		while ($arr.Count -gt $i)
@@ -280,7 +280,6 @@ Foreach ($File in $arr)
 		$node.VerInfo_Keys = $NewLine;
 
 		
-
 #		write-host $ClearComment
 #		if ($ClearComment -eq $false)
 #		{
@@ -294,61 +293,110 @@ Foreach ($File in $arr)
 		WriteLog ("New VerInfo_Keys: " + $node.VerInfo_Keys) "DUMP" # Dumping edited values
 #		if ($node.VerInfo_Keys -ne $NewLine) { WriteLog ("In prop [VerInfo_Keys] applied value [" + $node.VerInfo_Keys + "] not correspond to required value [$NewLine]") "ERRr" }
 	}
-#	WriteLog "Changed PropertyGroup Condition=$ProgGroupName Set Version = $MajorVersion.$MinorVersion.$Build.$Revision"
-#	WriteLog "File saved"
 
-	# remove usless nodes .VerInfo_*
 
-$xxx = $xml.Project.PropertyGroup.SelectNodes("")
+# т.к. <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+# т.е. указан нейм-спейс - требуется указать следующие магически строчки.
+# как это работает гуглить по "powershell selectNodes csproj" (У шарпа теже проблемы)
+[System.Xml.XmlNamespaceManager] $nsmgr = $xml.NameTable
+$nsmgr.AddNamespace('a','http://schemas.microsoft.com/developer/msbuild/2003')
 
-$xxx
-#$RemoveAttribute = $xml.Project.PropertyGroup.VerInfo_Keys
-#$xml.Project.PropertyGroup($RemoveAttribute)
+#$xml.SelectNodes("PropertyGroup")
+$nodes = $xml.Project.PropertyGroup | where {$_.Condition -ne $ProgGroupName}
 
+function RemoveSingleNode ($Condition, $NodeToRemove)
+{
+	# Удаление одной ноды из XML с неймспейсом. функция только для нод PropertyGroup с Condition
 	
+	# Собираем XPatch
+	$xPath = "//a:PropertyGroup[@Condition = ""$Condition""]/a:$NodeToRemove"
 
-	$nodes = $xml.Project.PropertyGroup # | where {$_.Condition -eq $ProgGroupName}
-#$nodes
-	foreach ($xnode in $nodes)
+	$rnode = $xml.SelectSingleNode($xPath, $nsmgr)	# выбираем ноду которую надо удалить
+	$parentNode = $rnode.ParentNode; 	# На уровень выше т.к. PS умеет удалять только детей.
+	$d = $parentNode.RemoveChild($rnode);   # удаляем. "$d =" для того чтоб в консоль не писала содержимое ноды.
+}
+
+foreach ($xnode in $nodes)
+{
+	# Удаление нод VerInfo_* из всех PropertyGroup, кроме той у которой Condition != $ProgGroupName
+
+	if ($xnode.Condition -ne $ProgGroupName)
 	{
-		if ($xnode.Condition -ne $ProgGroupName)
+		# Condition текущей ноды
+		$Condition = $xnode.Condition
+
+		# Проверяем на существование дочерней ноды, и если она есть - удаляем
+		if ($xnode.VerInfo_MajorVer -ne $NULL)
 		{
-			if ($xnode.VerInfo_Keys -ne $null) {
-			write-host "aaaaaaaaaaaaaa" -foregroundcolor yellow
-$xnode.
+			# Само удаление ноды (через функцию)
+			RemoveSingleNode $Condition "VerInfo_MajorVer"
 
-
-#$node.SelectNodes($node.VerInfo_Keys) | % { $_.ParentNode.RemoveChild($_) }
-#$rnode = $node
-#$node.RemoveChild($node.VerInfo_Keys)
-#$node.RemoveFromTree($node.VerInfo_Keys)
-
-#$rnode = $node.SelectSingleNode("VerInfo_Keys")
-#$node = $xml.SelectSingleNode("//VerInfo_Keys[.='$node.VerInfo_Keys']")
-#[Void]
-#$aaa = $xnode.SelectSingleNode("VerInfo_Keys")
-#$aaa
-#$nodes.RemoveChild($xnode.SelectSingleNode("VerInfo_Keys"))
-#$xnode.SelectNodes("//VerInfo_Keys").item(0).removechild()
-
-#$rnode
-#[Void]$node.RemoveChild($rnode)
-
-#				$node.VerInfo_Keys.RemoveAll();
-#				$node.RemoveFromTree();
-				
-#				$node.RemoveChild(); 
-			write-host "aaaaaaaaaaaaaa" -foregroundcolor yellow
-			};
-	                #$xnode
+			# логгируем результат удаления
+			if ($xnode.VerInfo_MajorVer -eq $NULL) 
+			{
+				WriteLog ("Exist key VerInfo_MajorVer in PropertyGroup[@Condition=" + $Condition + "] removed succesfully ") "DUMP" # Dumping edited values
+			}
+			Else
+			{
+				WriteLog ("Exist key VerInfo_MajorVer in PropertyGroup[@Condition=" + $Condition + "] didn't removed") "ERRr" # Dumping edited values
+			}
+		}
+		If ($xnode.VerInfo_MinorVer -ne $NULL)
+		{
+			RemoveSingleNode $Condition "VerInfo_MinorVer"
+			if ($xnode.VerInfo_MajorVer -eq $NULL) 
+			{
+				WriteLog ("Exist key VerInfo_MinorVer in PropertyGroup[@Condition=" + $Condition + "] removed succesfully ") "DUMP" # Dumping edited values
+			}
+			Else
+			{
+				WriteLog ("Exist key VerInfo_MinorVer in PropertyGroup[@Condition=" + $Condition + "] didn't removed") "ERRr" # Dumping edited values
+			}
+		}
+		If ($xnode.VerInfo_Build -ne $NULL)
+		{
+			RemoveSingleNode $Condition "VerInfo_Build"
+			if ($xnode.VerInfo_MajorVer -eq $NULL) 
+			{
+				WriteLog ("Exist key VerInfo_Build    in PropertyGroup[@Condition=" + $Condition + "] removed succesfully ") "DUMP" # Dumping edited values
+			}
+			Else
+			{
+				WriteLog ("Exist key VerInfo_Build in PropertyGroup[@Condition=" + $Condition + "] didn't removed") "ERRr" # Dumping edited values
+			}
+		}
+		If ($xnode.VerInfo_Release -ne $NULL)
+		{
+			RemoveSingleNode $Condition "VerInfo_Release"
+			if ($xnode.VerInfo_MajorVer -eq $NULL) 
+			{
+				WriteLog ("Exist key VerInfo_Release  in PropertyGroup[@Condition=" + $Condition + "] removed succesfully ") "DUMP" # Dumping edited values
+			}
+			Else
+			{
+				WriteLog ("Exist key VerInfo_Release in PropertyGroup[@Condition=" + $Condition + "] didn't removed") "ERRr" # Dumping edited values
+			}
+		}
+		If ($xnode.VerInfo_Keys -ne $NULL)
+		{
+			RemoveSingleNode $Condition "VerInfo_Keys"
+			if ($xnode.VerInfo_MajorVer -eq $NULL) 
+			{
+				WriteLog ("Exist key VerInfo_Keys     in PropertyGroup[@Condition=" + $Condition + "] removed succesfully ") "DUMP" # Dumping edited values
+			}
+			Else
+			{
+				WriteLog ("Exist key VerInfo_Keys in PropertyGroup[@Condition=" + $Condition + "] didn't removed") "ERRr" # Dumping edited values
+			}
 		}
 	}
+}
+
+
 	# backup original file
 	#Copy-Item -Path $FileFullPath -Destination "$FileFullPath.BAK"
 
 	# Save XML File
-	# $xml.Save($FileFullPath); Save with out BOM
-
 	$enc = New-Object System.Text.UTF8Encoding( $true ) # True - Save with BOM, False - Save with out BOM
 	$wrt = New-Object System.XML.XMLTextWriter( "$FileFullPath", $enc )
 	$wrt.Formatting = 'Indented'
@@ -361,8 +409,3 @@ $xnode.
 
 WriteLog "END. May be it was successfull..." "MESS"
 
-
-#    <PropertyGroup Condition="'$(Base)'!=''">
-#        <VerInfo_MinorVer>14</VerInfo_MinorVer>
-#        <VerInfo_MajorVer>0</VerInfo_MajorVer>
-#        <VerInfo_Keys>CompanyName=Р—РђРћ РќРџРџ РЎРёСЃС‚РµРјРЅС‹Рµ РўРµС…РЅРѕР»РѕРіРёРё;FileDescription=РљРѕРЅСЃРѕР»СЊ СЃР»СѓР¶Р±С‹ РґРёСЃРїРµС‚С‡РµСЂР° РґР°РЅРЅС‹С… РђРЎРџРњ &quot;РЁС‚СѓСЂРјР°РЅ&quot;;FileVersion=0.14.0.0;InternalName=HubServerConsole;LegalCopyright=2014 Р—РђРћ РќРџРџ РЎРёСЃС‚РµРјРЅС‹Рµ РўРµС…РЅРѕР»РѕРіРёРё;LegalTrademarks=;OriginalFilename=HubServerConsole.exe;ProductName=РђРІС‚РѕРјР°С‚РёР·РёСЂРѕРІР°РЅРЅР°СЏ РЎРёСЃС‚РµРјР° РџРѕРјРѕС‰Рё РњР°С€РёРЅРёСЃС‚Сѓ &quot;РЁС‚СѓСЂРјР°РЅ&quot;;ProductVersion=0.14.0.0;Comments=</VerInfo_Keys>

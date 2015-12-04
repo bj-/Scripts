@@ -1,0 +1,9 @@
+Windows Registry Editor Version 5.00
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer]
+; Отключение правой клавиши мыши
+"NoViewContextMenu"=dword:00000000
+"NoTrayContextMenu"=dword:00000000
+"NoStartMenuMorePrograms"=dword:00000000
+"NoControlPanel"=dword:00000000
