@@ -6,7 +6,7 @@
 #
 #
 # TODO 
-#  TODO чистить очереди перед стартом
+#  TODO чистить очереди и логи перед стартом
 #
 #
 #
@@ -18,11 +18,13 @@ param (
 	[string]$SQLUsername = "sa",
 	[string]$SQLPassword = "as",
 #	[string]$SQLScriptFile = "test.sql",
-	[string]$SQLScriptFile = "D:\ShturmanMOSStep8_u16\InitMOSDemo.sql",
-	[string]$AppPath = "D:\Shturman\BIN\",
+	[string]$SQLScriptFile = "",
+	[string]$AppPath = "D:\Shturman\",
 	[switch]$ServicesUninstall = $FALSE,
 	[switch]$ServicesInstall = $FALSE,
-	[switch]$Fast = $FALSE		# Сокращает пероды сна между командами до 1 сек.
+	[switch]$Fast = $FALSE,		# Сокращает пероды сна между командами до 1 сек.
+	[switch]$Debug = $FALSE		# в консоль все события лога пишет
+	
 )
 
 # Include SubScripts
@@ -41,12 +43,16 @@ if ($Fast -eq $TRUE) # Для отладки, чтоб не ждать
 	[Int]$SleepBeforeSQLService = 1      #Recomended: 600
 	[Int]$SleepAfterSQLService = 1      #Recomended: 300
 	[Int]$SleepAfterSQLScript = 1      #Recomended: 20-30
+	[Int]$SleepBetwenSrvcInstalationAndSrvcConfiguration = 0
+	[Int]$SleepBeforeScriptRuning = 1
 }
 Else
 {
+	[Int]$SleepBeforeScriptRuning = 10
 	[Int]$SleepBeforeSQLService = 10      #Recomended: 600
 	[Int]$SleepAfterSQLService = 30      #Recomended: 300
 	[Int]$SleepAfterSQLScript = 5      #Recomended: 20-30
+	[Int]$SleepBetwenSrvcInstalationAndSrvcConfiguration = 1   # Для шибко тупых компов может потребоваться промежуток
 }
 #$SQLServiceName = "MSSQL`$SQLEXPRESS"
 #$SQLDBName = "Shturman_metro"
@@ -67,12 +73,24 @@ if(isAdmin)
 	WriteLog "Админские права: есть." "MESS"
 };
 
-# Дествия с сервисами. регистрация / разрегистрация
-$ShturmanServices = "ShturmanQuality","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp","ShturmanGPS",
-	"ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga","ShturmanMetroLocations",
-	"ShturmanDataStorage","ShturmanHub","ShturmanLog"
+# Список всех существующих в мире сервисов
+$ShturmanServicesAll = "ShturmanQuality","ShturmanMainUnit","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp",
+	"ShturmanGPS","ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga",
+	"ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog"
 
-#$ShturmanServices = "ShturmanQuality","ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog"
+# Если в каталоге демки присуствует файл Services.ps1 - подсасываем из него персонализинованные параметры необходимых данной демке
+if (test-path "$AppPath\..\Params.ps1")
+{
+	# инклюдим параметры (список сервисов, инстанс SQL и пр что обычно в блоке params
+	WriteLog "Чтение настроек скрипта $AppPath\Params.ps1" "INFO"
+	."$AppPath\Params.ps1"
+}
+Else
+{
+	# если персонального списка нет - считаем что нужны все сервисы
+	WriteLog "Скрипт запущен с дефолтными настройками" "INFO"
+	$ShturmanServices = $ShturmanServicesAll
+}
 
 
 # TODO сделать чтоб сам искал все фалы *.Server.exe
@@ -83,22 +101,68 @@ $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.e
 #$ShturmanExeFiles = "DataStorageServer.exe","HubServer.exe","LogServer.exe","MetroLocationsServer.exe","QualityServer.exe"
 
 
-# Удаление всех сервисов
-if ($ServicesUninstall)
+#   +===================+
+#   |     Functions     |
+#   +===================+
+function ServicesUninstall
 {
-	foreach($item in $ShturmanServices)
+	# Удаление всех сервисов
+	WriteLog "Removing Services" "INFO"
+
+	foreach($item in $ShturmanServicesAll)
 	{
 
 		if (Get-Service $item -ErrorAction SilentlyContinue)
 		{
-			$UninstallResult = (Get-WmiObject Win32_Service -filter "name='$item'").Delete()
-			if ($UninstallResult.ReturnValue -eq 0)
+			# стопим сервис
+			if((Check-Service -ServiceName $item) -eq $FALSE)
 			{
-				WriteLog "Service [$item] succesffully removed" "MESS"
+				WriteLog "Service [$item] already stopped" "DUMP"
 			}
 			Else
 			{
-				WriteLog "Service [$item] can not remove" "ERR"
+				net stop $item
+
+				# BUG п омоему тут хрень, а не проверка.
+				if (Get-Service $item -ErrorAction SilentlyContinue)
+				{
+					WriteLog "Service [$item] is stopped" "INFO"
+				}
+			}
+
+			# удаляем
+			$UninstallResult = (Get-WmiObject Win32_Service -filter "name='$item'").Delete()
+			if ($UninstallResult.ReturnValue -eq 0)
+			{
+
+				if (Get-Service $item -ErrorAction SilentlyContinue)
+				{
+					if((Check-Service -ServiceName $item) -eq $TRUE)
+					{
+						WriteLog "Service [$item] doesn't removed (Service is RUN). Required rebot for complete operation." "WARN"
+					}
+					Else
+					{
+						# не факт что сюда зайдет когданить.
+						WriteLog "Service [$item] doesn't removed (Service is STOPED). Uncknown Error." "ERRr"
+					}
+				}
+				else
+				{
+					WriteLog "Service [$item] succesffully removed" "MESS"
+				}
+			}
+			Else
+			{
+				if((Check-Service -ServiceName $item) -eq $TRUE)
+				{
+					WriteLog "Service [$item] can not remove (Service is RUN),  Required rebot for complete operation." "WARN"
+				}
+				else
+				{
+# TODO хз почему так иногда происходит. моежет даже процесса не висеть. вроде ребут помогает.
+					WriteLog "Service [$item] can not remove (Service is STOPED). [I don't know what's happens]" "ERRr"
+				}
 			}
 		}
 		else
@@ -106,63 +170,70 @@ if ($ServicesUninstall)
 			WriteLog "Service [$item] doesn't exist" "INFO"
 		}
 
-#		if ((Check-Service -ServiceName $item -verbose) -ne $TRUE)
-#		{
-#			$UninstallResult = (Get-WmiObject Win32_Service -filter "name='$item'").Delete()
-#		}
 	}
-
-	break;	
 }
 
-if ($ServicesInstall) 
+function ServicesInstall
 {
+	# Исталятор сервисов. инстоллит все что сможет найти.
 
-	WriteLog "Services Installer" "MESS"
-	# TODO Переписать по нормлальному
+	WriteLog "Services Installer" "INFO"
 
-WriteLog "cd $AppPath"
-#cd $AppPath
+	# По списку экзешников возможных, если экзешник есть - регистрируем его.
+	foreach ($item in $ShturmanExeFiles)
+	{
+		# проверяем вдруг сервис уже зареган.
+		$itemServiceName = "Shturman" + ($item -replace "Server.exe", "")
+#		$itemServiceName
+		if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+		{
+			WriteLog "Service [$itemServiceName] aready registered." "WARN"
+		}
+		Else
+		{
+			if (test-path "$AppPath\BIN\$item")
+			{
 
-#	foreach($item in $ShturmanExeFiles)
-#	{
+				WriteLog "Registering service [$itemServiceName]." "INFO"
 
-#invoke-Item (".\$item /install")
+				# регистрируе сервис его же средставами
+				start $AppPath\BIN\$item "/install /silent"
 
-#		$AppPath
-#	}
+				# TODO вставить проверку что сервис зарегался.
+				if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+				{
+					WriteLog "Service [$itemServiceName] registered." "MESS"
+				}
+				else
+				{
+					# TODO так в лоб не прокатило. в большинстве случаев сервис считается еще не зареганным.
+#					WriteLog "Service [$itemServiceName] not registered." "ERRr"
+				}
 
-cd $AppPath
-.\AccelerometerServer.exe /install
-.\AsnpServer.exe /install
-.\BlueGigaServer.exe /install
-.\DataStorageServer.exe /install
-.\DataSyncServer.exe /install
-.\FOSServer.exe /install
-.\GPSServer.exe /install
-.\HubServer.exe /install
-.\LogServer.exe /install
-.\MainUnitServer.exe /install
-.\MetroLocationsServer.exe /install
-.\ModemServer.exe /install
-.\QualityServer.exe /install
-.\RRsServer.exe /install
-.\UpdateServer.exe /install
-.\WLanServer.exe /install
+			}
+			Else
+			{
+					WriteLog "File [$AppPath\BIN\$item] not found." "WARN"
+			}
+		}
+	}
 
+	# особотупые компы могут не успеть зарегать сервис... посему для таких слоупоков зарежка
+	Start-Sleep -Second $SleepBetwenSrvcInstalationAndSrvcConfiguration
 
-	Start-Sleep -Second 15
-
-	# Проставляем мануальный запуск для всех
-	foreach($item in $ShturmanServices)
+	# Проставляем мануальный запуск для всех, кроме лога
+	foreach($item in $ShturmanServicesAll)
 	{
 
+		# Обращаемся к сервису
 		if (Get-Service $item -ErrorAction SilentlyContinue)
 		{
-			if ($item -ne "ShturmanLog") {
+			if ($item -ne "ShturmanLog") { # кроме лог сервиса
 
+				# ставим мануальный запуск
 				Set-Service $item -StartupType Manual
 
+				# проверяем что манул установлен
 				$s = Get-WmiObject -Class Win32_Service -Property StartMode -Filter "Name='$item'"
 				if ($s.StartMode -eq "Manual")
 				{
@@ -176,56 +247,61 @@ cd $AppPath
 			}
 		}
 	}
-#	Get-Service -Name SharedAccess, cx2Svc -EA 0 | 
-#	foreach($item in $ShturmanExeFiles)
-#	{
-#		$s = "$AppPath$item /install"
-#		Invoke-Item $s
-#		"$AppPath$item /install"
-#	}
+}
+
+# ========================================================================================================================
+
+if ($ServicesUninstall)
+{
+	ServicesUninstall;
+	break;	
+}
+
+
+if ($ServicesInstall) 
+{
+	ServicesInstall;
 	break;	
 }
 
 
 WriteLog "Ждем $SleepBeforeSQLService сек, пока система придет в себя после загрузки" "INFO"
-Start-Sleep -Seconds $SleepBeforeSQLService; 
+Start-Sleep -Seconds $SleepBeforeScriptRuning; 
 
 
-# Ждем запуска MS SQL
-while ((Check-Service -ServiceName $SQLServiceName -verbose) -ne $TRUE)
+# Выполнение инициализационного SQL скрипта, если указан в пропертях.
+# необходим в некоторых демках для приведения базы в некое исходноe состояние (заливка фейковой истории)
+if ($SQLScriptFile -ne "")
 {
-	Start-Sleep -Seconds 5; 
+
+	Start-Sleep -Seconds $SleepBeforeSQLService; 
+
+	# Ждем запуска MS SQL
+	while ((Check-Service -ServiceName $SQLServiceName -verbose) -ne $TRUE)
+	{
+		Start-Sleep -Seconds 5; 
+	}
+
+
+	WriteLog "Ждем $SleepAfterSQLService сек, после запуска SQL Сервера. т.к. не всегда сразу к нему можно приконнектиться" "INFO"
+	# тупим еще минуту после старта... на всякий случай
+
+
+	Start-Sleep -Seconds $SleepAfterSQLService; 
+
+	WriteLog "Выполнение инициализационного скрипта" "INFO"
+
+	# Выполняем инициализационный скрипт
+	WriteLog "Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
+	Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
+
+	# опять тупим
+	Start-Sleep -Seconds $SleepAfterSQLScript; 
 }
 
-
-WriteLog "Ждем $SleepAfterSQLService сек, после запуска SQL Сервера. т.к. не всегда сразу к нему можно приконнектиться" "INFO"
-# тупим еще минуту после старта... на всякий случай
-
-
-Start-Sleep -Seconds $SleepAfterSQLService; 
-
-WriteLog "Выполнение инициализационного скрипта" "INFO"
-
-# Выполняем инициализационный скрипт
-WriteLog "Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
-Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
-
-# опять тупим
-Start-Sleep -Seconds $SleepAfterSQLScript; 
-
-
 WriteLog "Запуск сервисов" "INFO"
-#net start ShturmanLog
-#net start ShturmanHub
-#net start ShturmanDataStorage
-#net start ShturmanMetroLocations
-#net start ShturmanQuality
 
-
-
-#$ShturmanServicesReverse = [array]::Reverse($ShturmanServices)
-#$ShturmanServicesReverse
-#$ShturmanServices
+# реверс массива т.к. в нем сервису указаны в порядке обратном правильному запуску. так уж повелось.
 [array]::Reverse($ShturmanServices)
 
 foreach($item in $ShturmanServices)
@@ -270,9 +346,13 @@ foreach($item in $ShturmanServices)
 #Start-Sleep -Seconds 100; 
 WriteLog "Запуск приложения" "MESS"
 
-cd $AppPath
-.\Shturman.lnk
+#cd $AppPath
+#Start "$AppPath\Shturman.lnk"
+Start "$AppPath\BIN\Shturman.lnk"
 
-break
+WriteLog "Done. Windows will be automaticaly closed after 120s" "INFO"
+Start-Sleep -Seconds 120; 
+
+# break
 
 #$ShturmanEXELocation
