@@ -29,26 +29,32 @@
 #
 
 # History:
+# [!] - New, [#] - Bugs
 # [1.0.3]
 #   - Debug Mode для логгирования в консоли
 #   - Проверка что новые данные зааплаились в ноду
 #   - отключено создание файлов *.BAK
 # TODO [1.0.4]
-#   - Аргументы -Debug -ClearComment теперь свитчи. т.е. если указан = True, если не указан - False
-#   - help. вызывается аргументом [-help]
-#   - Во всех нодах, кроме $ProgGroupName убивает все ключи <VerInfo_*> (MajorVer/MinorVer/Build/Release/Keys)
+#   - [!] Аргументы -Debug -ClearComment теперь свитчи. т.е. если указан = True, если не указан - False
+#   - [!] help. вызывается аргументом [-help]
+#   - [!] Во всех нодах, кроме $ProgGroupName убивает все ключи <VerInfo_*> (MajorVer/MinorVer/Build/Release/Keys)
+#   - [#] Исправлено добавление ", " в коментарий, если комментарий пустой и нет ключа -ClearComment
+#   - [#] Частично исправлено форматирование XML файла - установлены отступы 4 пробела на уровень. Пробел перед "/>" пока не побежден.
 #
 # TODO
 #   TODO [HIGH] Если ноды для версий нет в XML, но в командной строке указано прописать туда версию - создать ноду. $MajorVersion-$Revision
 #   TODO [HIGH] Default $Path - текущий фолдер скрипта. возможно отдельным свитчем. чтоб случайно в C: не запустили
 #   TODO [HIGH] Запуск из CMD  так чтоб не билась кодировка (попробовать cmd в юникоде)
-#   TODO [HIGH] форматирование XML файла сделать также убого как в делфи. :) дабы при коммите нормально реплейсились только измененные строки.
+#   TODO [HIGH] форматирование XML файла доделать до убого делфи. :) - в делфях <tag/> / <tag prop=""/>, а у PS <tag /> /  / <tag prop="" />
 #   TODO - зачитать сохраненный файл и проверить что в нем дествительно сохранены новые значения
 #   TODO - принимать в качестве пути значения оканчивающмяеся как на \ так и без оной  
 #   TODO - автоматом показывать хелп, (если нет корректных аргументов на входе.)
 
 param (
-	[string]$Path = ".\DEFAULTPATH", # Путь к фолдеру в котором менять файлы. без оконечного \. например "D:\projects"
+	# Путь к фолдеру в котором менять файлы. без оконечного \. например "D:\projects"
+	# По умолчанию каталог запуска скрипта
+	[string]$Path = (Split-Path $script:MyInvocation.MyCommand.Path), 
+
 	# Устанавливаемая версия [Major].[Minor].[Build].[Revision]
 	[string]$MajorVersion 	= "0",
 	[string]$MinorVersion 	= "00",
@@ -60,6 +66,11 @@ param (
 	[switch]$Help		= $false
 )
 
+# Determine script location for PowerShell
+#$ScriptDir = 
+#$Path
+
+break
 # Script Version
 [string]$scriptver = "1.0.4";
 
@@ -262,7 +273,10 @@ Foreach ($File in $arr)
 					{
 						$Separator = ", ";
 					}
-					$arr[$i] = $arr[$i] + $Separator + $Comment
+					if ($Comment -ne "") # добавляем коммент только если он не пустой
+					{
+						$arr[$i] = $arr[$i] + $Separator + $Comment
+					}
 				}
 				Else 
 				{
@@ -394,12 +408,17 @@ foreach ($xnode in $nodes)
 
 
 	# backup original file
-	#Copy-Item -Path $FileFullPath -Destination "$FileFullPath.BAK"
+#	Copy-Item -Path $FileFullPath -Destination "$FileFullPath.BAK"
+
+#	$xml.PreserveWhiteSpace = $FALSE
+#	Foreach-Object {$xml -replace "/>", "fff"}
+#	$xml = [regex]::replace($xml, " />", "/>")
 
 	# Save XML File
 	$enc = New-Object System.Text.UTF8Encoding( $true ) # True - Save with BOM, False - Save with out BOM
 	$wrt = New-Object System.XML.XMLTextWriter( "$FileFullPath", $enc )
 	$wrt.Formatting = 'Indented'
+	$wrt.Indentation = 4
 	$xml.Save( $wrt )
 	$wrt.Close()
 
