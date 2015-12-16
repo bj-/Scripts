@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!--Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"-->
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <configSections>
+    <sectionGroup name="system.web">
+      <section name="myConfigSection" />
+    </sectionGroup>
+  </configSections>
+  <system.webServer>
+    <modules>
+      <add name="moduleToRemove" />
+      <add name="moduleToKeep" />
+    </modules>
+  </system.webServer>
+  <system.web>
+    <customErrors mode="On" defaultRedirect="Error.htm">
+      <error statusCode="404" redirect="http://myAppDevWeb/404.aspx" />
+    </customErrors>
+  </system.web>
+  <appSettings>
+    <add key="DBServer" value="myAppDevDB" />
+  </appSettings>
+  <PropertyGroup Condition="bbb">
+    <Base_Win32>true</Base_Win32>
+    <CfgParent>Base</CfgParent>
+    <VerInfo_MinorVer>14</VerInfo_MinorVer>
+    <Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="a$sd">
+    <Base_Win32>true</Base_Win32>
+    <CfgParent>Base</CfgParent>
+    <Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="('$(Platform)'=='Win32' and '$(Base)'=='true') or '$(Base_Win32)'!=''">
+    <Base_Win32>true</Base_Win32>
+    <CfgParent>Base</CfgParent>
+    <VerInfo_MinorVer>14</VerInfo_MinorVer>
+    <Base>true</Base>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Base)'!=''">
+    <VerInfo_MinorVer>14</VerInfo_MinorVer>
+    <DCC_K>false</DCC_K>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
+    <VerInfo_MinorVer>14</VerInfo_MinorVer>
+    <DCC_MapFile>3</DCC_MapFile>
+  </PropertyGroup>
+</Project>

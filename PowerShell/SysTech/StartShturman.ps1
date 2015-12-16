@@ -160,7 +160,7 @@ function ServicesUninstall
 				}
 				else
 				{
-# TODO хз почему так иногда происходит. моежет даже процесса не висеть. вроде ребут помогает.
+# TODO хз почему так иногда происходит. может даже процесса не висеть. вроде ребут помогает.
 					WriteLog "Service [$item] can not remove (Service is STOPED). [I don't know what's happens]" "ERRr"
 				}
 			}
@@ -194,20 +194,33 @@ function ServicesInstall
 			if (test-path "$AppPath\BIN\$item")
 			{
 
-				WriteLog "Registering service [$itemServiceName]." "INFO"
+				#WriteLog "Registering service [$itemServiceName]." "INFO"
 
 				# регистрируе сервис его же средставами
 				start $AppPath\BIN\$item "/install /silent"
 
-				# TODO вставить проверку что сервис зарегался.
-				if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+				$i = 0; # костыль чтоб дать время сервису прийти в себя после регистрации. т.к. прямо сразу - он еще не существует.
+				while ($i -le 5)
 				{
-					WriteLog "Service [$itemServiceName] registered." "MESS"
-				}
-				else
-				{
-					# TODO так в лоб не прокатило. в большинстве случаев сервис считается еще не зареганным.
-#					WriteLog "Service [$itemServiceName] not registered." "ERRr"
+					# Проверка что сервис зарегался.
+					if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+					{
+						WriteLog "Service [$itemServiceName] registered." "MESS"
+						break; # выпадеем из цикла, если регистрация успешна
+					}
+					else
+					{
+
+						# в конце пятой попытки еще раз проверяем сервис, и если его таки нет - кидаем ошибку
+						if ($i -eq 5 -and (-not (Get-Service $itemServiceName -ErrorAction SilentlyContinue)))
+						{
+							WriteLog "Service [$itemServiceName] can not register" "ERRr"
+						}
+
+						# тупо спим 0.1с. обычно этого хватает. но на всякий случай спим 5 попыток
+						Start-Sleep -Milliseconds 100; 
+						$i++;
+					}
 				}
 
 			}
@@ -221,7 +234,10 @@ function ServicesInstall
 	# особотупые компы могут не успеть зарегать сервис... посему для таких слоупоков зарежка
 	Start-Sleep -Second $SleepBetwenSrvcInstalationAndSrvcConfiguration
 
+
 	# Проставляем мануальный запуск для всех, кроме лога
+	WriteLog "Set ""Manual"" in Service's StartType" "INFO"
+
 	foreach($item in $ShturmanServicesAll)
 	{
 

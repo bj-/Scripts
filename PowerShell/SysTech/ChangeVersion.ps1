@@ -3,30 +3,12 @@
 # Ищет *.dproj в каталоге и подкаталогах указанных в $Path
 # и меняет им версию на указанную в блоке Param. либо в ключах.
 
-# Запуск:
-# либо правкой блока Param - версии прописываем в нем
-# либо из командной строки PS:
-# .\ChangeVersion.ps1 
-#	Ключи не обязательные. при отсутвии любого - возмет дефолтное значение из param
-# 	[-Path "[Путь до фолдера в котором менять]"]  (без оконечного слеша) TODO сделать толерастом
-#	[-MajorVersion "[Major]"] 
-#	[-MinorVersion "[Minor]"]
-#	[-Build "[Build]"] 
-#	[-Revision "[Revision]"]
-#	[-Comment "[Коментарий]"]
-#	[-ClearComment]		- перезаписать коментарий новым (по умолчанию: добавить)
-#	[-Debug]		- в консоль сыпать все сообщения для лога, Default = отключено
-#
-# Пример:
-#   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion "0" -MinorVersion "16" -Build "005" -Revision "00" -Comment "Хаааа-ха-ха (адский смех)" -ClearComment
-#
-#  Полный путь для запуска скриптов (шоткатом например) выглядит так:
-# C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe "C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Все починил'" -ClearComment
-# 
-#
+# Help вызывается ключем -Help
+
 #   Если скрипт не запускается и ругается что запрещено запускать неподписанные скрипты - выполнить в PS данную команду
 #   Set-ExecutionPolicy RemoteSigned
-#
+#   !!! из под админа
+
 
 # History:
 # [!] - New, [#] - Bugs
@@ -34,21 +16,24 @@
 #   - Debug Mode для логгирования в консоли
 #   - Проверка что новые данные зааплаились в ноду
 #   - отключено создание файлов *.BAK
-# TODO [1.0.4]
+# [1.0.4]
 #   - [!] Аргументы -Debug -ClearComment теперь свитчи. т.е. если указан = True, если не указан - False
 #   - [!] help. вызывается аргументом [-help]
 #   - [!] Во всех нодах, кроме $ProgGroupName убивает все ключи <VerInfo_*> (MajorVer/MinorVer/Build/Release/Keys)
 #   - [#] Исправлено добавление ", " в коментарий, если комментарий пустой и нет ключа -ClearComment
 #   - [#] Частично исправлено форматирование XML файла - установлены отступы 4 пробела на уровень. Пробел перед "/>" пока не побежден.
+#   - [!] Если не указан параметр $Path - используется текущий фолдер скрипта.
+#   - [!] Если не указан ни один из кллючей версии - автоматом показывает хелп
+# TODO NEXT [1.0.5]
+#   - 
 #
 # TODO
+#   TODO [HIGH] Запретить задавать версию ниже/туже чем при прошлом запуске. контролировать.... хз как. файл/запрос к серверу. лучше к серверу.
 #   TODO [HIGH] Если ноды для версий нет в XML, но в командной строке указано прописать туда версию - создать ноду. $MajorVersion-$Revision
-#   TODO [HIGH] Default $Path - текущий фолдер скрипта. возможно отдельным свитчем. чтоб случайно в C: не запустили
 #   TODO [HIGH] Запуск из CMD  так чтоб не билась кодировка (попробовать cmd в юникоде)
 #   TODO [HIGH] форматирование XML файла доделать до убого делфи. :) - в делфях <tag/> / <tag prop=""/>, а у PS <tag /> /  / <tag prop="" />
 #   TODO - зачитать сохраненный файл и проверить что в нем дествительно сохранены новые значения
 #   TODO - принимать в качестве пути значения оканчивающмяеся как на \ так и без оной  
-#   TODO - автоматом показывать хелп, (если нет корректных аргументов на входе.)
 
 param (
 	# Путь к фолдеру в котором менять файлы. без оконечного \. например "D:\projects"
@@ -56,9 +41,9 @@ param (
 	[string]$Path = (Split-Path $script:MyInvocation.MyCommand.Path), 
 
 	# Устанавливаемая версия [Major].[Minor].[Build].[Revision]
-	[string]$MajorVersion 	= "0",
+	[string]$MajorVersion 	= "00",
 	[string]$MinorVersion 	= "00",
-	[string]$Build	 	= "000",
+	[string]$Build	 	= "00",
 	[string]$Revision	= "00",
 	[string]$Comment	= "",
 	[switch]$ClearComment	= $false,
@@ -66,11 +51,7 @@ param (
 	[switch]$Help		= $false
 )
 
-# Determine script location for PowerShell
-#$ScriptDir = 
-#$Path
 
-break
 # Script Version
 [string]$scriptver = "1.0.4";
 
@@ -96,7 +77,12 @@ Else
 [string]$DateFormat = "yyyy-MM-dd HH-mm-ss";
 
 # Значения и переменные.
-[string]$LogFile = ".\ChVer.log";
+[string]$LogFile = ".\ChangeVersion.log";
+
+
+# еслди не указан ни один из ключей версии - показываем хелп
+if ($MajorVersion -eq "00" -and $MinorVersion -eq "00" -and $Build -eq "00" -and $Revision -eq "00")
+{$Help = $TRUE}
 
 if ($Help)
 {
@@ -124,8 +110,11 @@ if ($Help)
 #	[-Debug]		- в консоль сыпать все сообщения для лога, Default = отключено
 #       [-Help]			- Данный Хелп. при использовании данного ключа - другие ключи игнорируются и скрипт не выполняется.
 #
-# Пример:
+# Примеры:
+#   Все файлы *.prodj в каталоге и подкаталогах D:\Projects
 #   .\ChangeVersion.ps1 -Path "D:\Projects" -MajorVersion '0' -MinorVersion '16' -Build '005' -Revision '00' -Comment 'Хаааа-ха-ха (адский смех)' -ClearComment
+#   Все файлы *.prodj в начиная с текущего каталога (скрипта)
+#   .\ChangeVersion.ps1 -MajorVersion '0' -MinorVersion '16' -Build '005' -Revision '00' -Comment 'Хаааа-ха-ха (адский смех)' -ClearComment
 #
 #  Полный путь для запуска скриптов (шоткатом например) выглядит так:
 # C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe ""C:\SysTech\ChangeVersion.ps1 -Path 'D:\Projects' -MajorVersion 0 -MinorVersion 16 -Build 005 -Revision 00 -Comment 'Все починил' -ClearComment""
@@ -133,6 +122,7 @@ if ($Help)
 #
 #   Если скрипт не запускается и ругается что запрещено запускать неподписанные скрипты - выполнить в PS данную команду
 #   Set-ExecutionPolicy RemoteSigned
+#   !!! из полд админа
 ";
 	break;
 }
@@ -205,7 +195,7 @@ Foreach ($File in $arr)
 	# строим полный путь до следующего файла
 	$FileFullPath = $Path + "\" + $File;
 
-	if ($ClearComment) {$CommentMode = "New"} Else {$CommentMode = "Append"}
+	if ($ClearComment) {$CommentMode = "Replace"} Else {$CommentMode = "Append"}
 	WriteLog "File: \$File New Version: $MajorVersion.$MinorVersion.$Build.$Revision, Comment=[$Comment] (mode: $CommentMode)";
 
 	# Get File content in XML
@@ -410,9 +400,6 @@ foreach ($xnode in $nodes)
 	# backup original file
 #	Copy-Item -Path $FileFullPath -Destination "$FileFullPath.BAK"
 
-#	$xml.PreserveWhiteSpace = $FALSE
-#	Foreach-Object {$xml -replace "/>", "fff"}
-#	$xml = [regex]::replace($xml, " />", "/>")
 
 	# Save XML File
 	$enc = New-Object System.Text.UTF8Encoding( $true ) # True - Save with BOM, False - Save with out BOM
@@ -422,7 +409,6 @@ foreach ($xnode in $nodes)
 	$xml.Save( $wrt )
 	$wrt.Close()
 
-#	$xml.Save($FileFullPath);
 	
 }
 
