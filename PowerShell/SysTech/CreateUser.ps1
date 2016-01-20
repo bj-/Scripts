@@ -3,7 +3,8 @@ param (
 	[string]$UserFullName = "Block Administrator",
 	[string]$UserDescription = "Block Administrator",
 	[string]$Password = "mRaGjr2Ty",
-	[string]$Group = "Администраторы"
+	[string]$Group = "Администраторы",
+	[switch]$Debug = $FALSE
 );
 
 clear;
@@ -42,15 +43,49 @@ function addUser2Group([string]$user,[string]$group)
     }
     catch
     {
-        write2log($_)
+        WriteLog($_)
         return $false
     }
 
     return $true
 }
 
-function CreateUser ([string]$UserName, [string]$UserPassword, [string]$UserFullName = "", [string]$UserDescription = "")
+function CreateUser ()
 {
+
+	param (
+		[string]$UserName = "",
+		[string]$UserPassword = "",
+		[string]$UserFullName = "",
+		[string]$UserDescription = "",
+		[switch]$Verbose = $FALSE
+		)
+
+	WriteLog "Creating user [$User]" "DUMP"
+
+	# проверяем существвет ли уже данный пользователь
+	if (Check-LocalUserLogin -UserName $UserName -Verbose)
+	{
+		if ($Verbose = $TRUE)
+		{
+			WriteLog "User [$User] already exist" "INFO"
+		}
+		return -1
+	}
+
+$aa;
+break; 
+
+	if ($UserPassword -eq "")
+	{
+		$UserPassword = ([char[]](Get-Random -Input $(48..57 + 65..90 + 97..122) -Count 12)) -join ""
+		if ($Verbose = $TRUE)
+		{
+			WriteLog "Password is empty. Generated new password [$UserPassword]" "INFO"
+		}
+		
+	}
+
 	# Create new local Admin user for script purposes
 	$Computer = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
 
@@ -63,13 +98,21 @@ function CreateUser ([string]$UserName, [string]$UserPassword, [string]$UserFull
 	$LocalAdmin.SetInfo()
 	$LocalAdmin.UserFlags = 64 + 65536 # ADS_UF_PASSWD_CANT_CHANGE + ADS_UF_DONT_EXPIRE_PASSWD
 	$LocalAdmin.SetInfo()
+
+	# проверяем что пользователь создался
+	# TODO
+	
+
 }
 
 # ========================================
 
+#Get-LocalUserAccount -UserName "Admins"
 
 # Create user
-if (CreateUser $User $Password $UserFullName $UserDescription)
+
+
+if (CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription -Verbose)
 {
 	WriteLog "User $User Created" "MESS"
 }

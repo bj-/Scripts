@@ -55,3 +55,72 @@ function isAdmin
 		return $TRUE;
 	}
 } 
+
+
+Function Get-LocalUserLogins ()
+{
+	$adsi = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
+	$list = $adsi.psbase.children | where {$_.psbase.schemaClassName -match "user"} | select @{n="Name";e={$_.name}}
+
+	return $list;
+}
+
+Function Check-LocalUserLogin
+{
+	param (
+		[string]$UserName = "",
+		[switch]$Verbose = $FALSE
+
+		)
+	if ($UserName -eq "")
+	{
+		WriteLog "[User] property must be specified (function [Check-LocalUserLogin])" "WARN"
+	}
+	else
+	{
+		$list = Get-LocalUserLogins
+		foreach ($item in $list)
+		{
+			if ($item.name -eq $UserName)
+			{
+				if ($Verbose) {WriteLog "User [$UserName] found" "INFO" }
+				return $TRUE
+			}
+		}
+
+		if ($Verbose) {WriteLog "User [$UserName] not found" "WARN" }
+		return $FALSE
+	}
+}
+
+
+
+<#
+Function Get-LocalUserAccount
+{
+[CmdletBinding()]
+param (
+	[parameter(ValueFromPipeline=$true,
+	ValueFromPipelineByPropertyName=$true)]
+	[string[]]$ComputerName=$env:computername,
+	[string]$UserName
+	)
+
+	foreach ($comp in $ComputerName){
+
+		[ADSI]$server="WinNT://$comp"
+
+		if ($UserName)
+		{
+			foreach ($User in $UserName)
+			{
+				$server.children | where {$_.schemaclassname -eq "user" -and $_.name -eq $user}
+			}    
+		}
+		else
+		{
+			$server.children | where {$_.schemaclassname -eq "user"}
+		}
+	}
+}
+#>
