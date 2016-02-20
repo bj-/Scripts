@@ -56,6 +56,67 @@ function isAdmin
 	}
 } 
 
+Function TestFolderPath 
+{
+	param (
+		[string]$Path = "",
+		[switch]$Create = $FALSE,
+		[switch]$Verbose = $FALSE
+		)
+
+	if ($Path -eq "")
+	{
+		WriteLog "Parameter [Path] in function [TestFolderPath] are missed" "ERRr"
+		break;
+	}
+<#
+	# проверки на существование путей
+	# - фолдера для Лог файлов
+	if (-not (test-path $LogFilePath))
+	{
+		WriteLog "Log File path [$LogFilePath] doesn't exist" "ERRr"
+		break;
+	}
+	else
+	{
+		WriteLog "Log File path [$LogFilePath] exist" "INFO"
+	}
+#>
+	# - Проверяем наличе фолдера
+	if (-not (test-path $Path))
+	{
+#break	
+		if ($Create)
+		{
+			WriteLog "Creating folder [$Path]" "DUMP"
+
+			# PowerShell's New-Item creates a folder
+			$result = New-Item -Path $Path -ItemType "directory"
+
+			WriteLog "Creating folder result: $result" "DUMP"
+			
+			if (-not (test-path $Path))
+			{
+				WriteLog "Can not create folder [$Path]" "ERRr"
+				break;
+			}
+			else
+			{
+				WriteLog "Created folder [$Path]" "MESS" -Verbose $Verbose
+			}
+		}
+		Else
+		{
+		WriteLog "Folder [$Path] doesn't exist" "ERRr"
+		}
+	}
+	else
+	{
+		WriteLog "Folder [$Path] is exist" "INFO" -Verbose $Verbose
+	}
+
+}
+
 
 Function Get-LocalUserLogins ()
 {

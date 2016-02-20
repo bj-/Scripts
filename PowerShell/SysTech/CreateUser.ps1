@@ -1,8 +1,13 @@
+<#
+  TODO: проверять под каким юзером запущено
+  TODO: не зависимо от того под кем запустили - корректно все прописывать.
+
+#>
 param (
 	[string]$User = "Admin",
 	[string]$UserFullName = "Block Administrator",
 	[string]$UserDescription = "Block Administrator",
-	[string]$Password = "mRaGjr2Ty",
+	[string]$Password = "",
 	[string]$Group = "Администраторы",
 	[switch]$Debug = $FALSE
 );
@@ -13,7 +18,7 @@ clear;
 .".\..\functions\functions.ps1"
 .".\..\functions\log.ps1"
 
-[string]$version = "1.0.1"
+[string]$version = "1.0.2"
 <#
 by NET (рабаатет)
 
@@ -34,20 +39,26 @@ if(isAdmin)
 };
 
 
-function addUser2Group([string]$user,[string]$group)
+function addUser2Group ()
 {
-    $cname = gc env:computername
-    try
-    {
-        ([adsi]"WinNT://$cname/$group,group").Add("WinNT://$cname/$user,user")
-    }
-    catch
-    {
-        WriteLog($_)
-        return $false
-    }
+	param (
+		[string]$user = "",
+		[string]$group = "",
+		[switch]$Verbose = $FALSE
+		)
 
-    return $true
+	$cname = gc env:computername
+	try
+	{
+		([adsi]"WinNT://$cname/$group,group").Add("WinNT://$cname/$user,user")
+	}
+	catch
+	{
+		WriteLog $_ "WARN" $Verbose
+		return $false
+	}
+
+	return $true
 }
 
 function CreateUser ()
@@ -61,28 +72,20 @@ function CreateUser ()
 		[switch]$Verbose = $FALSE
 		)
 
-	WriteLog "Creating user [$User]" "DUMP"
+	WriteLog "Creating user [$UserName]" "DUMP"
 
 	# проверяем существвет ли уже данный пользователь
-	if (Check-LocalUserLogin -UserName $UserName -Verbose)
+	if (Check-LocalUserLogin -UserName $UserName)
 	{
-		if ($Verbose = $TRUE)
-		{
-			WriteLog "User [$User] already exist" "INFO"
-		}
+		WriteLog "User [$User] already exist" "INFO" $Verbose
 		return -1
 	}
 
-$aa;
-break; 
 
 	if ($UserPassword -eq "")
 	{
 		$UserPassword = ([char[]](Get-Random -Input $(48..57 + 65..90 + 97..122) -Count 12)) -join ""
-		if ($Verbose = $TRUE)
-		{
-			WriteLog "Password is empty. Generated new password [$UserPassword]" "INFO"
-		}
+		WriteLog "Password is empty. Generated new password [$UserPassword]" "INFO" $Verbose
 		
 	}
 
@@ -100,7 +103,16 @@ break;
 	$LocalAdmin.SetInfo()
 
 	# проверяем что пользователь создался
-	# TODO
+	if (Check-LocalUserLogin -UserName $UserName)
+	{
+		WriteLog "User [$User] Created" "MESS" $Verbose
+		return $TRUE
+	}
+	Else
+	{
+		WriteLog "User [$User] doesn't created" "ERRr" $Verbose
+		return $FALSE
+	}
 	
 
 }
@@ -110,21 +122,27 @@ break;
 #Get-LocalUserAccount -UserName "Admins"
 
 # Create user
+# write-host  $Password
 
-
-if (CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription -Verbose)
+$uCrRes = CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription
+if ($uCrRes -eq $TRUE)
 {
-	WriteLog "User $User Created" "MESS"
+	WriteLog "User [$User] Created" "MESS"
+}
+ElseIf ($uCrRes -eq "-1")
+{
+	WriteLog "User [$User] already exist" "INFO"
 }
 Else
 {
-	WriteLog "User $User doesn't created" "ERRr"
+	WriteLog "User [$User] doesn't created" "ERRr"
 }
 
-# Create Group
-WriteLog "Adding user $User to group $Group" "INFO"
+# Add To Group
+WriteLog "Adding user [$User] to group [$Group]" "INFO"
 # TODO вставить проверку что включился в группу
-addUser2Group $User $Group
+
+addUser2Group -User $User -Group $Group
 
 
 # SetShell for users
@@ -150,7 +168,7 @@ Set-ItemProperty -path $RegKey -name Shell -value "C:\Shturman\BIN\OnBoard.exe"
 #Get-ItemProperty -Path $RegKey -Name Shell
 
 
-break
+# break
 
 <#
 # CreateLocalGroup.ps1

@@ -28,8 +28,15 @@ Else
 [string]$LogDateFormat = "yyyy-MM-dd HH-mm-ss";
 
 
-function WriteLog($message, $messagetype = "INFO")
+function WriteLog
 {
+	param (
+		[string]$message = "",
+		[string]$messagetype = "INFO",
+		[bool]$Verbose = $TRUE		# в консоль все события лога пишет
+	)
+
+
 	$currDateTime = Get-Date -Format $LogDateFormat
 	
 	switch ($messagetype)
@@ -59,7 +66,10 @@ function WriteLog($message, $messagetype = "INFO")
 	# В консоль 
 	if ($messagetype -match $HostErrorLevel)
 	{
-		Write-Host $message -foregroundcolor $color;
+		if ($Verbose)
+		{
+			Write-Host $message -foregroundcolor $color;
+		}
 	}
 	# В лог
 	if ($messagetype -match $LogErrorLevel)
