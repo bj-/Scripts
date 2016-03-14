@@ -2,7 +2,7 @@ Program p1;
 begin
 IniFile.SetFileName('C:\Shturman\Bin\Shturman.ini');
 
-  IniFile.WriteString('Update.Client', 'Component', 'ShturmanOnBoardInUpd');
+  IniFile.WriteString('Update.Client', 'Component', 'ShturmanOnBoard');
   IniFile.Closefile;
 end.
 
