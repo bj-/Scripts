@@ -1,15 +1,53 @@
-#
+<#
 # Basic functions
 # Version 1.0.0
 #
 #
 #
-# Разделы и функции.
-# [Services]
-# Check-Service ($ServiceName)	Запущен ли сервис	return True/False, write status into console
+Разделы и функции.
+[Services]
+	Check-Service()	Запущен ли сервис	return True/False, write status into console
+		[string]$ServiceName = "",
+		[switch]$verbose
+		return $TRUE/$FALSE
 
-# [Secirity]
-# isAdmin	проверка наличия административных привилегий	return True/False, write status into console and stop script when False
+
+[Secirity]
+	isAdmin()	проверка наличия административных привилегий	return True/False, write status into console and stop script when False
+		return $TRUE/$FALSE
+
+[FilesAndFolders]
+	TestFolderPath 
+		[string]$Path = "",
+		[switch]$Create = $FALSE,
+		[switch]$Verbose = $FALSE
+
+
+[UsersAndGroups]
+	Get-LocalUserLogins
+		return LOGINS_ARRAY;
+	Check-LocalUserLogin
+		[string]$UserName = "",
+		[switch]$Verbose = $FALSE
+		return $TRUE/$FALSE
+	addUser2Group ()			Добавить юзера в группу
+		[string]$user = "",
+		[string]$group = "",
+		[switch]$Verbose = $FALSE
+		return $TRUE/$FALSE
+	CreateUser ()				Создание Юзера
+		[string]$UserName = "",
+		[string]$UserPassword = "",
+		[string]$UserFullName = "",
+		[string]$UserDescription = "",
+		[switch]$Verbose = $FALSE
+		return $TRUE/$FALSE/-1
+	get-LocalUserSid			Get Local User SID by Username
+		[string]$Username = "",
+		[switch]$Verbose = $FALSE
+		return USER_SID
+
+#>
 
 # =============================================================================================
 # [Services]
@@ -47,7 +85,7 @@ function isAdmin
 	{
 		Write-Host "Required Administrative previlegies. Please Run script under administrator." -foregroundcolor "red"; 
 		Start-Sleep -Seconds 2; 
-		break;
+		break; # если нет - отваливаемся.
 		#return $FALSE;
 	}
 	Else
@@ -56,6 +94,7 @@ function isAdmin
 	}
 } 
 
+# [FilesAndFolders]
 Function TestFolderPath 
 {
 	param (
@@ -117,6 +156,11 @@ Function TestFolderPath
 
 }
 
+<# ==============================================
+
+[UsersAndGroups]
+
+ ============================================== #>
 
 Function Get-LocalUserLogins ()
 {
@@ -144,16 +188,133 @@ Function Check-LocalUserLogin
 		{
 			if ($item.name -eq $UserName)
 			{
-				if ($Verbose) {WriteLog "User [$UserName] found" "INFO" }
+				WriteLog "User [$UserName] found" "INFO" $Verbose
 				return $TRUE
 			}
 		}
 
-		if ($Verbose) {WriteLog "User [$UserName] not found" "WARN" }
+		WriteLog "User [$UserName] not found" "WARN" $Verbose
 		return $FALSE
 	}
 }
 
+
+function addUser2Group ()
+{
+	param (
+		[string]$user = "",
+		[string]$group = "",
+		[switch]$Verbose = $FALSE
+		)
+
+	WriteLog "Adding user [$User] to group [$Group]" "INFO" $Verbose
+
+	$cname = gc env:computername
+	try
+	{
+		([adsi]"WinNT://$cname/$group,group").Add("WinNT://$cname/$user,user")
+	}
+	catch
+	{
+		WriteLog $_ "WARN" $Verbose
+		return $false
+	}
+# TODO: проверка включился ли юзер в группу
+
+	return $true
+}
+
+function CreateUser ()
+{
+
+	param (
+		[string]$UserName = "",
+		[string]$UserPassword = "",
+		[string]$UserFullName = "",
+		[string]$UserDescription = "",
+		[switch]$Verbose = $FALSE
+		)
+
+	WriteLog "Creating user [$UserName]" "DUMP"
+
+	# проверяем существвет ли уже данный пользователь
+	if (Check-LocalUserLogin -UserName $UserName)
+	{
+		WriteLog "User [$User] already exist" "INFO" $Verbose
+		return -1
+	}
+
+
+	if ($UserPassword -eq "")
+	{
+		$UserPassword = ([char[]](Get-Random -Input $(48..57 + 65..90 + 97..122) -Count 12)) -join ""
+		WriteLog "Password is empty. Generated new password [$UserPassword]" "INFO" $Verbose
+		
+	}
+
+	# Create new local Admin user for script purposes
+	$Computer = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
+
+	$LocalAdmin = $Computer.Create("User", $UserName)
+	$LocalAdmin.SetPassword($UserPassword)
+	$LocalAdmin.SetInfo() # Для каждой проперти. пакетно нельзя.
+	$LocalAdmin.Description  = $UserDescription
+	$LocalAdmin.SetInfo()
+	$LocalAdmin.FullName = $UserFullName
+	$LocalAdmin.SetInfo()
+	$LocalAdmin.UserFlags = 64 + 65536 # ADS_UF_PASSWD_CANT_CHANGE + ADS_UF_DONT_EXPIRE_PASSWD
+	$LocalAdmin.SetInfo()
+
+	# проверяем что пользователь создался
+	if (Check-LocalUserLogin -UserName $UserName)
+	{
+		WriteLog "User [$User] Created" "MESS" $Verbose
+		return $TRUE
+	}
+	Else
+	{
+		WriteLog "User [$User] doesn't created" "ERRr" $Verbose
+		return $FALSE
+	}
+	
+
+}
+
+
+function get-LocalUserSid
+{
+	# Get Local User SID by Username
+	Param (
+		[string]$Username = "",
+		[switch]$Verbose = $FALSE
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+	# проверка что юзер существует
+	if (Check-LocalUserLogin $Username $Verbose)
+	{
+		$ID = new-object System.Security.Principal.NTAccount($Username)
+		$sid = $ID.Translate( [System.Security.Principal.SecurityIdentifier] ).toString()
+		# TODO Логгирование
+	}
+	else
+	{
+		# TODO Логгирование ошибки
+
+	}
+	
+	# TODO: проверка что Сид получен
+
+	WriteLog "$FuncName SID for local user [$Username] is [$sid]" "DUMP" $Verbose
+	return $sid
+
+	# Alternative way
+#	write-host (new-object System.Security.Principal.NTAccount "Admin").Translate([System.Security.Principal.SecurityIdentifier])
+
+}
 
 
 <#

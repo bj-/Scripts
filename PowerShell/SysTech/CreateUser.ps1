@@ -14,11 +14,15 @@ param (
 
 clear;
 
+# Determine script location for PowerShell
+$ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
+ 
 # Include SubScripts
-.".\..\functions\functions.ps1"
-.".\..\functions\log.ps1"
+.$ScriptDir"\..\Functions\Functions.ps1"
+.$ScriptDir".\..\Functions\log.ps1"
 
-[string]$version = "1.0.2"
+
+[string]$version = "1.0.3"
 <#
 by NET (рабаатет)
 
@@ -39,125 +43,67 @@ if(isAdmin)
 };
 
 
-function addUser2Group ()
-{
-	param (
-		[string]$user = "",
-		[string]$group = "",
-		[switch]$Verbose = $FALSE
-		)
-
-	$cname = gc env:computername
-	try
-	{
-		([adsi]"WinNT://$cname/$group,group").Add("WinNT://$cname/$user,user")
-	}
-	catch
-	{
-		WriteLog $_ "WARN" $Verbose
-		return $false
-	}
-
-	return $true
-}
-
-function CreateUser ()
-{
-
-	param (
-		[string]$UserName = "",
-		[string]$UserPassword = "",
-		[string]$UserFullName = "",
-		[string]$UserDescription = "",
-		[switch]$Verbose = $FALSE
-		)
-
-	WriteLog "Creating user [$UserName]" "DUMP"
-
-	# провер€ем существвет ли уже данный пользователь
-	if (Check-LocalUserLogin -UserName $UserName)
-	{
-		WriteLog "User [$User] already exist" "INFO" $Verbose
-		return -1
-	}
-
-
-	if ($UserPassword -eq "")
-	{
-		$UserPassword = ([char[]](Get-Random -Input $(48..57 + 65..90 + 97..122) -Count 12)) -join ""
-		WriteLog "Password is empty. Generated new password [$UserPassword]" "INFO" $Verbose
-		
-	}
-
-	# Create new local Admin user for script purposes
-	$Computer = [ADSI]"WinNT://$Env:COMPUTERNAME,Computer"
-
-	$LocalAdmin = $Computer.Create("User", $UserName)
-	$LocalAdmin.SetPassword($UserPassword)
-	$LocalAdmin.SetInfo() # ƒл€ каждой проперти. пакетно нельз€.
-	$LocalAdmin.Description  = $UserDescription
-	$LocalAdmin.SetInfo()
-	$LocalAdmin.FullName = $UserFullName
-	$LocalAdmin.SetInfo()
-	$LocalAdmin.UserFlags = 64 + 65536 # ADS_UF_PASSWD_CANT_CHANGE + ADS_UF_DONT_EXPIRE_PASSWD
-	$LocalAdmin.SetInfo()
-
-	# провер€ем что пользователь создалс€
-	if (Check-LocalUserLogin -UserName $UserName)
-	{
-		WriteLog "User [$User] Created" "MESS" $Verbose
-		return $TRUE
-	}
-	Else
-	{
-		WriteLog "User [$User] doesn't created" "ERRr" $Verbose
-		return $FALSE
-	}
-	
-
-}
-
 # ========================================
 
-#Get-LocalUserAccount -UserName "Admins"
-
 # Create user
-# write-host  $Password
-
-$uCrRes = CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription
-if ($uCrRes -eq $TRUE)
+if ((CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription -Verbose) -eq $TRUE)
 {
-	WriteLog "User [$User] Created" "MESS"
-}
-ElseIf ($uCrRes -eq "-1")
-{
-	WriteLog "User [$User] already exist" "INFO"
-}
-Else
-{
-	WriteLog "User [$User] doesn't created" "ERRr"
+	# Add To Group
+	addUser2Group -User $User -Group $Group -Verbose
 }
 
-# Add To Group
-WriteLog "Adding user [$User] to group [$Group]" "INFO"
-# TODO вставить проверку что включилс€ в группу
 
-addUser2Group -User $User -Group $Group
+
+
+#    [string]$DomainName = $env:USERDOMAIN            
+
+
+
+#$admin = get-sid "Administrator"
+#$admin.SubString(0, $admin.Length - 4)
+
+get-LocalUserSid -UserName Admin -Verbose
+get-LocalUserSid -UserName bj -Verbose
+
+
+
+write-host (new-object System.Security.Principal.NTAccount "bj").Translate([System.Security.Principal.SecurityIdentifier])
+
+
+<#            
+foreach($User in $UserAccount) {            
+ $object = New-Object ЦTypeName PSObject ЦProp (            
+                @{'UserName'=$null;            
+                'DomainName'=$null;            
+                'SIDValue'=$null}            
+                )            
+            
+ $Object.UserName = $User.ToUpper()            
+ $Object.DomainName = $DomainName.ToUpper()            
+ try {            
+     $UserObject = [System.Security.Principal.NTAccount]::new($DomainName,$User)            
+     $out = $UserObject.Translate([System.Security.Principal.SecurityIdentifier])            
+  $Object.SIDValue = $out.Value            
+             
+ } catch {            
+  $Object.SIDValue = "FAILED"            
+ }            
+$Object            
+}   
+}
+
+aaa  -UserAccount bj
+break
+#>                              
+
+
 
 
 # SetShell for users
-
-# PowerShell Set-ItemProperty script to set values in the registry
-#function SetRegKey ($RegKey, )
-
-
 WriteLog "Set Personal Shell (OnBoard.exe) for current user" "INFO"
 # TODO вставить проверку что на что подменилось
 $RegKey = "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
-#Get-ItemProperty -Path $RegKey -Name Shell
-#$RegKey ="HKCU:\Control Panel\Desktop"
 Set-ItemProperty -path $RegKey -name Shell -value "Explorer.exe"
-#Get-ItemProperty -Path $RegKey -Name Shell
 
 WriteLog "Set Shell (explorer.exe) for PC (all users)" "INFO"
 # TODO вставить проверку что на что подменилось

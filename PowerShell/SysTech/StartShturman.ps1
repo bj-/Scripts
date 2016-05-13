@@ -26,23 +26,34 @@ param (
 	[string]$SQLPassword = "as",
 #	[string]$SQLScriptFile = "test.sql",
 	[string]$SQLScriptFile = "",
-	[string]$AppPath = "D:\Shturman\",
+	[string]$AppPath = "D:\Shturman",
 	[string]$InstallPath = "C:\ShturmanInstallationPackage\",
 	[string]$ParamsPath = "$AppPath\Params.ps1",
 	[switch]$ServicesUninstall = $FALSE,
+	[switch]$ServicesInstall = $FALSE,
 	[switch]$ShturmanInstall = $FALSE,
-	[switch]$ShturmanIstall = $FALSE,
 	[switch]$Fast = $FALSE,		# Сокращает периоды сна между командами до 1 сек.
 	[switch]$Debug = $FALSE		# в консоль все события лога пишет
 	
 )
 
+#$AppPath\PSS\SysTech\CreateUser.ps1
+
+clear;
+
+# Determine script location for PowerShell
+$ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
+ 
+# Include SubScripts
+.$ScriptDir"\..\Functions\Functions.ps1"
+.$ScriptDir".\..\Functions\log.ps1"
+<#
 # Include SubScripts
 .".\..\functions\functions.ps1"
 .".\..\functions\log.ps1"
+#>
 
-$version = "1.0.2";
-clear;
+$version = "1.0.3";
 
 #[Console]::OutputEncoding = [System.Text.Encoding]::1251
 #$OutputEncoding = [Console]::OutputEncoding
@@ -93,27 +104,27 @@ $ShturmanServicesAll = "ShturmanQuality","ShturmanMainUnit","ShturmanRRs","Shtur
 	"ShturmanGPS","ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga",
 	"ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog"
 
+# TODO сделать чтоб сам искал все фалы *.Server.exe
+$ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
+		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
+		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe"
+
+
 # Если в каталоге демки присуствует файл Services.ps1 - подсасываем из него персонализинованные параметры необходимых данной демке
 if (test-path $ParamsPath)
 {
 	# инклюдим параметры (список сервисов, инстанс SQL и пр что обычно в блоке params
-	WriteLog "Чтение настроек скрипта $AppPath\Params.ps1" "INFO"
+	WriteLog "Чтение настроек скрипта [$ParamsPath]" "INFO"
 	."$ParamsPath"
 }
 Else
 {
 	# если персонального списка нет - считаем что нужны все сервисы
-	WriteLog "Скрипт запущен с дефолтными настройками" "INFO"
+	WriteLog "Скрипт запущен с дефолтными настройками (файл настроек [$ParamsPath] не найден)" "INFO"
 	$ShturmanServices = $ShturmanServicesAll
 	$ShturmanServicesAutomaticDelayStart = ""
 }
 
-
-
-# TODO сделать чтоб сам искал все фалы *.Server.exe
-$ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
-		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
-		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe"
 
 #$ShturmanExeFiles = "DataStorageServer.exe","HubServer.exe","LogServer.exe","MetroLocationsServer.exe","QualityServer.exe"
 
@@ -140,16 +151,16 @@ function ServiceStop
 #		if (Get-Service $ServiceName -ErrorAction SilentlyContinue)
 		if (Check-Service -ServiceName $ServiceName)
 		{
-			WriteLog "Service [$ServiceName] can not stop" "ERRr" $Verbose
+			WriteLog "ServiceStop: Service [$ServiceName] can not stop" "ERRr" $Verbose
 		}
 		Else
 		{
-			WriteLog "Service [$ServiceName] is stopped" "INFO" $Verbose
+			WriteLog "ServiceStop: Service [$ServiceName] is stopped" "INFO" $Verbose
 		}
 	}
 	Else
 	{
-		WriteLog "Service [$ServiceName] already stopped" "INFO" $Verbose
+		WriteLog "ServiceStop: Service [$ServiceName] already stopped" "INFO" $Verbose
 	}
 
 }
@@ -164,7 +175,7 @@ function ServiceStart
 
 	if(Check-Service -ServiceName $ServiceName)
 	{
-		WriteLog "Service [$ServiceName] already started" "INFO" $Verbose
+		WriteLog "ServiceStart: Service [$ServiceName] already started" "INFO" $Verbose
 	}
 	Else
 	{
@@ -172,19 +183,24 @@ function ServiceStart
 
 		if (Check-Service -ServiceName $ServiceName)
 		{
-			WriteLog "Service [$ServiceName] is started" "INFO" $Verbose
+			WriteLog "ServiceStart: Service [$ServiceName] is started" "INFO" $Verbose
 		}
 		Else
 		{
-			WriteLog "Service [$ServiceName] can not start" "ERRr" $Verbose
+			WriteLog "ServiceStart: Service [$ServiceName] can not start" "ERRr" $Verbose
 		}
 	}
 }
 
 function ServicesUninstall
 {
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
 	# Удаление всех сервисов
-	WriteLog "Removing Services" "INFO"
+	WriteLog "$FuncName Removing Services" "INFO"
 
 	foreach($item in $ShturmanServicesAll)
 	{
@@ -195,7 +211,7 @@ function ServicesUninstall
 			ServiceStop -ServiceName $item -Verbose
 <#			if((Check-Service -ServiceName $item) -eq $FALSE)
 			{
-				WriteLog "Service [$item] already stopped" "DUMP"
+				WriteLog "$FuncName Service [$item] already stopped" "DUMP"
 			}
 			Else
 			{
@@ -217,35 +233,35 @@ function ServicesUninstall
 				{
 					if((Check-Service -ServiceName $item) -eq $TRUE)
 					{
-						WriteLog "Service [$item] doesn't removed (Service is RUN). Required rebot for complete operation." "WARN"
+						WriteLog "$FuncName Service [$item] doesn't removed (Service is RUN). Required rebot for complete operation." "WARN"
 					}
 					Else
 					{
 						# не факт что сюда зайдет когданить.
-						WriteLog "Service [$item] doesn't removed (Service is STOPED). Uncknown Error." "ERRr"
+						WriteLog "$FuncName Service [$item] doesn't removed (Service is STOPED). Uncknown Error." "ERRr"
 					}
 				}
 				else
 				{
-					WriteLog "Service [$item] succesffully removed" "MESS"
+					WriteLog "$FuncName Service [$item] succesffully removed" "MESS"
 				}
 			}
 			Else
 			{
 				if((Check-Service -ServiceName $item) -eq $TRUE)
 				{
-					WriteLog "Service [$item] can not remove (Service is RUN),  Required rebot for complete operation." "WARN"
+					WriteLog "$FuncName Service [$item] can not remove (Service is RUN),  Required rebot for complete operation." "WARN"
 				}
 				else
 				{
 # TODO хз почему так иногда происходит. может даже процесса не висеть. вроде ребут помогает.
-					WriteLog "Service [$item] can not remove (Service is STOPED). [I don't know what's happens]" "ERRr"
+					WriteLog "$FuncName Service [$item] can not remove (Service is STOPED). [I don't know what's happens]" "ERRr"
 				}
 			}
 		}
 		else
 		{
-			WriteLog "Service [$item] doesn't exist" "INFO"
+			WriteLog "$FuncName Service [$item] doesn't exist" "INFO"
 		}
 
 	}
@@ -255,7 +271,11 @@ function ServicesInstall
 {
 	# Исталятор сервисов. инстоллит все что сможет найти.
 
-	WriteLog "Services Installer" "INFO"
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+	WriteLog "$FuncName Services Installer" "INFO"
 
 	# По списку экзешников возможных, если экзешник есть - регистрируем его.
 	foreach ($item in $ShturmanExeFiles)
@@ -265,7 +285,7 @@ function ServicesInstall
 #		$itemServiceName
 		if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
 		{
-			WriteLog "Service [$itemServiceName] aready registered." "WARN"
+			WriteLog "$FuncName Service [$itemServiceName] aready registered." "WARN"
 		}
 		Else
 		{
@@ -283,7 +303,7 @@ function ServicesInstall
 					# Проверка что сервис зарегался.
 					if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
 					{
-						WriteLog "Service [$itemServiceName] registered." "MESS"
+						WriteLog "$FuncName Service [$itemServiceName] registered." "MESS"
 						break; # выпадеем из цикла, если регистрация успешна
 					}
 					else
@@ -292,7 +312,7 @@ function ServicesInstall
 						# в конце пятой попытки еще раз проверяем сервис, и если его таки нет - кидаем ошибку
 						if ($i -eq 5 -and (-not (Get-Service $itemServiceName -ErrorAction SilentlyContinue)))
 						{
-							WriteLog "Service [$itemServiceName] can not register" "ERRr"
+							WriteLog "$FuncName Service [$itemServiceName] can not register" "ERRr"
 						}
 
 						# тупо спим 0.1с. обычно этого хватает. но на всякий случай спим 5 попыток
@@ -304,7 +324,7 @@ function ServicesInstall
 			}
 			Else
 			{
-					WriteLog "File [$AppPath\BIN\$item] not found." "WARN"
+					WriteLog "$FuncName File [$AppPath\BIN\$item] not found." "WARN"
 			}
 		}
 	}
@@ -314,7 +334,7 @@ function ServicesInstall
 
 
 	# Проставляем мануальный запуск для всех, кроме лога
-	WriteLog "Set ""Manual"" in Service's StartType" "INFO"
+	WriteLog "$FuncName Set ""Manual"" in Service's StartType" "INFO"
 
 	foreach($item in $ShturmanServicesAll)
 	{
@@ -331,40 +351,50 @@ function ServicesInstall
 				$s = Get-WmiObject -Class Win32_Service -Property StartMode -Filter "Name='$item'"
 				if ($s.StartMode -eq "Manual")
 				{
-					WriteLog "Service [$item] StartupMode: Manual" "MESS"
+					WriteLog "$FuncName Service [$item] StartupMode: Manual" "MESS"
 				}
 				Else
 				{
-					WriteLog "Service [$item] can not set StartupMode to Manual" "ERR"
+					WriteLog "$FuncName Service [$item] can not set StartupMode to Manual" "ERR"
 				}
 #				WriteLog "Servives Installer" "MESS"
 			}
 		}
 	}
 	# Проставляем AutomaticDelay запуск для Сервисов из списка
-	WriteLog "Set ""AutomaticDelay"" in Service's StartType" "INFO"
+	WriteLog "$FuncName Set ""AutomaticDelay"" in Service's StartType" "INFO"
 
 	foreach($item in $ShturmanServicesAutomaticDelayStart)
 	{
-
+	
 		# Обращаемся к сервису
 		if (Get-Service $item -ErrorAction SilentlyContinue)
 		{
 			if ($item -ne "ShturmanLog") { # кроме лог сервиса
 
+				# Проставляем AutomaticDelay запуск для Сервиса
+				WriteLog "$FuncName Try to set Automatic(Delay) for service [$item]" "DUMP"
+				$r = SC.EXE config $item start= delayed-auto 
+				WriteLog "$FuncName $r" "DUMP"
+
+
+#				$s = Get-WmiObject -Class Win32_Service -Property StartMode -Filter "Name='$item'"
+#				WriteLog $s.StartMode "MESS"
+
 				# ставим мануальный запуск
-				Set-Service $item -StartupType Manual
+#				Set-Service $item -StartupType Manual
 
 				# проверяем что манул установлен
 				$s = Get-WmiObject -Class Win32_Service -Property StartMode -Filter "Name='$item'"
-				if ($s.StartMode -eq "Manual")
+				if ($s.StartMode -eq "Auto")
 				{
-					WriteLog "Service [$item] StartupMode: Automatic(Delay)" "MESS"
+					WriteLog "$FuncName Service [$item] StartupMode: Automatic(Delay)" "MESS"
 				}
 				Else
 				{
-					WriteLog "Service [$item] can not set StartupMode to Automatic(Delay)" "ERR"
+					WriteLog "$FuncName Service [$item] can not set StartupMode to Automatic(Delay)" "ERR"
 				}
+
 #				WriteLog "Servives Installer" "MESS"
 			}
 		}
@@ -392,21 +422,49 @@ if ($ShturmanInstall)
 	# Сносим сервисы
 	ServicesUninstall;
 
-
 # $InstallPath
 
 
 	# бэкап ini
-	# TODO  Проверка что файл существует и что пусть куда копировать существует.
+	# TODO  Проверка что путь куда копировать существует.
 	$sh_ini_Path = "$AppPath\Bin\Shturman.ini"
 	if (test-path $sh_ini_Path )
 	{
 		Copy-Item -Path $sh_ini_Path -Destination $InstallPath\Shturman_old.ini
+#		Copy-Item -Path $sh_ini_Path -Destination $AppPath\Bin\Shturman_old.ini
+		# TODO Проверка что скопировалось
 	}
 
 	# Сносим штурмана
-	# TODO таки сносить без Shturman.ini... сейчас все равно сносит
-	Remove-Item -Path $AppPath -Recurse -Exclude "*Shturman.ini*"
+	# TODO Сносить таки без Shturman.ini. сейчас с ним сносит
+	Remove-Item -Path $AppPath -Recurse -exclude *Shturman.ini -ErrorAction SilentlyContinue
+	WriteLog "exec: Remove-Item -Path $AppPath -Recurse -Exclude Shturman*.ini -ErrorAction SilentlyContinue" "DUMP"
+#	WriteLog "$dump" "DUMP"
+
+
+	# Проверка все ли файлы удалились. справишаем юзера продолжать ли если удалилось не все.
+	[bool]$CantRemoveFiles = $FALSE; 
+
+	$arr = Get-ChildItem -Path $AppPath -Force -Recurse -exclude Sfhturman*.ini -Name; # рекурсивно список всех файлов в каталоге и подкаталогах
+	Foreach ($File in $arr) 
+	{
+		WriteLog "File [$File] didn't remove" "ERRr"
+		$CantRemoveFiles = $TRUE;
+	}
+	if ($CantRemoveFiles)
+	{
+		WriteLog "Ask User: Some files didn't remove. Continue? [Y/N]" "DUMP"
+
+		$a = Read-Host -Prompt "Some files didn't remove. Continue? [Y/N]";
+		WriteLog "Answer is: [$a]" "DUMP"
+
+		if ( $a -ne "Y") 
+		{ 
+			WriteLog "All answers except [y/Y] -> Exit" "DUMP"
+			WriteLog "Script Aborted by User" "MESS"
+			break; 
+		};
+	}
 
 	# сносим базу
 	# TODO 
@@ -417,21 +475,66 @@ if ($ShturmanInstall)
 #	ServiceStart -ServiceName $SQLServiceName -Verbose
 
 
+<#
+TODO сделать функцию 
+function sql-exec()
+{
+	param (
+		[string]$SQLServiceName = "MSSQL`$SQLEXPRESS",
+		[string]$SQLDBName = "",
+		[string]$SQLServerInstance = "localhost\SQLEXPRESS",
+		[string]$SQLUsername = "sa",
+		[string]$SQLPassword = "",
+		[string]$SQLScriptFile = "",
+		[string]$SQLQuery = "",
+		[switch]$SQLDropConnection = $FALSE,
+		[switch]$Verbose = $FALSE,	# Говорливость функции в консоль
+		[switch]$Debug = $FALSE		# в консоль все события лога пишет
+	)
+
+	if ($SQLScriptFile -eq "" and $SQLQuery -eq "")
+	{
+		WriteLog "sql-exec: SQL query or File are not specified" "MESS"
+	}
+	
+}
+#>
+<#
+TODO снос и разворачивание базы... ну или апдейт ее хотя бы...
 	$sqlQuery = """DROP DATABASE [$SQLDBName]"""
 	$sqlQuery = '"exec(''Select * from users'');"'
+#	sql-exec()
 #	"Invoke-Sqlcmd -Query $sqlQuery -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
 #	Invoke-Sqlcmd -Query $sqlQuery -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
 	"Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
 	Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
-
+#>
 
 	# Разворачиваем базу
 	# TODO 
 
 	# Разворачиваем штурмана
 	# TODO 
+	WriteLog "Copy ShturmanFiles to [$AppPath]" "DUMP"
+	Copy-Item -Path $InstallPath\Shturman\* -Destination $AppPath -Recurse -Force
+	WriteLog "Copying ShturmanFiles to [$AppPath] finished" "DUMP"
+	# TODO: Check copied files
+	#WriteLog "Check copied files [$InstallPath] - [$AppPath]" "DUMP"
+
+	#$arrSrc = Get-ChildItem -Path "$InstallPath\Shturman\" -Force -Recurse; # рекурсивно список всех файлов в каталоге и подкаталогах
+	
+	#$arrTarget = Get-ChildItem -Path "$AppPath" -Force -Recurse; # рекурсивно список всех файлов в каталоге и подкаталогах
+
+	#write-host
+
+#Foreach ($File in $arr) 
+#{
+	
 
 	# Регистрируем сервисы
+	ServicesInstall;
+
+	# создание Юзера Admin
 	# TODO 
 
 	# Редактирование ini
@@ -532,7 +635,7 @@ WriteLog "Запуск приложения" "MESS"
 #Start "$AppPath\Shturman.lnk"
 Start "$AppPath\BIN\Shturman.lnk"
 
-WriteLog "Done. Windows will be automaticaly closed after 120s" "INFO"
+WriteLog "Done. This window will be automaticaly closed after 120s" "INFO"
 Start-Sleep -Seconds 120; 
 
 # break
