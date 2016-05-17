@@ -53,7 +53,7 @@ $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 .".\..\functions\log.ps1"
 #>
 
-$version = "1.0.3";
+$version = "1.0.4";
 
 #[Console]::OutputEncoding = [System.Text.Encoding]::1251
 #$OutputEncoding = [Console]::OutputEncoding
@@ -102,12 +102,12 @@ if(isAdmin)
 # Список всех существующих в мире сервисов
 $ShturmanServicesAll = "ShturmanQuality","ShturmanMainUnit","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp",
 	"ShturmanGPS","ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga",
-	"ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog"
+	"ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog","ShturmanBOINorms"
 
 # TODO сделать чтоб сам искал все фалы *.Server.exe
 $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
 		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
-		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe"
+		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe","BOINormsServer.exe"
 
 
 # Если в каталоге демки присуствует файл Services.ps1 - подсасываем из него персонализинованные параметры необходимых данной демке
