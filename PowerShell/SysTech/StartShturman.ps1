@@ -26,6 +26,7 @@ param (
 	[string]$SQLPassword = "as",
 #	[string]$SQLScriptFile = "test.sql",
 	[string]$SQLScriptFile = "",
+    [string]$SQLDBBackUpPatch = "",
 	[string]$AppPath = "D:\Shturman",
 	[string]$InstallPath = "C:\ShturmanInstallationPackage\",
 	[string]$ParamsPath = "$AppPath\Params.ps1",
@@ -46,14 +47,14 @@ $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
  
 # Include SubScripts
 .$ScriptDir"\..\Functions\Functions.ps1"
-.$ScriptDir".\..\Functions\log.ps1"
+.$ScriptDir"\..\Functions\log.ps1"
 <#
 # Include SubScripts
 .".\..\functions\functions.ps1"
 .".\..\functions\log.ps1"
 #>
 
-$version = "1.0.4";
+$version = "1.0.5";
 
 #[Console]::OutputEncoding = [System.Text.Encoding]::1251
 #$OutputEncoding = [Console]::OutputEncoding
@@ -93,6 +94,7 @@ WriteLog "Установщик Штурмана / Автозапуск Демонстрашек при запуске компа" "INFO
 WriteLog "Версия: $version" "INFO"
 
 
+
 # проверка наличия административных привилегий. если их нет - отваливаемся
 if(isAdmin)
 {
@@ -126,7 +128,8 @@ Else
 }
 
 
-#$ShturmanExeFiles = "DataStorageServer.exe","HubServer.exe","LogServer.exe","MetroLocationsServer.exe","QualityServer.exe"
+
+# $ShturmanExeFiles = "DataStorageServer.exe","HubServer.exe","LogServer.exe","MetroLocationsServer.exe","QualityServer.exe"
 
 
 #   +===================+
@@ -422,6 +425,9 @@ if ($ShturmanInstall)
 	# Сносим сервисы
 	ServicesUninstall;
 
+    WriteLog "Убиваем OnBoard.exe" "MESS"
+    taskkill.exe /f /im OnBoard.exe
+
 # $InstallPath
 
 
@@ -435,6 +441,11 @@ if ($ShturmanInstall)
 		# TODO Проверка что скопировалось
 	}
 
+    # СНОС
+	# сносим базу
+    WriteLog "Remove old Database [$SQLDBName]" "MESS"
+    SQLDropDatabase -SQLServerInstance "$SQLServerInstance" -SQLUsername "$SQLUsername" -SQLPassword "$SQLPassword" -SQLDBName $SQLDBName  # -Verbose
+
 	# Сносим штурмана
 	# TODO Сносить таки без Shturman.ini. сейчас с ним сносит
 	Remove-Item -Path $AppPath -Recurse -exclude *Shturman.ini -ErrorAction SilentlyContinue
@@ -445,88 +456,61 @@ if ($ShturmanInstall)
 	# Проверка все ли файлы удалились. справишаем юзера продолжать ли если удалилось не все.
 	[bool]$CantRemoveFiles = $FALSE; 
 
-	$arr = Get-ChildItem -Path $AppPath -Force -Recurse -exclude Sfhturman*.ini -Name; # рекурсивно список всех файлов в каталоге и подкаталогах
-	Foreach ($File in $arr) 
+	if (test-path $sh_ini_Path )
 	{
-		WriteLog "File [$File] didn't remove" "ERRr"
-		$CantRemoveFiles = $TRUE;
-	}
-	if ($CantRemoveFiles)
-	{
-		WriteLog "Ask User: Some files didn't remove. Continue? [Y/N]" "DUMP"
+    	$arr = Get-ChildItem -Path $AppPath -Force -Recurse -exclude Shturman*.ini -Name; # рекурсивно список всех файлов в каталоге и подкаталогах
+    	Foreach ($File in $arr) 
+    	{
+		    WriteLog "File [$File] didn't remove" "ERRr"
+		    $CantRemoveFiles = $TRUE;
+	    }
+	    if ($CantRemoveFiles)
+	    {
+    		WriteLog "Ask User: Some files didn't remove. Continue? [Y/N]" "DUMP"
+    
+		    $a = Read-Host -Prompt "Some files didn't remove. Continue? [Y/N]";
+		    WriteLog "Answer is: [$a]" "DUMP"
+    
+		    if ( $a -ne "Y") 
+		    { 
+    			WriteLog "All answers except [y/Y] -> Exit" "DUMP"
+			    WriteLog "Script Aborted by User" "MESS"
+			    break; 
+		    };
+	    };
+    };
 
-		$a = Read-Host -Prompt "Some files didn't remove. Continue? [Y/N]";
-		WriteLog "Answer is: [$a]" "DUMP"
 
-		if ( $a -ne "Y") 
-		{ 
-			WriteLog "All answers except [y/Y] -> Exit" "DUMP"
-			WriteLog "Script Aborted by User" "MESS"
-			break; 
-		};
-	}
 
-	# сносим базу
-	# TODO 
+<#  решено по другому
+	# TODO ---- 
 	# Restart SQL сервера. дабы прибить все коннекции к базе (так проще)
 	# стопим сервис
 # TODO Раскоментить обе строки
 #	ServiceStop -ServiceName $SQLServiceName -Verbose
 #	ServiceStart -ServiceName $SQLServiceName -Verbose
-
-
-<#
-TODO сделать функцию 
-function sql-exec()
-{
-	param (
-		[string]$SQLServiceName = "MSSQL`$SQLEXPRESS",
-		[string]$SQLDBName = "",
-		[string]$SQLServerInstance = "localhost\SQLEXPRESS",
-		[string]$SQLUsername = "sa",
-		[string]$SQLPassword = "",
-		[string]$SQLScriptFile = "",
-		[string]$SQLQuery = "",
-		[switch]$SQLDropConnection = $FALSE,
-		[switch]$Verbose = $FALSE,	# Говорливость функции в консоль
-		[switch]$Debug = $FALSE		# в консоль все события лога пишет
-	)
-
-	if ($SQLScriptFile -eq "" and $SQLQuery -eq "")
-	{
-		WriteLog "sql-exec: SQL query or File are not specified" "MESS"
-	}
-	
-}
 #>
-<#
-TODO снос и разворачивание базы... ну или апдейт ее хотя бы...
-	$sqlQuery = """DROP DATABASE [$SQLDBName]"""
-	$sqlQuery = '"exec(''Select * from users'');"'
-#	sql-exec()
-#	"Invoke-Sqlcmd -Query $sqlQuery -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
-#	Invoke-Sqlcmd -Query $sqlQuery -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
-	"Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table"
-	Invoke-Sqlcmd -InputFile $SQLScriptFile -Database $SQLDBName -ServerInstance $SQLServerInstance -Username $SQLUsername -Password $SQLPassword -Verbose | Format-Table
-#>
+
 
 	# Разворачиваем базу
-	# TODO 
+	WriteLog "Создание пользователя SQL сервера l:[ShturmanBlock], p:[P@ssw0rd] и установки роли [sysadmin]" "MESS"
+    SQLCreateUser -SQLServerInstance "$SQLServerInstance" -SQLUsername "$SQLUsername" -SQLPassword "$SQLPassword" -NewUser "ShturmanBlock" -NewPassword "P@ssw0rd" -Role "sysadmin" #-Verbose
+
+
+    WriteLog "Restore Database [$SQLDBName] from BackUp [$SQLDBBackUpPatch]" "MESS"
+    SQLRestoreDB -SQLServerInstance "$SQLServerInstance" -SQLUsername "$SQLUsername" -SQLPassword "$SQLPassword" -SQLDBName $SQLDBName -SQLDBBackUpPatch $SQLDBBackUpPatch -AppPath $AppPath # -Verbose
 
 	# Разворачиваем штурмана
 	# TODO 
+
 	WriteLog "Copy ShturmanFiles to [$AppPath]" "DUMP"
 	Copy-Item -Path $InstallPath\Shturman\* -Destination $AppPath -Recurse -Force
 	WriteLog "Copying ShturmanFiles to [$AppPath] finished" "DUMP"
 	# TODO: Check copied files
 	#WriteLog "Check copied files [$InstallPath] - [$AppPath]" "DUMP"
-
 	#$arrSrc = Get-ChildItem -Path "$InstallPath\Shturman\" -Force -Recurse; # рекурсивно список всех файлов в каталоге и подкаталогах
-	
 	#$arrTarget = Get-ChildItem -Path "$AppPath" -Force -Recurse; # рекурсивно список всех файлов в каталоге и подкаталогах
-
 	#write-host
-
 #Foreach ($File in $arr) 
 #{
 	
@@ -534,8 +518,64 @@ TODO снос и разворачивание базы... ну или апдейт ее хотя бы...
 	# Регистрируем сервисы
 	ServicesInstall;
 
+	
+
 	# создание Юзера Admin
+    if ((CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription -Verbose) -eq $TRUE)
+    {
+        $res = addUser2Group -User $User -Group $Group # -Verbose
+    	if ($res)
+        {
+            WriteLog "User [$User] added to group [$Group]" "MESS"
+        }
+    }    
+
+	# Установка Шеллов для юзеров
 	# TODO 
+
+    # Set Shell for All Users and System
+    WriteLog "Set Shell (Explorer.exe) for Local Machine" "MESS"
+    # TODO вставить проверку что на что подменилось
+    $RegKey = "HKLM:\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+    Set-ItemProperty -path $RegKey -name Shell -value "Explorer.exe"
+
+
+    # Set personal Shell for user Block
+    WriteLog "Set Shell (OnBoard.exe) for user [Block]" "INFO"
+    # TODO вставить проверку что на что подменилось
+    
+    # Get User SID
+    [string]$UserSID = get-LocalUserSid -UserName "Block" #-Verbose
+    WriteLog "User [Block] SID is [$UserSID]" "INFO"
+
+    # create a new PSDrive to the HKEY_USERS hive.  Just because only HKLM: and HKCU: exist by default
+    $res = New-PSDrive -PSProvider Registry -Name HKU -Root HKEY_USERS
+#    WriteLog "create a new PSDrive to the HKEY_USERS hive result: [$res]" "INFO"
+
+    
+    $RegKey = "HKU:\$UserSID\Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+    if (Test-Path -Path $RegKey)
+    {
+    #    write-host($regkey)
+        Set-ItemProperty -path $RegKey -name "Shell" -value "C:\Shturman\BIN\OnBoard.exe"
+        # WriteLog "Set Shell (OnBoard.exe) result: [$res]" "INFO"
+        
+    }
+    else
+    {
+        #WriteLog "User [Block] newer logon. Creating registry key [$RegKey] " "ERRr"
+        #New-Item -Path $RegKey -ItemType Key                 # не создает так
+            #if (Test-Path -Path $RegKey)
+            #{
+            #Set-ItemProperty -path $RegKey -name "Shell" -value "C:\Shturman\BIN\OnBoard.exe"  
+            #}
+            #else
+            #{
+                WriteLog "Can not set Shell for User [Block] because his newer logon on this Computer and Script can not create regestry key" "ERRr"
+            #}
+    }
+
+
 
 	# Редактирование ini
 	# TODO 

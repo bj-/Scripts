@@ -47,6 +47,39 @@
 		[switch]$Verbose = $FALSE
 		return USER_SID
 
+[SQL]
+	SQLCreateUser 				Create SQL User if not exist
+		[string]$SQLServerInstance = "",	SQL server instance
+		[string]$SQLUsername = "",		Used SQL Login an Password
+		[string]$SQLPassword = "",
+		[string]Role ="", 			If Empy - do not set role. used default
+		[string]$NewUser = "",			To create SQL User NAmd Passord
+		[string]$NewPassword = "",
+		[switch]$Verbose = $FALSE
+
+    SQLQueryExec
+		[string]$SQLServerInstance = "",	SQL server instance
+		[string]$SQLUsername = "",		Used SQL Login an Password
+		[string]$SQLPassword = ""
+		[string]$SQLQuery = ""            Query to Execute
+		[switch]$Verbose = $FALSE
+
+    SQLDropDatabase 				# Kill connection and drop database if exist
+		[string]$SQLServerInstance = ""     SQL server instance
+		[string]$SQLUsername = ""           Used SQL Login an Password
+		[string]$SQLPassword = ""
+		[string]$SQLDBName = ""             DB to Drop
+		[switch]$Verbose = $FALSE
+
+    SQLRestoreDB	                # MS SQL Server - Restore DBExecuting some SQL Query
+		[string]$SQLServerInstance = "",
+		[string]$SQLUsername = "",
+		[string]$SQLPassword = "",
+		[string]$SQLDBName = "",              # new db name
+        [string]$SQLDBBackUpPatch = "",       # Bak file plased there
+        [string]$AppPath = "",                # Path to restored mdf and ldf
+		[switch]$Verbose = $FALSE
+
 #>
 
 # =============================================================================================
@@ -103,9 +136,16 @@ Function TestFolderPath
 		[switch]$Verbose = $FALSE
 		)
 
+    # TestFolderPath -Path -Create -Verbose
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+
 	if ($Path -eq "")
 	{
-		WriteLog "Parameter [Path] in function [TestFolderPath] are missed" "ERRr"
+		WriteLog "$FuncName Parameter [Path] in function are missed" "ERRr" $TRUE
 		break;
 	}
 <#
@@ -121,37 +161,38 @@ Function TestFolderPath
 		WriteLog "Log File path [$LogFilePath] exist" "INFO"
 	}
 #>
+
 	# - Проверяем наличе фолдера
 	if (-not (test-path $Path))
 	{
 #break	
 		if ($Create)
 		{
-			WriteLog "Creating folder [$Path]" "DUMP"
+			WriteLog "$FuncName Creating folder [$Path]" "DUMP" $Verbose
 
 			# PowerShell's New-Item creates a folder
 			$result = New-Item -Path $Path -ItemType "directory"
 
-			WriteLog "Creating folder result: $result" "DUMP"
+			WriteLog "$FuncName Creating folder result: $result" "DUMP" $Verbose
 			
 			if (-not (test-path $Path))
 			{
-				WriteLog "Can not create folder [$Path]" "ERRr"
+				WriteLog "$FuncName Can not create folder [$Path]" "ERRr" $TRUE
 				break;
 			}
 			else
 			{
-				WriteLog "Created folder [$Path]" "MESS" -Verbose $Verbose
+				WriteLog "$FuncName Created folder [$Path]" "MESS" $TRUE
 			}
 		}
 		Else
 		{
-		WriteLog "Folder [$Path] doesn't exist" "ERRr"
+		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $TRUE
 		}
 	}
 	else
 	{
-		WriteLog "Folder [$Path] is exist" "INFO" -Verbose $Verbose
+		WriteLog "$FuncName Folder [$Path] is exist" "INFO" $Verbose
 	}
 
 }
@@ -216,7 +257,7 @@ function addUser2Group ()
 	}
 	catch
 	{
-		WriteLog $_ "WARN" $Verbose
+		WriteLog $_ "WARN" $TRUE
 		return $false
 	}
 # TODO: проверка включился ли юзер в группу
@@ -273,7 +314,7 @@ function CreateUser ()
 	}
 	Else
 	{
-		WriteLog "User [$User] doesn't created" "ERRr" $Verbose
+		WriteLog "User [$User] doesn't created" "ERRr" $TRUE
 		return $FALSE
 	}
 	
@@ -344,5 +385,212 @@ param (
 			$server.children | where {$_.schemaclassname -eq "user"}
 		}
 	}
+}
+#>
+
+<# ==============================================
+
+[SQL]
+
+ ============================================== #>
+
+function SQLCreateUser 				# Create SQL User if not exist
+{
+	param (
+		[string]$SQLServerInstance = "",
+		[string]$SQLUsername = "",
+		[string]$SQLPassword = "",
+		[string]$NewUser = "",
+		[string]$NewPassword = "",
+		[string]$Role ="",
+		[switch]$Verbose = $FALSE
+	)
+
+#  SQLCreateUser -SQLServerInstance "localhost" -SQLUsername "sa" -SQLPassword "as" -NewUser "ShturmanBlock" -NewPassword "passForUser"
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+# Make Query
+	$SQLQuery = 	"
+			USE [master];
+			GO
+			IF NOT EXISTS(SELECT name FROM [master].[sys].[syslogins] WHERE NAME = '$NewUser')
+			BEGIN 
+				CREATE LOGIN [$NewUser] WITH PASSWORD=N'$NewPassword', DEFAULT_DATABASE=[master], CHECK_EXPIRATION=OFF, CHECK_POLICY=OFF
+
+				IF NOT EXISTS(SELECT name FROM [master].[sys].[syslogins] WHERE NAME = '$NewUser')
+				BEGIN 
+					Print('Did not create user [$NewUser]')
+				END
+				ELSE
+					Print('User [$NewUser] Created')
+			END
+			ELSE
+				Print('User [$NewUser] already Exist')"
+   
+	WriteLog "$FuncName Create SQLUser:[$NewUser]" "INFO" $Verbose
+
+	SQLQueryExec -SQLServerInstance $SQLServerInstance -SQLUsername $SQLUsername -SQLPassword $SQLPassword -SQLQuery $SQLQuery
+
+	IF ($Role -ne "")   # прописываем роль для созданного юзера
+	{
+		WriteLog "$FuncName Set Role [$Role] for SQL User [$NewUser]" "INFO" $Verbose
+
+		$SQLQuery = 	"
+				USE [master];
+				GO
+				ALTER SERVER ROLE [$Role] ADD MEMBER [$NewUser]";
+		SQLQueryExec -SQLServerInstance $SQLServerInstance -SQLUsername $SQLUsername -SQLPassword $SQLPassword -SQLQuery $SQLQuery
+	}
+
+}
+
+
+
+function SQLDropDatabase 				# Kill connection and drop database if exist
+{
+	param (
+		[string]$SQLServerInstance = "",
+		[string]$SQLUsername = "",
+		[string]$SQLPassword = "",
+		[string]$SQLDBName = "",
+		[switch]$Verbose = $FALSE
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    # Make Query
+	$SQLQuery = 	"
+					DECLARE @dbname sysname
+					SET @dbname = '$SQLDBName'
+
+
+					IF EXISTS(SELECT name FROM sys.databases WHERE name = '$SQLDBName')
+					BEGIN
+						DECLARE @spid int
+						SELECT @spid = min(spid) from master.dbo.sysprocesses where dbid = db_id(@dbname)
+						WHILE @spid IS NOT NULL
+						BEGIN
+	    					Print('Kill Connections to database [$SQLDBName]')
+	    					EXECUTE ('KILL ' + @spid)
+	    					SELECT @spid = min(spid) from master.dbo.sysprocesses where dbid = db_id(@dbname) AND spid > @spid
+						END
+
+    					Print('Drop Database [$SQLDBName]')
+    					DROP DATABASE [$SQLDBName]
+
+						IF EXISTS(SELECT name FROM sys.databases WHERE name = '$SQLDBName')
+						BEGIN
+	    					Print('Did not drop database [$SQLDBName]')
+							DROP DATABASE [$SQLDBName]
+						END
+						ELSE
+	    					Print('Database [$SQLDBName] dropped')
+					END
+					ELSE
+	    				Print('Database [$SQLDBName] does not exists')
+
+		            "
+
+
+	WriteLog "$FuncName Drop Database: [$SQLDBName]" "MESS" $Verbose
+
+	SQLQueryExec -SQLServerInstance $SQLServerInstance -SQLUsername $SQLUsername -SQLPassword $SQLPassword -SQLQuery $SQLQuery #-Verbose $Verbose
+
+
+}
+
+function SQLRestoreDB
+{
+	# MS SQL Server - Restore DBExecuting some SQL Query
+	param (
+		[string]$SQLServerInstance = "",
+		[string]$SQLUsername = "",
+		[string]$SQLPassword = "",
+		[string]$SQLDBName = "",
+        [string]$SQLDBBackUpPatch = "",
+        [string]$AppPath = "",
+		[switch]$Verbose = $FALSE
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    # Пути к файлам куда развернуть базу
+    $SQLDBNameFileMDF = "$AppPath\SQL\$SQLDBName"+".mdf"
+    $SQLDBNameFileLDF = "$AppPath\SQL\$SQLDBName"+"_log.ldf"
+
+    # Make Query
+	$SQLQuery = 	"
+					USE [master]
+                    RESTORE DATABASE [Shturman_Metro] FROM  DISK = N'$SQLDBBackUpPatch' WITH  FILE = 1,  
+	                    MOVE N'Shturman_Metro' TO N'$SQLDBNameFileMDF',  
+	                    MOVE N'Shturman_Metro_log' TO N'$SQLDBNameFileLDF',  
+	                    NOUNLOAD,  
+	                    STATS = 5
+                    GO
+                    "
+
+    [bool]$CantRestore = $FALSE;
+	# - Проверяем наличе и отсутвие файлов (наличие бекапа и отсутсвие таргетных файлов)
+    TestFolderPath -Path "$AppPath\SQL\" -Create # -Verbose путь куда разворачивать бд
+
+	if (-not (test-path "$SQLDBBackUpPatch"))  # бекап существует
+	{
+		WriteLog "$FuncName Bakup File [$SQLDBBackUpPatch] does not exist" "ERRr" $TRUE
+        $CantRestore = $TRUE;
+	}
+	if ((test-path "$SQLDBNameFileMDF")) # файлы базы и лога - не существуют. т.е. не существует развернутой бд в этом месте
+	{
+		WriteLog "$FuncName File [$SQLDBNameFileMDF] for db [$SQLDBName] already exist Can not restore DB." "ERRr" $TRUE
+        $CantRestore = $TRUE;
+	}
+	if ((test-path "$SQLDBNameFileLDF"))
+	{
+		WriteLog "$FuncName File [$SQLDBNameFileLDF] for db [$SQLDBName] already exist. Can not restore DB." "ERRr" $TRUE
+        $CantRestore = $TRUE;
+	}
+    If ($CantRestore) # если хоть одно попало - прекращаем до устранения
+    {
+        break;
+    }
+
+
+# write-host $SQLQuery
+
+	WriteLog "$FuncName Restore DB: [$SQLDBName] from [$SQLDBBackUpPatch] " "MESS" $Verbose
+
+	SQLQueryExec -SQLServerInstance $SQLServerInstance -SQLUsername $SQLUsername -SQLPassword $SQLPassword -SQLQuery $SQLQuery #-Verbose $Verbose
+
+}
+
+
+function SQLQueryExec
+{
+	# MS SQL Server - Executing some SQL Query
+	param (
+		[string]$SQLServerInstance = "",
+		[string]$SQLUsername = "",
+		[string]$SQLPassword = "",
+		[string]$SQLQuery = "",
+		[switch]$Verbose = $FALSE
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+	WriteLog "$FuncName Used SQL Server:[$SQLServerInstance] l:[$SQLUsername]" "DUMP" $Verbose
+
+	WriteLog "$FuncName Execute Query: `n $SQLQuery" "DUMP" $Verbose
+	sqlcmd -S $SQLServerInstance -U $SQLUsername -P $SQLPassword -Q $SQLQuery
+
+	
+
 }
 #>

@@ -66,9 +66,9 @@ function WriteLog
 	# В консоль 
 	if ($messagetype -match $HostErrorLevel)
 	{
-		if ($Verbose)
+		if ($Verbose -or ($messagetype -eq "ERRr") -or ($messagetype -eq "WARN"))
 		{
-			Write-Host $message -foregroundcolor $color;
+			Write-Host "[ $messagetype ] $message" -foregroundcolor $color;
 		}
 	}
 	# В лог

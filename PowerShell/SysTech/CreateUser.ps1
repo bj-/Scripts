@@ -49,10 +49,14 @@ if(isAdmin)
 if ((CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullName -UserDescription $UserDescription -Verbose) -eq $TRUE)
 {
 	# Add To Group
-	addUser2Group -User $User -Group $Group -Verbose
+	if (addUser2Group -User $User -Group $Group -Verbose)
+    {
+        WriteLog "User [$User] added to group [$Group]" "MESS"
+    }
 }
 
 
+break
 
 
 #    [string]$DomainName = $env:USERDOMAIN            
@@ -63,7 +67,7 @@ if ((CreateUser -UserName $User -UserPassword $Password -UserFullName $UserFullN
 #$admin.SubString(0, $admin.Length - 4)
 
 get-LocalUserSid -UserName Admin -Verbose
-get-LocalUserSid -UserName bj -Verbose
+get-LocalUserSid -UserName Block -Verbose
 
 
 
