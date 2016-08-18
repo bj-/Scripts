@@ -36,6 +36,7 @@
 param (
 	[string]$PackageVersion = (Read-Host 'Package version required in format "0.00.0": '), # спрашиваем какую версию присвоить
     [string]$TargetDir = "InstallationPackage",
+    [string]$PackagePrefix = "ProductName",
     [string]$ShturmanBlockVersionsFolder = "",
 	[switch]$Debug = $FALSE		# в консоль все события лога пишет
 )
@@ -75,7 +76,7 @@ else
 $TargetDir = $ShturmanBlockVersionsFolder + $TargetDir;
 ;
 $TargetDirFull = "$TargetDir\$PackageVersion";
-$TargetFile =  $TargetDirFull + "\ShturmanBlock_u" + $PackageVersion + ".exe"
+$TargetFile =  $TargetDirFull + "\" + $PackagePrefix + "_u" + $PackageVersion + ".exe"
 
 
 
