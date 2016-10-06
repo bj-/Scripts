@@ -13,7 +13,10 @@ set nocount on;
  isnull(convert(varchar,(select max(umi.InspectionsDate) from UsersMedicalInspections umi where umi.UsersGuid = Users.Guid and SessionsTime.dt = convert(date, umi.InspectionsCreated) 
  and umi.InspectionsDate > '19100101' and DatePart(day, Umi.InspectionsDate) = DatePart(day, SessionsTime.DT) and DatePart(month, Umi.InspectionsDate) = DatePart(MONTH, SessionsTime.DT)),108),'Нет') 'Время прохождения медосмотра' ,
  (select count(*) from DriversSignals dsig where PlayType = 1 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество монотоний в кабину',
- (select count(*) from DriversSignals dsig where PlayType = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество гиперактиваций в кабину'
+ (select count(*) from DriversSignals dsig where PlayType = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество гиперактиваций в кабину',
+ (select count(*) from DriversSignals dsig where PlayType = 1 and SignalDestination = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество монотоний Оператору',
+ (select count(*) from DriversSignals dsig where PlayType = 2 and SignalDestination = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество гиперактиваций Оператору',
+ (select count(*) from Journal where Journal.Code = 'JOURNAL_SENDTOMEDINS' and convert(date,Journal.Created) = convert(date, SessionsTime.DT) and Journal.ForeignGuid = Users.Guid) 'Количество Медосмотров'
 FROM  Users , Persons , Roles  ,
 (
 SELECT format(Received ,'yyy.MM.dd') dt , SensorsCardio.UserGuid , CAST(SUM(Value/1000.0) AS INT) * 1.5 sec

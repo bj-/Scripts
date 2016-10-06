@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  <Class ClassName="ROOT/Microsoft/Windows/Storage/MSFT_iSCSIConnection">
+    <Version>1.0</Version>
+    <DefaultNoun>IscsiConnection</DefaultNoun>
+    <!--
+
+      //
+      // Get-IscsiConnection
+      //
+
+    -->
+    <InstanceCmdlets>
+            <GetCmdletParameters DefaultCmdletParameterSet="ByConnectionIdentifier">
+                <QueryableProperties>
+                    <Property PropertyName="ConnectionIdentifier">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByConnectionIdentifier" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="InitiatorSideIdentifier">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByInitiatorSideIdentifier" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="TargetSideIdentifier">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByTargetSideIdentifier" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="InitiatorPortalAddress">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByInitiatorPortalAddress" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="InitiatorPortalPortNumber">
+                        <Type PSType="uint16" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="InititorIPAdressListNumber">
+                        <Type PSType="uint16" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="false" ValueFromPipelineByPropertyName="true" />
+                        </RegularQuery>
+                    </Property>
+                 </QueryableProperties>
+                <QueryableAssociations>
+                    <!-- Disk -->
+                    <Association Association="MSFT_iSCSIConnectionToDisk" SourceRole="Disk" ResultRole="iSCSIConnection">
+                        <AssociatedInstance>
+                            <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_Disk" />
+                            <CmdletParameterMetadata PSName="Disk" ValueFromPipeline="true" CmdletParameterSets="ByDisk" />
+                        </AssociatedInstance>
+                    </Association>
+                    <!-- iSCSITargetPortal -->
+                    <Association Association="MSFT_iSCSIConnectionToiSCSITargetPortal" SourceRole="iSCSITargetPortal" ResultRole="iSCSIConnection">
+                        <AssociatedInstance>
+                            <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_iSCSITargetPortal" />
+                            <CmdletParameterMetadata PSName="iSCSITargetPortal" ValueFromPipeline="true" CmdletParameterSets="ByiSCSITargetPortal" />
+                        </AssociatedInstance>
+                    </Association>
+                    <!-- iSCSISession -->
+                    <Association Association="MSFT_iSCSISessionToiSCSIConnection" SourceRole="iSCSISession" ResultRole="iSCSIConnection">
+                        <AssociatedInstance>
+                            <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_iSCSISession" />
+                            <CmdletParameterMetadata PSName="IscsiSession" ValueFromPipeline="true" CmdletParameterSets="ByiSCSISession" />
+                        </AssociatedInstance>
+                    </Association>
+                    <!-- InitiatorPort -->
+                    <Association Association="MSFT_InitiatorPortToiSCSIConnection" SourceRole="InitiatorPort" ResultRole="iSCSIConnection">
+                        <AssociatedInstance>
+                            <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_InitiatorPort" />
+                            <CmdletParameterMetadata PSName="InitiatorPort" ValueFromPipeline="true" CmdletParameterSets="ByInitiatorPort" />
+                        </AssociatedInstance>
+                    </Association>
+                    <!-- iSCSITarget -->
+                    <Association Association="MSFT_iSCSITargetToiSCSIConnection" SourceRole="iSCSITarget" ResultRole="iSCSIConnection">
+                        <AssociatedInstance>
+                            <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_iSCSITarget" />
+                            <CmdletParameterMetadata PSName="IscsiTarget" ValueFromPipeline="true" CmdletParameterSets="ByiSCSITarget" />
+                        </AssociatedInstance>
+                    </Association>
+                </QueryableAssociations>
+            </GetCmdletParameters>
+    </InstanceCmdlets>
+  </Class>
+</PowerShellMetadata>
+<!-- SIG # Begin signature block -->
+<!-- MIIQggYJKoZIhvcNAQcCoIIQczCCEG8CAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB -->
+<!-- gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR -->
+<!-- AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUv/aigywpZ8kOaCLsTII9tt4g -->
+<!-- 0LWggg4CMIIEEzCCA0CgAwIBAgIQaguZT8AAIqsR2wJCfALTvjAJBgUrDgMCHQUA -->
+<!-- MHUxKzApBgNVBAsTIkNvcHlyaWdodCAoYykgMTk5OSBNaWNyb3NvZnQgQ29ycC4x -->
+<!-- HjAcBgNVBAsTFU1pY3Jvc29mdCBDb3Jwb3JhdGlvbjEmMCQGA1UEAxMdTWljcm9z -->
+<!-- b2Z0IFRlc3QgUm9vdCBBdXRob3JpdHkwHhcNMDYwNjIyMjI1NzMxWhcNMTEwNjIx -->
+<!-- MDcwMDAwWjBxMQswCQYDVQQGEwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4G -->
+<!-- A1UEBxMHUmVkbW9uZDEeMBwGA1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMRsw -->
+<!-- GQYDVQQDExJNaWNyb3NvZnQgVGVzdCBQQ0EwggEiMA0GCSqGSIb3DQEBAQUAA4IB -->
+<!-- DwAwggEKAoIBAQCP8/PfeqdyKGF+kPOBZ088QoCzw3JN738QZbhK18ZNrGebr6P9 -->
+<!-- xO18NGxVc15xCRygojr1ZVPU3M/zM6NaMyxXzUght6UkMDFTNana2dt0f0wueGfN -->
+<!-- 28ntsY+3rv95b6wjBlQOI0M3eN0+Tgpt0Cr2xn5bknQNsxMPXLFxtBD8sSAICC55 -->
+<!-- bl/ScjSukjqBsDKszkNZMKbB/K74zOh9hmtcruvelfoqOXUGXEE6UdxXNU6Syyyd -->
+<!-- e6Tcmun+IZxhHzukTH9SsYU5ZH2RiW+eFEKzvKLaaheHJOYb1Xx9j6rcAsmhXt39 -->
+<!-- gSqfJsM2QdPP/HMNHHQoOPKlCsXRD7vTvtCTAgMBAAGjgeswgegwgagGA1UdAQSB -->
+<!-- oDCBnYAQwGNF16MBfXnFenpfKNtD1qF3MHUxKzApBgNVBAsTIkNvcHlyaWdodCAo -->
+<!-- YykgMTk5OSBNaWNyb3NvZnQgQ29ycC4xHjAcBgNVBAsTFU1pY3Jvc29mdCBDb3Jw -->
+<!-- b3JhdGlvbjEmMCQGA1UEAxMdTWljcm9zb2Z0IFRlc3QgUm9vdCBBdXRob3JpdHmC -->
+<!-- EF/qT9LyHUMQtuhUPtiVJhgwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQUVKUh -->
+<!-- TKCub5xgTg/O3UbV12HWF6wwCwYDVR0PBAQDAgGGMAkGBSsOAwIdBQADgcEALM4P -->
+<!-- BbDuH2UZ4qMnvJz3fqMlqt0sx+vFAoExl8lNv0xYMMgn1aeIzp6lDu+ZNYz1Dhws -->
+<!-- zLaQwaB1zeZ99AsRMXqD+/5oTMUbm1SqKeArXbkkU/nswZwlgyVAY7cpQhx508Lx -->
+<!-- zKP6hjCLq1tKkMtEIJDswAVLXmvgOfGfvzelnmdJeHWj42tLPmZsa6wMiPS6McEK -->
+<!-- puUj3r5GTuhVDYMjehCRKYZB/4GuZFegl8Hdi5dcVz4Xzxt4sdIXRLygmE+PMIIE -->
+<!-- qDCCA5CgAwIBAgIKYQGLcwAAAAAAEzANBgkqhkiG9w0BAQUFADBxMQswCQYDVQQG -->
+<!-- EwJVUzETMBEGA1UECBMKV2FzaGluZ3RvbjEQMA4GA1UEBxMHUmVkbW9uZDEeMBwG -->
+<!-- A1UEChMVTWljcm9zb2Z0IENvcnBvcmF0aW9uMRswGQYDVQQDExJNaWNyb3NvZnQg -->
+<!-- VGVzdCBQQ0EwHhcNMDkwODE3MjMyMDE3WhcNMTEwNjIxMDcwMDAwWjCBgTETMBEG -->
+<!-- CgmSJomT8ixkARkWA2NvbTEZMBcGCgmSJomT8ixkARkWCW1pY3Jvc29mdDEUMBIG -->
+<!-- CgmSJomT8ixkARkWBGNvcnAxFzAVBgoJkiaJk/IsZAEZFgdyZWRtb25kMSAwHgYD -->
+<!-- VQQDExdNU0lUIFRlc3QgQ29kZVNpZ24gQ0EgMTCCASIwDQYJKoZIhvcNAQEBBQAD -->
+<!-- ggEPADCCAQoCggEBAMrP59aKVme8HWZvZdASS4rQZ47rB7ufxF9cowVOn2J+I6cP -->
+<!-- S/kUVis+MAoYys7GuhW7ys9M4+6TPqGVh0zMiRXryLJLgVRmNAbPnBA2csptQ3U8 -->
+<!-- WU/42xYlmPO9G5m/1ZbB4IqdR4QXG6v6vMy2/PnRpUB5yE23frEjqsjFVdG/nG8M -->
+<!-- rOQpMa8GZo/RiyqQ1xR7cYnLXvJagRZf6QoZfr3E17MRqLTo6fZykpOhTSJvJE2G -->
+<!-- CzZiDNvlT/2EhIxi3tgV0RiCAvTNM2nn2GZ9oHkVPTIyivWJRxIVW1MY5s+YHV2w -->
+<!-- PgQ9xhJNm2nlHiHNh5wunyRJXvyzXJxUO3mlBjUCAwEAAaOCAS8wggErMBAGCSsG -->
+<!-- AQQBgjcVAQQDAgEAMB0GA1UdDgQWBBSE5NCnmMiP71Y3lt298UasxbnFnjAZBgkr -->
+<!-- BgEEAYI3FAIEDB4KAFMAdQBiAEMAQTALBgNVHQ8EBAMCAYYwDwYDVR0TAQH/BAUw -->
+<!-- AwEB/zAfBgNVHSMEGDAWgBRUpSFMoK5vnGBOD87dRtXXYdYXrDBMBgNVHR8ERTBD -->
+<!-- MEGgP6A9hjtodHRwOi8vY3JsLm1pY3Jvc29mdC5jb20vcGtpL2NybC9wcm9kdWN0 -->
+<!-- cy9sZWdhY3l0ZXN0cGNhLmNybDBQBggrBgEFBQcBAQREMEIwQAYIKwYBBQUHMAKG -->
+<!-- NGh0dHA6Ly93d3cubWljcm9zb2Z0LmNvbS9wa2kvY2VydHMvTGVnYWN5VGVzdFBD -->
+<!-- QS5jcnQwDQYJKoZIhvcNAQEFBQADggEBADgZJU0m0HIPWizETMYIsjXzKQz5GtHT -->
+<!-- YPUPKilGy0Jj46g55flZfkFWSd2PTDo/URrhMPjnSjNI3urXJZByAhPYrwNvDIpO -->
+<!-- cOfl6fGOiyDaf6WPGcum608OIUB180/5cd7D3H+AH4lHuhIr8+wvNdu5UhMhEOQ+ -->
+<!-- iAglQVAyvAoj2jRu/awtZX59KT58RcE5ofKwoEZT4QiGOt8fHhA/fyNBSLbIllDz -->
+<!-- mSWpVW5IvbV3Ag/lBmJimU3rOJwrp7Pev7KjNAs6DqZzkwGCtQ8FOxWxJsczb4EZ -->
+<!-- Vqis7IjskyvSwcGXogYVupEg+q1ZjiuKYPy42LqEd8skWZMwOy1s0kQwggU7MIIE -->
+<!-- I6ADAgECAgp/ySJUAAAADN/xMA0GCSqGSIb3DQEBBQUAMIGBMRMwEQYKCZImiZPy -->
+<!-- LGQBGRYDY29tMRkwFwYKCZImiZPyLGQBGRYJbWljcm9zb2Z0MRQwEgYKCZImiZPy -->
+<!-- LGQBGRYEY29ycDEXMBUGCgmSJomT8ixkARkWB3JlZG1vbmQxIDAeBgNVBAMTF01T -->
+<!-- SVQgVGVzdCBDb2RlU2lnbiBDQSAxMB4XDTExMDUxMTAyMDIzMFoXDTExMDYyMTA3 -->
+<!-- MDAwMFowFDESMBAGA1UEAxMJWWFuZyBXYW5nMIGfMA0GCSqGSIb3DQEBAQUAA4GN -->
+<!-- ADCBiQKBgQDwTbL6ZwO1At4/2NFdN2HyyTqNtYkYMNeBgyCOXBtg3cejR9noG0/c -->
+<!-- UPNflb2iL+dHM04MjQaSz3JXyJJIdWhqkiY/8Qeh9dZE8EegmCCV5pGsqAYfYFdq -->
+<!-- vagRTsoZc2bWcoYKioK3vFboFn0TXGg7MftoHVIFUTBcfkwrXECtMwIDAQABo4IC -->
+<!-- ozCCAp8wPQYJKwYBBAGCNxUHBDAwLgYmKwYBBAGCNxUIg8+JTa3yAoWhnwyC+sp9 -->
+<!-- geH7dIFPgq6waof0/TICAWQCAQwwHwYDVR0lBBgwFgYKKwYBBAGCNwoDBgYIKwYB -->
+<!-- BQUHAwMwCwYDVR0PBAQDAgeAMCkGCSsGAQQBgjcVCgQcMBowDAYKKwYBBAGCNwoD -->
+<!-- BjAKBggrBgEFBQcDAzAdBgNVHQ4EFgQUXxmvr33gX6jSj8K6D2k5v4tr1zwwHwYD -->
+<!-- VR0jBBgwFoAUhOTQp5jIj+9WN5bdvfFGrMW5xZ4wgegGA1UdHwSB4DCB3TCB2qCB -->
+<!-- 16CB1IY2aHR0cDovL2NvcnBwa2kvY3JsL01TSVQlMjBUZXN0JTIwQ29kZVNpZ24l -->
+<!-- MjBDQSUyMDEuY3Jshk1odHRwOi8vbXNjcmwubWljcm9zb2Z0LmNvbS9wa2kvbXNj -->
+<!-- b3JwL2NybC9NU0lUJTIwVGVzdCUyMENvZGVTaWduJTIwQ0ElMjAxLmNybIZLaHR0 -->
+<!-- cDovL2NybC5taWNyb3NvZnQuY29tL3BraS9tc2NvcnAvY3JsL01TSVQlMjBUZXN0 -->
+<!-- JTIwQ29kZVNpZ24lMjBDQSUyMDEuY3JsMIGpBggrBgEFBQcBAQSBnDCBmTBCBggr -->
+<!-- BgEFBQcwAoY2aHR0cDovL2NvcnBwa2kvYWlhL01TSVQlMjBUZXN0JTIwQ29kZVNp -->
+<!-- Z24lMjBDQSUyMDEuY3J0MFMGCCsGAQUFBzAChkdodHRwOi8vd3d3Lm1pY3Jvc29m -->
+<!-- dC5jb20vcGtpL21zY29ycC9NU0lUJTIwVGVzdCUyMENvZGVTaWduJTIwQ0ElMjAx -->
+<!-- LmNydDAuBgNVHREEJzAloCMGCisGAQQBgjcUAgOgFQwTeWF3YW5AbWljcm9zb2Z0 -->
+<!-- LmNvbTANBgkqhkiG9w0BAQUFAAOCAQEATMhZd+wX+qR1cRJ8hAaUGfyNgBIdah+2 -->
+<!-- kKf78BQsT//at82lx1M5ZmycQzN60FshYozdQVB1mBStecVgAfBIylDGGwPSYicJ -->
+<!-- tNvH5K1zJSS+XHxpltod3eKk9Bo25AzYQbNkeL2Yk04jngMqyMn00XTRzmQ/jm7U -->
+<!-- ZrJYvWrVil0YPhX1CZX+okmjZsjxbmjvdMBVqaOnAq/ViKVpZKw5Z3nNx3gpPvIw -->
+<!-- d6/NjLG8ZRLCf+nq1adL2H8miNZ2Ru5pluxuKTS62dxwV79yI/JwLJyItv67LUqn -->
+<!-- xzqkxs7R48EPLgh0taGYMyk4mlEd9pONyl+otP1coXiH16dyz2y1tjGCAeowggHm -->
+<!-- AgEBMIGQMIGBMRMwEQYKCZImiZPyLGQBGRYDY29tMRkwFwYKCZImiZPyLGQBGRYJ -->
+<!-- bWljcm9zb2Z0MRQwEgYKCZImiZPyLGQBGRYEY29ycDEXMBUGCgmSJomT8ixkARkW -->
+<!-- B3JlZG1vbmQxIDAeBgNVBAMTF01TSVQgVGVzdCBDb2RlU2lnbiBDQSAxAgp/ySJU -->
+<!-- AAAADN/xMAkGBSsOAwIaBQCggbAwGQYJKoZIhvcNAQkDMQwGCisGAQQBgjcCAQQw -->
+<!-- HAYKKwYBBAGCNwIBCzEOMAwGCisGAQQBgjcCARUwIwYJKoZIhvcNAQkEMRYEFELx -->
+<!-- 9LP88VGsvT5CR6kFLHTs2NLBMFAGCisGAQQBgjcCAQwxQjBAoC6ALABNAGkAYwBy -->
+<!-- AG8AcwBvAGYAdAAgAFcAaQBuAGQAbwB3AHMAIABUAEUAUwBUoQ6ADGh0dHA6Ly9u -->
+<!-- dGJsZDANBgkqhkiG9w0BAQEFAASBgNyH/gu/vtk2T/SGK85y3fT7zPzw5pH7l1hc -->
+<!-- bpeKDBW/5W1vhC8jaXNwKhaNpiH8V9F+ysj+5C9995AJbtsZCkH7sE8memiQ+LUU -->
+<!-- 59LCzcs3HV8aMZ/CxLHup9pcgCXmr/gytoX0IOGtHlSxnN3mD7AxttSQ5A7+ixlf -->
+<!-- /q5OAHGg -->
+<!-- SIG # End signature block -->

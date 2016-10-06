@@ -1,0 +1,14 @@
+2016-09-23 11-00-11 INFO Archive Log Files, purge old archives and upload archives to Server
+2016-09-23 11-00-11 INFO Script version: [1.0.2]
+2016-09-23 11-00-11 INFO TestFolderPath: Folder [C:\Logs] is exist
+2016-09-23 11-00-12 INFO TestFolderPath: Folder [C:\Logs\Old] is exist
+2016-09-23 11-00-12 INFO Move Log Files to Archives
+2016-09-23 11-00-12 DUMP Processing file [Modem-16-03-07.log]
+2016-09-23 11-00-12 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 311076 bytes (304 KiB)  Creating archive: C:\Logs\Old\Modem-16-03-07.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 12504 bytes (13 KiB)  Everything is Ok
+2016-09-23 11-00-12 MESS File [Modem-16-03-07.log] moved to archive [Modem-16-03-07.log.zip]
+2016-09-23 11-00-12 DUMP Processing file [Modem-16-03-08.log]
+2016-09-23 11-00-12 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 204892 bytes (201 KiB)  Creating archive: C:\Logs\Old\Modem-16-03-08.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 8828 bytes (9 KiB)  Everything is Ok
+2016-09-23 11-00-12 MESS File [Modem-16-03-08.log] moved to archive [Modem-16-03-08.log.zip]
+2016-09-23 11-00-12 DUMP Processing file [Modem-16-03-10.log]
+2016-09-23 11-00-12 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 76057 bytes (75 KiB)  Creating archive: C:\Logs\Old\Modem-16-03-10.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 5124 bytes (6 KiB)  Everything is Ok
+2016-09-23 11-00-12 MESS File [Modem-16-03-10.log] moved to archive [Modem-16-03-10.log.zip]

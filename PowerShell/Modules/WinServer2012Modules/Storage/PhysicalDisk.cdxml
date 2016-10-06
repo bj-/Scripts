@@ -1,0 +1,285 @@
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  <Class ClassName="ROOT/Microsoft/Windows/Storage/MSFT_PhysicalDisk">
+    <Version>1.0.0.0</Version>
+    <DefaultNoun>PhysicalDisk</DefaultNoun>
+    <InstanceCmdlets>
+      <!--
+
+      //
+      // Get-PhysicalDisk
+      //
+
+      -->
+      <GetCmdletParameters DefaultCmdletParameterSet="ByUniqueId">
+        <QueryableProperties>
+          <!-- UniqueId -->
+          <Property PropertyName="UniqueId">
+            <Type PSType="System.String" />
+            <RegularQuery AllowGlobbing="true">
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByUniqueId" Aliases="Id" />
+            </RegularQuery>
+          </Property>
+          <!-- FriendlyName -->
+          <Property PropertyName="FriendlyName">
+            <Type PSType="System.String" />
+            <RegularQuery AllowGlobbing="true">
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByName" Position="0" />
+            </RegularQuery>
+          </Property>
+          <!-- Usage -->
+          <Property PropertyName="Usage">
+            <Type PSType="PhysicalDisk.Usage" />
+            <RegularQuery>
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+          <!-- Description -->
+          <Property PropertyName="Description">
+            <Type PSType="System.String" />
+            <RegularQuery AllowGlobbing="true">
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+          <!-- Manufacturer -->
+          <Property PropertyName="Manufacturer">
+            <Type PSType="System.String" />
+            <RegularQuery>
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+          <!-- Model -->
+          <Property PropertyName="Model">
+            <Type PSType="System.String" />
+            <RegularQuery>
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+          <!-- CanPool -->
+          <Property PropertyName="CanPool">
+            <Type PSType="System.Boolean" />
+            <RegularQuery>
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+          <!-- HealthStatus -->
+          <Property PropertyName="HealthStatus">
+            <Type PSType="PhysicalDisk.HealthStatus" />
+            <RegularQuery>
+              <CmdletParameterMetadata/>
+            </RegularQuery>
+          </Property>
+        </QueryableProperties>
+        <QueryableAssociations>
+          <!-- StorageSubSystem -->
+          <Association Association="MSFT_StorageSubSystemToPhysicalDisk" SourceRole="StorageSubSystem" ResultRole="PhysicalDisk">
+            <AssociatedInstance>
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_StorageSubSystem" />
+              <CmdletParameterMetadata PSName="StorageSubSystem" ValueFromPipeline="true" CmdletParameterSets="ByStorageSubSystem" ErrorOnNoMatch="false" />
+            </AssociatedInstance>
+          </Association>
+          <!-- StoragePool -->
+          <Association Association="MSFT_StoragePoolToPhysicalDisk" SourceRole="StoragePool" ResultRole="PhysicalDisk">
+            <AssociatedInstance>
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_StoragePool" />
+              <CmdletParameterMetadata PSName="StoragePool" ValueFromPipeline="true" CmdletParameterSets="ByStoragePool" ErrorOnNoMatch="false" />
+            </AssociatedInstance>
+          </Association>
+          <!-- VirtualDisk -->
+          <Association Association="MSFT_VirtualDiskToPhysicalDisk" SourceRole="VirtualDisk" ResultRole="PhysicalDisk">
+            <AssociatedInstance>
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_VirtualDisk" />
+              <CmdletParameterMetadata PSName="VirtualDisk" ValueFromPipeline="true" CmdletParameterSets="ByVirtualDisk" ErrorOnNoMatch="false" />
+            </AssociatedInstance>
+          </Association>
+        </QueryableAssociations>
+        <QueryOptions>
+          <Option OptionName="VirtualRangeMin">
+            <Type PSType="System.UInt64" />
+            <CmdletParameterMetadata PSName="VirtualRangeMin" CmdletParameterSets="ByVirtualDisk" />
+          </Option>
+          <Option OptionName="VirtualRangeMax">
+            <Type PSType="System.UInt64" />
+            <CmdletParameterMetadata PSName="VirtualRangeMax" CmdletParameterSets="ByVirtualDisk" />
+          </Option>
+          <Option OptionName="HasAllocations">
+            <Type PSType="System.Boolean" />
+            <CmdletParameterMetadata PSName="HasAllocations" CmdletParameterSets="ByVirtualDisk" />
+          </Option>
+          <Option OptionName="SelectedForUse">
+            <Type PSType="System.Boolean" />
+            <CmdletParameterMetadata PSName="SelectedForUse" CmdletParameterSets="ByVirtualDisk" />
+          </Option>
+        </QueryOptions>
+      </GetCmdletParameters>
+      <!--
+
+        //
+        // Enable-PhysicalDiskIndication
+        //
+
+        -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Enable" Noun="PhysicalDiskIndication" ConfirmImpact="Low" />
+        <Method MethodName="Maintenance">
+          <Parameters>
+            <!-- EnableIndication -->
+            <Parameter ParameterName="EnableIndication" DefaultValue="true">
+              <Type PSType="System.Boolean" />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByName">
+          <QueryableProperties>
+            <!-- UniqueId -->
+            <Property PropertyName="UniqueId">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByUniqueId"  Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- FriendlyName -->
+            <Property PropertyName="FriendlyName">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByName" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+        <!--
+
+        //
+        // Disable-PhysicalDiskIndication
+        //
+
+        -->
+        <Cmdlet>
+            <CmdletMetadata Verb="Disable" Noun="PhysicalDiskIndication" ConfirmImpact="Low" />
+            <Method MethodName="Maintenance">
+                <Parameters>
+                    <!-- EnableIndication -->
+                    <Parameter ParameterName="EnableIndication" DefaultValue="">
+                        <Type PSType="System.Boolean" />
+                    </Parameter>
+                </Parameters>
+            </Method>
+            <GetCmdletParameters DefaultCmdletParameterSet="ByName">
+                <QueryableProperties>
+                    <!-- UniqueId -->
+                    <Property PropertyName="UniqueId">
+                        <Type PSType="System.String" />
+                        <RegularQuery AllowGlobbing="false">
+                            <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByUniqueId" Aliases="Id" />
+                        </RegularQuery>
+                    </Property>
+                    <!-- FriendlyName -->
+                    <Property PropertyName="FriendlyName">
+                        <Type PSType="System.String" />
+                        <RegularQuery AllowGlobbing="true">
+                            <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByName" Position="0" />
+                        </RegularQuery>
+                    </Property>
+                </QueryableProperties>
+            </GetCmdletParameters>
+        </Cmdlet>        
+      <!--
+
+        //
+        // Reset-PhysicalDisk
+        //
+
+        -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Reset" ConfirmImpact="Medium" />
+        <Method MethodName="Reset" />
+        <GetCmdletParameters DefaultCmdletParameterSet="ByName">
+          <QueryableProperties>
+            <!-- UniqueId -->
+            <Property PropertyName="UniqueId">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="false">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByUniqueId" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- FriendlyName -->
+            <Property PropertyName="FriendlyName">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByName" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+    </InstanceCmdlets>
+  </Class>
+  <Enums>
+    <Enum EnumName="PhysicalDisk.Usage" UnderlyingType="System.UInt16">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="AutoSelect" Value="1" />
+      <Value Name="ManualSelect" Value="2" />
+      <Value Name="HotSpare" Value="3" />
+      <Value Name="Retired" Value="4" />
+      <Value Name="Journal" Value="5" />
+    </Enum>
+    <Enum EnumName="PhysicalDisk.HealthStatus" UnderlyingType="System.UInt16">
+      <Value Name="Healthy" Value="0" />
+      <Value Name="Warning" Value="1" />
+      <Value Name="Unhealthy" Value="2" />
+      <Value Name="Unknown" Value="5" />
+    </Enum>
+    <Enum EnumName="PhysicalDisk.OperationalStatus" UnderlyingType="System.UInt16">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="OK" Value="2" />
+      <Value Name="Degraded" Value="3" />
+      <Value Name="Stressed" Value="4" />
+      <Value Name="PredictiveFailure" Value="5" />
+      <Value Name="Error" Value="6" />
+      <Value Name="NonRecoverableError" Value="7" />
+      <Value Name="Starting" Value="8" />
+      <Value Name="Stopping" Value="9" />
+      <Value Name="Stopped" Value="10" />
+      <Value Name="InService" Value="11" />
+      <Value Name="NoContact" Value="12" />
+      <Value Name="LostCommunication" Value="13" />
+      <Value Name="Dormant" Value="15" />
+      <Value Name="PowerMode" Value="18" />
+      <Value Name="FailedMedia" Value="53252" />
+      <Value Name="Split" Value="53253" />
+      <Value Name="StaleMetadata" Value="53254" />
+      <Value Name="IOError" Value="53255" />
+      <Value Name="UnrecognizedMetadata" Value="53256" />
+    </Enum>
+    <Enum EnumName="PhysicalDisk.BusType" UnderlyingType="System.UInt16">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="SCSI" Value="1" />
+      <Value Name="ATAPI" Value="2" />
+      <Value Name="ATA" Value="3" />
+      <Value Name="IEEE1394" Value="4"/>
+      <Value Name="SSA" Value="5" />
+      <Value Name="FibreChannel" Value="6" />
+      <Value Name="USB" Value="7" />
+      <Value Name="RAID" Value="8" />
+      <Value Name="iSCSI" Value="9" />
+      <Value Name="SAS" Value="10" />
+      <Value Name="SATA" Value="11" />
+      <Value Name="SD" Value="12" />
+      <Value Name="MMC" Value="13" />
+      <Value Name="MAX" Value="14" />
+      <Value Name="FileBackedVirtual" Value="15" />
+      <Value Name="Spaces" Value="16" />  
+    </Enum>
+    <Enum EnumName="PhysicalDisk.CannotPoolReason" UnderlyingType="System.UInt16">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="Other" Value="1" />
+      <Value Name="AlreadyPooled" Value="2" />
+      <Value Name="NotHealthy" Value="3" />
+      <Value Name="RemovableMedia" Value="4" />
+      <Value Name="ClusteredDisk" Value="5" />
+      <Value Name="DiskOffline" Value="6" />
+      <Value Name="InsufficientCapacity" Value="7" />
+      <Value Name="SpareDisk" Value="8" />
+    </Enum>
+  </Enums>
+</PowerShellMetadata>

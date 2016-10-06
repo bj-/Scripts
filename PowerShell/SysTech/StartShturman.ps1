@@ -103,14 +103,15 @@ if(isAdmin)
 };
 
 # Список всех существующих в мире сервисов
-$ShturmanServicesAll = "ShturmanQuality","ShturmanMainUnit","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp",
-	"ShturmanGPS","ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga",
-	"ShturmanMetroLocations","ShturmanDataStorage","ShturmanHub","ShturmanLog","ShturmanBOINorms","ShturmanDataProc"
+$ShturmanServicesAll = "ShturmanDiag","ShturmanQuality","ShturmanMainUnit","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp","ShturmanGPS",
+			"ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga","ShturmanMetroLocations",
+			"ShturmanDataStorage","ShturmanHub","ShturmanLog","ShturmanBOINorms","ShturmanDataProc"
 
 # TODO сделать чтоб сам искал все фалы *.Server.exe
 $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
 		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
-		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe","BOINormsServer.exe","DataProcServer.exe"
+		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe","BOINormsServer.exe","DataProcServer.exe",
+		"DiagServer.exe"
 
 
 # Если в каталоге демки присуствует файл Services.ps1 - подсасываем из него персонализинованные параметры необходимых данной демке

@@ -1,0 +1,659 @@
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+  <Class ClassName="ROOT/Microsoft/Windows/Storage/MSFT_Volume">
+    <Version>1.0.0.0</Version>
+    <DefaultNoun>Volume</DefaultNoun>
+    <InstanceCmdlets>
+      <!--
+
+      //
+      // Get-Volume
+      //
+
+      -->
+      <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+        <QueryableProperties>
+          <!-- ObjectId -->
+          <Property PropertyName="ObjectId">
+            <Type PSType="System.String" />
+            <RegularQuery>
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+            </RegularQuery>
+          </Property>
+          <!-- Path -->
+          <Property PropertyName="Path">
+            <Type PSType="System.String" />
+            <RegularQuery AllowGlobbing="true">
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+            </RegularQuery>
+          </Property>
+          <!-- FileSystemLabel -->
+          <Property PropertyName="FileSystemLabel">
+            <Type PSType="System.String" />
+            <RegularQuery AllowGlobbing="true">
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+            </RegularQuery>
+          </Property>
+          <!-- DriveLetter -->
+          <Property PropertyName="DriveLetter">
+            <Type PSType="System.Char" />
+            <RegularQuery>
+              <CmdletParameterMetadata ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+            </RegularQuery>
+          </Property>
+        </QueryableProperties>
+        <QueryableAssociations>
+          <!-- Partition -->
+          <Association Association="MSFT_PartitionToVolume" SourceRole="Partition" ResultRole="Volume">
+            <AssociatedInstance>
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_Partition" />
+              <CmdletParameterMetadata PSName="Partition" ValueFromPipeline="true" CmdletParameterSets="ByPartition" ErrorOnNoMatch="false" />
+            </AssociatedInstance>
+          </Association>
+          <!-- DiskImage -->
+          <Association Association="MSFT_DiskImageToVolume" SourceRole="DiskImage" ResultRole="Volume">
+            <AssociatedInstance>
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_DiskImage" />
+              <CmdletParameterMetadata PSName="DiskImage" ValueFromPipeline="true" CmdletParameterSets="ByDiskImage" ErrorOnNoMatch="false" />
+            </AssociatedInstance>
+          </Association>
+        </QueryableAssociations>
+      </GetCmdletParameters>
+      <!--
+
+      //
+      // Set-Volume
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Set" ConfirmImpact="Medium" />
+        <Method MethodName="SetFileSystemLabel">
+          <Parameters>
+            <!-- FileSystemLabel -->
+            <Parameter ParameterName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata PSName="NewFileSystemLabel" />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Format-Volume
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Format" ConfirmImpact="High" Aliases="Initialize-Volume" />
+        <Method MethodName="Format">
+          <Parameters>
+            <!-- FileSystem -->
+            <Parameter ParameterName="FileSystem">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata>
+                <ValidateNotNull />
+                <ValidateNotNullOrEmpty />
+                <ValidateSet>
+                  <AllowedValue>FAT</AllowedValue>
+                  <AllowedValue>FAT32</AllowedValue>
+                  <AllowedValue>exFAT</AllowedValue>
+                  <AllowedValue>NTFS</AllowedValue>
+                  <AllowedValue>ReFS</AllowedValue>
+                </ValidateSet>
+              </CmdletParameterMetadata>
+            </Parameter>
+            <!-- NewFileSystemLabel -->
+            <Parameter ParameterName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata PSName="NewFileSystemLabel" />
+            </Parameter>
+            <!-- ClusterSize -->
+            <Parameter ParameterName="AllocationUnitSize">
+              <Type PSType="System.UInt32" />
+              <CmdletParameterMetadata Aliases="ClusterSize" />
+            </Parameter>
+            <!-- Full -->
+            <Parameter ParameterName="Full">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- Force -->
+            <Parameter ParameterName="Force">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- Compress -->
+            <Parameter ParameterName="Compress">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- ShortFileNameSupport -->
+            <Parameter ParameterName="ShortFileNameSupport">
+              <Type PSType="System.Boolean" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- SetIntegrityStreams -->
+            <Parameter ParameterName="SetIntegrityStreams">
+              <Type PSType="System.Boolean" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- UseLargeFRS -->
+            <Parameter ParameterName="UseLargeFRS">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- FormattedVolume -->
+            <Parameter ParameterName="FormattedVolume">
+              <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_Volume" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+          <QueryableAssociations>
+            <!-- Partition -->
+            <Association Association="MSFT_PartitionToVolume" SourceRole="Partition" ResultRole="Volume">
+              <AssociatedInstance>
+                <Type PSType="Microsoft.Management.Infrastructure.CimInstance" ETSType="Microsoft.Management.Infrastructure.CimInstance#MSFT_Partition" />
+                <CmdletParameterMetadata PSName="Partition" ValueFromPipeline="true" CmdletParameterSets="ByPartition" />
+              </AssociatedInstance>
+            </Association>
+          </QueryableAssociations>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Repair-Volume
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Repair" ConfirmImpact="Medium" />
+        <Method MethodName="Repair">
+          <Parameters>
+            <!-- OfflineScanAndFix -->
+            <Parameter ParameterName="OfflineScanAndFix">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- SpotFix -->
+            <Parameter ParameterName="SpotFix">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- Scan -->
+            <Parameter ParameterName="Scan">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="Output">
+              <Type PSType="Volume.RepairStatus" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Optimize-Volume
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Optimize" ConfirmImpact="Medium" />
+          <Method MethodName="Optimize">
+            <Parameters>
+              <!-- ReTrim -->
+              <Parameter ParameterName="ReTrim">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- Analyze -->
+            <Parameter ParameterName="Analyze">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- Defrag -->
+            <Parameter ParameterName="Defrag">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- SlabConsolidate -->
+            <Parameter ParameterName="SlabConsolidate">
+              <Type PSType="System.Management.Automation.SwitchParameter" />
+              <CmdletParameterMetadata />
+            </Parameter>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="Output">
+              <Type PSType="System.UInt32" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Get-SupportedFileSystems
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Get" Noun="SupportedFileSystems" ConfirmImpact="None" />
+        <Method MethodName="GetSupportedFileSystems">
+          <Parameters>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="SupportedFileSystems">
+              <Type PSType="System.String[]" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Get-SupportedClusterSizes
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Get" Noun="SupportedClusterSizes" ConfirmImpact="None" />
+        <Method MethodName="GetSupportedClusterSizes">
+          <Parameters>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="SupportedClusterSizes">
+              <Type PSType="System.UInt32[]" />
+              <CmdletOutputMetadata />
+            </Parameter>
+            <!-- FileSystemLabel -->
+            <Parameter ParameterName="FileSystem">
+              <Type PSType="System.String" />
+              <CmdletParameterMetadata PSName="FileSystem" />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Get-VolumeCorruptionCount
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Get" Noun="VolumeCorruptionCount" ConfirmImpact="None" />
+        <Method MethodName="GetCorruptionCount">
+          <Parameters>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="CorruptionCount">
+              <Type PSType="System.UInt32" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Get-VolumeScrubPolicy
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Get" Noun="VolumeScrubPolicy" ConfirmImpact="None" />
+        <Method MethodName="GetAttributes">
+          <Parameters>
+            <!-- CMDLET OUTPUT -->
+            <Parameter ParameterName="VolumeScrubEnabled">
+              <Type PSType="System.Boolean" />
+              <CmdletOutputMetadata />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+      <!--
+
+      //
+      // Set-VolumeScrubPolicy
+      //
+
+      -->
+      <Cmdlet>
+        <CmdletMetadata Verb="Set" Noun="VolumeScrubPolicy" ConfirmImpact="None" />
+        <Method MethodName="SetAttributes">
+          <Parameters>
+            <!-- EnableVolumeScrub -->
+            <Parameter ParameterName="EnableVolumeScrub">
+              <Type PSType="System.Boolean" />
+              <CmdletParameterMetadata PSName="Enable" Position="1" />
+            </Parameter>
+          </Parameters>
+        </Method>
+        <GetCmdletParameters DefaultCmdletParameterSet="ByDriveLetter">
+          <QueryableProperties>
+            <!-- ObjectId -->
+            <Property PropertyName="ObjectId">
+              <Type PSType="System.String" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ById" Aliases="Id" />
+              </RegularQuery>
+            </Property>
+            <!-- Path -->
+            <Property PropertyName="Path">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByPaths" />
+              </RegularQuery>
+            </Property>
+            <!-- FileSystemLabel -->
+            <Property PropertyName="FileSystemLabel">
+              <Type PSType="System.String" />
+              <RegularQuery AllowGlobbing="true">
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByLabel" />
+              </RegularQuery>
+            </Property>
+            <!-- DriveLetter -->
+            <Property PropertyName="DriveLetter">
+              <Type PSType="System.Char" />
+              <RegularQuery>
+                <CmdletParameterMetadata IsMandatory="true" ValueFromPipelineByPropertyName="true" CmdletParameterSets="ByDriveLetter" Position="0" />
+              </RegularQuery>
+            </Property>
+          </QueryableProperties>
+        </GetCmdletParameters>
+      </Cmdlet>
+    </InstanceCmdlets>
+  </Class>
+  <Enums>
+    <Enum EnumName="Volume.HealthStatus" UnderlyingType="System.UInt16">
+      <Value Name="Healthy" Value="0" />
+      <Value Name="ScanNeeded" Value="1" />
+      <Value Name="SpotFixNeeded" Value="2" />
+      <Value Name="FullRepairNeeded" Value="3" />
+    </Enum>
+    <Enum EnumName="Volume.DriveType" UnderlyingType="System.UInt32">
+      <Value Name="Unknown" Value="0" />
+      <Value Name="InvalidRootPath" Value="1" />
+      <Value Name="Removable" Value="2" />
+      <Value Name="Fixed" Value="3" />
+      <Value Name="Remote" Value="4" />
+      <Value Name="CDROM" Value="5" />
+      <Value Name="RAMDisk" Value="6" />
+    </Enum>
+    <Enum EnumName="Volume.RepairStatus" UnderlyingType="System.UInt32">
+      <Value Name="NoErrorsFound" Value="0" />
+      <Value Name="ErrorsFixed" Value="1" />
+      <Value Name="MinorErrorsFixedOrCleanup" Value="2" />
+      <Value Name="Failed" Value="3" />
+      <Value Name="ScanNoErrorsFound" Value="4" />
+      <Value Name="ScanErrorsFoundAndFixedOnline" Value="5" />
+      <Value Name="ScanErrorsFixedOnlineAlsoNeedSpotFix" Value="6" />
+      <Value Name="ScanErrorsFoundNeedSpotFix" Value="7" />
+      <Value Name="ScanNeedsRetry" Value="8" />
+      <Value Name="ScanRunning" Value="9" />
+      <Value Name="ScanTransientSnapshotError" Value="10" />
+      <Value Name="ScanFatalSnapshotError" Value="11" />
+      <Value Name="ScanNeedsMetaDataRetry" Value="12" />
+      <Value Name="NeedOfflineScanAndFix" Value="13" />
+    </Enum>
+  </Enums>
+</PowerShellMetadata>

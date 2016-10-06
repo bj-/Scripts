@@ -1,0 +1,1563 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Types>
+  <!--
+
+  //
+  // Disk
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_Disk</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>PartitionStyle</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["PartitionStyle"].Value)
+          {
+          0 { "RAW" }
+          1 { "MBR" }
+          2 { "GPT" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ProvisioningType</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["ProvisioningType"].Value)
+          {
+          0 { "Unknown" }
+          1 { "Thin" }
+          2 { "Fixed" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["OperationalStatus"].Value)
+          {
+          0 { "Unknown" }
+          1 { "Online" }
+          2 { "Not Ready" }
+          3 { "No Media" }
+          4 { "Offline" }
+          5 { "Failed" }
+          6 { "Missing" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+          0 { "Unknown" }
+          1 { "Healthy" }
+          4 { "Failing" }
+          8 { "Failed" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>BusType</Name>
+        <GetScriptBlock>
+            switch ($this.psBase.CimInstanceProperties["BusType"].Value)
+            {
+            0 { "Unknown" }
+            1 { "SCSI" }
+            2 { "ATAPI" }
+            3 { "ATA" }
+            4 { "1394" }
+            5 { "SSA" }
+            6 { "Fibre Channel" }
+            7 { "USB" }
+            8 { "RAID" }
+            9 { "iSCSI" }
+            10 { "SAS" }
+            11 { "SATA" }
+            12 { "SD" }
+            13 { "MMC" }
+            14 { "Virtual" }
+            15 { "File Backed Virtual" }
+            16 { "Spaces" }
+            Default { "Unknown" }
+            }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>UniqueIdFormat</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["UniqueIdFormat"].Value)
+          {
+            0 { "Vendor Specific" }
+            1 { "Vendor Id" }
+            2 { "EUI64" }
+            3 { "FCPH Name" }
+            8 { "SCSI Name String" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OfflineReason</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["OfflineReason"].Value)
+          {
+            1 { "Policy" }
+            2 { "Redundant Path" }
+            3 { "Snapshot" }
+            4 { "Collision" }
+            5 { "Resource Exhaustion" }
+            6 { "Critical Write Failures" }
+            7 { "Data Integrity Scan Required" }
+            Default { $null }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // Partition
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_Partition</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["OperationalStatus"].Value)
+          {
+          0 { "Unknown" }
+          1 { "Online" }
+          3 { "No Media" }
+          5 { "Failed" }
+          4 { "Offline" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Type</Name>
+        <GetScriptBlock>
+          if ($this.psBase.CimInstanceProperties["MbrType"].Value -gt 0)
+          {
+            switch ($this.psBase.CimInstanceProperties["MbrType"].Value)
+            {
+              1 { "FAT12" }
+              2 { "Xenix" }
+              3 { "Xenix" }
+              4 { "FAT16" }
+              5 { "Extended" }
+              6 { "Logical" }
+              7 { "IFS" }
+              10 { "OS/2 BootMgr" }
+              11 { "FAT32" }
+              12 { "FAT32 XINT13" }
+              14 { "XINT13" }
+              15 { "XINT13 Extended" }
+              65 { "PReP" }
+              66 { "LDM" }
+              99 { "Unix" }
+              231 { "Space Protective" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+          switch ($this.psBase.CimInstanceProperties["GptType"].Value)
+          {
+          "{c12a7328-f81f-11d2-ba4b-00a0c93ec93b}" { "System" }
+          "{e3c9e316-0b5c-4db8-817d-f92df00215ae}" { "Reserved" }
+          "{ebd0a0a2-b9e5-4433-87c0-68b6b72699c7}" { "Basic" }
+          "{5808c8aa-7e8f-42e0-85d2-e1e90434cfb3}" { "LDM Metadata" }
+          "{af9b60a0-1431-4f62-bc68-3311714a69ad}" { "LDM Data" }
+          "{de94bba4-06d1-4d40-a16a-bfd50179d6ac}" { "Recovery" }
+          "{e75caf8f-f680-4cee-afa3-b001e56efc2d}" { "Space Protective" }
+          Default { "Unknown" }
+          }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // VirtualDisk
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_VirtualDisk</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Usage</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Usage"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["Usage"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              2 { "Unrestricted" }
+              3 { "Reserved for ComputerSystem (the block server)" }
+              4 { "Reserved by Replication Services" }
+              5 { "Reserved by Migration Services" }
+              6 { "Local Replica Source" }
+              7 { "Remote Replica Source" }
+              8 { "Local Replica Target" }
+              9 { "Remote Replica Target" }
+              10 { "Local Replica Source or Target" }
+              11 { "Remote Replica Source or Target" }
+              12 { "Delta Replica Target" }
+              13 { "Element Component" }
+              14 { "Reserved as Pool Contributer" }
+              15 { "Composite Volume Member" }
+              16 { "Composite LogicalDisk Member" }
+              17 { "Reserved for Sparing" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+          <Name>NameFormat</Name>
+          <GetScriptBlock>
+            if ( $this.psBase.CimInstanceProperties["NameFormat"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+            {
+              switch ($this.psBase.CimInstanceProperties["NameFormat"].Value)
+              {
+                0 { "Unknown" }
+                1 { "Other" }
+                2 { "VPD83NAA6" }
+                3 { "VPD83NAA5" }
+                4 { "VPD83Type2" }
+                5 { "VPD83Type1" }
+                6 { "VPD83Type0" }
+                7 { "SNVM" }
+                8 { "NodeWWN" }
+                9 { "NAA" }
+                10 { "EUI64" }
+                11 { "T10VID" }
+                Default { "Unknown" }
+              }
+            }
+            else
+            {
+              $null
+            }
+          </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              1 { $_status += "Other" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              11 { $_status += "InService" }
+              53250 { $_status += "Detached" }
+              53251 { $_status += "Incomplete" }
+              Default { $_status += "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+            0 { "Healthy" }
+            1 { "Warning" }
+            2 { "Unhealthy" }
+            5 { "Unknown" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ProvisioningType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ProvisioningType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ProvisioningType"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Thin" }
+              2 { "Fixed" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ParityLayout</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ParityLayout"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ParityLayout"].Value)
+            {
+              1 { "Non-rotated Parity" }
+              2 { "Rotated Parity" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Access</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Access"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["Access"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Readable" }
+              2 { "Writeable" }
+              3 { "Read/Write" }
+              4 { "Write Once" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>UniqueIdFormat</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["UniqueIdFormat"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["UniqueIdFormat"].Value)
+            {
+              0 { "Vendor Specific" }
+              1 { "Vendor Id" }
+              2 { "EUI64" }
+              3 { "FCPH Name" }
+              8 { "SCSI Name String" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>DetachedReason</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["DetachedReason"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["DetachedReason"].Value)
+            {
+              0 { "Unknown" }
+              1 { "None" }
+              2 { "By Policy" }
+              3 { "Majority Disks Unhealthy" }
+              4 { "Incomplete" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptMethod>
+        <Name>GetSecurityDescriptor</Name>
+        <Script>
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage", $this, "GetSecurityDescriptor", $null)
+
+          $FileSecurity = New-Object System.Security.AccessControl.FileSecurity
+          $FileSecurity.SetSecurityDescriptorSddlForm($Result.OutParameters["SecurityDescriptor"].value)
+          $FileSecurity
+        </Script>
+      </ScriptMethod>
+      <ScriptMethod>
+        <Name>SetSecurityDescriptor</Name>
+        <Script>
+          param([string]$SecurityDescriptor=$("Parameter missing: -SecurityDescriptor SecurityDescriptor"))
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Parameters = New-Object -TypeName Microsoft.Management.Infrastructure.CimMethodParametersCollection
+          $SecurityDescriptorParam = [Microsoft.Management.Infrastructure.CimMethodParameter]::Create("SecurityDescriptor",$SecurityDescriptor,"string",0)
+          $Parameters.Add($SecurityDescriptorParam)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage",$this,"SetSecurityDescriptor",$Parameters)
+        </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // PhysicalDisk
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_PhysicalDisk</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Usage</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Usage"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ( $this.psBase.CimInstanceProperties["Usage"].Value )
+            {
+              0 { "Unknown" }
+              1 { "Auto-Select" }
+              2 { "Manual-Select" }
+              3 { "Hot Spare" }
+              4 { "Retired" }
+              5 { "Journal" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              4 { $_status += "Stressed" }
+              5 { $_status += "Predictive Failure" }
+              6 { $_status += "Error" }
+              7 { $_status += "Non-Recoverable Error" }
+              8 { $_status += "Starting" }
+              9 { $_status += "Stopping" }
+              10 { $_status += "Stopped" }
+              11 { $_status += "In Service" }
+              12 { $_status += "No Contact" }
+              13 { $_status += "Lost Communication" }
+              15 { $_status += "Dormant" }
+              18 { $_status += "Power Mode" }
+              53252 { $_status += "Failed Media" }
+              53253 { $_status += "Split" }
+              53254 { $_status += "Stale Metadata" }
+              53255 { $_status += "IO Error" }
+              53256 { $_status += "Unrecognized Metadata" }
+              Default { "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ( $this.psBase.CimInstanceProperties["HealthStatus"].Value )
+          {
+            0 { "Healthy" }
+            1 { "Warning" }
+            2 { "Unhealthy" }
+            5 { "Unknown" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>BusType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["BusType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ( $this.psBase.CimInstanceProperties["BusType"].Value )
+            {
+              0 { "Unknown" }
+              1 { "SCSI" }
+              2 { "ATAPI" }
+              3 { "ATA" }
+              4 { "1394" }
+              5 { "SSA" }
+              6 { "Fibre Channel" }
+              7 { "USB" }
+              8 { "RAID" }
+              9 { "iSCSI" }
+              10 { "SAS" }
+              11 { "SATA" }
+              12 { "SD" }
+              13 { "MMC" }
+              14 { "Virtual" }
+              15 { "File Backed Virtual" }
+              16 { "Spaces" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>CannotPoolReason</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["CannotPoolReason"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Other" }
+              2 { $_status += "In a Pool" }
+              3 { $_status += "Not Healthy" }
+              4 { $_status += "Removable Media" }
+              5 { $_status += "In Use by Cluster" }
+              6 { $_status += "Offline" }
+              7 { $_status += "Insufficient Capacity" }
+              8 { $_status += "Spare Disk" }
+              Default { "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>SupportedUsages</Name>
+        <GetScriptBlock>
+          $_usages = @();
+          foreach ( $_usage in $this.psBase.CimInstanceProperties["SupportedUsages"].Value )
+          {
+            switch ( $_usage )
+            {
+              1 { $_usages += "Auto-Select" }
+              2 { $_usages += "Manual-Select" }
+              3 { $_usages += "Hot Spare" }
+              4 { $_usages += "Retired" }
+              5 { $_usages += "Journal" }
+              Default { "Unknown" }
+            }
+          }
+          $_usages;
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // StoragePool
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_StoragePool</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Usage</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Usage"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["Usage"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              2 { "Unrestricted" }
+              3 { "Reserved for ComputerSystem (the block server)" }
+              4 { "Reserved as a Delta Replica Container" }
+              5 { "Reserved for Migration Services" }
+              6 { "Reserved for Local Replication Services" }
+              7 { "Reserved for Remote Replication Services" }
+              8 { "Reserved for Sparing" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Other" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              4 { $_status += "Stressed" }
+              5 { $_status += "Predictive Failure" }
+              6 { $_status += "Error" }
+              7 { $_status += "Non-Recoverable Error" }
+              8 { $_status += "Starting" }
+              9 { $_status += "Stopping" }
+              10 { $_status += "Stopped" }
+              11 { $_status += "In Service" }
+              12 { $_status += "No Contact" }
+              13 { $_status += "Lost Communication" }
+              14 { $_status += "Aborted" }
+              15 { $_status += "Dormant" }
+              16 { $_status += "Supporting Entity in Error" }
+              17 { $_status += "Completed" }
+              18 { $_status += "Power Mode" }
+              19 { $_status += "Relocating" }
+              53248 { $_status += "Read-only" }
+              53249 { $_status += "Incomplete" }
+              Default { "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+            0 { "Healthy" }
+            1 { "Warning" }
+            2 { "Unhealthy" }
+            5 { "Unknown" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ProvisioningTypeDefault</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ProvisioningTypeDefault"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ProvisioningTypeDefault"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Thin" }
+              2 { "Fixed" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>SupportedProvisioningTypes</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["SupportedProvisioningTypes"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Thin" }
+              2 { $_status += "Fixed" }
+              Default { "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ReadOnlyReason</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ReadOnlyReason"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ReadOnlyReason"].Value)
+            {
+              0 { "Unknown" }
+              1 { "None" }
+              2 { "By Policy" }
+              3 { "Majority Disks Unhealthy" }
+              4 { "Starting" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>RetireMissingPhysicalDisks</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["RetireMissingPhysicalDisks"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ( $this.psBase.CimInstanceProperties["RetireMissingPhysicalDisks"].Value )
+            {
+              0 { "Unknown" }
+              1 { "Auto" }
+              2 { "Always" }
+              3 { "Never" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptMethod>
+        <Name>GetSecurityDescriptor</Name>
+        <Script>
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage", $this, "GetSecurityDescriptor", $null)
+
+          $FileSecurity = New-Object System.Security.AccessControl.FileSecurity
+          $FileSecurity.SetSecurityDescriptorSddlForm($Result.OutParameters["SecurityDescriptor"].value)
+          $FileSecurity
+        </Script>
+      </ScriptMethod>
+      <ScriptMethod>
+                <Name>SetSecurityDescriptor</Name>
+                <Script>
+                    param([string]$SecurityDescriptor=$("Parameter missing: -SecurityDescriptor SecurityDescriptor"))
+                    $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+                    $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+                    $Parameters = New-Object -TypeName Microsoft.Management.Infrastructure.CimMethodParametersCollection
+                    $SecurityDescriptorParam = [Microsoft.Management.Infrastructure.CimMethodParameter]::Create("SecurityDescriptor",$SecurityDescriptor,"string",0)
+                    $Parameters.Add($SecurityDescriptorParam)
+                    $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage",$this,"SetSecurityDescriptor",$Parameters)
+                </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // ResiliencySetting
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_ResiliencySetting</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>ParityLayout</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ParityLayout"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ParityLayout"].Value)
+            {
+              1 { "Non-rotated Parity" }
+              2 { "Rotated Parity" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>NumberOfColumnsDefault</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["NumberOfColumnsDefault"].Value -eq [System.UInt16]::MaxValue )
+          {
+            "Auto"
+          }
+          else
+          {
+            $this.psBase.CimInstanceProperties["NumberOfColumnsDefault"].Value
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // StorageProvider
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_StorageProvider</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Type</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["Type"].Value)
+          {
+            1 { "SMP" }
+            2 { "SMI-S" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptMethod>
+        <Name>GetSecurityDescriptor</Name>
+        <Script>
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage", $this, "GetSecurityDescriptor", $null)
+
+          $FileSecurity = New-Object System.Security.AccessControl.FileSecurity
+          $FileSecurity.SetSecurityDescriptorSddlForm($Result.OutParameters["SecurityDescriptor"].value)
+          $FileSecurity
+        </Script>
+      </ScriptMethod>
+      <ScriptMethod>
+        <Name>SetSecurityDescriptor</Name>
+        <Script>
+          param([string]$SecurityDescriptor=$("Parameter missing: -SecurityDescriptor SecurityDescriptor"))
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Parameters = New-Object -TypeName Microsoft.Management.Infrastructure.CimMethodParametersCollection
+          $SecurityDescriptorParam = [Microsoft.Management.Infrastructure.CimMethodParameter]::Create("SecurityDescriptor",$SecurityDescriptor,"string",0)
+          $Parameters.Add($SecurityDescriptorParam)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage",$this,"SetSecurityDescriptor",$Parameters)
+        </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // StorageSubSystem
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_StorageSubSystem</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>NameFormat</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["NameFormat"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["NameFormat"].Value)
+            {
+              1 { "Other" }
+              2 { "IP" }
+              3 { "Dial" }
+              4 { "HID" }
+              5 { "NWA" }
+              6 { "HWA" }
+              7 { "X25" }
+              8 { "ISDN" }
+              9 { "IPX" }
+              10 { "DCC" }
+              11 { "ICD" }
+              12 { "E.164" }
+              13 { "SNA" }
+              14 { "OID/OSI" }
+              15 { "WWN" }
+              16 { "NAA" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+            0 { "Healthy" }
+            1 { "Warning" }
+            2 { "Unhealthy" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Other" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              4 { $_status += "Stressed" }
+              5 { $_status += "Predictive Failure" }
+              6 { $_status += "Error" }
+              7 { $_status += "Non-Recoverable Error" }
+              8 { $_status += "Starting" }
+              9 { $_status += "Stopping" }
+              10 { $_status += "Stopped" }
+              11 { $_status += "In Service" }
+              12 { $_status += "No Contact" }
+              13 { $_status += "Lost Communication" }
+              14 { $_status += "Aborted" }
+              15 { $_status += "Dormant" }
+              16 { $_status += "Supporting Entity in Error" }
+              17 { $_status += "Completed" }
+              18 { $_status += "Power Mode" }
+              Default { $_status += "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+        <ScriptProperty>
+            <Name>DataTieringType</Name>
+            <GetScriptBlock>
+              if ( $this.psBase.CimInstanceProperties["DataTieringType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+              {
+                switch ($this.psBase.CimInstanceProperties["DataTieringType"].Value)
+                {
+                  0 { "Unknown" }
+                  1 { "Not Supported" }
+                  2 { "Manual" }
+                  3 { "Auto" }
+                  Default { "Unknown" }
+                }
+              }
+              else
+              {
+                $null
+              }
+            </GetScriptBlock>
+            </ScriptProperty>
+            <ScriptProperty>
+              <Name>iSCSITargetCreationScheme</Name>
+              <GetScriptBlock>
+                if ( $this.psBase.CimInstanceProperties["iSCSITargetCreationScheme"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+                {
+                  switch ($this.psBase.CimInstanceProperties["iSCSITargetCreationScheme"].Value)
+                  {
+                    0 { "Unknown" }
+                    1 { "Not Supported" }
+                    2 { "Manual" }
+                    3 { "Auto" }
+                    Default { "Unknown" }
+                  }
+                }
+                else
+                {
+                  $null
+                }
+              </GetScriptBlock>
+        </ScriptProperty>
+      <ScriptMethod>
+        <Name>GetSecurityDescriptor</Name>
+        <Script>
+          $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+          $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+          $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage", $this, "GetSecurityDescriptor", $null)
+
+          $FileSecurity = New-Object System.Security.AccessControl.FileSecurity
+          $FileSecurity.SetSecurityDescriptorSddlForm($Result.OutParameters["SecurityDescriptor"].value)
+          $FileSecurity
+        </Script>
+      </ScriptMethod>
+      <ScriptMethod>
+                <Name>SetSecurityDescriptor</Name>
+                <Script>
+                    param([string]$SecurityDescriptor=$("Parameter missing: -SecurityDescriptor SecurityDescriptor"))
+                    $ConnectionOptions = New-Object Microsoft.Management.Infrastructure.Options.DComSessionOptions
+                    $CimSession = [Microsoft.Management.Infrastructure.CimSession]::Create("localhost", $ConnectionOptions)
+                    $Parameters = New-Object -TypeName Microsoft.Management.Infrastructure.CimMethodParametersCollection
+                    $SecurityDescriptorParam = [Microsoft.Management.Infrastructure.CimMethodParameter]::Create("SecurityDescriptor",$SecurityDescriptor,"string",0)
+                    $Parameters.Add($SecurityDescriptorParam)
+                    $Result = $CimSession.InvokeMethod("root/Microsoft/Windows/Storage",$this,"SetSecurityDescriptor",$Parameters)
+                </Script>
+      </ScriptMethod>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // Volume
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_Volume</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+          0 { "Healthy" }
+          1 { "Scan Needed" }
+          2 { "Spot Fix Needed" }
+          3 { "Full Repair Needed" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>DriveType</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["DriveType"].Value)
+          {
+          0 { "Unknown" }
+          1 { "Invalid Root Path" }
+          2 { "Removable" }
+          3 { "Fixed" }
+          4 { "Remote" }
+          5 { "CD-ROM" }
+          6 { "RAM Disk" }
+          Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // TargetPort
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_TargetPort</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>ConnectionType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["ConnectionType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["ConnectionType"].Value)
+            {
+              1 { "Other" }
+              2 { "Fibre Channel" }
+              3 { "Parallel SCSI" }
+              4 { "SSA" }
+              5 { "IEEE 1394" }
+              6 { "RDMA" }
+              7 { "iSCSI" }
+              8 { "SAS" }
+              9 { "ADT " }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>Role</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Role"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["Role"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Initiator" }
+              2 { "Target" }
+              3 { "Both Initiator and Target" }
+            }
+          }
+          else
+          {
+            $null;
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Other" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              4 { $_status += "Stressed" }
+              5 { $_status += "Predictive Failure" }
+              6 { $_status += "Error" }
+              7 { $_status += "Non-Recoverable Error" }
+              8 { $_status += "Starting" }
+              9 { $_status += "Stopping" }
+              10 { $_status += "Stopped" }
+              11 { $_status += "InService" }
+              12 { $_status += "No Contact" }
+              13 { $_status += "Lost Communication" }
+              14 { $_status += "Aborted" }
+              15 { $_status += "Dormant" }
+              16 { $_status += "Supporting Entity in Error" }
+              17 { $_status += "Completed" }
+              18 { $_status += "Power Mode" }
+              Default { $_status += "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HealthStatus</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["HealthStatus"].Value)
+          {
+            0 { "Healthy" }
+            1 { "Warning" }
+            2 { "Unhealthy" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>LinkTechnology</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["LinkTechnology"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["LinkTechnology"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              2 { "Ethernet" }
+              3 { "IB" }
+              4 { "FC" }
+              5 { "FDDI" }
+              6 { "ATM" }
+              7 { "Token Ring" }
+              8 { "Frame Relay" }
+              9 { "Infrared" }
+              10 { "BlueTooth" }
+              11 { "Wireless LAN" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>PortType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["PortType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["PortType"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              10 { "N" }
+              11 { "NL" }
+              12 { "F/NL" }
+              13 { "Nx" }
+              14 { "E" }
+              15 { "F" }
+              16 { "FL" }
+              17 { "B" }
+              18 { "G" }
+              50 {"10BaseT" }
+              51 { "10-100BaseT" }
+              52 { "100BaseT" }
+              53 { "1000BaseT" }
+              54 { "2500BaseT" }
+              55 { "10GBaseT" }
+              56 { "10GBase-CX4" }
+              94 { "SAS" }
+              100 { "100Base-FX" }
+              101 { "100Base-SX" }
+              102 { "1000Base-SX" }
+              103 { "1000Base-LX" }
+              104 { "1000Base-CX" }
+              105 { "10GBase-SR" }
+              106 { "10GBase-SW" }
+              107 { "10GBase-LX4" }
+              108 { "10GBase-LR" }
+              109 { "10GBase-LW" }
+              110 { "10GBase-ER" }
+              111 { "10GBase-EW" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>UsageRestriction</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["UsageRestriction"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["UsageRestriction"].Value)
+            {
+              0 { "Unknown" }
+              2 { "Front-end only" }
+              3 { "Back-end only" }
+              4 { "Not restricted" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // InitiatorId
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_InitiatorId</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>Type</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["Type"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["Type"].Value)
+            {
+              1 { "Other" }
+              2 { "PortWWN" }
+              3 { "NodeWWN" }
+              4 { "Hostname" }
+              5 { "iSCSI Name" }
+              6 { "SwitchWWN" }
+              7 { "SASAddress" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>HostType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["HostType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["HostType"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              2 { "Standard" }
+              3 { "Solaris" }
+              4 { "HPUX" }
+              5 { "OpenVMS" }
+              6 { "Tru64" }
+              7 { "Netware" }
+              8 { "Sequent" }
+              9 { "AIX" }
+              10 { "DGUX" }
+              11 { "Dynix" }
+              12 { "Irix" }
+              13 { "Cisco iSCSI Storage Router" }
+              14 { "Linux" }
+              15 { "Microsoft Windows" }
+              16 { "OS400" }
+              17 { "TRESPASS" }
+              18 { "HI-UX" }
+              19 { "VMware ESXi" }
+              20 { "Microsoft Windows Server 2008" }
+              21 { "Microsoft Windows Server 2003" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null;
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // InitiatorPort
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_InitiatorPort</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>PortType</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["PortType"].Value)
+          {
+            1 { "Unknown" }
+            2 { "Other" }
+            3 { "Not present" }
+            5 { "Fabric" }
+            6 { "Public Loop" }
+            7 { "FL Port" }
+            8 { "Fabric Port" }
+            9 { "Fabric expansion port" }
+            10 { "Generic Fabric Port" }
+            20 { "Private Loop" }
+            21 { "Point to Point" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>ConnectionType</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["ConnectionType"].Value)
+          {
+            0 { "Other" }
+            1 { "Fibre Channel" }
+            2 { "iSCSI" }
+            3 { "SAS" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              1 { $_status += "Unknown" }
+              2 { $_status += "Operational" }
+              3 { $_status += "User Offline" }
+              4 { $_status += "Bypassed" }
+              5 { $_status += "In diagnostics mode" }
+              6 { $_status += "Link Down" }
+              7 { $_status += "Port Error" }
+              8 { $_status += "Loopback" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>PortSupportedSpeed</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["PortSupportedSpeed"].Value)
+          {
+            1 { "1 GBit/sec" }
+            2 { "2 GBit/sec" }
+            4 { "10 GBit/sec" }
+            8 { "4 GBit/sec" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>PortSpeed</Name>
+        <GetScriptBlock>
+          switch ($this.psBase.CimInstanceProperties["PortSpeed"].Value)
+          {
+            1 { "1 GBit/sec" }
+            2 { "2 GBit/sec" }
+            4 { "10 GBit/sec" }
+            8 { "4 GBit/sec" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // MaskingSet
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_MaskingSet</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>HostType</Name>
+        <GetScriptBlock>
+          if ( $this.psBase.CimInstanceProperties["HostType"].Flags.HasFlag([Microsoft.Management.Infrastructure.CimFlags]::NullValue) -eq $false )
+          {
+            switch ($this.psBase.CimInstanceProperties["HostType"].Value)
+            {
+              0 { "Unknown" }
+              1 { "Other" }
+              2 { "Standard" }
+              3 { "Solaris" }
+              4 { "HPUX" }
+              5 { "OpenVMS" }
+              6 { "Tru64" }
+              7 { "Netware" }
+              8 { "Sequent" }
+              9 { "AIX" }
+              10 { "DGUX" }
+              11 { "Dynix" }
+              12 { "Irix" }
+              13 { "Cisco iSCSI Storage Router" }
+              14 { "Linux" }
+              15 { "Microsoft Windows" }
+              16 { "OS400" }
+              17 { "TRESPASS" }
+              18 { "HI-UX" }
+              19 { "VMware ESXi" }
+              20 { "Microsoft Windows Server 2008" }
+              21 { "Microsoft Windows Server 2003" }
+              Default { "Unknown" }
+            }
+          }
+          else
+          {
+            $null
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+<!--
+
+//
+// StorageSetting
+//
+
+-->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_StorageSetting</Name>
+    <Members>
+        <ScriptProperty>
+            <Name>NewDiskPolicy</Name>
+            <GetScriptBlock>
+                switch ($this.psBase.CimInstanceProperties["NewDiskPolicy"].Value)
+                {
+                0 { "Unknown" }
+                1 { "OnlineAll" }
+                2 { "OfflineShared" }
+                3 { "OfflineAll" }
+                4 { "OfflineInternal" }
+                Default { "OfflineShared" }
+                }
+            </GetScriptBlock>
+        </ScriptProperty>
+        <ScriptProperty>
+            <Name>ScrubPolicy</Name>
+            <GetScriptBlock>
+                switch ($this.psBase.CimInstanceProperties["ScrubPolicy"].Value)
+                {
+                0 { "Off" }
+                1 { "IntegrityStreams" }
+                2 { "All" }
+                Default { "Integrity Streams" }
+                }
+            </GetScriptBlock>
+        </ScriptProperty>
+    </Members>
+  </Type>
+  <!--
+
+  //
+  // StorageJob
+  //
+
+  -->
+  <Type>
+    <Name>Microsoft.Management.Infrastructure.CimInstance#MSFT_StorageJob</Name>
+    <Members>
+      <ScriptProperty>
+        <Name>OperationalStatus</Name>
+        <GetScriptBlock>
+          $_status = @();
+          foreach ( $status in $this.psBase.CimInstanceProperties["OperationalStatus"].Value )
+          {
+            switch ( $status )
+            {
+              0 { $_status += "Unknown" }
+              1 { $_status += "Other" }
+              2 { $_status += "OK" }
+              3 { $_status += "Degraded" }
+              4 { $_status += "Stressed" }
+              5 { $_status += "Predictive Failure" }
+              6 { $_status += "Error" }
+              7 { $_status += "Non-Recoverable Error" }
+              8 { $_status += "Starting" }
+              9 { $_status += "Stopping" }
+              10 { $_status += "Stopped" }
+              11 { $_status += "In Service" }
+              12 { $_status += "No Contact" }
+              13 { $_status += "Lost Communication" }
+              15 { $_status += "Dormant" }
+              18 { $_status += "Power Mode" }
+              32772 { $_status += "Failed Media" }
+              32773 { $_status += "Split" }
+              32774 { $_status += "Stale Metadata" }
+              32775 { $_status += "IO Error" }
+              32776 { $_status += "Unrecognized Metadata" }
+              Default { "Unknown" }
+            }
+          }
+          $_status;
+        </GetScriptBlock>
+      </ScriptProperty>
+      <ScriptProperty>
+        <Name>JobState</Name>
+        <GetScriptBlock>
+          switch ( $this.psBase.CimInstanceProperties["JobState"].Value )
+          {
+            2 { "New" }
+            3 { "Starting" }
+            4 { "Running" }
+            5 { "Suspended" }
+            6 { "Shutting Down" }
+            7 { "Completed" }
+            8 { "Terminated" }
+            9 { "Killed" }
+            10 { "Exception" }
+            11 { "Service" }
+            12 { "Query Pending" }
+            Default { "Unknown" }
+          }
+        </GetScriptBlock>
+      </ScriptProperty>
+    </Members>
+  </Type>
+</Types>

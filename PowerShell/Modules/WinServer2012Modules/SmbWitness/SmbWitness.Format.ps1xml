@@ -1,0 +1,90 @@
+<Configuration>
+<SelectionSets>
+  <SelectionSet>
+    <Name>SmbWitnessClientEntryType</Name>
+    <Types>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#root\Microsoft\Windows\SMBWitness\MSFT_SmbWitnessClient</TypeName>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#MSFT_SmbWitnessClient</TypeName>
+    </Types>
+  </SelectionSet>
+</SelectionSets>
+<ViewDefinitions>
+  <View>
+    <Name>SmbWitnessClientTableView</Name>
+    <ViewSelectedBy>
+      <SelectionSetName>SmbWitnessClientEntryType</SelectionSetName>
+    </ViewSelectedBy>
+    <TableControl>
+      <TableHeaders>
+        <TableColumnHeader>
+          <Width>50</Width>
+          <Label>Client Computer Name</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Witness Node Name</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>FileServer Node Name</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>FileServer IPAddress</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Network Name</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Client State</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Resources Monitored</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Notifications Sent</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Notifications Cancelled</Label>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <Label>Notifications Queued</Label>
+        </TableColumnHeader>
+      </TableHeaders>
+      <TableRowEntries>
+        <TableRowEntry>
+          <TableColumnItems>
+            <TableColumnItem>
+              <PropertyName>ClientName</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>WitnessNodeName</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>FileServerNodeName</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>FileServerIPAddress</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>NetworkName</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>State</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>ResourcesMonitored</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>NotificationsSent</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>NotificationsCancelled</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>QueuedNotifications</PropertyName>
+            </TableColumnItem>
+          </TableColumnItems>
+        </TableRowEntry>
+      </TableRowEntries>
+    </TableControl>
+  </View> 
+</ViewDefinitions>
+</Configuration>

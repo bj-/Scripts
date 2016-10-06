@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<!-- *******************************************************************
+
+Module Name: MSFT_NetAdapterEncapsulatedPacketTaskOffload.Format.ps1xml
+
+Description: Output Format file for MSFT_NetAdapterEncapsulatedPacketTaskOffload cmdlets
+
+Author:
+
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+******************************************************************** -->
+<Configuration>
+  <ViewDefinitions>
+  <View>
+    <Name>MSFT_NetAsapterEncapsulatedPacketTaskOffload_TableView</Name>
+    <ViewSelectedBy>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#ROOT/StandardCimv2/MSFT_NetAdapterEncapsulatedPacketTaskOffloadSettingData</TypeName>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#MSFT_NetAdapterEncapsulatedPacketTaskOffloadSettingData</TypeName>
+    </ViewSelectedBy>
+    <TableControl>
+      <TableHeaders>
+        <TableColumnHeader>
+          <Width>30</Width>
+        </TableColumnHeader>
+        <TableColumnHeader>
+          <label>Enabled</label>
+          <Width>20</Width>
+        </TableColumnHeader>
+      </TableHeaders>
+      <TableRowEntries>
+        <TableRowEntry>
+          <TableColumnItems>
+            <TableColumnItem>
+              <PropertyName>Name</PropertyName>
+            </TableColumnItem>
+            <TableColumnItem>
+              <PropertyName>EncapsulatedPacketTaskOffloadEnabled</PropertyName>
+            </TableColumnItem>
+          </TableColumnItems>
+        </TableRowEntry>
+      </TableRowEntries>
+    </TableControl>
+  </View>
+  <View>
+    <Name>MSFT_NetAsapterEncapsulatedPacketTaskOffload_ListView</Name>
+    <ViewSelectedBy>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#ROOT/StandardCimv2/MSFT_NetAdapterEncapsulatedPacketTaskOffloadSettingData</TypeName>
+      <TypeName>Microsoft.Management.Infrastructure.CimInstance#MSFT_NetAdapterEncapsulatedPacketTaskOffloadSettingData</TypeName>
+    </ViewSelectedBy>
+    <ListControl>
+      <ListEntries>
+        <ListEntry>
+          <ListItems>
+            <ListItem>
+              <PropertyName>Name</PropertyName>
+            </ListItem>
+            <ListItem>
+              <PropertyName>InterfaceDescription</PropertyName>
+            </ListItem>
+            <ListItem>
+              <label>Enabled</label>
+              <PropertyName>EncapsulatedPacketTaskOffloadEnabled</PropertyName>
+            </ListItem>
+            <ListItem>
+              <label>GreTransmitChecksumOffload</label>
+              <ScriptBlock>
+                [Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterEncapsulatedPacketTaskOffload.OffloadType]$_.EncapsulatedPacketTaskOffloadHardwareCapabilitiesGre.TransmitChecksumOffloadSupported
+              </ScriptBlock>
+            </ListItem>
+            <ListItem>
+              <label>GreReceiveChecksumOffload</label>
+              <ScriptBlock>
+                [Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterEncapsulatedPacketTaskOffload.OffloadType]$_.EncapsulatedPacketTaskOffloadHardwareCapabilitiesGre.ReceiveChecksumOffloadSupported
+              </ScriptBlock>
+            </ListItem>
+            <ListItem>
+              <label>GreLso</label>
+              <ScriptBlock>
+                [Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterEncapsulatedPacketTaskOffload.OffloadType]$_.EncapsulatedPacketTaskOffloadHardwareCapabilitiesGre.LsoV2Supported
+              </ScriptBlock>
+            </ListItem>
+            <ListItem>
+              <label>GreRss</label>
+              <ScriptBlock>
+                [Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterEncapsulatedPacketTaskOffload.OffloadType]$_.EncapsulatedPacketTaskOffloadHardwareCapabilitiesGre.RssSupported
+              </ScriptBlock>
+            </ListItem>
+            <ListItem>
+              <label>GreVmq</label>
+              <ScriptBlock>
+                [Microsoft.PowerShell.Cmdletization.GeneratedTypes.NetAdapterEncapsulatedPacketTaskOffload.OffloadType]$_.EncapsulatedPacketTaskOffloadHardwareCapabilitiesGre.VmqSupported
+              </ScriptBlock>
+            </ListItem>
+          </ListItems>
+        </ListEntry>
+      </ListEntries>
+    </ListControl>
+  </View>
+  </ViewDefinitions>
+</Configuration>

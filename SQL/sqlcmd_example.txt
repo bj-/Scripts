@@ -1,0 +1,3 @@
+sqlcmd.exe -S localhost -d shturman_metro -U sa -P Psswrd -s ";" -W -f o:1251 -i "Query.sql"
+
+sqlcmd.exe -S localhost -d shturman_metro -U sa -P Psswrd -Q "Select * from users"

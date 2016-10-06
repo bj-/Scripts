@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<PowerShellMetadata xmlns="http://schemas.microsoft.com/cmdlets-over-objects/2009/11">
+    <Class ClassName="ROOT/Microsoft/Windows/SMB/MSFT_SMBConnection">
+        <Version>1.0</Version>
+        
+        <DefaultNoun>SmbConnection</DefaultNoun>
+        <InstanceCmdlets>
+
+            <!--
+
+            //
+            // Get-SmbConnection
+            // 
+
+            -->
+            <GetCmdletParameters>
+                <QueryableProperties>
+                    <Property PropertyName="ServerName">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="false">
+                            <CmdletParameterMetadata IsMandatory="false" Position="1" ValueFromPipelineByPropertyName="true" />
+                        </RegularQuery>
+                    </Property>
+                    <Property PropertyName="UserName">
+                        <Type PSType="string" />
+                        <RegularQuery AllowGlobbing="false">
+                            <CmdletParameterMetadata IsMandatory="false" Position="2" ValueFromPipelineByPropertyName="true" />
+                        </RegularQuery>
+                    </Property>
+                </QueryableProperties>
+            </GetCmdletParameters>
+
+            <GetCmdlet>
+                <CmdletMetadata Verb="Get" HelpUri="http://go.microsoft.com/fwlink/?LinkID=241946" Aliases="gsmbc"/>
+            </GetCmdlet>
+
+        </InstanceCmdlets>
+
+    </Class>
+</PowerShellMetadata>
