@@ -16,7 +16,8 @@ set nocount on;
  (select count(*) from DriversSignals dsig where PlayType = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество гиперактиваций в кабину',
  (select count(*) from DriversSignals dsig where PlayType = 1 and SignalDestination = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество монотоний Оператору',
  (select count(*) from DriversSignals dsig where PlayType = 2 and SignalDestination = 2 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество гиперактиваций Оператору',
- (select count(*) from Journal where Journal.Code = 'JOURNAL_SENDTOMEDINS' and convert(date,Journal.Created) = convert(date, SessionsTime.DT) and Journal.ForeignGuid = Users.Guid) 'Количество Медосмотров'
+ (select count(*) from UsersMedicalInspectionsSending senmed where convert(date,senmed.Sended) = convert(date, SessionsTime.DT) and senmed.UsersGuid = Users.Guid) 'Количество Медосмотров'
+-- (select count(*) from Journal where Journal.Code = 'JOURNAL_SENDTOMEDINS' and convert(date,Journal.Created) = convert(date, SessionsTime.DT) and Journal.ForeignGuid = Users.Guid) 'Количество Медосмотров'
 FROM  Users , Persons , Roles  ,
 (
 SELECT format(Received ,'yyy.MM.dd') dt , SensorsCardio.UserGuid , CAST(SUM(Value/1000.0) AS INT) * 1.5 sec
