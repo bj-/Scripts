@@ -707,11 +707,18 @@ BackUpFireWallRulesList -Direction "All" -Verbose $TRUE
 
 #Delete Old Rule
 DeleteFireWallRule -RuleName "Shturman.RDP-In" -Verbose $TRUE
+DeleteFireWallRule -RuleName "ICMPv4-In" -Verbose $TRUE
+
 
 CreateFireWallRule -RuleName "Shturman.RDP-In" -RuleDisplayName "Shturman.RDP" -RuleDescription "RDP Access from Shturman Department" `
                     -RuleDirection "Inbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "3389" -RuleRemotePort "" -Verbose $TRUE
 WriteLog "Try to set [RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24] for rule [Shturman.RDP-In]" "DUMP"
 $result = Set-NetFirewallRule -Name "Shturman.RDP-In" -RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24, 80.76.243.254
+
+CreateFireWallRule -RuleName "ICMPv4-In" -RuleDisplayName "Incoming ICMP v4 (ping)" -RuleDescription "Incoming ICMP v4 (ping)" `
+                    -RuleDirection "Inbound" -RuleProfile "Any" -RuleProtocol "ICMPv4" -Verbose
+WriteLog "Try to set [RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24] for rule [ICMPv4-In]" "DUMP"
+$result = Set-NetFirewallRule -Name "ICMPv4-In" -RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24, 80.76.243.254
 
 
 # Disable all FireWall rules exept created "Shturman.RDP"
@@ -748,6 +755,10 @@ FirewallSetDefaultOutboundAction -Name "Domain" -DefaultOutboundAction "Block" -
 
 # Ret rule details
 # Get-NetFirewallRule -DisplayName "Общий доступ к файлам и принтерам (SMB - исходящий)"
+
+EnableFireWallRule -RuleName "ICMPv4-In" -RuleDirection "Inbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "Shturman.RDP-In" -RuleDirection "Inbound" -Profile "Any" -Verbose
+
 
 EnableFireWallRule -RuleName "RRAS-GRE-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
 EnableFireWallRule -RuleName "RRAS-PPTP-Out-TCP" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
