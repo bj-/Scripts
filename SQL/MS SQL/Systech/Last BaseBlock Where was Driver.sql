@@ -14,9 +14,9 @@ where sj1.SensorsGuid = s1.Guid
 and sj1.ServersGuid = sv1.Guid
 --and sj.SensorsJournalTypesId = jt.Id
 --and s.SerialNo like 'STL000-00-00-0'
-and (s1.SerialNo like '%STH00-168%' /* or s.SerialNo like '%STL000%'*/)
+and (s1.SerialNo like '%STH00-192%' /* or s.SerialNo like '%STL000%'*/)
 --and (sv.SerialNo like '%8679%' or sv.SerialNo like '%8740%') 
-and sj1.Changed < '2016-06-11 00:00:00.0000000'
+and sj1.Changed < '2016-09-21 00:00:00.0000000'
 group by sj1.SensorsGuid
 )  sj2
 where sj.SensorsGuid = s.Guid
