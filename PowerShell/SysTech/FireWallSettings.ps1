@@ -702,16 +702,16 @@ else
 
 
 # Backup Enabled FireWall rules list to log file
-BackUpFireWallRulesList -Direction "All" -Verbose $TRUE
+BackUpFireWallRulesList -Direction "All" -Verbose
 
 
 #Delete Old Rule
-DeleteFireWallRule -RuleName "Shturman.RDP-In" -Verbose $TRUE
-DeleteFireWallRule -RuleName "ICMPv4-In" -Verbose $TRUE
+DeleteFireWallRule -RuleName "Shturman.RDP-In" -Verbose
+DeleteFireWallRule -RuleName "ICMPv4-In" -Verbose
 
 
 CreateFireWallRule -RuleName "Shturman.RDP-In" -RuleDisplayName "Shturman.RDP" -RuleDescription "RDP Access from Shturman Department" `
-                    -RuleDirection "Inbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "3389" -RuleRemotePort "" -Verbose $TRUE
+                    -RuleDirection "Inbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "3389" -RuleRemotePort "" -Verbose
 WriteLog "Try to set [RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24] for rule [Shturman.RDP-In]" "DUMP"
 $result = Set-NetFirewallRule -Name "Shturman.RDP-In" -RemoteAddress 172.16.30.0/24, 109.188.130.109, 192.168.43.0/24, 185.15.189.99, 10.110.95.0/24, 10.168.102.0/24, 80.76.243.254
 
@@ -722,26 +722,26 @@ $result = Set-NetFirewallRule -Name "ICMPv4-In" -RemoteAddress 172.16.30.0/24, 1
 
 
 # Disable all FireWall rules exept created "Shturman.RDP"
-DisableFireWallRules -ExceptRuleName "Shturman.RDP-In" -RuleDirection "Inbound" -RuleEnabled "True" -Verbose $TRUE
-DisableFireWallRules -ExceptRuleName "Shturman.PORTS-Out" -RuleDirection "Outbound" -RuleEnabled "True" -Verbose $TRUE
+DisableFireWallRules -ExceptRuleName "Shturman.RDP-In" -RuleDirection "Inbound" -RuleEnabled "True" -Verbose
+DisableFireWallRules -ExceptRuleName "Shturman.PORTS-Out" -RuleDirection "Outbound" -RuleEnabled "True" -Verbose
 
 
 #Delete Old Rule
-DeleteFireWallRule -RuleName "Shturman.PORTS-Out" -Verbose $TRUE
-DeleteFireWallRule -RuleName "HTTP.80.8080-Out" -Verbose $TRUE
-DeleteFireWallRule -RuleName "HTTPS.SSL-Out" -Verbose $TRUE
+DeleteFireWallRule -RuleName "Shturman.PORTS-Out" -Verbose
+DeleteFireWallRule -RuleName "HTTP.80.8080-Out" -Verbose
+DeleteFireWallRule -RuleName "HTTPS.SSL-Out" -Verbose
 #Remove-NetFirewallRule -Name "Shturman.PORTS" -ErrorAction SilentlyContinue
 #Remove-NetFirewallRule -Name "HTTP.80.8080" -ErrorAction SilentlyContinue
 
 # Shturman outgoing Rule (Ports 45780-45800
 CreateFireWallRule -RuleName "Shturman.PORTS-Out" -RuleDisplayName "Shturman PORTS (45780-45800)" -RuleDescription "Shturman outgoing ports" `
-                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "45780-45800" -Verbose $TRUE
+                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "45780-45800" -Verbose
 
 CreateFireWallRule -RuleName "HTTPS.SSL-Out" -RuleDisplayName "HTTPS SSL (443)" -RuleDescription "SSL ports" `
-                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "443" -Verbose $TRUE
+                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "443" -Verbose
 
 CreateFireWallRule -RuleName "HTTP.80.8080-Out" -RuleDisplayName "HTTP (80, 8080)" -RuleDescription "HTTP Ports 80 and 8080" `
-                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "" -Verbose $TRUE
+                    -RuleDirection "Outbound" -RuleProfile "Any" -RuleProtocol "TCP" -RuleLocalPort "" -RuleRemotePort "" -Verbose
 WriteLog "Try to set [RemotePort 80, 8080] for rule [HTTP.80.8080-Out]" "DUMP"
 Set-NetFirewallRule -Name "HTTP.80.8080-Out" -RemotePort 80, 8080
 
@@ -749,9 +749,9 @@ Set-NetFirewallRule -Name "HTTP.80.8080-Out" -RemotePort 80, 8080
 
 #Set-NetFirewallSetting -
 #Get-NetFirewallProfile
-FirewallSetDefaultOutboundAction -Name "Private" -DefaultOutboundAction "Block" -Verbose $TRUE
-FirewallSetDefaultOutboundAction -Name "Public" -DefaultOutboundAction "Block" -Verbose $TRUE
-FirewallSetDefaultOutboundAction -Name "Domain" -DefaultOutboundAction "Block" -Verbose $TRUE
+FirewallSetDefaultOutboundAction -Name "Private" -DefaultOutboundAction "Block" -Verbose
+FirewallSetDefaultOutboundAction -Name "Public" -DefaultOutboundAction "Block" -Verbose
+FirewallSetDefaultOutboundAction -Name "Domain" -DefaultOutboundAction "Block" -Verbose
 
 # Ret rule details
 # Get-NetFirewallRule -DisplayName "Общий доступ к файлам и принтерам (SMB - исходящий)"
@@ -760,15 +760,15 @@ EnableFireWallRule -RuleName "ICMPv4-In" -RuleDirection "Inbound" -Profile "Any"
 EnableFireWallRule -RuleName "Shturman.RDP-In" -RuleDirection "Inbound" -Profile "Any" -Verbose
 
 
-EnableFireWallRule -RuleName "RRAS-GRE-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
-EnableFireWallRule -RuleName "RRAS-PPTP-Out-TCP" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
-EnableFireWallRule -RuleName "FPS-ICMP4-ERQ-Out-NoScope" -RuleDirection "Outbound" -Profile "Public" -Verbose $TRUE
-EnableFireWallRule -RuleName "FPS-ICMP4-ERQ-Out" -RuleDirection "Outbound" -Profile "Public, Private" -Verbose $TRUE
-EnableFireWallRule -RuleName "FPS-SMB-Out-TCP-NoScope" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
-EnableFireWallRule -RuleName "FPS-SMB-Out-TCP" -RuleDirection "Outbound" -Profile "Public, Private" -Verbose $TRUE
-EnableFireWallRule -RuleName "CoreNet-IPHTTPS-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
-EnableFireWallRule -RuleName "CoreNet-DHCP-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
-EnableFireWallRule -RuleName "CoreNet-DNS-Out-UDP" -RuleDirection "Outbound" -Profile "Any" -Verbose $TRUE
+EnableFireWallRule -RuleName "RRAS-GRE-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "RRAS-PPTP-Out-TCP" -RuleDirection "Outbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "FPS-ICMP4-ERQ-Out-NoScope" -RuleDirection "Outbound" -Profile "Public" -Verbose
+EnableFireWallRule -RuleName "FPS-ICMP4-ERQ-Out" -RuleDirection "Outbound" -Profile "Public, Private" -Verbose
+EnableFireWallRule -RuleName "FPS-SMB-Out-TCP-NoScope" -RuleDirection "Outbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "FPS-SMB-Out-TCP" -RuleDirection "Outbound" -Profile "Public, Private" -Verbose
+EnableFireWallRule -RuleName "CoreNet-IPHTTPS-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "CoreNet-DHCP-Out" -RuleDirection "Outbound" -Profile "Any" -Verbose
+EnableFireWallRule -RuleName "CoreNet-DNS-Out-UDP" -RuleDirection "Outbound" -Profile "Any" -Verbose
 
 $ShTask = Get-ScheduledTask -TaskName $TakName -ErrorAction SilentlyContinue
 if (($ShTask.TaskName -ne $TakName) -and ($SheduledTask -eq $TRUE))
