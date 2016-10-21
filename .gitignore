@@ -3,6 +3,7 @@ Drivers_State_*.csv
 Drivers_MGT_START.cmd
 a.a
 *.tmp
+*.log
 
 # Windows image file caches
 Thumbs.db
