@@ -1,0 +1,1 @@
+netsh ras show portstatus >\\st-dc1\NetworkConfig$\VPNClients.txt
