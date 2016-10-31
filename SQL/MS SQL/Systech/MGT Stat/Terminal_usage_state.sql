@@ -1,7 +1,7 @@
 /****** Script for SelectTopNRows command from SSMS  ******/
 set nocount on;
 
-select Name from [Shturman_Metro].[dbo].[MetroLines]
+select Name from [MetroLines]
   where guid = '00000000-0000-0000-0000-000000000004'
 
 SELECT 
@@ -12,7 +12,7 @@ SELECT
 		IIF([isConnected] = 1 , 'Подключен', 'Отключен') 
 	)
 
-  FROM [Shturman_Metro].[dbo].[Servers]
+  FROM [Servers]
   Where SerialNo = 'OperatorZDC'
 
 

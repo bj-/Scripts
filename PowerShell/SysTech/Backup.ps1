@@ -6,6 +6,7 @@
        - удаление архивов старше [$LogFilePurgeDays] дней
        - TODO заливка логов на сервер
        - TODO выборочное архивирование логов и заливка оных с блоков на сервак
+       - TODO Создание Шедульной таски для автоматического запуска скрипта
     2. MS SQL BackUP
        - бд Shturman_Metro полный бекап (Джобой в MS SQL)
        - в папку d:\BackUP
@@ -37,6 +38,7 @@ param (
 	[string]$BackUpWeekly = "13", # Weeks
 #	[string]$BackUpMontly = "14", # Days
 #	[string]$AppPath = "C:\Shturman\",
+	[switch]$CreateSheduledTask = $FALSE		# Создание Шедульной таски для автоматического запуска скрипта
 	[switch]$Debug = $FALSE		# в консоль все события лога пишет
 )
 
@@ -198,6 +200,14 @@ function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
 clear;
 WriteLog "Archive Log Files, purge old archives and upload archives to Server" "INFO"
 WriteLog "Script version: [$version]" "INFO"
+
+
+# TODO Создание Шедульной таски для автоматического запуска скрипта
+if ($CreateSheduledTask -eq $TRUE)
+{
+	WriteLog "NO FUNCTIONALE (c) Kuba's taxist" "ERRr"
+
+}
 
 # проверки на существование путей
 # - фолдера для Лог файлов и фолдера для архивов

@@ -9,8 +9,7 @@ set nocount on;
  format(dateadd ( SECOND,SessionsTime.sec,''),'HH:mm:ss') 'Датчик включен, часов',  
  -- format(dateadd ( SECOND, RRsTime.sec,''),'HH:mm:ss') 'датчик н адет, часов',  
  IIF (SessionsTime.sec > ISNULL( RRsTime.sec ,0) , format(dateadd ( SECOND, ISNULL( RRsTime.sec ,0),''),'HH:mm:ss') , format(dateadd ( SECOND,SessionsTime.sec,''),'HH:mm:ss')) 'Датчик надет, часов',
- ISNULL( ejourSleep.press_ej,0) 'Количество нажатий Монотония на ЭЖУР',
- ISNULL( ejourStress.press_ej,0) 'Количество нажатий Гиперактивация на ЭЖУР',
+ ISNULL( ejour.press_ej,0) 'Количество нажатий на ЭЖУР',
  isnull(convert(varchar,(select max(umi.InspectionsDate) from UsersMedicalInspections umi where umi.UsersGuid = Users.Guid and SessionsTime.dt = convert(date, umi.InspectionsCreated) 
  and umi.InspectionsDate > '19100101' and DatePart(day, Umi.InspectionsDate) = DatePart(day, SessionsTime.DT) and DatePart(month, Umi.InspectionsDate) = DatePart(MONTH, SessionsTime.DT)),108),'Нет') 'Время прохождения медосмотра' ,
  (select count(*) from DriversSignals dsig where PlayType = 1 and convert(date,dsig.Played) = convert(date, SessionsTime.DT) and dsig.UsersGuid = Users.Guid) 'Количество монотоний в кабину',
@@ -46,30 +45,13 @@ SELECT
 
   FROM UsersJournal j
   WHERE
-   UsersJournalTypesId = 7
+   UsersJournalTypesId in ( 7,8)
   group by  format(j.started ,'yyy.MM.dd'),
       UsersGuid
 
-) ejourSleep  ON SessionsTime.dt = ejourSleep.dt
- and SessionsTime.UsersGuid = ejourSleep.UsersGuid
-  
- left outer join
-(
-SELECT 
-  format(j.started ,'yyy.MM.dd') dt,
-  UsersGuid,
-  count(*) press_ej
-
-  FROM UsersJournal j
-  WHERE
-   UsersJournalTypesId = 8
-  group by  format(j.started ,'yyy.MM.dd'),
-      UsersGuid
-
-) ejourStress  ON SessionsTime.dt = ejourStress.dt
- and SessionsTime.UsersGuid = ejourStress.UsersGuid
- ,
- MetroLines
+) ejour  ON SessionsTime.dt = ejour.dt
+ and SessionsTime.UsersGuid = ejour.UsersGuid
+ , MetroLines
 
 WHERE Roles.Code = dbo.GetRolesCodeDriver() 
  and Persons.Guid=PersonsGuid
