@@ -6,7 +6,7 @@ select Name from [MetroLines]
 
 SELECT 
 	CONCAT(
-		'Оператор ЗДЦ последний раз подключился: ',
+		'Оператор последний раз подключился: ',
 		FORMAT([Connected], 'dd.MM.yyy HH:mm:ss') ,
 		'. В настоящее время: ',
 		IIF([isConnected] = 1 , 'Подключен', 'Отключен') 

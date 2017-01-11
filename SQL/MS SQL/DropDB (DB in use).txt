@@ -1,0 +1,7 @@
+-- Убийство БД даже если она открыта кем-то методом перевода в сингл юзер
+
+IF  EXISTS (SELECT name FROM sys.databases WHERE name = N'<DATABASE_NAME>') BEGIN
+	ALTER DATABASE [<DATABASE_NAME>] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+	DROP DATABASE [<DATABASE_NAME>]
+END
+GO
