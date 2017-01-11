@@ -15,24 +15,47 @@
        - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
+    3. SVN BackUP
+       - TODO Поиск репозиториев и дамп всех найденных, бэкап настроек
+       - TODO в папку d:\BackUP
+       - TODO Удаление старых бэкапов по принципу (1 нед - ежедневный, 1 месяц - недельный 1/15/21 числа кажд мес, всегда - ежемесячный от 1 числа)
+       - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
+       - TODO Восстановление бэкапа и проверка оного
+       - TODO Сообщение об ошибках в случае не прохождения проверки.
+    4. Redmine BackUP
+       - TODO Бэкап базы, файлохранилища, настроек
+       - TODO в папку d:\BackUP
+       - TODO Удаление старых бэкапов по принципу (1 нед - ежедневный, 1 месяц - недельный 1/15/21 числа кажд мес, всегда - ежемесячный от 1 числа)
+       - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
+       - TODO Восстановление бэкапа и проверка оного
+       - TODO Сообщение об ошибках в случае не прохождения проверки.
 
 #>
 
 
 param (
+	# Log Files
+	[string]$DateFormatLog = "yy-MM-dd",
 	[string]$LogFilePath = "D:\Shturman\Bin\Log",
 	[string]$LogFilePathOld = "D:\Shturman\Bin\Log\Old",
-	[string]$DateFormatLog = "yy-MM-dd",
 	[string]$LogFilePurgeDays = "30", # Days
 	[switch]$PurgeLogFiles = $FALSE, # похоронить архивы старше  $LogFilePurgeDays дней
 	[switch]$UploadLogFiles = $FALSE, # Заливка лог файлов на сервер.
 	[switch]$FastArcive = $FALSE, # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
 	[switch]$LogFileAll2Arc = $FALSE, # заставляет упаковывать все лог файлы. включая сегоднящние
+
+	# SQL
+
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
 #	[string]$SQLDBName = "Shturman_Metro",
 #	[string]$SQLUsername = "BackUpOperator",
 #	[string]$SQLPassword = "diF80noY",
 	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
+
+	# SVN
+	[switch]$SVN = $FALSE				# Бэкап и обслуживание SVN ( бех этого колюча остальыне из группы SVN* игнорируются)
+	# Redmine
+	[switch]$Redmine = $FALSE			# Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
 
 	[string]$BackUpDaily = "14", # Days
 	[string]$BackUpWeekly = "13", # Weeks

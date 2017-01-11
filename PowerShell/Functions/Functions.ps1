@@ -5,6 +5,15 @@
 #
 #
 Разделы и функции.
+[DateTime]
+	ParseDate()  Parse date and time.
+    	[string]$Date = "",			# Required '25/12/2015' 'dd/mm/YYYY'"
+    	[string]$Time = "",			# Required '15:10:13' 'hh:mm:ss'"
+    	[switch]$Verbose = $FALSE,		# Говорливость в лог
+    	[switch]$Debug = $FALSE			# в консоль все события лога пишет
+	return date by Get-Date. Return current date-time if empty
+
+
 [Services]
 	Check-Service()	Запущен ли сервис	return True/False, write status into console
 		[string]$ServiceName = "",
@@ -83,6 +92,38 @@
 #>
 
 # =============================================================================================
+
+# [DateTime]
+# Parse date and time. return date by Get-Date. Return current date-time if empty
+function ParseDate()
+{
+    param (
+    	[string]$Date = "",				# Required '25/12/2015' 'dd/mm/YYYY'"
+    	[string]$Time = "",				# Required '15:10:13' 'hh:mm:ss'"
+    	[switch]$Verbose = $FALSE,		# Говорливость в лог
+    	[switch]$Debug = $FALSE			# в консоль все события лога пишет
+    )
+
+  	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    $pDate = "$Date $Time"
+
+    if (($Date -eq "") -and ($Time -eq ""))
+    {
+        return Get-Date
+    }
+    $result = 0
+    if (!([DateTime]::TryParse($pDate, [ref]$result)))
+    {
+        WriteLog "$FuncName Incorrect Date or Time format: [$Date $Time]. Required '25/12/2015 15:10:13' 'dd/mm/YYYY hh:mm:ss'" "ERRr" $Verbose
+        #break;
+     }
+
+    return $result
+}
+
+
 # [Services]
 # Запущен ли сервис
 function Check-Service ()
