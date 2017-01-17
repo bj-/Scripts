@@ -2,10 +2,53 @@ set nocount on;
 
 --use Shturman_Metro
 
+-- соединяем все RR в одну таблицу
+
+DECLARE @SQL NVARCHAR(MAX) = '', @TableName NVARCHAR(MAX) = '';
+DECLARE @Template NVARCHAR(MAX) = 'SELECT * FROM %s';
+
+DECLARE RRs CURSOR FOR
+	SELECT name FROM sys.tables WHERE name LIKE 'SensorsDataRRSO2%'
+
+OPEN RRs;
+
+FETCH NEXT FROM RRs INTO @TableName;
+WHILE @@FETCH_STATUS = 0 BEGIN
+	
+	IF @SQL = ''
+		SET @SQL = REPLACE(@Template, '%s', @TableName)
+	ELSE
+		SET @SQL = @SQL + ' UNION ALL ' + REPLACE(@Template, '%s', @TableName)
+
+	FETCH NEXT FROM RRs INTO @TableName;
+END;
+
+DEALLOCATE RRs;
+
+CREATE TABLE #TempRRs(
+	[Guid] [uniqueidentifier] NOT NULL,
+	[SensorsGuid] [uniqueidentifier] NOT NULL,
+	[ServersGuid] [uniqueidentifier] NOT NULL,
+	[Received] [datetime2](7) NOT NULL,
+	[TickCount] [bigint] NULL,
+	[Value] [smallint] NULL,
+	[FIRR] [bigint] NULL,
+	[FIRIR] [bigint] NULL,
+	[Validity] [tinyint] NULL,
+	[Deactivated] [tinyint] NULL
+)
+
+SET @SQL = 'INSERT INTO #TempRRs SELECT * FROM (' + @SQL + ') RRs';
+
+EXEC sp_executesql @SQL
+
+-----------------------------------------
+
+
   SELECT    
   REPLACE (MetroLines.Name, ' ГУП «Мосгортранс»', '') 'Парк' ,
   SessionsTime.dt 'Дата',
-  Persons.LastName+' '+SUBSTRING(Persons.FirstName, 1,1)+'. '+SUBSTRING(Persons.MiddleName, 1, 1) + '.'  'ФИО',   
+  Persons.LastName+' '+SUBSTRING(Persons.FirstName, 1,1)+'. '+SUBSTRING(Persons.MiddleName, 1, 1) + '.'  'ФИО', SerialNo,  
  format(dateadd ( SECOND,SessionsTime.sec,''),'HH:mm:ss') 'Датчик включен, часов',  
  -- format(dateadd ( SECOND, RRsTime.sec,''),'HH:mm:ss') 'датчик н адет, часов',  
  IIF (SessionsTime.sec > ISNULL( RRsTime.sec ,0) , format(dateadd ( SECOND, ISNULL( RRsTime.sec ,0),''),'HH:mm:ss') , format(dateadd ( SECOND,SessionsTime.sec,''),'HH:mm:ss')) 'Датчик надет, часов',
@@ -21,12 +64,12 @@ set nocount on;
 -- (select count(*) from Journal where Journal.Code = 'JOURNAL_SENDTOMEDINS' and convert(date,Journal.Created) = convert(date, SessionsTime.DT) and Journal.ForeignGuid = Users.Guid) 'Количество Медосмотров'
 FROM  Users , Persons , Roles  ,
 (
-SELECT format(Received ,'yyy.MM.dd') dt , SensorsCardio.UserGuid , CAST(SUM(Value/1000.0) AS INT) * 1.5 sec
- FROM SensorsDataRRSO2 , SensorsCardio      
+SELECT format(Received ,'yyy.MM.dd') dt , SensorsCardio.UserGuid , CAST(SUM(Value/1000.0) AS INT) * 1.5 sec, Sensors.SerialNo
+ FROM #TempRRs , SensorsCardio, Sensors      
  WHERE 
- SensorsCardio.Guid=SensorsDataRRSO2.SensorsGuid
+ SensorsCardio.Guid=#TempRRs.SensorsGuid and SensorsCardio.Guid=Sensors.Guid 
  and ((Validity > 70) and (Validity <= 100) and (Deactivated = 0)     and (FIRR > 0) and (FIRIR > 0) and (FIRIR / FIRR > 0.5) and (FIRIR / FIRR < 10))
-GROUP BY format(Received ,'yyy.MM.dd')  , SensorsCardio.UserGuid    
+GROUP BY format(Received ,'yyy.MM.dd')  , SensorsCardio.UserGuid, Sensors.SerialNo    
 )  RRsTime
  right outer join
 (
@@ -78,3 +121,6 @@ WHERE Roles.Code = dbo.GetRolesCodeDriver()
 
  and MetroLines.Guid = '00000000-0000-0000-0000-000000000004'
 ORDER BY 1, 2 ,3
+
+-- удаляем временную таблицу
+DROP TABLE #TempRRs
