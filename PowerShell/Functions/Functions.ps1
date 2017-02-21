@@ -30,6 +30,11 @@
 		[string]$Path = "",
 		[switch]$Create = $FALSE,
 		[switch]$Verbose = $FALSE
+    DeleteFile                            Удаление файлов
+		[string]$File = "",             # Полный путь названия файла указан должен здесь быть
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+
+
 
 
 [UsersAndGroups]
@@ -168,7 +173,12 @@ function isAdmin
 	}
 } 
 
-# [FilesAndFolders]
+<# ==============================================
+
+FilesAndFolders]
+
+ ============================================== #>
+
 Function TestFolderPath 
 {
 	param (
@@ -228,7 +238,8 @@ Function TestFolderPath
 		}
 		Else
 		{
-		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $TRUE
+    		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $TRUE
+            break;
 		}
 	}
 	else
@@ -237,6 +248,31 @@ Function TestFolderPath
 	}
 
 }
+
+# Удаление файлов
+function DeleteFile
+{
+    # Удаление файлов
+	param (
+		[string]$File = "",             # Полный путь названия файла указан должен здесь быть
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+
+    WriteLog "Try to delete file [$File]" "DUMP" $Verbose
+
+	Remove-Item -Path $File -Force
+
+	# проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
+	if (test-path -Path $File -ErrorAction SilentlyContinue)
+	{
+		WriteLog "Old Log file [$File] doesn't removed" "ERRr" $TRUE
+	}
+	else
+	{
+		WriteLog "File [$File] is deleted" "MESS" $Verbose # а если нормально удалился - пишем что ремувед
+	}
+}
+
 
 <# ==============================================
 
