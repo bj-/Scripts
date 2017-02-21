@@ -36,22 +36,21 @@ function WriteLog
 		[bool]$Verbose = $TRUE		# в консоль все события лога пишет
 	)
 
-
 	$currDateTime = Get-Date -Format $LogDateFormat
 	
 	switch ($messagetype)
 	{
 		"INFO"
 		{
-			[string]$color = "white"
+			[string]$color = "White"
 		}
 		"WARN"
 		{
-			[string]$color = "yellow"
+			[string]$color = "Yellow"
 		}
 		"ERRr"
 		{
-			[string]$color = "red"
+			[string]$color = "Red"
 		}
 		"MESS"
 		{
@@ -69,6 +68,8 @@ function WriteLog
 		if ($Verbose -or ($messagetype -eq "ERRr") -or ($messagetype -eq "WARN"))
 		{
 			Write-Host "[ $messagetype ] $message" -foregroundcolor $color;
+			#Write-Host "Write-Host [ $messagetype ] $message -foregroundcolor $color";
+
 		}
 	}
 	# В лог
