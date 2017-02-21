@@ -12,3 +12,1608 @@
 2016-09-23 11-00-12 DUMP Processing file [Modem-16-03-10.log]
 2016-09-23 11-00-12 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 76057 bytes (75 KiB)  Creating archive: C:\Logs\Old\Modem-16-03-10.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 5124 bytes (6 KiB)  Everything is Ok
 2016-09-23 11-00-12 MESS File [Modem-16-03-10.log] moved to archive [Modem-16-03-10.log.zip]
+2017-02-10 15-22-08 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-22-08 INFO Script version: [1.0.2]
+2017-02-10 15-22-08 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-22-08 DUMP TestFolderPath: Creating folder [C:\Logs\Old\DEMOPOLISH]
+2017-02-10 15-22-08 DUMP TestFolderPath: Creating folder result: C:\Logs\Old\DEMOPOLISH
+2017-02-10 15-22-08 MESS TestFolderPath: Created folder [C:\Logs\Old\DEMOPOLISH]
+2017-02-10 15-22-46 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-22-46 INFO Script version: [1.0.2]
+2017-02-10 15-22-46 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-22-46 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-23-31 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-23-31 INFO Script version: [1.0.2]
+2017-02-10 15-23-31 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-23-31 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-23-31 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-23-31 INFO Move Log Files to Archives
+2017-02-10 15-23-31 DUMP Processing file [BlueGiga-16-12-14.log]
+2017-02-10 15-23-33 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13126412 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 392816 bytes (384 KiB)  Everything is Ok
+2017-02-10 15-23-33 MESS File [BlueGiga-16-12-14.log] moved to archive [BlueGiga-16-12-14.log.zip]
+2017-02-10 15-23-33 DUMP Processing file [BlueGiga-16-12-15.log]
+2017-02-10 15-23-35 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13042693 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 398802 bytes (390 KiB)  Everything is Ok
+2017-02-10 15-23-35 MESS File [BlueGiga-16-12-15.log] moved to archive [BlueGiga-16-12-15.log.zip]
+2017-02-10 15-23-35 DUMP Processing file [BlueGiga-16-12-16.log]
+2017-02-10 15-23-37 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13217982 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 417069 bytes (408 KiB)  Everything is Ok
+2017-02-10 15-23-37 MESS File [BlueGiga-16-12-16.log] moved to archive [BlueGiga-16-12-16.log.zip]
+2017-02-10 15-23-37 DUMP Processing file [BlueGiga-16-12-17.log]
+2017-02-10 15-23-39 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13150970 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 389132 bytes (381 KiB)  Everything is Ok
+2017-02-10 15-23-39 MESS File [BlueGiga-16-12-17.log] moved to archive [BlueGiga-16-12-17.log.zip]
+2017-02-10 15-23-39 DUMP Processing file [BlueGiga-16-12-18.log]
+2017-02-10 15-23-41 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13218542 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 375563 bytes (367 KiB)  Everything is Ok
+2017-02-10 15-23-41 MESS File [BlueGiga-16-12-18.log] moved to archive [BlueGiga-16-12-18.log.zip]
+2017-02-10 15-23-41 DUMP Processing file [BlueGiga-16-12-19.log]
+2017-02-10 15-23-43 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13142130 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 402922 bytes (394 KiB)  Everything is Ok
+2017-02-10 15-23-43 MESS File [BlueGiga-16-12-19.log] moved to archive [BlueGiga-16-12-19.log.zip]
+2017-02-10 15-23-43 DUMP Processing file [BlueGiga-16-12-20.log]
+2017-02-10 15-23-44 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13232211 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 420812 bytes (411 KiB)  Everything is Ok
+2017-02-10 15-23-44 MESS File [BlueGiga-16-12-20.log] moved to archive [BlueGiga-16-12-20.log.zip]
+2017-02-10 15-23-44 DUMP Processing file [BlueGiga-16-12-21.log]
+2017-02-10 15-23-46 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13168492 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 412839 bytes (404 KiB)  Everything is Ok
+2017-02-10 15-23-46 MESS File [BlueGiga-16-12-21.log] moved to archive [BlueGiga-16-12-21.log.zip]
+2017-02-10 15-23-46 DUMP Processing file [BlueGiga-16-12-22.log]
+2017-02-10 15-24-19 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-24-19 INFO Script version: [1.0.2]
+2017-02-10 15-24-19 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-24-19 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-24-19 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-14.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-14.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-15.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-15.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-16.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-16.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-17.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-17.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-18.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-18.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-19.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-19.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-20.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-20.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-21.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-21.log.7z] is deleted
+2017-02-10 15-24-19 DUMP Try to delete file [BlueGiga-16-12-22.log.7z]
+2017-02-10 15-24-19 MESS File [BlueGiga-16-12-22.log.7z] is deleted
+2017-02-10 15-24-19 INFO Move Log Files to Archives
+2017-02-10 15-24-19 DUMP Processing file [BlueGiga-16-12-22.log]
+2017-02-10 15-24-20 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 13026633 bytes (13 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 418799 bytes (409 KiB)  Everything is Ok
+2017-02-10 15-24-20 MESS File [BlueGiga-16-12-22.log] moved to archive [BlueGiga-16-12-22.log.7z]
+2017-02-10 15-24-20 DUMP Processing file [BlueGiga-16-12-23.log]
+2017-02-10 15-24-22 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 8777597 bytes (8572 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\BlueGiga-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 275747 bytes (270 KiB)  Everything is Ok
+2017-02-10 15-24-22 MESS File [BlueGiga-16-12-23.log] moved to archive [BlueGiga-16-12-23.log.7z]
+2017-02-10 15-24-22 DUMP Processing file [Data-16-12-15.log]
+2017-02-10 15-24-22 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 4047 bytes (4 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Data-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1251 bytes (2 KiB)  Everything is Ok
+2017-02-10 15-24-22 MESS File [Data-16-12-15.log] moved to archive [Data-16-12-15.log.7z]
+2017-02-10 15-24-22 DUMP Processing file [Data-16-12-16.log]
+2017-02-10 15-24-22 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 4047 bytes (4 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Data-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1250 bytes (2 KiB)  Everything is Ok
+2017-02-10 15-24-22 MESS File [Data-16-12-16.log] moved to archive [Data-16-12-16.log.7z]
+2017-02-10 15-24-22 DUMP Processing file [Data-16-12-17.log]
+2017-02-10 15-24-22 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 4013 bytes (4 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Data-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 787 bytes (1 KiB)  Everything is Ok
+2017-02-10 15-24-22 MESS File [Data-16-12-17.log] moved to archive [Data-16-12-17.log.7z]
+2017-02-10 15-24-22 DUMP Processing file [Demopolish-16-12-14.log]
+2017-02-10 15-24-35 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 56988172 bytes (55 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1855911 bytes (1813 KiB)  Everything is Ok
+2017-02-10 15-24-35 MESS File [Demopolish-16-12-14.log] moved to archive [Demopolish-16-12-14.log.7z]
+2017-02-10 15-24-35 DUMP Processing file [Demopolish-16-12-15.log]
+2017-02-10 15-24-47 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 56733182 bytes (55 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1856755 bytes (1814 KiB)  Everything is Ok
+2017-02-10 15-24-47 MESS File [Demopolish-16-12-15.log] moved to archive [Demopolish-16-12-15.log.7z]
+2017-02-10 15-24-47 DUMP Processing file [Demopolish-16-12-16.log]
+2017-02-10 15-25-00 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 56905855 bytes (55 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1864664 bytes (1821 KiB)  Everything is Ok
+2017-02-10 15-25-00 MESS File [Demopolish-16-12-16.log] moved to archive [Demopolish-16-12-16.log.7z]
+2017-02-10 15-25-00 DUMP Processing file [Demopolish-16-12-17.log]
+2017-02-10 15-25-10 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 43887143 bytes (42 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1480041 bytes (1446 KiB)  Everything is Ok
+2017-02-10 15-25-10 MESS File [Demopolish-16-12-17.log] moved to archive [Demopolish-16-12-17.log.7z]
+2017-02-10 15-25-10 DUMP Processing file [Demopolish-16-12-18.log]
+2017-02-10 15-25-19 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 41913363 bytes (40 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1440403 bytes (1407 KiB)  Everything is Ok
+2017-02-10 15-25-19 MESS File [Demopolish-16-12-18.log] moved to archive [Demopolish-16-12-18.log.7z]
+2017-02-10 15-25-19 DUMP Processing file [Demopolish-16-12-19.log]
+2017-02-10 15-25-28 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 41971401 bytes (41 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1457569 bytes (1424 KiB)  Everything is Ok
+2017-02-10 15-25-28 MESS File [Demopolish-16-12-19.log] moved to archive [Demopolish-16-12-19.log.7z]
+2017-02-10 15-25-28 DUMP Processing file [Demopolish-16-12-20.log]
+2017-02-10 15-25-37 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 42117494 bytes (41 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1436949 bytes (1404 KiB)  Everything is Ok
+2017-02-10 15-25-37 MESS File [Demopolish-16-12-20.log] moved to archive [Demopolish-16-12-20.log.7z]
+2017-02-10 15-25-37 DUMP Processing file [Demopolish-16-12-21.log]
+2017-02-10 15-25-45 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 42052177 bytes (41 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1433700 bytes (1401 KiB)  Everything is Ok
+2017-02-10 15-25-45 MESS File [Demopolish-16-12-21.log] moved to archive [Demopolish-16-12-21.log.7z]
+2017-02-10 15-25-45 DUMP Processing file [Demopolish-16-12-22.log]
+2017-02-10 15-25-54 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 41903613 bytes (40 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1436526 bytes (1403 KiB)  Everything is Ok
+2017-02-10 15-25-54 MESS File [Demopolish-16-12-22.log] moved to archive [Demopolish-16-12-22.log.7z]
+2017-02-10 15-25-54 DUMP Processing file [Demopolish-16-12-23.log]
+2017-02-10 15-26-00 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 27856641 bytes (27 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Demopolish-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 938553 bytes (917 KiB)  Everything is Ok
+2017-02-10 15-26-00 MESS File [Demopolish-16-12-23.log] moved to archive [Demopolish-16-12-23.log.7z]
+2017-02-10 15-26-00 DUMP Processing file [GPS-16-12-14.log]
+2017-02-10 15-26-01 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6377137 bytes (6228 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 192881 bytes (189 KiB)  Everything is Ok
+2017-02-10 15-26-01 MESS File [GPS-16-12-14.log] moved to archive [GPS-16-12-14.log.7z]
+2017-02-10 15-26-01 DUMP Processing file [GPS-16-12-15.log]
+2017-02-10 15-26-02 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6347781 bytes (6200 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 186070 bytes (182 KiB)  Everything is Ok
+2017-02-10 15-26-02 MESS File [GPS-16-12-15.log] moved to archive [GPS-16-12-15.log.7z]
+2017-02-10 15-26-02 DUMP Processing file [GPS-16-12-16.log]
+2017-02-10 15-26-03 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6347155 bytes (6199 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 188466 bytes (185 KiB)  Everything is Ok
+2017-02-10 15-26-03 MESS File [GPS-16-12-16.log] moved to archive [GPS-16-12-16.log.7z]
+2017-02-10 15-26-03 DUMP Processing file [GPS-16-12-17.log]
+2017-02-10 15-26-03 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6314667 bytes (6167 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 192608 bytes (189 KiB)  Everything is Ok
+2017-02-10 15-26-03 MESS File [GPS-16-12-17.log] moved to archive [GPS-16-12-17.log.7z]
+2017-02-10 15-26-03 DUMP Processing file [GPS-16-12-18.log]
+2017-02-10 15-26-04 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6323508 bytes (6176 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 191288 bytes (187 KiB)  Everything is Ok
+2017-02-10 15-26-04 MESS File [GPS-16-12-18.log] moved to archive [GPS-16-12-18.log.7z]
+2017-02-10 15-26-04 DUMP Processing file [GPS-16-12-19.log]
+2017-02-10 15-26-05 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6372445 bytes (6224 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 204084 bytes (200 KiB)  Everything is Ok
+2017-02-10 15-26-05 MESS File [GPS-16-12-19.log] moved to archive [GPS-16-12-19.log.7z]
+2017-02-10 15-26-05 DUMP Processing file [GPS-16-12-20.log]
+2017-02-10 15-26-06 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6386263 bytes (6237 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 194510 bytes (190 KiB)  Everything is Ok
+2017-02-10 15-26-06 MESS File [GPS-16-12-20.log] moved to archive [GPS-16-12-20.log.7z]
+2017-02-10 15-26-06 DUMP Processing file [GPS-16-12-21.log]
+2017-02-10 15-26-07 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6396390 bytes (6247 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 194542 bytes (190 KiB)  Everything is Ok
+2017-02-10 15-26-07 MESS File [GPS-16-12-21.log] moved to archive [GPS-16-12-21.log.7z]
+2017-02-10 15-26-07 DUMP Processing file [GPS-16-12-22.log]
+2017-02-10 15-26-08 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6404321 bytes (6255 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 193255 bytes (189 KiB)  Everything is Ok
+2017-02-10 15-26-08 MESS File [GPS-16-12-22.log] moved to archive [GPS-16-12-22.log.7z]
+2017-02-10 15-26-08 DUMP Processing file [GPS-16-12-23.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 4224845 bytes (4126 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\GPS-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 124759 bytes (122 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [GPS-16-12-23.log] moved to archive [GPS-16-12-23.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-14.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 188445 bytes (185 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3712 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-14.log] moved to archive [Log-16-12-14.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-15.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 191844 bytes (188 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3774 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-15.log] moved to archive [Log-16-12-15.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-16.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 206062 bytes (202 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3942 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-16.log] moved to archive [Log-16-12-16.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-17.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 202562 bytes (198 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3774 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-17.log] moved to archive [Log-16-12-17.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-18.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 202365 bytes (198 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3710 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-18.log] moved to archive [Log-16-12-18.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-19.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 200821 bytes (197 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 4162 bytes (5 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-19.log] moved to archive [Log-16-12-19.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-20.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 194783 bytes (191 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 4123 bytes (5 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-20.log] moved to archive [Log-16-12-20.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-21.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 192215 bytes (188 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3785 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-21.log] moved to archive [Log-16-12-21.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-22.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 189647 bytes (186 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 4040 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-22.log] moved to archive [Log-16-12-22.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [Log-16-12-23.log]
+2017-02-10 15-26-09 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 134074 bytes (131 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Log-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 3096 bytes (4 KiB)  Everything is Ok
+2017-02-10 15-26-09 MESS File [Log-16-12-23.log] moved to archive [Log-16-12-23.log.7z]
+2017-02-10 15-26-09 DUMP Processing file [MainUnit-16-12-14.log]
+2017-02-10 15-26-10 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7641797 bytes (7463 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 240603 bytes (235 KiB)  Everything is Ok
+2017-02-10 15-26-10 MESS File [MainUnit-16-12-14.log] moved to archive [MainUnit-16-12-14.log.7z]
+2017-02-10 15-26-10 DUMP Processing file [MainUnit-16-12-15.log]
+2017-02-10 15-26-11 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7620297 bytes (7442 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 241088 bytes (236 KiB)  Everything is Ok
+2017-02-10 15-26-11 MESS File [MainUnit-16-12-15.log] moved to archive [MainUnit-16-12-15.log.7z]
+2017-02-10 15-26-11 DUMP Processing file [MainUnit-16-12-16.log]
+2017-02-10 15-26-13 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7583040 bytes (7406 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 245736 bytes (240 KiB)  Everything is Ok
+2017-02-10 15-26-13 MESS File [MainUnit-16-12-16.log] moved to archive [MainUnit-16-12-16.log.7z]
+2017-02-10 15-26-13 DUMP Processing file [MainUnit-16-12-17.log]
+2017-02-10 15-26-14 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7536266 bytes (7360 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 244466 bytes (239 KiB)  Everything is Ok
+2017-02-10 15-26-14 MESS File [MainUnit-16-12-17.log] moved to archive [MainUnit-16-12-17.log.7z]
+2017-02-10 15-26-14 DUMP Processing file [MainUnit-16-12-18.log]
+2017-02-10 15-26-15 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7553059 bytes (7377 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 232439 bytes (227 KiB)  Everything is Ok
+2017-02-10 15-26-15 MESS File [MainUnit-16-12-18.log] moved to archive [MainUnit-16-12-18.log.7z]
+2017-02-10 15-26-15 DUMP Processing file [MainUnit-16-12-19.log]
+2017-02-10 15-26-16 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7590559 bytes (7413 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 254608 bytes (249 KiB)  Everything is Ok
+2017-02-10 15-26-16 MESS File [MainUnit-16-12-19.log] moved to archive [MainUnit-16-12-19.log.7z]
+2017-02-10 15-26-16 DUMP Processing file [MainUnit-16-12-20.log]
+2017-02-10 15-26-17 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7634032 bytes (7456 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 255594 bytes (250 KiB)  Everything is Ok
+2017-02-10 15-26-17 MESS File [MainUnit-16-12-20.log] moved to archive [MainUnit-16-12-20.log.7z]
+2017-02-10 15-26-17 DUMP Processing file [MainUnit-16-12-21.log]
+2017-02-10 15-26-19 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7647734 bytes (7469 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 248209 bytes (243 KiB)  Everything is Ok
+2017-02-10 15-26-19 MESS File [MainUnit-16-12-21.log] moved to archive [MainUnit-16-12-21.log.7z]
+2017-02-10 15-26-19 DUMP Processing file [MainUnit-16-12-22.log]
+2017-02-10 15-26-20 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 7646944 bytes (7468 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 242605 bytes (237 KiB)  Everything is Ok
+2017-02-10 15-26-20 MESS File [MainUnit-16-12-22.log] moved to archive [MainUnit-16-12-22.log.7z]
+2017-02-10 15-26-20 DUMP Processing file [MainUnit-16-12-23.log]
+2017-02-10 15-26-20 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 5047206 bytes (4929 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MainUnit-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 160176 bytes (157 KiB)  Everything is Ok
+2017-02-10 15-26-20 MESS File [MainUnit-16-12-23.log] moved to archive [MainUnit-16-12-23.log.7z]
+2017-02-10 15-26-20 DUMP Processing file [MetroLocations-16-12-14.log]
+2017-02-10 15-26-22 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 14465224 bytes (14 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MetroLocations-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 245685 bytes (240 KiB)  Everything is Ok
+2017-02-10 15-26-22 MESS File [MetroLocations-16-12-14.log] moved to archive [MetroLocations-16-12-14.log.7z]
+2017-02-10 15-26-22 DUMP Processing file [MetroLocations-16-12-15.log]
+2017-02-10 15-26-24 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 14409265 bytes (14 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MetroLocations-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 250629 bytes (245 KiB)  Everything is Ok
+2017-02-10 15-26-24 MESS File [MetroLocations-16-12-15.log] moved to archive [MetroLocations-16-12-15.log.7z]
+2017-02-10 15-26-24 DUMP Processing file [MetroLocations-16-12-16.log]
+2017-02-10 15-26-26 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 14415270 bytes (14 MiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MetroLocations-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 249991 bytes (245 KiB)  Everything is Ok
+2017-02-10 15-26-26 MESS File [MetroLocations-16-12-16.log] moved to archive [MetroLocations-16-12-16.log.7z]
+2017-02-10 15-26-26 DUMP Processing file [MetroLocations-16-12-17.log]
+2017-02-10 15-26-26 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 2009787 bytes (1963 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MetroLocations-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 33737 bytes (33 KiB)  Everything is Ok
+2017-02-10 15-26-26 MESS File [MetroLocations-16-12-17.log] moved to archive [MetroLocations-16-12-17.log.7z]
+2017-02-10 15-26-26 DUMP Processing file [MetroLocations-16-12-23.log]
+2017-02-10 15-26-26 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 113 bytes (1 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\MetroLocations-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 279 bytes (1 KiB)  Everything is Ok
+2017-02-10 15-26-26 MESS File [MetroLocations-16-12-23.log] moved to archive [MetroLocations-16-12-23.log.7z]
+2017-02-10 15-26-26 DUMP Processing file [Modem-16-12-14.log]
+2017-02-10 15-26-27 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9842489 bytes (9612 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 337208 bytes (330 KiB)  Everything is Ok
+2017-02-10 15-26-27 MESS File [Modem-16-12-14.log] moved to archive [Modem-16-12-14.log.7z]
+2017-02-10 15-26-27 DUMP Processing file [Modem-16-12-15.log]
+2017-02-10 15-26-29 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9821154 bytes (9591 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 338145 bytes (331 KiB)  Everything is Ok
+2017-02-10 15-26-29 MESS File [Modem-16-12-15.log] moved to archive [Modem-16-12-15.log.7z]
+2017-02-10 15-26-29 DUMP Processing file [Modem-16-12-16.log]
+2017-02-10 15-26-30 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9826025 bytes (9596 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 345132 bytes (338 KiB)  Everything is Ok
+2017-02-10 15-26-30 MESS File [Modem-16-12-16.log] moved to archive [Modem-16-12-16.log.7z]
+2017-02-10 15-26-30 DUMP Processing file [Modem-16-12-17.log]
+2017-02-10 15-26-32 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9852026 bytes (9622 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 333090 bytes (326 KiB)  Everything is Ok
+2017-02-10 15-26-32 MESS File [Modem-16-12-17.log] moved to archive [Modem-16-12-17.log.7z]
+2017-02-10 15-26-32 DUMP Processing file [Modem-16-12-18.log]
+2017-02-10 15-26-33 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9890485 bytes (9659 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 330391 bytes (323 KiB)  Everything is Ok
+2017-02-10 15-26-33 MESS File [Modem-16-12-18.log] moved to archive [Modem-16-12-18.log.7z]
+2017-02-10 15-26-33 DUMP Processing file [Modem-16-12-19.log]
+2017-02-10 15-26-34 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9874063 bytes (9643 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 349283 bytes (342 KiB)  Everything is Ok
+2017-02-10 15-26-34 MESS File [Modem-16-12-19.log] moved to archive [Modem-16-12-19.log.7z]
+2017-02-10 15-26-34 DUMP Processing file [Modem-16-12-20.log]
+2017-02-10 15-26-36 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9846691 bytes (9616 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 346418 bytes (339 KiB)  Everything is Ok
+2017-02-10 15-26-36 MESS File [Modem-16-12-20.log] moved to archive [Modem-16-12-20.log.7z]
+2017-02-10 15-26-36 DUMP Processing file [Modem-16-12-21.log]
+2017-02-10 15-26-37 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9847986 bytes (9618 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 347751 bytes (340 KiB)  Everything is Ok
+2017-02-10 15-26-37 MESS File [Modem-16-12-21.log] moved to archive [Modem-16-12-21.log.7z]
+2017-02-10 15-26-37 DUMP Processing file [Modem-16-12-22.log]
+2017-02-10 15-26-39 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 9836797 bytes (9607 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 354459 bytes (347 KiB)  Everything is Ok
+2017-02-10 15-26-39 MESS File [Modem-16-12-22.log] moved to archive [Modem-16-12-22.log.7z]
+2017-02-10 15-26-39 DUMP Processing file [Modem-16-12-23.log]
+2017-02-10 15-26-40 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6495551 bytes (6344 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Modem-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 230926 bytes (226 KiB)  Everything is Ok
+2017-02-10 15-26-40 MESS File [Modem-16-12-23.log] moved to archive [Modem-16-12-23.log.7z]
+2017-02-10 15-26-40 DUMP Processing file [Update-16-12-14.log]
+2017-02-10 15-26-41 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6296747 bytes (6150 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-14.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 187046 bytes (183 KiB)  Everything is Ok
+2017-02-10 15-26-41 MESS File [Update-16-12-14.log] moved to archive [Update-16-12-14.log.7z]
+2017-02-10 15-26-41 DUMP Processing file [Update-16-12-15.log]
+2017-02-10 15-26-41 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6259877 bytes (6114 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 190363 bytes (186 KiB)  Everything is Ok
+2017-02-10 15-26-41 MESS File [Update-16-12-15.log] moved to archive [Update-16-12-15.log.7z]
+2017-02-10 15-26-41 DUMP Processing file [Update-16-12-16.log]
+2017-02-10 15-26-42 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6265181 bytes (6119 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 179637 bytes (176 KiB)  Everything is Ok
+2017-02-10 15-26-42 MESS File [Update-16-12-16.log] moved to archive [Update-16-12-16.log.7z]
+2017-02-10 15-26-42 DUMP Processing file [Update-16-12-17.log]
+2017-02-10 15-26-43 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6224806 bytes (6079 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 175462 bytes (172 KiB)  Everything is Ok
+2017-02-10 15-26-43 MESS File [Update-16-12-17.log] moved to archive [Update-16-12-17.log.7z]
+2017-02-10 15-26-43 DUMP Processing file [Update-16-12-18.log]
+2017-02-10 15-26-44 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6229748 bytes (6084 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 176891 bytes (173 KiB)  Everything is Ok
+2017-02-10 15-26-44 MESS File [Update-16-12-18.log] moved to archive [Update-16-12-18.log.7z]
+2017-02-10 15-26-44 DUMP Processing file [Update-16-12-19.log]
+2017-02-10 15-26-45 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6286972 bytes (6140 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 183665 bytes (180 KiB)  Everything is Ok
+2017-02-10 15-26-45 MESS File [Update-16-12-19.log] moved to archive [Update-16-12-19.log.7z]
+2017-02-10 15-26-45 DUMP Processing file [Update-16-12-20.log]
+2017-02-10 15-26-46 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6309630 bytes (6162 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 178436 bytes (175 KiB)  Everything is Ok
+2017-02-10 15-26-46 MESS File [Update-16-12-20.log] moved to archive [Update-16-12-20.log.7z]
+2017-02-10 15-26-46 DUMP Processing file [Update-16-12-21.log]
+2017-02-10 15-26-47 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6292141 bytes (6145 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 198322 bytes (194 KiB)  Everything is Ok
+2017-02-10 15-26-47 MESS File [Update-16-12-21.log] moved to archive [Update-16-12-21.log.7z]
+2017-02-10 15-26-47 DUMP Processing file [Update-16-12-22.log]
+2017-02-10 15-26-48 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 6300941 bytes (6154 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 184317 bytes (180 KiB)  Everything is Ok
+2017-02-10 15-26-48 MESS File [Update-16-12-22.log] moved to archive [Update-16-12-22.log.7z]
+2017-02-10 15-26-48 DUMP Processing file [Update-16-12-23.log]
+2017-02-10 15-26-48 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 4162719 bytes (4066 KiB)  Creating archive: C:\Logs\Old\DEMOPOLISH\Update-16-12-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 115486 bytes (113 KiB)  Everything is Ok
+2017-02-10 15-26-48 MESS File [Update-16-12-23.log] moved to archive [Update-16-12-23.log.7z]
+2017-02-10 15-27-03 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-27-03 INFO Script version: [1.0.2]
+2017-02-10 15-27-03 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-27-03 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-27-03 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-27-03 DUMP Try to delete file [BlueGiga-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [BlueGiga-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [BlueGiga-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [BlueGiga-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Data-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [Data-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Data-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [Data-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Data-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [Data-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Demopolish-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [Demopolish-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [GPS-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [GPS-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Log-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [Log-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MainUnit-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [MainUnit-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MetroLocations-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [MetroLocations-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MetroLocations-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [MetroLocations-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MetroLocations-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [MetroLocations-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MetroLocations-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [MetroLocations-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [MetroLocations-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [MetroLocations-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Modem-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [Modem-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-14.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-14.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-15.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-15.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-16.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-16.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-17.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-17.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-18.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-18.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-19.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-20.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-20.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-21.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-21.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-22.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-22.log.7z] is deleted
+2017-02-10 15-27-03 DUMP Try to delete file [Update-16-12-23.log.7z]
+2017-02-10 15-27-03 MESS File [Update-16-12-23.log.7z] is deleted
+2017-02-10 15-27-03 INFO Move Log Files to Archives
+2017-02-10 15-27-29 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-27-29 INFO Script version: [1.0.2]
+2017-02-10 15-27-29 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-27-29 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-27-29 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-27-29 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-27-29 ERRr Old Log file [Update-16-12-19.log.7z] doesn't removed
+2017-02-10 15-27-29 INFO Move Log Files to Archives
+2017-02-10 15-27-48 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-27-48 INFO Script version: [1.0.2]
+2017-02-10 15-27-48 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-27-48 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-27-48 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-27-48 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-27-48 ERRr Old Log file [Update-16-12-19.log.7z] doesn't removed
+2017-02-10 15-27-48 INFO Move Log Files to Archives
+2017-02-10 15-28-06 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-28-06 INFO Script version: [1.0.2]
+2017-02-10 15-28-06 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-28-06 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-28-06 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-28-06 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-28-06 ERRr Old Log file [Update-16-12-19.log.7z] doesn't removed
+2017-02-10 15-28-06 DUMP Try to delete file [Update-17-01-09.log.7z]
+2017-02-10 15-28-06 ERRr Old Log file [Update-17-01-09.log.7z] doesn't removed
+2017-02-10 15-28-06 DUMP Try to delete file [Update-17-01-10.log.7z]
+2017-02-10 15-28-06 ERRr Old Log file [Update-17-01-10.log.7z] doesn't removed
+2017-02-10 15-28-06 INFO Move Log Files to Archives
+2017-02-10 15-28-17 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-28-17 INFO Script version: [1.0.2]
+2017-02-10 15-28-17 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-28-17 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-28-17 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-28-17 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-28-17 ERRr Old Log file [Update-16-12-19.log.7z] doesn't removed
+2017-02-10 15-28-17 DUMP Try to delete file [Update-17-01-09.log.7z]
+2017-02-10 15-28-17 ERRr Old Log file [Update-17-01-09.log.7z] doesn't removed
+2017-02-10 15-28-17 DUMP Try to delete file [Update-17-01-10.log.7z]
+2017-02-10 15-28-17 ERRr Old Log file [Update-17-01-10.log.7z] doesn't removed
+2017-02-10 15-28-17 DUMP Try to delete file [Update-17-01-11.log.7z]
+2017-02-10 15-28-17 ERRr Old Log file [Update-17-01-11.log.7z] doesn't removed
+2017-02-10 15-28-17 INFO Move Log Files to Archives
+2017-02-10 15-28-33 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-28-33 INFO Script version: [1.0.2]
+2017-02-10 15-28-33 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-28-33 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-28-33 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-28-33 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-28-33 ERRr Old Log file [Update-16-12-19.log.7z] doesn't removed
+2017-02-10 15-28-33 DUMP Try to delete file [Update-17-01-09.log.7z]
+2017-02-10 15-28-33 ERRr Old Log file [Update-17-01-09.log.7z] doesn't removed
+2017-02-10 15-28-33 DUMP Try to delete file [Update-17-01-10.log.7z]
+2017-02-10 15-28-33 ERRr Old Log file [Update-17-01-10.log.7z] doesn't removed
+2017-02-10 15-28-33 DUMP Try to delete file [Update-17-01-11.log.7z]
+2017-02-10 15-28-33 ERRr Old Log file [Update-17-01-11.log.7z] doesn't removed
+2017-02-10 15-28-33 INFO Move Log Files to Archives
+2017-02-10 15-30-25 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-10 15-30-25 INFO Script version: [1.0.2]
+2017-02-10 15-30-25 INFO TestFolderPath: Folder [C:\Logs] is exist
+2017-02-10 15-30-25 INFO TestFolderPath: Folder [C:\Logs\Old\DEMOPOLISH] is exist
+2017-02-10 15-30-25 INFO Purge old log files, older than [C:\Logs\Old\DEMOPOLISH] days
+2017-02-10 15-30-25 DUMP Try to delete file [Update-16-12-19.log.7z]
+2017-02-10 15-30-25 MESS File [Update-16-12-19.log.7z] is deleted
+2017-02-10 15-30-25 DUMP Try to delete file [Update-17-01-09.log.7z]
+2017-02-10 15-30-25 MESS File [Update-17-01-09.log.7z] is deleted
+2017-02-10 15-30-25 DUMP Try to delete file [Update-17-01-10.log.7z]
+2017-02-10 15-30-25 MESS File [Update-17-01-10.log.7z] is deleted
+2017-02-10 15-30-25 DUMP Try to delete file [Update-17-01-11.log.7z]
+2017-02-10 15-30-25 MESS File [Update-17-01-11.log.7z] is deleted
+2017-02-10 15-30-25 INFO Move Log Files to Archives
+2017-02-20 16-42-56 INFO Скрипт запущен с дефолтными настройками (файл настроек [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1] не найден)
+2017-02-20 16-44-18 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-44-46 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-45-09 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-45-38 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-45-53 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-49-06 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-49-06 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-49-06 INFO Script version: [1.0.4]
+2017-02-20 16-49-51 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-49-51 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-49-51 INFO Script version: [1.0.4]
+2017-02-20 16-49-51 ERRr AAAAA
+2017-02-20 16-50-20 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-50-20 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-50-20 INFO Script version: [1.0.4]
+2017-02-20 16-50-20 INFO AAAAA
+2017-02-20 16-50-47 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-50-47 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-50-47 INFO Script version: [1.0.4]
+2017-02-20 16-50-47 WARN AAAAA
+2017-02-20 16-50-53 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-50-53 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-50-53 INFO Script version: [1.0.4]
+2017-02-20 16-50-53 ERRr AAAAA
+2017-02-20 16-50-56 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-50-56 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-50-56 INFO Script version: [1.0.4]
+2017-02-20 16-51-01 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-51-01 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-51-01 INFO Script version: [1.0.4]
+2017-02-20 16-51-01 ERRr AAAAA
+2017-02-20 16-51-43 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-51-43 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-51-43 INFO Script version: [1.0.4]
+2017-02-20 16-51-43 ERRr AAAAA
+2017-02-20 16-52-17 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-52-17 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-52-17 INFO Script version: [1.0.4]
+2017-02-20 16-52-17 ERRr AAAAA
+2017-02-20 16-53-26 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-53-26 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-53-26 INFO Script version: [1.0.4]
+2017-02-20 16-53-26 ERRr AAAAA
+2017-02-20 16-53-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-53-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-53-27 INFO Script version: [1.0.4]
+2017-02-20 16-53-27 ERRr AAAAA
+2017-02-20 16-54-29 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-54-29 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-54-29 INFO Script version: [1.0.4]
+2017-02-20 16-54-29 ERRr AAAAA
+2017-02-20 16-54-50 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-54-50 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-54-50 INFO Script version: [1.0.4]
+2017-02-20 16-54-50 ERRr AAAAA
+2017-02-20 16-55-05 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-55-05 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-55-05 INFO Script version: [1.0.4]
+2017-02-20 16-55-05 ERRr AAAAA
+2017-02-20 16-55-06 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-55-06 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-55-06 INFO Script version: [1.0.4]
+2017-02-20 16-55-06 ERRr AAAAA
+2017-02-20 16-55-25 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-55-25 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-55-25 INFO Script version: [1.0.4]
+2017-02-20 16-55-25 ERRr AAAAA
+2017-02-20 16-55-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-55-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-55-40 INFO Script version: [1.0.4]
+2017-02-20 16-55-40 ERRr AAAAA
+2017-02-20 16-56-52 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-56-52 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-56-52 INFO Script version: [1.0.4]
+2017-02-20 16-56-52 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 16-56-52 ERRr AAAAA
+2017-02-20 16-57-01 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-01 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-01 INFO Script version: [1.0.4]
+2017-02-20 16-57-01 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 16-57-01 ERRr AAAAA
+2017-02-20 16-57-14 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-14 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-14 INFO Script version: [1.0.4]
+2017-02-20 16-57-14 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 16-57-14 ERRr AAAAA
+2017-02-20 16-57-16 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-16 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-16 INFO Script version: [1.0.4]
+2017-02-20 16-57-16 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 16-57-16 ERRr AAAAA
+2017-02-20 16-57-17 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-18 INFO Script version: [1.0.4]
+2017-02-20 16-57-18 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 16-57-18 ERRr AAAAA
+2017-02-20 16-57-21 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-21 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-21 INFO Script version: [1.0.4]
+2017-02-20 16-57-21 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 16-57-21 ERRr AAAAA
+2017-02-20 16-57-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 16-57-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 16-57-40 INFO Script version: [1.0.4]
+2017-02-20 16-57-40 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 16-57-40 ERRr AAAAA
+2017-02-20 17-00-00 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-00-00 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-00-00 INFO Script version: [1.0.4]
+2017-02-20 17-00-00 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 17-00-00 ERRr AAAAA
+2017-02-20 17-02-23 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-02-23 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-02-23 INFO Script version: [1.0.4]
+2017-02-20 17-02-23 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 17-02-45 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-02-45 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-02-45 INFO Script version: [1.0.4]
+2017-02-20 17-02-45 ERRr TestFolderPath: Folder [D:\BackUp\Shturman_Metro] doesn't exist
+2017-02-20 17-04-12 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-04-12 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-04-12 INFO Script version: [1.0.4]
+2017-02-20 17-04-12 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-04-12 ERRr SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-04-33 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-04-33 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-04-33 INFO Script version: [1.0.4]
+2017-02-20 17-04-34 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-04-34 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-04-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-04-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-04-40 INFO Script version: [1.0.4]
+2017-02-20 17-04-40 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-04-40 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-05-04 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-05-04 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-05-04 INFO Script version: [1.0.4]
+2017-02-20 17-05-04 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-05-04 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-05-05 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-05-05 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-05-05 INFO Script version: [1.0.4]
+2017-02-20 17-05-05 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-05-05 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-05-37 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-05-37 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-05-37 INFO Script version: [1.0.4]
+2017-02-20 17-05-37 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-05-37 INFO True
+2017-02-20 17-05-37 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak
+2017-02-20 17-06-06 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-06-06 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-06-06 INFO Script version: [1.0.4]
+2017-02-20 17-06-06 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-06-06 INFO True
+2017-02-20 17-06-06 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-06-14 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-06-14 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-06-14 INFO Script version: [1.0.4]
+2017-02-20 17-06-14 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-06-14 INFO True
+2017-02-20 17-06-14 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-06-52 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-06-52 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-06-52 INFO Script version: [1.0.4]
+2017-02-20 17-06-52 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-06-52 INFO True
+2017-02-20 17-06-52 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-07-06 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-07-06 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-07-06 INFO Script version: [1.0.4]
+2017-02-20 17-07-06 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-07-06 INFO True
+2017-02-20 17-07-06 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-08-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-08-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-08-27 INFO Script version: [1.0.4]
+2017-02-20 17-08-27 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-08-27 INFO True
+2017-02-20 17-08-27 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-08-55 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-08-56 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-08-56 INFO Script version: [1.0.4]
+2017-02-20 17-08-56 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-08-56 INFO True
+2017-02-20 17-08-56 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak]
+2017-02-20 17-09-54 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-09-54 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-09-54 INFO Script version: [1.0.4]
+2017-02-20 17-09-54 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-09-54 INFO True
+2017-02-20 17-09-54 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180]
+2017-02-20 17-11-41 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-11-41 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-11-41 INFO Script version: [1.0.4]
+2017-02-20 17-11-41 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-11-41 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-13-44 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-13-44 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-13-44 INFO Script version: [1.0.4]
+2017-02-20 17-13-44 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-13-44 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-13-57 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-13-57 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-13-57 INFO Script version: [1.0.4]
+2017-02-20 17-13-57 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-13-57 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-14-01 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-14-01 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-14-01 INFO Script version: [1.0.4]
+2017-02-20 17-14-01 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-14-01 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-14-01 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-14-16 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-14-16 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-14-16 INFO Script version: [1.0.4]
+2017-02-20 17-14-16 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-14-16 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-14-16 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-16-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-16-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-16-40 INFO Script version: [1.0.4]
+2017-02-20 17-16-40 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-16-40 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-16-40 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-16-59 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-16-59 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-17-00 INFO Script version: [1.0.4]
+2017-02-20 17-17-00 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-17-00 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-17-00 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-17-02 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-17-02 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-17-02 INFO Script version: [1.0.4]
+2017-02-20 17-17-02 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-17-02 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-17-02 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-17-18 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-17-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-17-18 INFO Script version: [1.0.4]
+2017-02-20 17-17-18 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-17-18 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-17-18 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-17-48 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-17-48 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-17-48 INFO Script version: [1.0.4]
+2017-02-20 17-17-48 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-17-48 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-17-48 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-18-20 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-18-20 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-18-20 INFO Script version: [1.0.4]
+2017-02-20 17-18-20 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-18-20 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-18-20 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-19-39 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-19-39 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-19-39 INFO Script version: [1.0.4]
+2017-02-20 17-19-39 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-19-39 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-19-39 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-20-07 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-20-07 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-20-07 INFO Script version: [1.0.4]
+2017-02-20 17-20-07 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-20-07 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-20-07 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-22-17 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-22-17 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-22-17 INFO Script version: [1.0.4]
+2017-02-20 17-22-17 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-22-17 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-22-17 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-23-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-23-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-23-27 INFO Script version: [1.0.4]
+2017-02-20 17-23-27 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-23-27 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-23-27 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-24-37 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-24-37 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-24-37 INFO Script version: [1.0.4]
+2017-02-20 17-24-37 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-24-37 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-24-37 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-24-59 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-24-59 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-24-59 INFO Script version: [1.0.4]
+2017-02-20 17-24-59 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-24-59 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-24-59 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-25-21 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-25-21 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-25-21 INFO Script version: [1.0.4]
+2017-02-20 17-25-21 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-25-21 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-25-21 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-26-55 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-26-55 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-26-55 INFO Script version: [1.0.4]
+2017-02-20 17-26-55 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-26-55 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-26-55 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-27-55 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-27-55 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-27-55 INFO Script version: [1.0.4]
+2017-02-20 17-27-55 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-27-55 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-27-55 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-29-09 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-29-09 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-29-09 INFO Script version: [1.0.4]
+2017-02-20 17-29-09 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-29-09 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-29-09 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-29-50 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-29-50 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-29-50 INFO Script version: [1.0.4]
+2017-02-20 17-29-50 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-29-50 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-29-50 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-33-52 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-33-52 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-33-52 INFO Script version: [1.0.4]
+2017-02-20 17-33-52 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-33-52 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-33-52 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-34-12 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-34-12 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-34-12 INFO Script version: [1.0.4]
+2017-02-20 17-34-12 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-34-12 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-34-12 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-34-30 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-34-30 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-34-30 INFO Script version: [1.0.4]
+2017-02-20 17-34-30 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-34-30 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-34-30 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-34-38 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-34-38 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-34-38 INFO Script version: [1.0.4]
+2017-02-20 17-34-38 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-34-38 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-34-38 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-34-55 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-34-55 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-34-55 INFO Script version: [1.0.4]
+2017-02-20 17-34-55 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-34-55 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-34-55 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-35-11 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-35-11 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-35-11 INFO Script version: [1.0.4]
+2017-02-20 17-35-11 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-35-11 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-35-11 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-35-18 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-35-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-35-18 INFO Script version: [1.0.4]
+2017-02-20 17-35-18 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-35-18 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-35-18 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-35-34 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-35-34 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-35-34 INFO Script version: [1.0.4]
+2017-02-20 17-35-34 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-35-34 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-35-34 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-36-05 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-36-05 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-36-05 INFO Script version: [1.0.4]
+2017-02-20 17-36-05 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-36-05 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-36-05 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-36-18 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-36-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-36-18 INFO Script version: [1.0.4]
+2017-02-20 17-36-18 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-36-18 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-36-18 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-37-11 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-37-11 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-37-11 INFO Script version: [1.0.4]
+2017-02-20 17-37-11 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-37-11 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-37-11 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-37-39 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-37-39 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-37-39 INFO Script version: [1.0.4]
+2017-02-20 17-37-39 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-37-39 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-37-39 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-37-47 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-37-47 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-37-47 INFO Script version: [1.0.4]
+2017-02-20 17-37-47 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-37-47 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-37-47 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-38-32 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-38-32 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-38-32 INFO Script version: [1.0.4]
+2017-02-20 17-38-32 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-38-32 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-38-32 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-40-20 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-40-20 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-40-20 INFO Script version: [1.0.4]
+2017-02-20 17-40-20 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-40-20 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-40-20 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-40-32 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-40-32 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-40-32 INFO Script version: [1.0.4]
+2017-02-20 17-40-32 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-40-32 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-40-32 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-41-07 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-41-07 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-41-07 INFO Script version: [1.0.4]
+2017-02-20 17-41-07 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-41-07 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-41-07 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-42-41 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-42-41 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-42-41 INFO Script version: [1.0.4]
+2017-02-20 17-42-41 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-42-41 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-42-41 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-42-42 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-42-42 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-42-42 INFO Script version: [1.0.4]
+2017-02-20 17-42-42 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-42-42 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-42-42 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-45-49 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-45-49 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-45-49 INFO Script version: [1.0.4]
+2017-02-20 17-45-49 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-45-49 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-45-49 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-46-47 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-46-47 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-46-47 INFO Script version: [1.0.4]
+2017-02-20 17-46-47 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-46-47 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-46-47 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-48-25 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-48-25 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-48-25 INFO Script version: [1.0.4]
+2017-02-20 17-48-25 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-48-25 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-48-25 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-48-38 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-48-38 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-48-38 INFO Script version: [1.0.4]
+2017-02-20 17-48-38 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-48-38 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-48-38 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-48-53 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-48-53 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-48-54 INFO Script version: [1.0.4]
+2017-02-20 17-48-54 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-48-54 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-48-54 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-49-17 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-49-17 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-49-17 INFO Script version: [1.0.4]
+2017-02-20 17-49-17 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-49-17 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-49-17 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-49-30 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-49-30 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-49-30 INFO Script version: [1.0.4]
+2017-02-20 17-49-30 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-49-30 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-49-30 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-49-43 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-49-43 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-49-43 INFO Script version: [1.0.4]
+2017-02-20 17-49-43 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-49-43 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-49-43 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-52-28 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-52-28 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-52-28 INFO Script version: [1.0.4]
+2017-02-20 17-52-28 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-52-28 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-52-28 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-52-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-52-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-52-40 INFO Script version: [1.0.4]
+2017-02-20 17-52-40 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-52-40 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-52-40 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-54-05 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-54-05 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-54-05 INFO Script version: [1.0.4]
+2017-02-20 17-54-05 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-54-05 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-54-05 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-54-44 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-54-44 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-54-44 INFO Script version: [1.0.4]
+2017-02-20 17-54-44 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-54-44 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-54-44 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-55-33 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-55-33 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-55-33 INFO Script version: [1.0.4]
+2017-02-20 17-55-33 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-55-33 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-55-33 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-55-40 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-55-40 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-55-40 INFO Script version: [1.0.4]
+2017-02-20 17-55-40 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-55-40 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-55-40 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-20 17-57-04 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-20 17-57-04 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-20 17-57-04 INFO Script version: [1.0.4]
+2017-02-20 17-57-04 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-20 17-57-04 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-20 17-57-04 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-22-34 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-22-34 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-22-34 INFO Script version: [1.0.4]
+2017-02-21 11-22-34 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-22-34 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-22-34 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-28-48 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-28-48 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-28-48 INFO Script version: [1.0.4]
+2017-02-21 11-28-48 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-28-48 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-28-48 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-28-48 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-29-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-29-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-29-27 INFO Script version: [1.0.4]
+2017-02-21 11-29-27 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-29-27 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-29-27 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-29-27 DUMP Try to delete file [Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-30-09 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-30-09 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-30-09 INFO Script version: [1.0.4]
+2017-02-21 11-30-09 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-30-09 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-30-09 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] doesn't removed
+2017-02-21 11-30-09 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-30-09 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] doesn't removed
+2017-02-21 11-30-54 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-30-54 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-30-54 INFO Script version: [1.0.4]
+2017-02-21 11-30-54 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-30-54 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-30-54 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] doesn't removed
+2017-02-21 11-30-54 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-30-54 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] doesn't removed
+2017-02-21 11-31-05 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-31-05 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-31-05 INFO Script version: [1.0.4]
+2017-02-21 11-31-05 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-31-05 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-31-05 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] doesn't removed
+2017-02-21 11-31-05 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-31-05 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] doesn't removed
+2017-02-21 11-32-41 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-32-41 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-32-41 INFO Script version: [1.0.4]
+2017-02-21 11-32-41 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-32-41 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-32-41 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] doesn't removed
+2017-02-21 11-32-41 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-32-41 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] doesn't removed
+2017-02-21 11-32-45 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-32-45 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-32-45 INFO Script version: [1.0.4]
+2017-02-21 11-32-45 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-32-45 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-32-45 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] doesn't removed
+2017-02-21 11-32-46 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-32-46 ERRr Old Log file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] doesn't removed
+2017-02-21 11-33-04 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 11-33-04 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 11-33-04 INFO Script version: [1.0.4]
+2017-02-21 11-33-04 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 11-33-04 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [180], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 11-33-04 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[180]
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-01-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-01_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-02-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-04-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-05-01_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-06-01_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-08-01_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-10-20_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-10_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-20_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-12-21_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-02_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-03_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-11_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-19_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-21_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-01-30_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-02_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-11_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-12_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-13_1711.bak] is deleted
+2017-02-21 11-33-04 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak]
+2017-02-21 11-33-04 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2017-02-14_1711.bak] is deleted
+2017-02-21 12-31-39 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-31-39 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-31-39 INFO Script version: [1.0.4]
+2017-02-21 12-31-39 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-31-39 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-31-39 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-31-39 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-09-01_1711.bak]
+2017-02-21 12-31-39 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-09-01_1711.bak] is deleted
+2017-02-21 12-31-39 DUMP Try to delete file [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-11-01_1711.bak]
+2017-02-21 12-31-39 MESS File [D:\BackUp\Shturman_Metro\Shturman_Metro_2016-11-01_1711.bak] is deleted
+2017-02-21 12-34-43 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-34-43 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-34-43 INFO Script version: [1.0.4]
+2017-02-21 12-34-43 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-34-43 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-34-43 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-34-55 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-34-55 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-34-55 INFO Script version: [1.0.4]
+2017-02-21 12-34-55 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-34-55 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-34-55 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-34-55 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-34-55 DUMP TestFolderPath: Creating folder [D:\Shturman\Bin\Log\Old]
+2017-02-21 12-34-55 DUMP TestFolderPath: Creating folder result: D:\Shturman\Bin\Log\Old
+2017-02-21 12-34-55 MESS TestFolderPath: Created folder [D:\Shturman\Bin\Log\Old]
+2017-02-21 12-34-55 INFO Move Log Files to Archives
+2017-02-21 12-34-55 DUMP Processing file [Log-17-01-16.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 15888 bytes (16 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-16.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 738 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-16.log] moved to archive [Log-17-01-16.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-17.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 18192 bytes (18 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-17.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 773 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-17.log] moved to archive [Log-17-01-17.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-18.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 20496 bytes (21 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-18.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 843 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-18.log] moved to archive [Log-17-01-18.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-19.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 22800 bytes (23 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 849 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-19.log] moved to archive [Log-17-01-19.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-20.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 25104 bytes (25 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 861 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-20.log] moved to archive [Log-17-01-20.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-21.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 27408 bytes (27 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-21.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 937 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-21.log] moved to archive [Log-17-01-21.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-22.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 29712 bytes (30 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-22.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 894 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-22.log] moved to archive [Log-17-01-22.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-23.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 32016 bytes (32 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-23.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 974 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-23.log] moved to archive [Log-17-01-23.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-24.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 34320 bytes (34 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-24.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 969 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-24.log] moved to archive [Log-17-01-24.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-25.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 36624 bytes (36 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-25.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1014 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-25.log] moved to archive [Log-17-01-25.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-26.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 38928 bytes (39 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-26.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1021 bytes (1 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-26.log] moved to archive [Log-17-01-26.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-27.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 41346 bytes (41 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-27.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1241 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-27.log] moved to archive [Log-17-01-27.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-28.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 38908 bytes (38 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-28.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1135 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-28.log] moved to archive [Log-17-01-28.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-29.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 38908 bytes (38 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-29.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1141 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-29.log] moved to archive [Log-17-01-29.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-01-30.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 31082 bytes (31 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-01-30.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1040 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-01-30.log] moved to archive [Log-17-01-30.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-02-15.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 31082 bytes (31 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-02-15.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1040 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-02-15.log] moved to archive [Log-17-02-15.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-02-19.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 31082 bytes (31 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-02-19.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1040 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-02-19.log] moved to archive [Log-17-02-19.log.7z]
+2017-02-21 12-34-56 DUMP Processing file [Log-17-02-20.log]
+2017-02-21 12-34-56 DUMP  7-Zip (a) [64] 15.12 : Copyright (c) 1999-2015 Igor Pavlov : 2015-11-19  Scanning the drive: 1 file, 31082 bytes (31 KiB)  Creating archive: D:\Shturman\Bin\Log\Old\Log-17-02-20.log.7z  Items to compress: 1   Files read from disk: 1 Archive size: 1040 bytes (2 KiB)  Everything is Ok
+2017-02-21 12-34-56 MESS File [Log-17-02-20.log] moved to archive [Log-17-02-20.log.7z]
+2017-02-21 12-35-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-35-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-35-27 INFO Script version: [1.0.4]
+2017-02-21 12-35-27 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-35-27 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-35-27 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-35-27 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-35-27 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-35-27 INFO Move Log Files to Archives
+2017-02-21 12-35-36 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-35-36 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-35-36 INFO Script version: [1.0.4]
+2017-02-21 12-35-36 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-35-36 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-35-36 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-35-36 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-35-36 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-35-36 INFO Move Log Files to Archives
+2017-02-21 12-35-51 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-35-51 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-35-51 INFO Script version: [1.0.4]
+2017-02-21 12-35-51 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-35-51 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-35-51 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-35-51 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-35-51 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-35-51 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-01.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-01.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-16.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-16.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-17.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-17.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-18.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-18.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-19.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-19.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-20.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-20.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-21.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-21.log.7z] is deleted
+2017-02-21 12-35-51 DUMP Try to delete file [Log-17-01-22.log.7z]
+2017-02-21 12-35-51 MESS File [Log-17-01-22.log.7z] is deleted
+2017-02-21 12-35-51 INFO Move Log Files to Archives
+2017-02-21 12-47-21 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-47-21 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-47-21 INFO Script version: [1.0.4]
+2017-02-21 12-47-21 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-47-21 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-47-21 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-47-21 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-47-21 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-47-21 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-47-21 INFO Move Log Files to Archives
+2017-02-21 12-51-28 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-51-28 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-51-28 INFO Script version: [1.0.4]
+2017-02-21 12-51-28 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-51-28 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-51-28 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-51-28 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-51-28 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-51-28 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-51-28 INFO Move Log Files to Archives
+2017-02-21 12-55-12 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-55-12 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-12 INFO Script version: [1.0.4]
+2017-02-21 12-55-12 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-55-12 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-55-12 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-55-12 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-55-12 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-55-13 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-55-13 INFO Move Log Files to Archives
+2017-02-21 12-55-18 INFO Скрипт запущен с дефолтными настройками (файл настроек [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1] не найден)
+2017-02-21 12-55-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-18 INFO Script version: [1.0.4]
+2017-02-21 12-55-22 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-55-22 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-22 INFO Script version: [1.0.4]
+2017-02-21 12-55-22 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-55-22 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-55-22 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-55-22 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-55-22 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-55-22 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-55-22 INFO Move Log Files to Archives
+2017-02-21 12-55-27 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-55-27 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-27 INFO Script version: [1.0.4]
+2017-02-21 12-55-27 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-55-27 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-55-27 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-55-27 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-55-27 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-55-27 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-55-27 INFO Move Log Files to Archives
+2017-02-21 12-55-38 INFO Скрипт запущен с дефолтными настройками (файл настроек [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1] не найден)
+2017-02-21 12-55-38 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-38 INFO Script version: [1.0.4]
+2017-02-21 12-55-44 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-55-44 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-55-44 INFO Script version: [1.0.4]
+2017-02-21 12-55-44 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-55-44 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-55-44 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-55-44 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-55-44 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-55-44 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-55-44 INFO Move Log Files to Archives
+2017-02-21 12-56-18 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-56-18 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-56-18 INFO Script version: [1.0.4]
+2017-02-21 12-56-18 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-56-18 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-56-18 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-56-18 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-56-18 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-56-18 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-56-18 INFO Move Log Files to Archives
+2017-02-21 12-56-34 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-56-34 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-56-34 INFO Script version: [1.0.4]
+2017-02-21 12-56-34 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-56-34 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-56-34 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-56-34 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-56-34 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-56-34 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-56-34 INFO Move Log Files to Archives
+2017-02-21 12-57-03 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-57-03 INFO Script version: [1.0.4]
+2017-02-21 12-57-03 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-57-03 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-57-03 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-57-03 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-57-03 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-57-03 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-57-03 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-57-03 INFO Move Log Files to Archives
+2017-02-21 12-57-11 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-57-11 INFO Script version: [1.0.4]
+2017-02-21 12-57-11 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-57-11 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-57-11 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-57-11 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-57-11 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-57-11 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-57-11 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-57-11 INFO Move Log Files to Archives
+2017-02-21 12-57-17 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-57-17 INFO Script version: [1.0.4]
+2017-02-21 12-57-17 INFO Скрипт запущен с дефолтными настройками (файл настроек [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1] не найден)
+2017-02-21 12-58-48 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-58-48 INFO Script version: [1.0.4]
+2017-02-21 12-58-48 INFO Скрипт запущен с дефолтными настройками
+2017-02-21 12-59-03 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-59-03 INFO Script version: [1.0.4]
+2017-02-21 12-59-03 INFO Скрипт запущен с дефолтными настройками (файл настроек [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1] не найден)
+2017-02-21 12-59-59 INFO Archive Log Files, purge old archives and upload archives to Server
+2017-02-21 12-59-59 INFO Script version: [1.0.4]
+2017-02-21 12-59-59 INFO Чтение настроек скрипта [D:\GitHubRep\Scripts\PowerShell\SysTech\BackUpSettings.ps1]
+2017-02-21 12-59-59 INFO TestFolderPath: Folder [D:\BackUp\Shturman_Metro] is exist
+2017-02-21 12-59-59 DUMP SQL Settings: SQLBackUpPath: [D:\BackUp\Shturman_Metro], SQLBackUpFileMask: [Shturman_Metro_2*.bak Shturman_Metro_Anal_*.bak], SQLBackUpDaily: [7], SQLBackUp10days: [60], SQLBackUpMontly: [100], SQLDateFormatLog: [yyyy-MM-dd_HHmm]
+2017-02-21 12-59-59 INFO Purge old SQL BackUp files, by settings D:[7];10d:[60];M:[100]
+2017-02-21 12-59-59 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log] is exist
+2017-02-21 12-59-59 INFO TestFolderPath: Folder [D:\Shturman\Bin\Log\Old] is exist
+2017-02-21 12-59-59 INFO Purge old log files, older than [D:\Shturman\Bin\Log\Old] days
+2017-02-21 12-59-59 INFO Move Log Files to Archives

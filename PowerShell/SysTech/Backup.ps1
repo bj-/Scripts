@@ -11,7 +11,7 @@
        - бд Shturman_Metro полный бекап (Джобой в MS SQL)
        - в папку d:\BackUP
        - TODO Архивирование бэкапа
-       - TODO Удаление старых бэкапов по принципу (2 нед - ежедневный, 3 месяца - недельный 1/15/21 чтсдла кажд мес, всегда - ежемесячный от 1 числа)
+       - Удаление старых бэкапов по принципу ([$SQLBackUpDaily] дней - ежедневный; [$SQLBackUp10days] дней - "недельный" 1/10/20 числа кажд мес; [$SQLBackUpMontly] дней - месячный от 1 числа;  всегда - ежеквартальный от 1 числа)
        - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
@@ -30,11 +30,26 @@
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
 
+
+New:
+
+1.0.4
+    Common
+        Настройки подцепляются из файла BackUpSettings.ps1, при наличии ключа [-UseSettingsFile], Файл должен находиться в папке скрипта.
+        Настройки соответствует блоку PARAM. Все что будет в данной файле имеет приоритет на любыми входящими ключами
+    2. MS SQL BackUP
+        Удаление старых бэкапов по принципу ([$SQLBackUpDaily] дней - ежедневный; [$SQLBackUp10days] дней - "недельный" 1/10/20 числа кажд мес; [$SQLBackUpMontly] дней - месячный от 1 числа;  всегда - ежеквартальный от 1 числа)
+    1. Log Archiver
+        Включение архивирования логов по флагу [$Log]
+
+1.0.3
+    Все
 #>
 
 
 param (
 	# Log Files
+	[switch]$Log = $FALSE,				# Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
 	[string]$DateFormatLog = "yy-MM-dd",
 	[string]$LogFilePath = "D:\Shturman\Bin\Log",
 	[string]$LogFilePathOld = "D:\Shturman\Bin\Log\Old",
@@ -46,30 +61,69 @@ param (
 
 	# SQL
 
+	[switch]$SQL = $FALSE,				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
 #	[string]$SQLDBName = "Shturman_Metro",
 #	[string]$SQLUsername = "BackUpOperator",
 #	[string]$SQLPassword = "diF80noY",
 	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
+	[array]$SQLBackUpFileMask = ("Shturman_Metro_*.bak","Shturman_Metro_Anal_*.bak"),
+	[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
+	[int]$SQLBackUpDaily = "7", # Days
+	[int]$SQLBackUp10days = "60", # Days
+	[int]$SQLBackUpMontly = "180", # Days
 
 	# SVN
-	[switch]$SVN = $FALSE				# Бэкап и обслуживание SVN ( бех этого колюча остальыне из группы SVN* игнорируются)
+	[switch]$SVN = $FALSE,				# Бэкап и обслуживание SVN ( бех этого колюча остальыне из группы SVN* игнорируются)
 	# Redmine
-	[switch]$Redmine = $FALSE			# Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+	[switch]$Redmine = $FALSE,			# Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
 
 	[string]$BackUpDaily = "14", # Days
 	[string]$BackUpWeekly = "13", # Weeks
 #	[string]$BackUpMontly = "14", # Days
 #	[string]$AppPath = "C:\Shturman\",
-	[switch]$CreateSheduledTask = $FALSE		# Создание Шедульной таски для автоматического запуска скрипта
+	[switch]$CreateSheduledTask = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
+
+	[switch]$UseSettingsFile = $FALSE,		    # использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
+
 	[switch]$Debug = $FALSE		# в консоль все события лога пишет
+#	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.2";
+$version = "1.0.4";
 
+
+
+# Determine script location for PowerShell
+$ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
+ 
 # Include SubScripts
-.".\..\functions\functions.ps1"
-.".\..\functions\log.ps1"
+.$ScriptDir"\..\Functions\Functions.ps1"
+.$ScriptDir"\..\Functions\log.ps1"
+
+clear;
+WriteLog "Archive Log Files, purge old archives and upload archives to Server" "INFO"
+WriteLog "Script version: [$version]" "INFO"
+
+
+[string]$ParamsPath = "$ScriptDir\BackUpSettings.ps1";
+
+# Если в каталоге скрипта присуствует файл BackUpSettings.ps1 - подсасываем из него персонализинованные параметры
+if ((test-path $ParamsPath) -and ($UseSettingsFile))
+{
+	# инклюдим параметры (список сервисов, инстанс SQL и пр что обычно в блоке params
+	WriteLog "Чтение настроек скрипта [$ParamsPath]" "INFO"
+	."$ParamsPath"
+}
+ElseIf (-not $UseSettingsFile)
+{
+	WriteLog "Скрипт запущен с дефолтными настройками" "INFO"
+}
+Else
+{
+	WriteLog "Скрипт запущен с дефолтными настройками (файл настроек [$ParamsPath] не найден)" "INFO"
+}
+
 
 # ===============================================
 #                   Functions
@@ -220,11 +274,6 @@ function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
 }
 #>
 
-clear;
-WriteLog "Archive Log Files, purge old archives and upload archives to Server" "INFO"
-WriteLog "Script version: [$version]" "INFO"
-
-
 # TODO Создание Шедульной таски для автоматического запуска скрипта
 if ($CreateSheduledTask -eq $TRUE)
 {
@@ -232,101 +281,186 @@ if ($CreateSheduledTask -eq $TRUE)
 
 }
 
-# проверки на существование путей
-# - фолдера для Лог файлов и фолдера для архивов
-TestFolderPath -Path $LogFilePath #-Verbose
-TestFolderPath -Path $LogFilePathOld -Create #-Verbose
+if ($SQL)
+{
+    TestFolderPath -Path $SQLBackUpPath #-Verbose
+
+    writelog "SQL Settings: SQLBackUpPath: [$SQLBackUpPath], SQLBackUpFileMask: [$SQLBackUpFileMask], SQLBackUpDaily: [$SQLBackUpDaily], SQLBackUp10days: [$SQLBackUp10days], SQLBackUpMontly: [$SQLBackUpMontly], SQLDateFormatLog: [$SQLDateFormatLog]" "DUMP"
+
+	WriteLog "Purge old SQL BackUp files, by settings D:[$SQLBackUpDaily];10d:[$SQLBackUp10days];M:[$SQLBackUpMontly]" "INFO"
 
 
-# Удаление старых заархивированных логов
-if ($PurgeLogFiles -eq $TRUE){ FilePurge -Path $LogFilePathOld -LogFilePurgeDays $LogFilePurgeDays <# -Verbose #>; };
+;
+    for($i=0; $i -lt $SQLBackUpFileMask.Count; $i++)
+    {
+    	$arr = Get-ChildItem -Path $SQLBackUpPath -Force -Filter $SQLBackUpFileMask[$i]
+
+    	Foreach ($File in $arr) 
+    	{
+            #$File.Name;
+
+            #Extract date from file name
+    		#$match = [regex]::Match($File,"((\d){2}[-\.]?){3}")  # этот вариант красивше, но возвращает дату с точкой на конце
+		    #$match = [regex]::Match($File,"((\d){2}-){2}(\d){2}")
+		    $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # тоже что и предыдущий, но более понятно.
+    		#$match
+    		#$match.Value
+
+    		# если в файле небыло ничего похожего на дату - пропустим этот файл
+		    if ($match.Value -ne "")
+		    {
+       			$FileDate =  get-date ($match.Value)
+
+    			# сравниваем даты. Пропускаем и не удаяем файлы младше требуемой даты.
+			    if ($FileDate -lt (Get-Date).AddDays(-$SQLBackUpDaily))
+			    {
+
+#$FileDate
+#$FileDate.Day -notin 1, 10, 20
+
+                    # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpDaily  - удаляем
+                    if (($FileDate -gt (Get-Date).AddDays(-$SQLBackUp10days)) -and ($FileDate.Day -notin 1, 10, 20) )
+                    {
+                        $File.Name;
+                        DeleteFile -File $File.FullName -Verbose
+                        #$FileDate
+                    }
+
+                    # если файл не от первого числа месяца и находится в диапазоне дат от $SQLBackUpMontly до $SQLBackUp10days - удаляем
+                    if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUp10days)) -and (($FileDate -gt (Get-Date).AddDays(-$SQLBackUpMontly))) -and ($FileDate.Day -notin 1) )
+                    {
+                        $File.Name;
+                        DeleteFile -File $File.FullName -Verbose
+                        #$FileDate
+                    }
+
+                    # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
+                    if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUpMontly)) -and ($FileDate.Day -notin 1) -and ($FileDate.Month -notin 1, 4, 7, 10))
+                    {
+                        $File.Name;
+                        DeleteFile -File $File.FullName -Verbose
+                        #$FileDate
+                    }
+
+                    # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
+                    if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUpMontly)) -and (($FileDate.Month -notin 1, 4, 7, 10) -or ($FileDate.Day -notin 1)))
+                    {
+                        $File.Name;
+                        DeleteFile -File $File.FullName -Verbose
+                        #$FileDate
+                    }
+
+
+                }
+            }
+
+
+
+        }
+        
+        #$SQLBackUpFileMask[$i];
+    }
+
+}
+
+if ($Log)
+{
+    # проверки на существование путей
+    # - фолдера для Лог файлов и фолдера для архивов
+    TestFolderPath -Path $LogFilePath #-Verbose
+    TestFolderPath -Path $LogFilePathOld -Create #-Verbose
+
+
+    # Удаление старых заархивированных логов
+    if ($PurgeLogFiles -eq $TRUE){ FilePurge -Path $LogFilePathOld -LogFilePurgeDays $LogFilePurgeDays <# -Verbose #>; };
 
 
 #break;
-	# Текущая дата в формате который используется для именования файлов
-	$currDate = Get-Date -Format $DateFormatLog
+    	# Текущая дата в формате который используется для именования файлов
+    	$currDate = Get-Date -Format $DateFormatLog
 
-	WriteLog "Move Log Files to Archives" "INFO"
+    	WriteLog "Move Log Files to Archives" "INFO"
 
-	# массив всех файлов
-	# TODO: сделать как-то покрасивше. т.е. из набранного массива выпиливать лишнее, а не так как сейчас
-	if ($LogFileAll2Arc -eq $TRUE)
-	{
-		$arr = Get-ChildItem -Path $LogFilePath -Force -Filter "*.log" -Name;
-	}
-	Else
-	{
-		$arr = Get-ChildItem -Path $LogFilePath -Force -Filter "*.log" -Name | where {$_ -notmatch "$currDate.log" };
-	}
+    	# массив всех файлов
+    	# TODO: сделать как-то покрасивше. т.е. из набранного массива выпиливать лишнее, а не так как сейчас
+    	if ($LogFileAll2Arc -eq $TRUE)
+    	{
+		    $arr = Get-ChildItem -Path $LogFilePath -Force -Filter "*.log" -Name;
+	    }
+	    Else
+	    {
+    		$arr = Get-ChildItem -Path $LogFilePath -Force -Filter "*.log" -Name | where {$_ -notmatch "$currDate.log" };
+    	}
 
-	# на сколько сильно паковать. если флаг взведен - пакуем по максимому, но долго-долго.
-	if ($FastArcive -eq $TRUE)
-	{
-		$ArcivationDensity = ""
-	}
-	else
-	{
-		$ArcivationDensity = "-mx=9"
-	}
-#	echo "Service's Error Logs Sensor [version: $scriptver]`r`nMonitoring *.Error files in folder $ErrLogPath"
+	    # на сколько сильно паковать. если флаг взведен - пакуем по максимому, но долго-долго.
+	    if ($FastArcive -eq $TRUE)
+	    {
+    		$ArcivationDensity = ""
+    	}
+    	else
+    	{
+		    $ArcivationDensity = "-mx=9"
+	    }
+    #	echo "Service's Error Logs Sensor [version: $scriptver]`r`nMonitoring *.Error files in folder $ErrLogPath"
+    
+    #	$i = 0;
 
-#	$i = 0;
-
-	Foreach ($File in $arr) 
-	{
-		$path = $LogFilePath + "\" + $File;
-		$arcPath = "$LogFilePathOld\$File.7z"
-
-		WriteLog "Processing file [$File]" "DUMP"
-
-		# Проверяем возможные пути расположения архиватора
-		if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
-		{
+    	Foreach ($File in $arr) 
+    	{
+		    $path = $LogFilePath + "\" + $File;
+		    $arcPath = "$LogFilePathOld\$File.7z"
+    
+		    WriteLog "Processing file [$File]" "DUMP"
+    
+		    # Проверяем возможные пути расположения архиватора
+		    if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
+		    {
 # "d:\prog\7-zip\7za.exe -m9 a $arcPath -sdel $path"
-			$res = D:\Prog\7-zip\7za.exe $ArcivationDensity a $arcPath -sdel $path
-		}
-		ElseIf (test-path -Path "C:\Prog\7-Zip\7za.exe" -ErrorAction SilentlyContinue)
-		{
-			$res = C:\Prog\7-Zip\7za.exe $ArcivationDensity a $arcPath -sdel $path
-		}
-		else 
-		{
-			WriteLog "Archiver not found" "ERRr" # не нашли архиватор. делать нефиг, вываливаемся
-			break;
-		}
+    			$res = D:\Prog\7-zip\7za.exe $ArcivationDensity a $arcPath -sdel $path
+		    }
+		    ElseIf (test-path -Path "C:\Prog\7-Zip\7za.exe" -ErrorAction SilentlyContinue)
+		    {
+    			$res = C:\Prog\7-Zip\7za.exe $ArcivationDensity a $arcPath -sdel $path
+		    }
+		    else 
+		    {
+    			WriteLog "Archiver not found" "ERRr" # не нашли архиватор. делать нефиг, вываливаемся
+			    break;
+		    }
 
 
-		WriteLog "$res" "DUMP"
+		    WriteLog "$res" "DUMP"
 
-		if (test-path $arcPath)
-		{
-			# повторная попытка грохнуть файл. если архиватор не смог. бесполезная по сути... т.к. не помогает.
-			Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
-#			$File.Delete()
-
-			# проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
-			if (test-path $path -ErrorAction SilentlyContinue)
-			{
-
-				WriteLog "File [$File] added to archive [$File.zip]" "WARN" # если исходный остался - пишем что файл _добавлен_
-				WriteLog "Source file [$path] doesn't removed" "ERRr"
-			}
-			else
-			{
-				WriteLog "File [$File] moved to archive [$File.zip]" "MESS" # а если нормально удалился - пишем что ремувед
-			}
+    		if (test-path $arcPath)
+		    {
+    			# повторная попытка грохнуть файл. если архиватор не смог. бесполезная по сути... т.к. не помогает.
+			    Remove-Item -Path $path -Force -ErrorAction SilentlyContinue
+    #			$File.Delete()
+    
+			    # проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
+			    if (test-path $path -ErrorAction SilentlyContinue)
+			    {
+    
+				    WriteLog "File [$File] added to archive [$File.7z]" "WARN" # если исходный остался - пишем что файл _добавлен_
+				    WriteLog "Source file [$path] doesn't removed" "ERRr"
+			    }
+			    else
+			    {
+    				WriteLog "File [$File] moved to archive [$File.7z]" "MESS" # а если нормально удалился - пишем что ремувед
+			    }
 			
-		}
-		Else
-		{
-			WriteLog "Arcived File [$arcPath] doesn't exist" "ERRr"
-		}
-
-#$File
-#		WriteLog $path "INFO"
-	}
-# Заливка заархивированных логов на сервер
-if ($UploadLogFiles -eq $TRUE)
-{
-	UploadFiles # -Verbose
+    		}
+		    Else
+		    {
+    			WriteLog "Arcived File [$arcPath] doesn't exist" "ERRr"
+		    }
+    
+    #$File
+    #		WriteLog $path "INFO"
+    	}
+    # Заливка заархивированных логов на сервер
+    if ($UploadLogFiles -eq $TRUE)
+    {
+    	UploadFiles # -Verbose
+    }
 }
