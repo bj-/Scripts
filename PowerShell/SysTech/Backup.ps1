@@ -16,12 +16,14 @@
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
     3. SVN BackUP
-       - TODO Поиск репозиториев и дамп всех найденных, бэкап настроек
-       - TODO в папку d:\BackUP
+       - Поиск репозиториев и дамп всех найденных, бэкап настроек
+       - TODO Нормальный (полный) бэкап настроек, включая прова и правила коммитов, а не только список юзеров и групп
+       - в папку d:\BackUP
        - TODO Удаление старых бэкапов по принципу (1 нед - ежедневный, 1 месяц - недельный 1/15/21 числа кажд мес, всегда - ежемесячный от 1 числа)
-       - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
+       - TODO сделать проверку что скопировались кофигурационные файлы
+       - TODO сделать проверку что бекап создался, а не только создался файл *.dump как сейчас
     4. Redmine BackUP
        - TODO Бэкап базы, файлохранилища, настроек
        - TODO в папку d:\BackUP
@@ -33,14 +35,18 @@
 
 New:
 
+1.0.5
+    SVN
+        - Поиск репозиториев и дамп всех найденных, бэкап настроек в каталог [$SVNBackUpPath\SVN_yyyy-MM-dd_HHmm]. каждый репозиторий в свой файл.
+
 1.0.4
     Common
-        Настройки подцепляются из файла BackUpSettings.ps1, при наличии ключа [-UseSettingsFile], Файл должен находиться в папке скрипта.
-        Настройки соответствует блоку PARAM. Все что будет в данной файле имеет приоритет на любыми входящими ключами
+        - Настройки подцепляются из файла BackUpSettings.ps1, при наличии ключа [-UseSettingsFile], Файл должен находиться в папке скрипта.
+        - Настройки соответствует блоку PARAM. Все что будет в данной файле имеет приоритет на любыми входящими ключами
     2. MS SQL BackUP
-        Удаление старых бэкапов по принципу ([$SQLBackUpDaily] дней - ежедневный; [$SQLBackUp10days] дней - "недельный" 1/10/20 числа кажд мес; [$SQLBackUpMontly] дней - месячный от 1 числа;  всегда - ежеквартальный от 1 числа)
+        - Удаление старых бэкапов по принципу ([$SQLBackUpDaily] дней - ежедневный; [$SQLBackUp10days] дней - "недельный" 1/10/20 числа кажд мес; [$SQLBackUpMontly] дней - месячный от 1 числа;  всегда - ежеквартальный от 1 числа)
     1. Log Archiver
-        Включение архивирования логов по флагу [$Log]
+        - Включение архивирования логов по флагу [$Log]
 
 1.0.3
     Все
@@ -68,13 +74,19 @@ param (
 #	[string]$SQLPassword = "diF80noY",
 	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
 	[array]$SQLBackUpFileMask = ("Shturman_Metro_*.bak","Shturman_Metro_Anal_*.bak"),
-	[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
+	#[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
 	[int]$SQLBackUpDaily = "7", # Days
 	[int]$SQLBackUp10days = "60", # Days
 	[int]$SQLBackUpMontly = "180", # Days
 
 	# SVN
-	[switch]$SVN = $FALSE,				# Бэкап и обслуживание SVN ( бех этого колюча остальыне из группы SVN* игнорируются)
+	[switch]$SVN = $FALSE,				# Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
+	[string]$SVNRepoPath = "D:\Repositories",
+	[string]$SVNBackUpPath = "D:\BackUp\SVN",
+	[int]$SVNBackUpDaily = "7", # Days
+	[int]$SVNBackUp10days = "30", # Days
+	[int]$SVNBackUpMontly = "90", # Days
+
 	# Redmine
 	[switch]$Redmine = $FALSE,			# Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
 
@@ -90,7 +102,7 @@ param (
 #	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.4";
+$version = "1.0.5";
 
 
 
@@ -290,7 +302,7 @@ if ($SQL)
 	WriteLog "Purge old SQL BackUp files, by settings D:[$SQLBackUpDaily];10d:[$SQLBackUp10days];M:[$SQLBackUpMontly]" "INFO"
 
 
-;
+
     for($i=0; $i -lt $SQLBackUpFileMask.Count; $i++)
     {
     	$arr = Get-ChildItem -Path $SQLBackUpPath -Force -Filter $SQLBackUpFileMask[$i]
@@ -302,7 +314,7 @@ if ($SQL)
             #Extract date from file name
     		#$match = [regex]::Match($File,"((\d){2}[-\.]?){3}")  # этот вариант красивше, но возвращает дату с точкой на конце
 		    #$match = [regex]::Match($File,"((\d){2}-){2}(\d){2}")
-		    $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # тоже что и предыдущий, но более понятно.
+		    $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
     		#$match
     		#$match.Value
 
@@ -321,7 +333,7 @@ if ($SQL)
                     # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpDaily  - удаляем
                     if (($FileDate -gt (Get-Date).AddDays(-$SQLBackUp10days)) -and ($FileDate.Day -notin 1, 10, 20) )
                     {
-                        $File.Name;
+                        #$File.Name;
                         DeleteFile -File $File.FullName -Verbose
                         #$FileDate
                     }
@@ -329,7 +341,7 @@ if ($SQL)
                     # если файл не от первого числа месяца и находится в диапазоне дат от $SQLBackUpMontly до $SQLBackUp10days - удаляем
                     if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUp10days)) -and (($FileDate -gt (Get-Date).AddDays(-$SQLBackUpMontly))) -and ($FileDate.Day -notin 1) )
                     {
-                        $File.Name;
+                        #$File.Name;
                         DeleteFile -File $File.FullName -Verbose
                         #$FileDate
                     }
@@ -337,7 +349,7 @@ if ($SQL)
                     # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
                     if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUpMontly)) -and ($FileDate.Day -notin 1) -and ($FileDate.Month -notin 1, 4, 7, 10))
                     {
-                        $File.Name;
+                        #$File.Name;
                         DeleteFile -File $File.FullName -Verbose
                         #$FileDate
                     }
@@ -345,7 +357,7 @@ if ($SQL)
                     # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
                     if (($FileDate -lt (Get-Date).AddDays(-$SQLBackUpMontly)) -and (($FileDate.Month -notin 1, 4, 7, 10) -or ($FileDate.Day -notin 1)))
                     {
-                        $File.Name;
+                        #$File.Name;
                         DeleteFile -File $File.FullName -Verbose
                         #$FileDate
                     }
@@ -463,4 +475,126 @@ if ($Log)
     {
     	UploadFiles # -Verbose
     }
+}
+
+
+if ($SVN)     #BackUp SVN Repositories
+{
+    #BackUp SVN Repository
+    $CurrDate = Get-Date -Format "yyyy-MM-dd"
+    $CurrTime = Get-Date -Format "HHmm"
+    $SVNBackUpPathCurrent = "$SVNBackUpPath\SVN_$CurrDate" + "_$CurrTime"
+
+    #TestFolderPath -Path $SVNBackUpPathCurrent  -Create #-Verbose
+    TestFolderPath -Path "$SVNBackUpPathCurrent\Conf"  -Create #-Verbose
+
+
+    # Purge old BackUp
+   	$arr = Get-ChildItem -Path $SVNBackUpPath -Force -Directory
+
+   	Foreach ($File in $arr) 
+   	{
+        #$File
+        #$File.Name;
+
+        #Extract date from file name
+ 		#$match = [regex]::Match($File,"((\d){2}[-\.]?){3}")  # этот вариант красивше, но возвращает дату с точкой на конце
+	    #$match = [regex]::Match($File,"((\d){2}-){2}(\d){2}")
+	    $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
+   		#$match
+   		#$match.Value
+
+   		# если в файле/каталоге небыло ничего похожего на дату - пропустим этот файл
+	    if ($match.Value -ne "")
+	    {
+        }
+
+   			$FileDate =  get-date ($match.Value)
+            #$match.Value
+
+  			# сравниваем даты. Пропускаем и не удаяем файлы младше требуемой даты.
+		    if ($FileDate -lt (Get-Date).AddDays(-$SVNBackUpDaily))
+		    {
+
+                #$FileDate
+                #$FileDate.Day -notin 1, 10, 20
+                #$File.Name
+
+                # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpDaily  - удаляем
+                #($FileDate -gt (Get-Date).AddDays(-$SVNBackUp10days))
+                #($FileDate.Day -notin 1, 10, 20)
+                if (($FileDate -gt (Get-Date).AddDays(-$SVNBackUp10days)) -and ($FileDate.Day -notin 1, 10, 20) )
+                {
+                    $File.Name;
+                    #$File.FullName;
+                    #DeleteFile -File $File.FullName -Verbose
+                    #$FileDate
+                }
+
+                # если файл не от первого числа месяца и находится в диапазоне дат от $SQLBackUpMontly до $SQLBackUp10days - удаляем
+                if (($FileDate -lt (Get-Date).AddDays(-$SVNBackUp10days)) -and (($FileDate -gt (Get-Date).AddDays(-$SVNBackUpMontly))) -and ($FileDate.Day -notin 1) )
+                {
+                    $File.Name;
+                    #DeleteFile -File $File.FullName -Verbose
+                    #$FileDate
+                }
+
+                # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
+                if (($FileDate -lt (Get-Date).AddDays(-$SVNBackUpMontly)) -and ($FileDate.Day -notin 1) -and ($FileDate.Month -notin 1, 4, 7, 10))
+                {
+                    $File.Name;
+                    #DeleteFile -File $File.FullName -Verbose
+                    #$FileDate
+                }
+
+                # если файл старше даты $SQLBackUpMontly и не от 1-го числа квартала - удаляем
+                if (($FileDate -lt (Get-Date).AddDays(-$SVNBackUpMontly)) -and (($FileDate.Month -notin 1, 4, 7, 10) -or ($FileDate.Day -notin 1)))
+                {
+                    $File.Name;
+                    #DeleteFile -File $File.FullName -Verbose
+                    #$FileDate
+                }
+
+
+            }
+
+
+
+    }
+
+    break;
+    
+    # Copy SVN Config Files
+	WriteLog "Try to copy SVN configuration files" "DUMP"
+    Copy-Item -Path "$SVNRepoPath\*.conf" -Destination "$SVNBackUpPathCurrent\Conf"
+    Copy-Item -Path "$SVNRepoPath\*.pid" -Destination "$SVNBackUpPathCurrent\Conf"
+    Copy-Item -Path "$SVNRepoPath\htpasswd" -Destination "$SVNBackUpPathCurrent\Conf"
+   	WriteLog "SVN Configuration copied to [$SVNBackUpPathCurrent\Conf]" "MESS"
+    
+    # TODO сделать проверку что оно скопировалось
+
+
+    # Получаем список репозиториев (один фолдер - один репозиторий)
+    $arr = Get-ChildItem -Path $SVNRepoPath -Force -Directory -Name;
+    
+  	Foreach ($File in $arr) 
+   	{
+    	WriteLog "Try to create dump of repository [$SVNRepoPath\$File]" "DUMP"
+
+        # дампим репы средствами 
+        svnadmin dump $SVNRepoPath\$File > $SVNBackUpPathCurrent\$File.dump
+
+        # проверка бессмысленная т.к. файл оно создает в любом случае
+        # TODO сделать осмысленую проверку
+        if (Test-Path -Path "$SVNBackUpPathCurrent\$File.dump")
+        {
+        	WriteLog "Dump of repository [$SVNRepoPath\$File] Created" "MESS"
+        }
+        else
+        {
+        	WriteLog "Dump of repository [$SVNRepoPath\$File] is not Created" "ERRr"
+        }
+    }
+
+
 }
