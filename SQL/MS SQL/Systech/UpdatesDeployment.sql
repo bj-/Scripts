@@ -1,5 +1,5 @@
 /******  Проверка разливки апдейтов по блокам   ****/
-
+/*
 SELECT 
 	upj.Server_Serial_No, 
 	[upj0151].Version AS [0.15.01],
@@ -21,7 +21,7 @@ LEFT JOIN update_journal AS [upj0153] ON upj.Server_Serial_No = [upj0153].Server
 LEFT JOIN update_journal AS [upj0154] ON upj.Server_Serial_No = [upj0154].Server_Serial_No AND [upj0154].Version ='0.15.4'
 GROUP BY upj.Server_Serial_No, [upj0151].[Version], [upj0152].[Version], [upj0153].[Version], [upj0153].Result, [upj0154].[Version]
 ORDER BY upj.Server_Serial_No ASC
-
+*/
 
 /* 
 0.15.01 = Заливка файлов (PSS, 7-Zip, BGInfo)
@@ -33,7 +33,7 @@ ORDER BY upj.Server_Serial_No ASC
 -- Select distinct version from Update_Journal
 -- select distinct Server_Serial_No from  Update_Journal
 
-DECLARE @UpdVer nvarchar(20);
+--DECLARE @UpdVer nvarchar(20);
 --set @UpdVer = 'dadasd';
 
 SELECT 
@@ -42,7 +42,7 @@ SELECT
 	(SELECT [uj1].[Result] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.1' and uj1.Update_Time = (select max(Update_Time) from Update_Journal where  Server_Serial_No = [uj].[Server_Serial_No] and [Version] = '0.15.1')) AS [0.15.01],
 	--(SELECT  DISTINCT [uj1].[Version] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.1') AS [0.15.01],
 --	(SELECT DISTINCT [uj1].[Version] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.2') AS [0.15.02],
-	(SELECT [uj1].[Result] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.2' and uj1.Update_Time = (select max(Update_Time) from Update_Journal where  Server_Serial_No = [uj].[Server_Serial_No] and [Version] = '0.15.2')) AS [0.15.02],
+	(SELECT [uj1].[Result] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [uj1].[Version] = '0.15.2' and [uj1].[Update_Time] = (select max(Update_Time) from Update_Journal where  Server_Serial_No = [uj].[Server_Serial_No] and [Version] = '0.15.2')) AS [0.15.02],
 --	(SELECT DISTINCT [uj1].[Version] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.3') AS [0.15.03],
 	(SELECT [uj1].[Result] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.3' and uj1.Update_Time = (select max(Update_Time) from Update_Journal where  Server_Serial_No = [uj].[Server_Serial_No] and [Version] = '0.15.3')) AS [0.15.03],
 --	(SELECT DISTINCT [uj1].[Version] FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = [uj].[Server_Serial_No] AND [Version] = '0.15.4') AS [0.15.04],
@@ -57,8 +57,17 @@ FROM [Update_Journal] AS [uj]
 GROUP BY [uj].[Server_Serial_No]
 ORDER BY [uj].[Server_Serial_No] ASC
 
+/*
+SELECT [uj1].[Result],* FROM Update_Journal AS [uj1] WHERE [Version] = '0.15.2' and uj1.Update_Time = (select max(Update_Time) from Update_Journal where [Version] = '0.15.2')
+select max(Update_Time) from Update_Journal
+
+where Server_Serial_No = 'STB10281' and Version = '0.15.2'
+
+select * from Update_Journal where  Server_Serial_No = 'STB10281' and [Version] = '0.15.2'
 
 
+
+SELECT [uj1].[Result], * FROM Update_Journal AS [uj1] WHERE [uj1].[Server_Serial_No] = 'STB10281' AND [uj1].[Version] = '0.15.2' and [uj1].[Update_Time] = (select max(Update_Time) from Update_Journal where Server_Serial_No = 'STB10281' and [Version] = '0.15.2')
 /*
 DECLARE @UpdVer nvarchar(20);
 
@@ -68,5 +77,16 @@ SELECT @UpdVer = '0.15.3', [uj1].[Result]
 
 */
 
+update Update_Journal set Update_Time = '2016-11-02 10:34:43.0000087' where id = 163
+
+157
+158
+159
+160
+161
+162
+163
+164
 --select * from Update_Journal where Server_Serial_No = 'STB08692'
 --update Update_Journal set Result = 0 where id = 97
+*/

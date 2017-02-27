@@ -12,7 +12,8 @@ INNER JOIN [Persons] AS [p] ON [u].[PersonsGuid] = [p].[Guid]
 INNER JOIN [Sensors] AS [s] ON [s].[Guid] = [sbj].[SensorsGuid]
 
 where 
-	[p].[LastName] like '%могиль%'
+	[p].[LastName] like '%саре%'
+	--[s].[SerialNo] = 'STH00-196'
 	--AND [sbj].[Changed] BETWEEN '2016-03-20' AND '2016-04-12'
 	-- SerialNo = 'STH00-122'
 

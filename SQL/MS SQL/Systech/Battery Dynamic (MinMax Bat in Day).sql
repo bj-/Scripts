@@ -20,7 +20,8 @@ INNER JOIN [Persons] AS [p] ON [u].[PersonsGuid] = [p].[Guid]
 INNER JOIN [Sensors] AS [s] ON [s].[Guid] = [sbj].[SensorsGuid]
 
 where 
-	[p].[LastName] like '%Манило%'
+	[p].[LastName] like '%саре%'
+	--[s].[SerialNo] = 'STH00-196'
 --	AND [sbj].[Changed] BETWEEN '2016-08-10 00:00:00.0000000' AND '2016-09-31 00:00:00.0000000'
 	-- SerialNo = 'STH00-122'
 Group BY format([sbj].[Changed] ,'yyy.MM.dd'), [p].[LastName], [p].[FirstName], [p].[MiddleName], [s].[SerialNo]
