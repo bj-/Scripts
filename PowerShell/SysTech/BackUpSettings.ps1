@@ -26,3 +26,12 @@
 	[int]$SQLBackUpDaily = "7" # Days
 	[int]$SQLBackUp10days = "60" # Days
 	[int]$SQLBackUpMontly = "100" # Days
+
+
+# SVN
+	[switch]$SVN = $TRUE				# Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
+	[string]$SVNRepoPath = "D:\Repositories"
+	[string]$SVNBackUpPath = "D:\BackUp\SVN"
+	[int]$SVNBackUpDaily = "7"          # Days
+	[int]$SVNBackUp10days = "30"        # Days
+	[int]$SVNBackUpMontly = "90"        # Days
