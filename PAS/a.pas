@@ -22,3 +22,16 @@ IniFile.SetFileName('C:\Shturman\Bin\Shturman.ini');
   IniFile.WriteString('ModemPort', 'ExtVPNLogin', 'ST\Block');
   IniFile.Closefile;
 end.
+
+
+Program p1;
+begin
+IniFile.SetFileName('C:\Shturman\Bin\Shturman.ini');
+
+  IniFile.WriteString('BlueGiga', 'Send10Percent', '1');
+  IniFile.Closefile;
+end.
+
+type shturman.ini
+net stop ShturmanBlueGiga
+net start ShturmanBlueGiga

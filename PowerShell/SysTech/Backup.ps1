@@ -4,9 +4,11 @@
        - в подпапку Old
        - по расписанию 1 раз в сутки в 03:30 (Шедульной таской)
        - удаление архивов старше [$LogFilePurgeDays] дней
+       - Архивироване Errors папки
        - TODO заливка логов на сервер
        - TODO выборочное архивирование логов и заливка оных с блоков на сервак
        - TODO Создание Шедульной таски для автоматического запуска скрипта
+       - TODO Копирование файлов по маске (вход через аргументы) перед архивированием "Blue*" "*17-04-03*" и т.п.
     2. MS SQL BackUP
        - бд Shturman_Metro полный бекап (Джобой в MS SQL)
        - в папку d:\BackUP
@@ -35,6 +37,11 @@
 
 New:
 
+1.0.6
+    Errors
+        - мув и архивирование Error файлов в тот же каталог в который архивируются лог файлы
+    Error+Log
+        - Заархивирование по кладет в подкаталог $LogFolderForArchives. По умолчанию используется имя компьютера.
 1.0.5
     SVN
         - Поиск репозиториев и дамп всех найденных, бэкап настроек в каталог [$SVNBackUpPath\SVN_yyyy-MM-dd_HHmm]. каждый репозиторий в свой файл.
@@ -59,14 +66,18 @@ param (
 	[string]$DateFormatLog = "yy-MM-dd",
 	[string]$LogFilePath = "D:\Shturman\Bin\Log",
 	[string]$LogFilePathOld = "D:\Shturman\Bin\Log\Old",
+    [string]$LogFolderForArchives = $env:computername,
 	[string]$LogFilePurgeDays = "30", # Days
 	[switch]$PurgeLogFiles = $FALSE, # похоронить архивы старше  $LogFilePurgeDays дней
 	[switch]$UploadLogFiles = $FALSE, # Заливка лог файлов на сервер.
 	[switch]$FastArcive = $FALSE, # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
 	[switch]$LogFileAll2Arc = $FALSE, # заставляет упаковывать все лог файлы. включая сегоднящние
 
-	# SQL
+    # Errors log Archiver 
+	[switch]$Errors = $FALSE,				# Архивирование Errors файлов
+	[string]$ErrorsPath = "D:\Shturman\Bin\Errors",		# Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
 
+	# SQL
 	[switch]$SQL = $FALSE,				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
 #	[string]$SQLDBName = "Shturman_Metro",
@@ -102,7 +113,7 @@ param (
 #	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.5";
+$version = "1.0.6";
 
 
 
@@ -280,6 +291,76 @@ break;
 
 }
 
+function ArchiveFiles ()
+{
+    # Архивирование файлов
+	param (
+		[string]$Path = "",
+		[string]$arcPath = "",
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+#	WriteLog "$FuncName Removing Services" "INFO"
+
+
+    # на сколько сильно паковать. если флаг взведен - пакуем по максимому, но долго-долго.
+	if ($FastArcive -eq $TRUE)
+	{
+        $ArcivationDensity = ""
+    }
+    else
+    {
+	    $ArcivationDensity = "-mx=9"
+	}
+
+
+    # Проверяем возможные пути расположения архиватора
+    if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
+    {
+# "d:\prog\7-zip\7za.exe -m9 a $arcPath -sdel $path"
+		$res = D:\Prog\7-zip\7za.exe $ArcivationDensity a $arcPath -sdel $Path
+    }
+    ElseIf (test-path -Path "C:\Prog\7-Zip\7za.exe" -ErrorAction SilentlyContinue)
+    {
+		$res = C:\Prog\7-Zip\7za.exe $ArcivationDensity a $arcPath -sdel $Path
+    }
+    else 
+    {
+    	WriteLog "Archiver not found" "ERRr" # не нашли архиватор. делать нефиг, вываливаемся
+        break;
+	}
+
+    WriteLog "$res" "DUMP"
+
+	if (test-path $arcPath)
+    {
+		# повторная попытка грохнуть файл. если архиватор не смог. бесполезная по сути... т.к. не помогает.
+	    Remove-Item -Path $Path -Force -ErrorAction SilentlyContinue
+    #	$File.Delete()
+    
+	    # проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
+	    if (test-path $Path -ErrorAction SilentlyContinue)
+#	    if (test-path "c:\windows" -ErrorAction SilentlyContinue)
+	    {
+		    WriteLog "File [$Path] added to archive [$arcPath]" "WARN" $Verbose # если исходный остался - пишем что файл _добавлен_
+		    WriteLog "Source file [$Path] doesn't removed" "ERRr" $TRUE
+	    }
+	    else
+	    {
+			WriteLog "File [$Path] moved to archive [$arcPath]" "MESS" $Verbose # а если нормально удалился - пишем что ремувед
+	    }
+			
+	}
+    Else
+    {
+		WriteLog "Arcived File [$arcPath] doesn't exist" "ERRr" $TRUE
+    }
+}
+
 <#
 function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
 {
@@ -287,7 +368,7 @@ function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
 #>
 
 # TODO Создание Шедульной таски для автоматического запуска скрипта
-if ($CreateSheduledTask -eq $TRUE)
+if ($CreateSheduledTask)
 {
 	WriteLog "NO FUNCTIONALE (c) Kuba's taxist" "ERRr"
 
@@ -404,6 +485,7 @@ if ($Log)
     		$arr = Get-ChildItem -Path $LogFilePath -Force -Filter "*.log" -Name | where {$_ -notmatch "$currDate.log" };
     	}
 
+<#
 	    # на сколько сильно паковать. если флаг взведен - пакуем по максимому, но долго-долго.
 	    if ($FastArcive -eq $TRUE)
 	    {
@@ -413,6 +495,7 @@ if ($Log)
     	{
 		    $ArcivationDensity = "-mx=9"
 	    }
+#>
     #	echo "Service's Error Logs Sensor [version: $scriptver]`r`nMonitoring *.Error files in folder $ErrLogPath"
     
     #	$i = 0;
@@ -420,9 +503,18 @@ if ($Log)
     	Foreach ($File in $arr) 
     	{
 		    $path = $LogFilePath + "\" + $File;
-		    $arcPath = "$LogFilePathOld\$File.7z"
+		    $arcPath = "$LogFilePathOld\" + "$LogFolderForArchives\$File.7z"
     
 		    WriteLog "Processing file [$File]" "DUMP"
+
+
+
+            # Архивирование файлов в папке в архив вида Errors_yyyy-MM-dd_HHmm.7z с удалением файлов
+            ArchiveFiles -Path $path -arcPath $arcPath -Verbose
+
+
+
+            <#
     
 		    # Проверяем возможные пути расположения архиватора
 		    if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
@@ -466,6 +558,7 @@ if ($Log)
 		    {
     			WriteLog "Arcived File [$arcPath] doesn't exist" "ERRr"
 		    }
+#>
     
     #$File
     #		WriteLog $path "INFO"
@@ -476,6 +569,63 @@ if ($Log)
     	UploadFiles # -Verbose
     }
 }
+
+if ($Errors)
+{
+    # Errors log Archiver 
+    # $ErrorsPath = "D:\Shturman\Bin\Errors",		# Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy-MM-dd_HHmm.7z
+
+    # проверка существования файлов Error по исходному пути, если их там нет то и делать нечего
+    if (Test-Path -Path "$ErrorsPath\*.Error")
+    {
+        # проверка/создание папки куда складывать архив ошибок
+        TestFolderPath -Path "$LogFilePathOld\Errors" -Create #-Verbose
+
+        # move ВСЕХ файлов из каталога Еррор, а не только еррор файлов. на всякий случай
+      	WriteLog "Try to move ALL files from [$ErrorsPath] to [$LogFilePathOld\Errors]" "DUMP"
+        Move-Item -Path "$ErrorsPath\*" -Destination "$LogFilePathOld\Errors" -Force
+
+        # Проверка что смувилось все
+        if (-not (Test-Path -Path "$ErrorsPath\*"))
+#        if (-not (Test-Path -Path "$ErrorsPath\ddd"))
+        {
+           	WriteLog "All Error's files moved from [$LogFilePathOld\Errors]" "DUMP"
+        }
+        else
+        {
+           	WriteLog "NOT All Error's files moved to [$LogFilePathOld\Errors]" "WARN"
+        }
+        
+        # Проверка что в новом месте что-то появилось и архивирование
+        if (Test-Path -Path "$LogFilePathOld\Errors\*.Error")
+        {
+           	WriteLog "Error's Files does moved succesfully to [$LogFilePathOld\Errors]" "MESS" $FALSE
+
+            # Архивирование файлов в папке в архив вида Errors_yyyy-MM-dd_HHmm.7z с удалением файлов
+            $PathToArchive = "$LogFilePathOld\Errors\*.Error"
+            $CurrDate = Get-Date -Format "yyyy-MM-dd"
+            $ArchivePatch =   "$LogFilePathOld\" + "$LogFolderForArchives\Errors\Errors_$CurrDate.7z"
+            ArchiveFiles -Path $PathToArchive -arcPath $ArchivePatch -Verbose
+        }
+        else
+        {
+           	WriteLog "Error's Files does not exit in [$LogFilePathOld\Errors]" "ERRr"
+        }
+
+        
+        WriteLog "Remove folder [$LogFilePathOld\Errors]" "DUMP"
+        Remove-Item "$LogFilePathOld\Errors"
+
+        
+    }
+    else
+    {
+       	WriteLog "No Error's files found in [$ErrorsPath]" "INFO"
+    }
+
+
+}
+
 
 
 if ($SVN)     #BackUp SVN Repositories

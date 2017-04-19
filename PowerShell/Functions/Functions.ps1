@@ -233,12 +233,12 @@ Function TestFolderPath
 			}
 			else
 			{
-				WriteLog "$FuncName Created folder [$Path]" "MESS" $TRUE
+				WriteLog "$FuncName Created folder [$Path]" "MESS" $Verbose
 			}
 		}
 		Else
 		{
-    		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $TRUE
+    		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $Verbose
             break;
 		}
 	}

@@ -8,14 +8,19 @@
 	[string]$DateFormatLog = "yy-MM-dd"
 	[string]$LogFilePath = "D:\Shturman\Bin\Log"
 	[string]$LogFilePathOld = "D:\Shturman\Bin\Log\Old"
+#    [string]$LogFolderForArchives = $env:computername
 	[string]$LogFilePurgeDays = "30"    # Days
 	[switch]$PurgeLogFiles = $TRUE     # похоронить архивы старше  $LogFilePurgeDays дней
 	[switch]$UploadLogFiles = $FALSE    # Заливка лог файлов на сервер.
 	[switch]$FastArcive = $FALSE        # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
 	[switch]$LogFileAll2Arc = $FALSE    # заставляет упаковывать все лог файлы. включая сегоднящние
 
-# SQL
+    # Errors log Archiver 
+	[switch]$Errors = $FALSE				# Архивирование Errors файлов
+	[string]$ErrorsPath = "D:\Shturman\Bin\Errors"		# Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
 
+
+    # SQL
 	[bool]$SQL = $TRUE				# Бэкап и обслуживание SQL ( бех этого колюча остальыне из группы SQL* игнорируются)
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS"
 #	[string]$SQLDBName = "Shturman_Metro"
