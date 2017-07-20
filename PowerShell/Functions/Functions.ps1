@@ -33,6 +33,13 @@
     DeleteFile                            ”даление файлов
 		[string]$File = "",             # ѕолный путь названи€ файла указан должен здесь быть
 		[switch]$Verbose = $FALSE		# в консоль все событи€ лога пишет
+    CheckFreeSpace 						# ѕроверка наличи€ свободного места на диске (локальный и сетева€ шара)
+		[string]$Path = "",             # ѕолный путь из которого будет братьс€ буква диска/сетевой путь
+		[int]$Size = 0,     			# —колько места должно быть доступно
+		[switch]$Verbose = $FALSE		# в консоль все событи€ лога пишет
+    GetFreeSpace						# ѕоулчаекм значение свободного места на диске (локальный или сетева€ шара)
+		[string]$Path = "",             # ѕолный путь из которого будет братьс€ буква диска/сетевой путь
+		[switch]$Verbose = $FALSE		# в консоль все событи€ лога пишет
 
 
 
@@ -272,6 +279,97 @@ function DeleteFile
 		WriteLog "File [$File] is deleted" "MESS" $Verbose # а если нормально удалилс€ - пишем что ремувед
 	}
 }
+
+# ѕроверка наличи€ свободного места на диске (локальный и сетева€ шара)
+function CheckFreeSpace
+{
+    # 
+	param (
+		[string]$Path = "",             # ѕолный путь из которого будет братьс€ буква диска/сетевой путь
+		[int]$Size = 0,                # —колько места должно быть доступно
+		[switch]$Verbose = $FALSE		# в консоль все событи€ лога пишет
+	)
+
+	# им€ функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    WriteLog "$FuncName : Try to check Free space on drive [$Path]" "DUMP" $Verbose
+
+    # получаем кол-во свободного места
+    $FreeSpace = GetFreeSpace $Path $Verbose
+
+    if ( $FreeSpace -gt $Size) 
+    {
+        WriteLog "$FuncName : Free Space exist! Drive has [$FreeSpace] bytes, required [$Size] bytes" "INFO" $Verbose		
+        return $TRUE
+    } 
+    else
+    {
+        WriteLog "$FuncName : Free Space does not exist! Drive has [$FreeSpace] bytes, required [$Size] bytes" "WARN" $Verbose		
+		return $FALSE
+    }
+
+}
+
+# ѕоулчаекм значение свободного места на диске (локальный или сетева€ шара)
+function GetFreeSpace
+{
+    # 
+	param (
+		[string]$Path = "",             # ѕолный путь из которого будет братьс€ буква диска/сетевой путь
+		[switch]$Verbose = $FALSE		# в консоль все событи€ лога пишет
+	)
+
+	# им€ функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    WriteLog "$FuncName : Try to get Free space on drive [$Path]" "DUMP" $Verbose
+
+    # »звлекаем букву диска либо сетевой путь из $Path
+
+    #$Path
+
+    # им€ диска 
+    $match = [regex]::Match($Path,"([A-Za-z]{1}:)") # ищем в формате yyyy-MM-dd.
+    #$match
+    #$match.Value
+    $DriveLetter = $match.Value  # извлеченное им€ диска (2 символа)
+
+
+    # сетева€ шара
+    $match = [regex]::Match($Path,"\\\\(.)*?\\(.)*?\\") # ищем в формате yyyy-MM-dd.
+    #$match
+    #$match.Value
+    $ComputerName = $match.Value  # извлеченное им€ диска (2 символа)
+
+    if ( $DriveLetter -ne "" )
+    {
+        WriteLog "$FuncName : Drive Letter is [$DriveLetter], try to get drive properties" "DUMP" $Verbose
+
+        $disk = Get-WmiObject Win32_LogicalDisk -Filter "DeviceID='$DriveLetter'"
+        #$disk.Size
+        
+        return $disk.FreeSpace
+        
+    }
+
+
+    if ( $ComputerName -ne "" )
+    {
+        WriteLog "$FuncName : ShareName is [$ComputerName], try to get available space on share" "DUMP" $Verbose
+        #$do = $fso.getdrive("$ComputerName")
+        return (new-object -com scripting.filesystemobject).getdrive("$ComputerName").availablespace
+        #$do
+    }
+
+    # если не то ни другое - считаем что свободного места 0 байт
+    return 0
+
+
+}
+
 
 
 <# ==============================================
