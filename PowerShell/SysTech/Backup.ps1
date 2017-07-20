@@ -5,13 +5,16 @@
        - по расписанию 1 раз в сутки в 03:30 (Шедульной таской)
        - удаление архивов старше [$LogFilePurgeDays] дней
        - Архивироване Errors папки
+       - TODO Проверка открыт ли файл (дабы не трогать его т.к. его не выйдет удалить)
        - TODO заливка логов на сервер
+       - TODO Выложить (хардлинг при возможности) в фолдрер для экспорта (на другой сервер/пленку), удаление старых копий.
        - TODO выборочное архивирование логов и заливка оных с блоков на сервак
        - TODO Создание Шедульной таски для автоматического запуска скрипта
        - TODO Копирование файлов по маске (вход через аргументы) перед архивированием "Blue*" "*17-04-03*" и т.п.
     2. MS SQL BackUP
        - бд Shturman_Metro полный бекап (Джобой в MS SQL)
        - в папку d:\BackUP
+       - Выложить (хардлинг при возможности) в фолдер для экспорта (на другой сервер/пленку), удаление старых копий.
        - TODO Архивирование бэкапа
        - Удаление старых бэкапов по принципу ([$SQLBackUpDaily] дней - ежедневный; [$SQLBackUp10days] дней - "недельный" 1/10/20 числа кажд мес; [$SQLBackUpMontly] дней - месячный от 1 числа;  всегда - ежеквартальный от 1 числа)
        - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
@@ -37,6 +40,11 @@
 
 New:
 
+1.0.7
+    SQL
+	- Выкладывает файл для экспорт на внешние хранилище в папку $SQLExportPath.
+	  Включается функционал ключем $SQLExport, по умолчанию выключен.
+	  Сначала пробует создать хардлинк, если не получается - создает копию. все предыдущие версии (по маске $SQLBackUpFileMask[$i]) удаляет
 1.0.6
     Errors
         - мув и архивирование Error файлов в тот же каталог в который архивируются лог файлы
@@ -84,7 +92,9 @@ param (
 #	[string]$SQLUsername = "BackUpOperator",
 #	[string]$SQLPassword = "diF80noY",
 	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
-	[array]$SQLBackUpFileMask = ("Shturman_Metro_*.bak","Shturman_Metro_Anal_*.bak"),
+	[string]$SQLExportPath = "D:\BackUp\2Tape",
+	[switch]$SQLExport = $FALSE, # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+	[array]$SQLBackUpFileMask = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
 	#[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
 	[int]$SQLBackUpDaily = "7", # Days
 	[int]$SQLBackUp10days = "60", # Days
@@ -107,13 +117,15 @@ param (
 #	[string]$AppPath = "C:\Shturman\",
 	[switch]$CreateSheduledTask = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
 
+        # Common
 	[switch]$UseSettingsFile = $FALSE,		    # использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
+	[switch]$HighestPrivelegesIsRequired = $FALSE,   #Проверять есть ли админские права. модт быть необходимо работы с файлами
 
 	[switch]$Debug = $FALSE		# в консоль все события лога пишет
 #	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.6";
+$version = "1.0.7";
 
 
 
@@ -145,6 +157,22 @@ ElseIf (-not $UseSettingsFile)
 Else
 {
 	WriteLog "Скрипт запущен с дефолтными настройками (файл настроек [$ParamsPath] не найден)" "INFO"
+}
+
+#WriteLog "Debug Mode: [$Debug]" "MESS"
+if ( $Debug )
+{
+    WriteLog "Debug Mode: [$Debug]" "MESS"
+}
+
+
+# проверка наличия административных привилегий. если их нет - отваливаемся
+if ( $HighestPrivelegesIsRequired )
+{
+	if(isAdmin)
+	{
+		WriteLog "Админские права: есть." "MESS"
+	};
 }
 
 
@@ -374,6 +402,11 @@ if ($CreateSheduledTask)
 
 }
 
+
+#GetFreeSpace -Path D:\BackUP\2Tape -Verbose
+#GetFreeSpace -Path "\\st-nas\BackUp\SVN\SVN_2016-09-05" -Verbose
+
+
 if ($SQL)
 {
     TestFolderPath -Path $SQLBackUpPath #-Verbose
@@ -383,10 +416,15 @@ if ($SQL)
 	WriteLog "Purge old SQL BackUp files, by settings D:[$SQLBackUpDaily];10d:[$SQLBackUp10days];M:[$SQLBackUpMontly]" "INFO"
 
 
+#   [array]$SQLLastBackUpFile = @()
+
 
     for($i=0; $i -lt $SQLBackUpFileMask.Count; $i++)
     {
     	$arr = Get-ChildItem -Path $SQLBackUpPath -Force -Filter $SQLBackUpFileMask[$i]
+
+        $FileMaxDate = ""; # максимальная дата файла
+        $LastFile = ""; # файл с максимальной датой
 
     	Foreach ($File in $arr) 
     	{
@@ -404,12 +442,15 @@ if ($SQL)
 		    {
        			$FileDate =  get-date ($match.Value)
 
+                if ($FileMaxDate -lt $FileDate) 
+                { 
+                    $FileMaxDate = $FileDate;
+                    $LastFile = $File;
+                }
+
     			# сравниваем даты. Пропускаем и не удаяем файлы младше требуемой даты.
 			    if ($FileDate -lt (Get-Date).AddDays(-$SQLBackUpDaily))
 			    {
-
-#$FileDate
-#$FileDate.Day -notin 1, 10, 20
 
                     # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpDaily  - удаляем
                     if (($FileDate -gt (Get-Date).AddDays(-$SQLBackUp10days)) -and ($FileDate.Day -notin 1, 10, 20) )
@@ -442,18 +483,239 @@ if ($SQL)
                         DeleteFile -File $File.FullName -Verbose
                         #$FileDate
                     }
+                }
+            }
+        }
 
 
+
+        # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+	    if ( $SQLExport )
+        {
+	        #WriteLog "Create a latest copy of SQL backup(s) in Export folder [$SQLExportPath]" "DUMP"
+    
+            # Проверка наличия пути без создания оного.
+            TestFolderPath -Path $SQLExportPath #-Verbose
+        
+            # Проверка что есть более свежая версия файла, если нет, то дальнейшая работа не имеет смысла. 
+
+    	    $arr = Get-ChildItem -Path $SQLExportPath -Force -Filter $SQLBackUpFileMask[$i]
+
+            # Берем максимальную дату из имеющихся файлов (попавших под маску), если нет файлов в таргетном каталоге считаем что дата последней выкладки 01-01-1970.
+            # Сбрасываем значение даты, заоодно если нет файлов в каталоге для экспорта - считаем что там очень старый файл.
+            $FileDate = get-date ("1970/01/01");
+
+       	    Foreach ($File in $arr) 
+            {
+
+                WriteLog ("Extract date from file name [" + $File.FullName + "]") "DUMP"             
+
+                #Extract date from file name
+                $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
+                #$match
+                #$match.Value
+        
+                # если в файле небыло ничего похожего на дату - пропустим этот файл
+                if ($match.Value -ne "")
+                {
+                    $nfDate = get-date ($match.Value)
+                    if ($FileDate -lt $nfDate)
+                    {
+                        $FileDate = $nfDate
+                    }
                 }
             }
 
+#-------
+                    if ($FileDate -lt $FileMaxDate)
+                    {
+                        WriteLog "New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
+
+                        $SQLBackUpFileMask[$i]
+                        # Удаляем неактуальную версию
+                        $File = $SQLExportPath + "\" + $SQLBackUpFileMask[$i]
+                        DeleteFile -File $File -Verbose
+
+                        #Test-Path -Path $SQLExportPath
+                        if (Test-Path -Path $SQLExportPath)
+                        {
+                            
+                            
+
+                            # Пробуем создать хардлинк
+                            #New-Item -ItemType HardLink -Name "$SQLExportPath\$LastFile" -Value "$SQLBackUpPath\$LastFile"
+                            #$command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+
+                            WriteLog "Try to create New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
+                            $command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+                            invoke-expression $command
+
+                            if (-not (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue) )
+                            {
+                                # Если не удалось создать хардлинк пробуем скопировать
+                                WriteLog "Did not create HardLink of file for export [$SQLExportPath\$LastFile], try to create a copy" "DUMP"
+
+                                
+                                # Проверка наличия свободного места на диске под копию файла
+                                if ( CheckFreeSpace -Path $SQLExportPath -Size $File.Length  ) #-Verbose
+                                {
+                                    # Копирование файла если место есть
+                                    Copy-Item -Path $SQLBackUpPath\$LastFile -Destination $SQLExportPath\$LastFile
+                                }
+                            }
+
+                            # Финальная проверка что создалась копия
+                            if (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue )
+                            {
+                                WriteLog "Created copy of file for export (to Tape) [$SQLExportPath\$LastFile]" "MESS"
 
 
-        }
+                            }
+                            else 
+                            {
+                                # Если не удалось создать и копии тоже - ругаемся красненьким
+                                WriteLog "Did not create file for export [$SQLExportPath\$LastFile] (HardLink or Copy)" "ERRr"
+                            }
+                        }
+                        else
+                        {
+                                WriteLog "Export folder does not exist [$SQLExportPath]" "ERRr"
+                        }
+                    }
+                    Else 
+                    {
+                        WriteLog "NO New file for export. Last file [$LastFile] is same as old file [$SQLExportPath\$File]" "DUMP"
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<#
+            
+
+
+            $FileDate
+            $FileMaxDate
+
+            break
+
+
+
+
+
+
+
+
+
+
+    	    Foreach ($File in $arr) 
+
+    	    {
+                if ($arr[0].Length -gt 0)
+                {
+                    $File = $arr[0]
+                }
+                else
+                {
+                    WriteLog ("No files in [$SQLExportPath] with mask [" + $SQLBackUpFileMask[$i] + "]") "MESS"             
+                }
+                #$File.Name;
         
-        #$SQLBackUpFileMask[$i];
-    }
+                #Extract date from file name
+   		        #$match = [regex]::Match($File,"((\d){2}[-\.]?){3}")  # этот вариант красивше, но возвращает дату с точкой на конце
+	            #$match = [regex]::Match($File,"((\d){2}-){2}(\d){2}")
+		        $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
+    		    #$match
+    		    #$match.Value
+        
+        		# если в файле небыло ничего похожего на дату - пропустим этот файл
+		        if ($match.Value -ne "")
+		        {
+            		$FileDate =  get-date ($match.Value)
+                        
+                    if ($FileDate -lt $FileMaxDate)
+                    {
+                        WriteLog "New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
 
+                        $SQLBackUpFileMask[$i]
+                        # Удаляем неактуальную версию
+                        $File = $SQLExportPath + "\" + $SQLBackUpFileMask[$i]
+                        DeleteFile -File $File -Verbose
+
+                        #Test-Path -Path $SQLExportPath
+                        if (Test-Path -Path $SQLExportPath)
+                        {
+                            
+                            
+
+                            # Пробуем создать хардлинк
+                            #New-Item -ItemType HardLink -Name "$SQLExportPath\$LastFile" -Value "$SQLBackUpPath\$LastFile"
+                            #$command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+
+                            WriteLog "Try to create New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
+                            $command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+                            #invoke-expression $command
+
+                            if (-not (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue) )
+                            {
+                                # Если не удалось создать хардлинк пробуем скопировать
+                                WriteLog "Did not create HardLink of file for export [$SQLExportPath\$LastFile], try to create a copy" "DUMP"
+
+                                
+                                # Проверка наличия свободного места на диске под копию файла
+                                if ( CheckFreeSpace -Path $SQLExportPath -Size $File.Length  ) #-Verbose
+                                {
+                                    # Копирование файла если место есть
+                                    Copy-Item -Path $SQLBackUpPath\$LastFile -Destination $SQLExportPath\$LastFile
+                                }
+                            }
+
+                            # Финальная проверка что создалась копия
+                            if (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue )
+                            {
+                                WriteLog "Created copy of file for export (to Tape) [$SQLExportPath\$LastFile]" "MESS"
+
+
+                            }
+                            else 
+                            {
+                                # Если не удалось создать и копии тоже - ругаемся красненьким
+                                WriteLog "Did not create file for export [$SQLExportPath\$LastFile] (HardLink or Copy)" "ERRr"
+                            }
+                        }
+                        else
+                        {
+                                WriteLog "Export folder does not exist [$SQLExportPath]" "ERRr"
+                        }
+                    }
+                    Else 
+                    {
+                        WriteLog "NO New file for export. Last file [$LastFile] is same as old file [$SQLExportPath\$File]" "DUMP"
+                    }
+                }
+            }
+            #>
+        }
+    }
 }
 
 if ($Log)
