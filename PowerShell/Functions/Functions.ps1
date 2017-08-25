@@ -101,6 +101,12 @@
         [string]$AppPath = "",                # Path to restored mdf and ldf
 		[switch]$Verbose = $FALSE
 
+--[Network]
+    --ConnectionCreate
+		[string]$ConnectionType = "VPN",      # VPN | FTP| LOCAL
+		[string]$VPNName = "ST",
+		[switch]$Verbose = $FALSE
+
 #>
 
 # =============================================================================================
@@ -191,6 +197,7 @@ Function TestFolderPath
 	param (
 		[string]$Path = "",
 		[switch]$Create = $FALSE,
+		[switch]$ContinueOnError = $FALSE, # не останавливать скрипт если не удалось проверить наличие фолдера
 		[switch]$Verbose = $FALSE
 		)
 
@@ -236,22 +243,32 @@ Function TestFolderPath
 			if (-not (test-path $Path))
 			{
 				WriteLog "$FuncName Can not create folder [$Path]" "ERRr" $TRUE
-				break;
+                if( $ContinueOnError -eq $FALSE )
+                {
+				    break;
+                }
+                return $FALSE
 			}
 			else
 			{
 				WriteLog "$FuncName Created folder [$Path]" "MESS" $Verbose
+                return $TRUE
 			}
 		}
 		Else
 		{
     		WriteLog "$FuncName Folder [$Path] doesn't exist" "ERRr" $Verbose
-            break;
+            if( $ContinueOnError -eq $FALSE )
+            {
+			    break;
+            }
+            return $FALSE
 		}
 	}
 	else
 	{
 		WriteLog "$FuncName Folder [$Path] is exist" "INFO" $Verbose
+        return $TRUE
 	}
 
 }
