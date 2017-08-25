@@ -18,21 +18,29 @@
 	[string]$ErrorsPath = "D:\Shturman\Bin\Errors"		# Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
 #>
 
+
     # SQL
-	[switch]$SQL = $FALSE,				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
+	[switch]$SQL = $TRUE				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
 #	[string]$SQLDBName = "Shturman_Metro",
 #	[string]$SQLUsername = "BackUpOperator",
 #	[string]$SQLPassword = "diF80noY",
-	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
-	[string]$SQLExportPath = "D:\BackUp\2Tape",
-	[switch]$SQLExport = $FALSE # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro"
+	[string]$SQLExportPath = "D:\BackUp\2Tape"
+	[switch]$SQLExport = $TRUE # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [switch]$SQLExportUploadArc = $TRUE # Архивирование бэкапа для заливки на сервер
+    [int]$SQLExportUploadArcPart = 1 # Нарезка архива на части = размер части в МБ, 0 = одним куском
+
+    [switch]$SQLExportUpload = $TRUE # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string]$SQLExportUploadPath = ("\\172.16.30.139\Share\MCC_D"+(get-date -Format "yyyy-MM-dd")) # Путь куда заливать
+    [array]$SQLExportUploadCred = ("Upload","Chi79Mai") # Логин и пароль для заливки
+
 	[array]$SQLBackUpFileMask = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_*.bak")
 	#[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm"
 	[int]$SQLBackUpDaily = "7" # Days
 	[int]$SQLBackUp10days = "60" # Days
 	[int]$SQLBackUpMontly = "180" # Days
-
+#>
 <#
 # SVN
 	[switch]$SVN = $TRUE				# Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
