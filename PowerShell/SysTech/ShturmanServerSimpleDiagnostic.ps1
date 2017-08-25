@@ -1,4 +1,26 @@
 ﻿
+<#
+    1. Shturman Servers Simple Diagnostic
+	- TODO Проверка живости базы (выборка по нескольким таблицам, проверяем сколько дней/часов назад последний раз писалось в таблицу
+	  TODO Выбираем такие таблицы, в которых данные меняются постоянно.)
+	- *.Errors files только за последнюю неделю + общее количество.
+	  TODO Если нет за последнюю неделю, то красить в желтый общее количество
+
+	- Объем файлов *.queue в кб. 
+	- *.Frames Count с разделением по сервисам
+	- *.Messages Count
+	- FreeSpace (Gb) на нескольких дисках
+	- *.Errors files списком
+
+New:
+
+1.0.2
+	- *.Errors files только за последнюю неделю + общее количество.
+	- [#] Если не подконнектиться к серверу - сообщает об этом, а не кидает ошибку.
+1.0.1
+    Все
+#>
+
 
 param (
 	[string]$FilePath = "D:\Shturman\Bin\Log",
@@ -16,9 +38,9 @@ param (
 
 	[array]$ServiceName = ("BOINormsServer","DataStorageServer","DataProcServer","DiagServer","FOSServer","HubServer","LogServer","MetroLocationsServer","RRsServer","UpdateServer","FresherServer","SolverServer"),
 
-    [int]$FramesMaxCount = 500,
-    [int]$MesagesMaxCount = 500,
-    [int]$ServerQueueMaxSize = 500,
+	[int]$FramesMaxCount = 500,
+	[int]$MesagesMaxCount = 500,
+	[int]$ServerQueueMaxSize = 500,
 
 	[string]$ResultFilePath = "D:\Shturman\Diag",
 
@@ -256,29 +278,58 @@ if ("FreeSpace")
 
     for($i=0; $i -lt $ServerAddress.Count; $i++)
     {
-        $disk = Get-WmiObject Win32_LogicalDisk -ComputerName $ServerAddress[$i] -Filter "DriveType=3"
 
-        $res = $disk[0].FreeSpace / 1000000000
-        $res = [math]::Round($res, 0)
 
-        $res1[$i] =   $res.ToString() + (' ' * (10-$res.ToString().Length))
-        #$res1[$i] = $res
 
-        if ($res -lt 10)
+        #Clear-Variable $disk
+        #Clear-Variable $res
+
+        #write-host ("Get-WmiObject Win32_LogicalDisk -ComputerName " + $ServerAddress[$i] + " -Filter ""DriveType=3""")
+
+        if ( $disk = Get-WmiObject Win32_LogicalDisk -ComputerName $ServerAddress[$i] -Filter "DriveType=3" -erroraction SilentlyContinue )
         {
-            $Color1 = "red"
-        }
+
+            #"GOOD"
+            $disk = Get-WmiObject Win32_LogicalDisk -ComputerName $ServerAddress[$i] -Filter "DriveType=3"
+
+            $res = $disk[0].FreeSpace / 1000000000
+            $res = [math]::Round($res, 0)
+
+            $res1[$i] =   $res.ToString() + (' ' * (10-$res.ToString().Length))
+            #$res1[$i] = $res
+
+            if ($res -lt 10)
+            {
+                $Color1 = "red"
+            }
          
-        $res = $disk[1].FreeSpace / 1000000000
-        $res = [math]::Round($res, 0)
+            $res = $disk[1].FreeSpace / 1000000000
+            $res = [math]::Round($res, 0)
 
-        $res2[$i] =   $res.ToString() + (' ' * (10-$res.ToString().Length))
-        #$res2[$i] = $res
+            $res2[$i] =   $res.ToString() + (' ' * (10-$res.ToString().Length))
+            #$res2[$i] = $res
 
-        if ($res -lt 170)
+            if ($res -lt 170)
+            {
+                $Color2 = "red"
+            }
+
+
+        }
+        else
         {
+            # Бывает если 
+            #    if the Windows Management Instrumentation (WMI-In) inbound firewall rule is not enabled 
+            #    DCOM is enabled in the Registry or service not stopped or crashed
+
+            WriteResult -Text ("Server [" + $ServerAddress[$i] + "] is unavailable") -Color "yellow"
+
+            $res1[$i] = "N/A" + (' ' * (10-"N/A".Length))
+            $res2[$i] = "N/A" + (' ' * (10-"N/A".Length))
+            $Color1 = "red"
             $Color2 = "red"
         }
+
 
 
     }
@@ -303,7 +354,7 @@ if ("FreeSpace")
 
 if ("Errors")
 {
-    WriteResult -Text "----------------------------       *.Errors files       ----------------------------" -Color "Green"
+    WriteResult -Text "----------------------       *.Errors files  (last 7 days)     ---------------------" -Color "Green"
 
     for($i=0; $i -lt $ServerName.Count; $i++)
     {
@@ -314,22 +365,33 @@ if ("Errors")
         if (Test-Path -Path $ServerErrorsPath[$i])
         {
 
-            $Files = Get-ChildItem -Path $ServerErrorsPath[$i] -Filter "*.error" -Name
+            #$Files = (Get-ChildItem -Path $ServerErrorsPath[$i] -Filter "*.error" -Name | Where-Object { $_.CreationTime -ge (Get-Date).AddDays(-7)  })
+            $Files = Get-ChildItem -Path $ServerErrorsPath[$i] -Filter "*.error"
+            #$Files = (Get-ChildItem -Path $ServerErrorsPath[$i] -Filter "*.error" | Where-Object { $_.CreationTime -ge (Get-Date).AddDays(-7)  })
+
+            #"Get-ChildItem -Path $ServerErrorsPath[$i] -Filter ""*.error"" -Name | Where-Object { $_.CreationTime -ge (Get-Date).AddDays(-7)  }"
+            #Get-ChildItem -Path $ServerErrorsPath[$i] -Filter "*.error" -Name | Where-Object { $_.CreationTime -ge (Get-Date).AddDays(-7)  }
     
         
             #$errorFilesFound = $FALSE
         
             foreach ($file in $Files)
             {
-                $text =  $file
-                WriteResult -Text $text -Color "red"
-            
+                if ( $file.CreationTime -ge (Get-Date).AddDays(-7) )
+                {
+                    $text =  $file.Name
+                    WriteResult -Text $text -Color "red"
+                }
             }
 
             if ($Files.Count -eq 0)
             {
                 $text =  "No errors file found"
                 WriteResult -Text $text -Color ""
+            }
+            else
+            {
+                WriteResult -Text ("Total *.error files: [" + $Files.Count + "]") -Color "Yellow"
             }
         }
         Else
