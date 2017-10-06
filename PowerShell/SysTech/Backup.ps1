@@ -38,6 +38,10 @@
        - TODO обработка старых архивов по расписанию 1 раз в сутки в 03:00
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
+    5. Files and Folders
+       - TODO бэкап конкретных файлов (масив из названия фолдера куда класть и имени файла который бэкапить)
+       - TODO Бэкап фолдеров (масив из названия фолдера куда класть и пути который бэкапить) + маска по которйо блать файлы + маска которую эксклюдить из набора
+       - TODO экспорт файлов на сервер
 
 
 New:
@@ -128,6 +132,28 @@ param (
 #	[string]$BackUpMontly = "14",		# Days
 #	[string]$AppPath = "C:\Shturman\",
 	[switch]$CreateSheduledTask = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
+
+
+<#
+    # Files and folders
+	[switch]$FilesON = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
+	[string]$FilesBackUpPath = "D:\BackUp\Shturman_Metro\Files",
+	[string]$FilesFileName = (
+                                # имя фолдера создаваемого в $FilesBackUpPath , файл который туда складывать, Compress | $FALSE - сжммать, Уровень сжатия [0-9]
+                                  # --TODO --"Mask Include", "Mask Exclude" - маски файлов
+                                ("TargetFolderForFile", "FilePatch", "Compress", "9"), 
+                                ("TargetFolderForFile", "FilePatch", "Compress", "9")
+                             ),		# единичные файлы
+	[string]$FilesFolderName =  (
+                                    # имя фолдера создаваемого в $FilesBackUpPath , файл который туда складывать, Compress | $FALSE - сжммать, Уровень сжатия [0-9]
+                                      # "Mask Include", "Mask Exclude" - маски файлов
+                                    ("TargetFolderForFolder", "FolderPatch", "Compress", "9", "Mask Include", "Mask Exclude"), 
+                                    ("TargetFolderForFolder", "FolderPatch", "Compress", "9", "Mask Include", "Mask Exclude")
+                                ),		# фолдеры целиком
+	Удаление старых архивов (как и логов) или нет?
+    #[string]$BackUpDaily = "14",		# Days
+    
+#>
 
         # Common
 	[switch]$UseSettingsFile = $FALSE,			# использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
