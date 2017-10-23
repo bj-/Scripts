@@ -1,0 +1,36 @@
+На каждом блоке 
+
+sudo su
+echo 'APT::Get::AllowUnauthenticated "1";' >> /etc/apt/apt.conf.d/71-no-recommends  
+cp /etc/apt/sources.list /etc/apt/sources.list.BAK
+echo 'deb http://192.168.51.92/packages/armhf/ /' > /etc/apt/sources.list
+echo 'deb http://192.168.51.92/packages/armhf/Contribe/ /' >> /etc/apt/sources.list
+
+#Контроль
+cat /etc/apt/apt.conf.d/71-no-recommends
+cat /etc/apt/sources.list
+
+
+
+На гавном блоке:
+sudo su
+apt-get install build-essential cifs-utils
+
+cp /etc/fstab /etc/fstab.BAK
+echo "//192.168.51.92/packages /mnt/repo/ cifs username=Shturman,password=Ver39noN,iocharset=utf8,file_mode=0777,dir_mode=0777" >> /etc/fstab
+cat /etc/fstab
+
+
+# Пересборка списка апдейтов серверной части
+cd /mnt/repo/armhf/Contribe
+dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
+
+Файл апдейта может быть только один.
+пересобирать список апдейтов можно только находясь в той директории. полные пути указывать нельзя. иначе они так в пак и попадут.
+
+
+На сервере:
+IIS: разрешить скачивать файлы MIMEtype .deb
+
+
+
