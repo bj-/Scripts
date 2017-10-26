@@ -10,6 +10,13 @@ echo 'deb http://192.168.51.92/packages/armhf/Contribe/ /' >> /etc/apt/sources.l
 cat /etc/apt/apt.conf.d/71-no-recommends
 cat /etc/apt/sources.list
 
+#Установка
+apt-get update
+apt-get install shturman
+
+# Апгрейд
+apt-get update
+apt-get upgrade
 
 
 На гавном блоке:
