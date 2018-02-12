@@ -107,6 +107,16 @@
 		[string]$VPNName = "ST",
 		[switch]$Verbose = $FALSE
 
+
+[Data]
+psiconv                            # Convert text ($string) encoding from $f to $t
+        $f      = source
+        $t      = target
+        $string = string
+bin2hex                            # Convert string to HEX
+        [string]$text
+
+
 #>
 
 # =============================================================================================
@@ -784,5 +794,45 @@ function SQLQueryExec
 
 	
 
+}
+
+function psiconv ( $f, $t, $string ) 
+{
+    # Text Encoding Converter
+    # Example
+    #    $r = psiconv -f "utf-8" -t "windows-1251" $line
+    #    $f : source
+    #    $t : target
+    #    $s : string
+
+    $enc = [system.text.encoding]
+
+    $cp1          = $enc::getencoding( $f )
+    $cp2          = $enc::getencoding( $t )
+    $inputbytes   = $enc::convert( $cp1, $cp2, $cp2.getbytes( $string ))
+    $outputstring = $cp2.getstring( $inputbytes )
+    
+    return $outputstring
+}
+#$r = psiconv -f "utf-8" -t "windows-1251" $line
+
+
+function bin2hex()
+{
+    # Convert string to HEX 
+
+    param (
+    	[string]$text = ""
+    )
+
+    $Encode = new-object "System.Text.UTF8Encoding"
+    $bytearray = $Encode.GetBytes($text) 
+    $res = ""
+    Foreach ($i in $bytearray) { 
+    $res = $res + $i.ToString("X").PadLeft(2,"0")
+    } 
+    #$text = $res.Substring(0,$res.Length - 1) 
+    #$text = $res
+    return $res
 }
 #>
