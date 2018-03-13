@@ -55,7 +55,7 @@ SELECT 2,
 FROM [Shturman3].[dbo].[Servers] AS [s88]
 LEFT JOIN [10.200.24.92].[Shturman3Diag].[dbo].[Servers] AS [s92] ON [s92].[Guid] = [s88].[Guid]
 where Alias like 'STB%'
-AND Alias NOT IN ('STB8888','STB9999')
+AND Alias NOT IN ('STB8888','STB2278')
 AND Alias NOT LIKE ('STB000%')
 AND [s92].[BlockSerialNo] IS NULL
 --ORDER BY Alias ASC
