@@ -15,7 +15,8 @@
 
 
 ChangeNotes
-
+	1.07
+		+ Поддержка сервисов Shturman3
 
 #>
 param (
@@ -40,7 +41,7 @@ param (
 
 #$AppPath\PSS\SysTech\CreateUser.ps1
 
-clear;
+#clear;
 
 
 # Determine script location for PowerShell
@@ -55,7 +56,7 @@ $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 .".\..\functions\log.ps1"
 #>
 
-$version = "1.0.6";
+$version = "1.0.7";
 
 #[Console]::OutputEncoding = [System.Text.Encoding]::1251
 #$OutputEncoding = [Console]::OutputEncoding
@@ -105,13 +106,15 @@ if(isAdmin)
 # Список всех существующих в мире сервисов
 $ShturmanServicesAll = "ShturmanDiag","ShturmanQuality","ShturmanMainUnit","ShturmanRRs","ShturmanDataSync","ShturmanUpdate","ShturmanAsnp","ShturmanGPS",
 			"ShturmanWLan","ShturmanAccelerometer","ShturmanModem","ShturmanFOS","ShturmanBlueGiga","ShturmanMetroLocations",
-			"ShturmanDataStorage","ShturmanHub","ShturmanLog","ShturmanBOINorms","ShturmanDataProc"
+			"ShturmanDataStorage","ShturmanHub","ShturmanLog","ShturmanBOINorms","ShturmanDataProc",
+			"ShturmanSolver3","ShturmanMath3","ShturmanFresher3","ShturmanDataTransfer3","ShturmanHub3","ShturmanLog3","ShturmanDataStorage3"
 
 # TODO сделать чтоб сам искал все фалы *.Server.exe
 $ShturmanExeFiles = "AccelerometerServer.exe","AsnpServer.exe","BlueGigaServer.exe","DataStorageServer.exe","DataSyncServer.exe",
 		"FOSServer.exe","GPSServer.exe","HubServer.exe","LogServer.exe","MainUnitServer.exe","MetroLocationsServer.exe",
 		"ModemServer.exe","QualityServer.exe","RRsServer.exe","UpdateServer.exe","WLanServer.exe","BOINormsServer.exe","DataProcServer.exe",
-		"DiagServer.exe"
+		"DiagServer.exe",
+		"SolverServer.exe","MathServer.exe","FresherServer.exe","DataTransferServer.exe"
 
 
 # Если в каталоге демки присуствует файл Services.ps1 - подсасываем из него персонализинованные параметры необходимых данной демке
@@ -205,7 +208,9 @@ function ServicesUninstall
 	$FuncName = "$FuncName" + ":";
 
 	# Удаление всех сервисов
-	WriteLog "$FuncName Removing Services" "INFO"
+	WriteLog "===============================" "INFO"
+	WriteLog "$FuncName Removing All Services" "INFO"
+	WriteLog "===============================" "INFO"
 
 	$RebootRequired = $FALSE;  # если не удалось снести сервисы (хоть один из них) - взводим флаг и отправляем комп в ребут
 
@@ -295,15 +300,18 @@ function ServicesInstall
 	$FuncName = $MyInvocation.MyCommand;
 	$FuncName = "$FuncName" + ":";
 
+	WriteLog "============================" "INFO"
 	WriteLog "$FuncName Services Installer" "INFO"
+	WriteLog "============================" "INFO"
 
 	# По списку экзешников возможных, если экзешник есть - регистрируем его.
 	foreach ($item in $ShturmanExeFiles)
 	{
 		# проверяем вдруг сервис уже зареган.
 		$itemServiceName = "Shturman" + ($item -replace "Server.exe", "")
+		$itemServiceName3 = "Shturman" + ($item -replace "Server.exe", "") + "3"
 #		$itemServiceName
-		if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+		if ( (Get-Service $itemServiceName -ErrorAction SilentlyContinue) -or (Get-Service $itemServiceName3 -ErrorAction SilentlyContinue) )
 		{
 			WriteLog "$FuncName Service [$itemServiceName] aready registered." "WARN"
 		}
@@ -321,7 +329,7 @@ function ServicesInstall
 				while ($i -le 5)
 				{
 					# Проверка что сервис зарегался.
-					if (Get-Service $itemServiceName -ErrorAction SilentlyContinue)
+					if ( (Get-Service $itemServiceName -ErrorAction SilentlyContinue) -or (Get-Service $itemServiceName3 -ErrorAction SilentlyContinue) )
 					{
 						WriteLog "$FuncName Service [$itemServiceName] registered." "MESS"
 						break; # выпадеем из цикла, если регистрация успешна
@@ -330,7 +338,7 @@ function ServicesInstall
 					{
 
 						# в конце пятой попытки еще раз проверяем сервис, и если его таки нет - кидаем ошибку
-						if ($i -eq 5 -and (-not (Get-Service $itemServiceName -ErrorAction SilentlyContinue)))
+						if ($i -eq 5 -and (-not (Get-Service $itemServiceName -ErrorAction SilentlyContinue) -and (-not (Get-Service $itemServiceName3 -ErrorAction SilentlyContinue))) )
 						{
 							WriteLog "$FuncName Service [$itemServiceName] can not register" "ERRr"
 						}
@@ -442,8 +450,8 @@ if ($ShturmanInstall)
 	# Сносим сервисы
 	ServicesUninstall;
 
-    WriteLog "Убиваем OnBoard.exe" "MESS"
-    taskkill.exe /f /im OnBoard.exe
+	    WriteLog "Убиваем OnBoard.exe" "MESS"
+	    taskkill.exe /f /im OnBoard.exe
 
 # $InstallPath
 
@@ -460,8 +468,8 @@ if ($ShturmanInstall)
 
     # СНОС
 	# сносим базу
-    WriteLog "Remove old Database [$SQLDBName]" "MESS"
-    SQLDropDatabase -SQLServerInstance "$SQLServerInstance" -SQLUsername "$SQLUsername" -SQLPassword "$SQLPassword" -SQLDBName $SQLDBName  # -Verbose
+	    WriteLog "Remove old Database [$SQLDBName]" "MESS"
+	    SQLDropDatabase -SQLServerInstance "$SQLServerInstance" -SQLUsername "$SQLUsername" -SQLPassword "$SQLPassword" -SQLDBName $SQLDBName  # -Verbose
 
 	# Сносим штурмана
 	# TODO Сносить таки без Shturman.ini. сейчас с ним сносит
