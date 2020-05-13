@@ -51,5 +51,37 @@
 	[int]$SVNBackUpMontly = "90"        # Days
 
 #>
-        # Common
-        [switch]$HighestPrivelegesIsRequired = $FALSE
+
+    # Files and folders
+	#[switch]$FilesON = $TRUE		# Создавать бекапы файлов/каталогов
+	[switch]$FilesON = $FALSE		# Создавать бекапы файлов/каталогов
+    [string]$FilesDateFormat = "yyy-MM-dd_HHmm"
+	[string]$FilesBackUpPahth = "D:\BackUp\Files"  # Место куда сладируются сделанные бекапы
+	[array]$FilesFileName = (
+                                # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
+                                  # --TODO --"Mask Include", "Mask Exclude" - маски файлов
+                                ("", "FilePatch", "ID", "Compress"), 
+                                ("D:\BackUp", "FilePatch", "ID", "Compress")
+                             )		# единичные файлы
+	[array]$FilesFolderName =  (
+                                    # имя фолдера задаваемого в $FilesBackUpPath , каталог который необходимо забекапить, Compress | $FALSE - сжммать, Уровень сжатия [0-9], Маска включаемых файлов, Маска исключаемых
+                                      # "Mask Include", "Mask Exclude" - маски файлов
+                                    ("", "c:\temp\*", "", "Compress", "", ""), 
+                                    ("D:\BackUp", "c:\temp", "ID", "Compress", "", "")
+                                    ("D:\BackUp", "c:\temp", "ID", "Compress", "Mask Include", "Mask Exclude")
+                                )		# фолдеры целиком
+	# Удаление старых архивов (как и логов) или нет?
+	[int]$FilesBackUpDaily = "7"			# Days
+	[int]$FilesBackUp10days = "60"			# Days
+	[int]$FilesBackUpMontly = "0"		# Days (0 - всегда)
+	[string]$FilesExportPath = "D:\BackUp\2Tape"
+    #[switch]$FilesExport = $TRUE			# Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [switch]$FilesExport = $FALSE			# Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [int]$FilesExportUploadArcPart = 100		# Нарезка архива на части = размер части в МБ, 0 = одним куском
+    [switch]$FilesExportUpload = $FALSE		# Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string]$FilesExportUploadPath = "\\172.16.30.139\Share\Exp"	# Путь куда заливать
+    [array]$FilesExportUploadCred = ("UserName","password")		# Логин и пароль для заливки
+
+
+    # Common
+    [switch]$HighestPrivelegesIsRequired = $FALSE
