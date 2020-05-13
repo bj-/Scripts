@@ -292,19 +292,30 @@ function DeleteFile
 		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
 	)
 
-    WriteLog "Try to delete file [$File]" "DUMP" $Verbose
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
 
-	Remove-Item -Path $File -Force
+    if (test-path -Path $File -ErrorAction SilentlyContinue)
+    {
+        WriteLog "$FuncName Try to delete file [$File]" "DUMP" $Verbose
 
-	# проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
-	if (test-path -Path $File -ErrorAction SilentlyContinue)
-	{
-		WriteLog "Old Log file [$File] doesn't removed" "ERRr" $TRUE
-	}
-	else
-	{
-		WriteLog "File [$File] is deleted" "MESS" $Verbose # а если нормально удалился - пишем что ремувед
-	}
+	    Remove-Item -Path $File -Force
+    	
+        # проверяем исходный файл на наличие, если все еще присутсвует - ругаемся
+    	if (test-path -Path $File -ErrorAction SilentlyContinue)
+    	{
+		    WriteLog "$FuncName Old Log file [$File] doesn't removed" "ERRr" $TRUE
+	    }
+	    else
+	    {
+    		WriteLog "$FuncName File [$File] was deleted" "MESS" $Verbose # а если нормально удалился - пишем что ремувед
+    	}
+    }
+    else
+    {
+    	WriteLog "$FuncName File [$File] does not exist" "INFO" $Verbose # Файла и так нету
+    }
+
 }
 
 # Проверка наличия свободного места на диске (локальный и сетевая шара)
