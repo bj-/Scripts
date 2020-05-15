@@ -45,6 +45,10 @@
 
 
 New:
+1.0.10
+    - Создание шедульной таски
+        - Название, время запуска - все хардкод. если надо - исправить на созданной уже.
+          Созданеи таско исключительно для облегчения труда.
 1.0.9
     - Бекапирование файлов и фолдеров
         - отдельных файлов
@@ -52,7 +56,7 @@ New:
         - отдельных каталогов (путь полный указан)
         - всех подкаталогов в отдельные архивы (последний каталог указан как "*" )
         - выкладывание последней версии каждого бекапа в отдельный каталог (HardLink по возможности)
-	- Archive prefix (can add)
+
 1.0.8
     - функция ArchiveFiles: сделана поддержка разбития на тома, опциональное удаление исходных файлов, 3 типа сжатия - дефолт, нулевой и максимальный
     SQL
@@ -138,7 +142,6 @@ param (
 	[string]$BackUpWeekly = "13",		# Weeks
 #	[string]$BackUpMontly = "14",		# Days
 #	[string]$AppPath = "C:\Shturman\",
-	[switch]$CreateSheduledTask = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
 
 
     # Files and folders
@@ -172,6 +175,7 @@ param (
 
 
         # Common
+	[switch]$SheduledTaskCreate = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
 	[switch]$UseSettingsFile = $FALSE,			# использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
 	[switch]$HighestPrivelegesIsRequired = $FALSE,   #Проверять есть ли админские права. модт быть необходимо работы с файлами
 
@@ -185,13 +189,20 @@ param (
 #	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.9";
+$version = "1.0.10";
 
 
 
 # Determine script location for PowerShell
 $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
- 
+$ScriptFullPath = $script:MyInvocation.MyCommand.Source
+
+#Split-Path $script:MyInvocation.MyCommand.Path
+#$script:MyInvocation.MyCommand.Source
+
+#$ScriptFullPath
+#break
+
 # Include SubScripts
 .$ScriptDir"\..\Functions\Functions.ps1"
 .$ScriptDir"\..\Functions\log.ps1"
@@ -199,6 +210,7 @@ $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 clear;
 WriteLog "Archive Log Files, purge old archives and upload archives to Server" "INFO"
 WriteLog "Script version: [$version]" "INFO"
+
 
 
 [string]$ParamsPath = "$ScriptDir\BackUpSettings.ps1";
@@ -591,11 +603,97 @@ function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
 }
 #>
 
-# TODO Создание Шедульной таски для автоматического запуска скрипта
-if ($CreateSheduledTask)
+# Создание Шедульной таски для автоматического запуска скрипта
+#$SheduledTaskCreate = $TRUE
+if ($SheduledTaskCreate)
 {
-	WriteLog "NO FUNCTIONALE (c) Kuba's taxist" "ERRr"
 
+	if(isAdmin)
+	{
+		WriteLog "Админские права: есть." "MESS"
+	};
+	#WriteLog "NO FUNCTIONALE (c) Kuba's taxist" "ERRr"
+    $Name = "BackUp Logs, Fileas and Folders, SQL DB"
+    $Description = "Automatic BackUp and purge old BackUps"
+
+    #WriteLog "Run with params: TaskName: [$Name]; Description: [$Description]; Execute: [$Execute] with Argument: [$Argument]" "INFO"
+    WriteLog "Will Create Sheduled task for Script: TaskName: [$Name]" "INFO"
+
+    # Проверяем существует ли уже таска с таким названием
+    $ShTask = Get-ScheduledTask -TaskName $Name -ErrorAction SilentlyContinue
+
+    #$ShTask
+
+    if ( ($ShTask.TaskName -eq $Name) )
+    {
+        # удаляем существующую таску
+        Unregister-ScheduledTask -TaskName $Name -Confirm:$false
+      	WriteLog "Delete exist Sheduled task [$Name]" "MESS"
+
+        $ShTask = Get-ScheduledTask -TaskName $Name -ErrorAction SilentlyContinue
+
+        if ($ShTask.TaskName -eq $Name)
+        {
+            # Заканчиваем с ошибкой т.к. таска уже существует
+      	    WriteLog "Sheduled task [$Name] already exist. And can't be delete" "WARN"
+            break;
+        }
+    }
+
+
+    # Create sheduled task 
+ 	$action = New-ScheduledTaskAction -Execute "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" `
+                                      -Argument "$ScriptFullPath -UseSettingsFile"
+    
+    #$RunAt = ParseDate -Date $Date -Time $Time -Verbose # Переводим то что дал пользователь в дату-время. либо берем сегодняшнюю если не сказал ничего
+    #$RunAt = Get-Date
+    #$RunAt = "10/10/2020"
+    #ParseInterval -Interval $Interval
+
+    #$RepetitionInterval = New-TimeSpan -Minutes 55
+    #$RepetitionInterval = New-TimeSpan -Days 10
+    #$RepetitionInterval = ParseInterval -Interval $Interval -verbose
+    #$RepetitionInterval = New-TimeSpan -Days 1
+    #$RepetitionInterval =  1
+
+    #$RepetitionInterval
+
+	#$trigger = New-ScheduledTaskTrigger `
+	#    -Once `
+	#    -At ($RunAt) `
+	#    -RepetitionInterval ($RepetitionInterval) `
+	#    -RepetitionDuration ([System.TimeSpan]::MaxValue)
+    $trigger = New-ScheduledTaskTrigger -At 00:10:00 -Daily
+	$option1 = New-ScheduledJobOption -StartIfOnBattery -ContinueIfGoingOnBattery
+	$principal = New-ScheduledTaskPrincipal -UserID "NT AUTHORITY\SYSTEM" -LogonType ServiceAccount -RunLevel Highest
+	# $option1 = New-ScheduledJobOption -StartIfOnBattery -ContinueIfGoingOnBattery
+	$STSettings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries
+	#Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $TaskName -Description "Disable windows firewall" -User $AdminLogin -Password $AdminPassword -RunLevel Highest #-Principal $principal
+	Register-ScheduledTask -Action $action -Trigger $trigger -TaskName $Name -Description $Description -Principal $principal -Settings $STSettings #-ScheduledJobOption $option1
+
+
+	#-User "$env:USERDOMAIN\$env:USERNAME" `
+	#                       -Password 'P@ssw0rd' `
+
+	# Enable-ScheduledTask 
+	# Disable-ScheduledTask 
+    #EnableFireWallRule -RuleName "RRAS-GRE-Out" -RuleDirection "Outbound"
+
+
+    #"Get-ScheduledTask -TaskName $TaskName -ErrorAction SilentlyContinue"
+    #Get-ScheduledTask -TaskName "$TaskName"
+
+    $ShTask = Get-ScheduledTask -TaskName "$Name" -ErrorAction SilentlyContinue
+    #$ShTask
+    if ($ShTask.TaskName -eq $Name)
+    {
+      	WriteLog "Sheduled task [$Name] created." "MESS"
+    
+    }
+    else
+    {
+    	WriteLog "Sheduled task [$Name] isn't created." "ERRr"
+    }
 }
 
 
@@ -1328,22 +1426,17 @@ if ($FilesON)
 
         #$BackFileMaskName = $BackFile -replace "(\.\*)|(\..*$)", ""
         $BackFileMaskName = $BackFile -replace "(\.\*)|[\*\?]", ""
-
-	if ( $BackFileMaskName -eq "" )
-	{
-		continue
-	}
         $BackFileMaskName = Split-path $BackFileMaskName -Leaf
         #$BackFileMaskName
         #$BackFileMask = Split-path $BackFile -Leaf
 
         if ( $id.Length -gt 0 ) 
         {
-            $id = "$id" + "_"
+            $id = "_$id"
         }
 
 	    $path = $BackFile;
-	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
+	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
 
     
 	    #WriteLog "Processing file [$File]" "DUMP"
@@ -1361,7 +1454,7 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
         }
         else 
         {
@@ -1397,7 +1490,7 @@ if ($FilesON)
 
         if ( $id.Length -gt 0 ) 
         {
-            $id = "$id" + "_"
+            $id = "_$id"
         }
 
         #$BackFolderName
@@ -1426,16 +1519,16 @@ if ($FilesON)
 
         if ( $BackFolderName -eq "*" )
         {
-            $dirs = Get-ChildItem -Path $BackFolderParent -Directory # -Depth 0
+            $dirs = Get-ChildItem -Path $BackFolderParent -Directory #-Depth 0
             
             foreach ( $dir in $dirs )
             {
                 $BackFileMaskName = $dir.Name
                 $path = $dir.FullName
-        	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
+        	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
                 
-                #$path
-                #$arcPath
+                $path
+                $arcPath
                 ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
             # выкладываем / заливаем
@@ -1445,7 +1538,7 @@ if ($FilesON)
             }
     
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
                 
             }
 
@@ -1453,7 +1546,7 @@ if ($FilesON)
         else
         {
             $BackFileMaskName = $BackFolderName
-    	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
+    	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
             ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
             # выкладываем / заливаем
@@ -1463,7 +1556,7 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
 
         }
 
