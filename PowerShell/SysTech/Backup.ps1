@@ -52,7 +52,7 @@ New:
         - отдельных каталогов (путь полный указан)
         - всех подкаталогов в отдельные архивы (последний каталог указан как "*" )
         - выкладывание последней версии каждого бекапа в отдельный каталог (HardLink по возможности)
-
+	- Archive prefix (can add)
 1.0.8
     - функция ArchiveFiles: сделана поддержка разбития на тома, опциональное удаление исходных файлов, 3 типа сжатия - дефолт, нулевой и максимальный
     SQL
@@ -1328,17 +1328,22 @@ if ($FilesON)
 
         #$BackFileMaskName = $BackFile -replace "(\.\*)|(\..*$)", ""
         $BackFileMaskName = $BackFile -replace "(\.\*)|[\*\?]", ""
+
+	if ( $BackFileMaskName -eq "" )
+	{
+		continue
+	}
         $BackFileMaskName = Split-path $BackFileMaskName -Leaf
         #$BackFileMaskName
         #$BackFileMask = Split-path $BackFile -Leaf
 
         if ( $id.Length -gt 0 ) 
         {
-            $id = "_$id"
+            $id = "$id" + "_"
         }
 
 	    $path = $BackFile;
-	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
+	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
 
     
 	    #WriteLog "Processing file [$File]" "DUMP"
@@ -1356,7 +1361,7 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
         }
         else 
         {
@@ -1392,7 +1397,7 @@ if ($FilesON)
 
         if ( $id.Length -gt 0 ) 
         {
-            $id = "_$id"
+            $id = "$id" + "_"
         }
 
         #$BackFolderName
@@ -1421,16 +1426,20 @@ if ($FilesON)
 
         if ( $BackFolderName -eq "*" )
         {
+<<<<<<< HEAD
             $dirs = Get-ChildItem -Path $BackFolderParent -Directory #-Depth 0
+=======
+            $dirs = Get-ChildItem -Path $BackFolderParent -Directory # -Depth 0
+>>>>>>> 80e9e46faccd1d11233ba904e7cc9e0f959c4b52
             
             foreach ( $dir in $dirs )
             {
                 $BackFileMaskName = $dir.Name
                 $path = $dir.FullName
-        	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
+        	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
                 
-                $path
-                $arcPath
+                #$path
+                #$arcPath
                 ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
             # выкладываем / заливаем
@@ -1440,7 +1449,7 @@ if ($FilesON)
             }
     
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
                 
             }
 
@@ -1448,7 +1457,7 @@ if ($FilesON)
         else
         {
             $BackFileMaskName = $BackFolderName
-    	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
+    	    $arcPath = "$BackUpFolder\" + $id + "$BackFileMaskName" + "_" + $currDate + ".7z"
             ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
             # выкладываем / заливаем
@@ -1458,7 +1467,7 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $id + $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
 
         }
 
