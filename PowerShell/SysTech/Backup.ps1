@@ -195,11 +195,12 @@ $version = "1.0.10";
 
 # Determine script location for PowerShell
 $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
-$ScriptFullPath = $script:MyInvocation.MyCommand.Source
+$ScriptFullPath = $ScriptDir + "\" + $script:MyInvocation.MyCommand.Name
 
 #Split-Path $script:MyInvocation.MyCommand.Path
 #$script:MyInvocation.MyCommand.Source
 
+#$ScriptDir
 #$ScriptFullPath
 #break
 
