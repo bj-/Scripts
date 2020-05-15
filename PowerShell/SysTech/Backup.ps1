@@ -1426,11 +1426,7 @@ if ($FilesON)
 
         if ( $BackFolderName -eq "*" )
         {
-<<<<<<< HEAD
-            $dirs = Get-ChildItem -Path $BackFolderParent -Directory #-Depth 0
-=======
             $dirs = Get-ChildItem -Path $BackFolderParent -Directory # -Depth 0
->>>>>>> 80e9e46faccd1d11233ba904e7cc9e0f959c4b52
             
             foreach ( $dir in $dirs )
             {
