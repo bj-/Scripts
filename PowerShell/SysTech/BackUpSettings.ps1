@@ -20,7 +20,7 @@
 
 
     # SQL
-	[switch]$SQL = $TRUE				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
+	[switch]$SQL = $FALSE				# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 #	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
 #	[string]$SQLDBName = "Shturman_Metro",
 #	[string]$SQLUsername = "BackUpOperator",

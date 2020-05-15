@@ -1421,7 +1421,7 @@ if ($FilesON)
 
         if ( $BackFolderName -eq "*" )
         {
-            $dirs = Get-ChildItem -Path $BackFolderParent -Directory -Depth 0
+            $dirs = Get-ChildItem -Path $BackFolderParent -Directory #-Depth 0
             
             foreach ( $dir in $dirs )
             {
