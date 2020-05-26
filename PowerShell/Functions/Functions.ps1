@@ -40,8 +40,28 @@
     GetFreeSpace						# Поулчаекм значение свободного места на диске (локальный или сетевая шара)
 		[string]$Path = "",             # Полный путь из которого будет браться буква диска/сетевой путь
 		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+    get_foldersize                      # возвращает размер в байтах
+        [string]$Path = ""              # Путь (можно с маской)
+    move_files                          # Мув файлов и фолдеров. Возвращает TRUE/FALSE
+		[string]$Path = "",             # Откуда
+		[string]$Destination = "",      # Куда
+    copy_files_and_folders              # копирование файлов, фолдеров, сабфолдеров
+		[string]$Path = "",             # Откуда
+		[string]$Destination = "",      # Куда
+		[switch]$Recurse = $FALSE,      # с подкаталогами
+        [switch]$Check = $FALSE,        # проверить (размер исходных и скопированных - одинаков)
+		[switch]$Verbose = $FALSE
 
 
+function get_foldersize ()
+{
+	param (
+		[string]$Path = ""
+		#[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+    return ((Get-ChildItem $Path -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum)
+
+}
 
 
 [UsersAndGroups]
@@ -408,7 +428,104 @@ function GetFreeSpace
 
 }
 
+# копирование файлов, фолдеров, сабфолдеров
+function copy_files_and_folders ()
+{
+	param (
+		[string]$Path = "",
+		[string]$Destination = "",
+		#[switch]$Create = $FALSE,
+		[switch]$Recurse = $FALSE,
+        [switch]$Check = $FALSE,
+		[switch]$Verbose = $FALSE
+		)
 
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+
+	if ( $Path -eq "" )
+	{
+		WriteLog "$FuncName Parameter [Path] are missed" "ERRr" $TRUE
+		break;
+	}
+
+	if ( $Target -eq "" )
+	{
+		WriteLog "$FuncName Parameter [Target] are missed" "ERRr" $TRUE
+		break;
+	}
+
+	WriteLog "$FuncName From [$Path] to [$Destination]" "INFO" $Verbose
+
+    
+    if ( $Recurse ) 
+    {
+        Copy-Item -Path $Path -Destination $Destination -Recurse
+
+    }
+    else
+    {
+        Copy-Item -Path $Path -Destination $Destination
+    }
+
+    if ( $Check )
+    {
+        $SizeSrc = (Get-ChildItem $Path -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum
+        $SizeTrg = (Get-ChildItem $Destination -Recurse | Measure-Object -Property Length -Sum -ErrorAction Stop).Sum
+        if ( $SizeSrc -eq $SizeTrg )
+        {
+           
+        	WriteLog ("$FuncName Succesfully copied From [$Path] to [$Destination]; [" + [math]::Round($SizeSrc / 1MB) + "] Mb") "MESS" $Verbose
+        }
+        else
+        {
+        	WriteLog "$FuncName failed to copy [$Path] to [$Destination]. Size mismatch Src:[$SizeSrc] / Trd:[$SizeTrg] b" "ERRr" $Verbose
+        }
+    }
+
+
+}
+
+# Мув файлов и фолдеров
+function move_files ()
+{
+    param (
+		[string]$Path = "",
+		[string]$Destination = "",
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+
+    if ( -not (Test-Path -Path $Path) )
+    {
+        WriteLog "Source files does not exist [$Path]" "WARN"
+        return $FALSE
+    }
+
+
+    if ( -not (Test-Path -Path $Destination) )
+    {
+        WriteLog "Target folder [$Destination] does not exist or not accessible" "ERRr" -Verbose
+        return $FALSE
+    }
+
+    # move
+    Move-Item -Path $Path -Destination $Destination 
+    WriteLog "Move-Item -Path $Path -Destination $Destination" "DUMP"
+
+    # Check result
+    if ( -not (Get-ChildItem -Path $Path) )
+    {
+        WriteLog "Succeffully moved [$Path] to [$Destination]" "MESS" $Verbose
+        return $TRUE
+    }
+    else
+    {
+        WriteLog "Can not move [$Path] to [$Destination]" "ERRr" -Verbose
+        return $FALSE
+    }
+}
 
 <# ==============================================
 
