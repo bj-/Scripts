@@ -24,9 +24,10 @@
        - TODO Заливка последнего бекапа на сервак, если он отличается от предыдущего
     3. SVN BackUP
        - Поиск репозиториев и дамп всех найденных, бэкап настроек
-       - TODO Нормальный (полный) бэкап настроек, включая прова и правила коммитов, а не только список юзеров и групп
+       - TODO Нормальный (полный) бэкап настроек, включая права и правила коммитов, а не только список юзеров и групп
        - в папку d:\BackUP
-       - TODO Удаление старых бэкапов по принципу (1 нед - ежедневный, 1 месяц - недельный 1/15/21 числа кажд мес, всегда - ежемесячный от 1 числа)
+       - Удаление старых бэкапов по принципу (1 нед - ежедневный, 1 месяц - недельный 1/15/21 числа кажд мес, всегда - ежемесячный от 1 числа)
+       - Упаковыв дампов с конфигами в один архив (без сжатия)
        - TODO Восстановление бэкапа и проверка оного
        - TODO Сообщение об ошибках в случае не прохождения проверки.
        - TODO сделать проверку что скопировались кофигурационные файлы
@@ -42,9 +43,32 @@
        - TODO бэкап конкретных файлов (масив из названия фолдера куда класть и имени файла который бэкапить)
        - TODO Бэкап фолдеров (масив из названия фолдера куда класть и пути который бэкапить) + маска по которйо блать файлы + маска которую эксклюдить из набора
        - TODO экспорт файлов на сервер
+    6. MySQL BackUp
+        -
+    7. Collector
+        - Сбор бекапов с произвольных компьютеров
+        - складирование в указанный каталог в подкаталог = хостснейм | IP address 
+    А. Создание шедульной таски
+        - Создание шедульной таски (исключительно для облегчения установки). Название, время запуска - все хардкод.
+    B. General настройки
+        - SettingsFile - указать конкретный файл настроек (относительный путь от "c:\каталог_скрипта\")
+        - TODO: Куда класть
+        - TODO: Хранение (дневные / 10-ти дневки / месячные / квартальные / полугодовые / годовые
+        - TODO: Указать имя конфигурационного файла
+
 
 
 New:
+1.0.11
+    - Поддержка SVN
+        - дамп всех найденных репозиториев
+        - конфигурационных файлов
+        - упаковывание дампов с конфигами в один архив
+    - Поддержка MySQL
+    - Поддержка Redmine
+    - Сборщик с других компов
+    - рефакторинг purge_backUp функции
+    - Возможность указать кокретный файл настроек SettingsFile
 1.0.10
     - Создание шедульной таски
         - Название, время запуска - все хардкод. если надо - исправлять на созданной таске уже.
@@ -91,105 +115,163 @@ New:
 
 
 param (
-	# Log Files
-	[switch]$Log = $FALSE,					# Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
-	[string]$DateFormatLog = "yy-MM-dd",
-	[string]$LogFilePath = "D:\Shturman\Bin\Log",
-	[string]$LogFilePathOld = "D:\Shturman\Bin\Log\Old",
-    [string]$LogFolderForArchives = $env:computername,
-	[string]$LogFilePurgeDays = "30",		# Days
-	[switch]$PurgeLogFiles = $FALSE,		# похоронить архивы старше  $LogFilePurgeDays дней
-#	[switch]$UploadLogFiles = $FALSE,		# Заливка лог файлов на сервер.
-	[switch]$FastArcive = $FALSE,			# более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
-	[switch]$LogFileAll2Arc = $FALSE,		# заставляет упаковывать все лог файлы. включая сегоднящние
+	# +==============+
+    # |   Log Files  |
+	# +==============+  
+	[switch] $Log                  = $FALSE,					     # Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
+	[string] $DateFormatLog        = "yy-MM-dd",
+	[string] $LogFilePath          = "D:\Shturman\Bin\Log",
+	[string] $LogFilePathOld       = "D:\Shturman\Bin\Log\Old",
+    [string] $LogFolderForArchives = $env:computername,
+	[string] $LogFilePurgeDays     = "30",		                     # Days
+	[switch] $PurgeLogFiles        = $FALSE,		                 # похоронить архивы старше  $LogFilePurgeDays дней
+#	[switch] $UploadLogFiles       = $FALSE,		                 # Заливка лог файлов на сервер.
+	[switch] $FastArcive           = $FALSE,		                 # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
+	[switch] $LogFileAll2Arc       = $FALSE,		                 # заставляет упаковывать все лог файлы. включая сегоднящние 
 
     # Errors log Archiver 
-	[switch]$Errors = $FALSE,							# Архивирование Errors файлов
-	[string]$ErrorsPath = "D:\Shturman\Bin\Errors",		# Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
+	[switch] $Errors               = $FALSE,						 # Архивирование Errors файлов
+	[string] $ErrorsPath           = "D:\Shturman\Bin\Errors",	  	 # Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
 
-	# SQL
-	[switch]$SQL = $FALSE,					# Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
-#	[string]$SQLServerInstance = "localhost\SQLEXPRESS",
-#	[string]$SQLDBName = "Shturman_Metro",
-#	[string]$SQLUsername = "BackUpOperator",
-#	[string]$SQLPassword = "diF80noY",
-	[string]$SQLBackUpPath = "D:\BackUp\Shturman_Metro",
-	[string]$SQLExportPath = "D:\BackUp\2Tape",
-	[switch]$SQLExport = $FALSE,			# Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-    [switch]$SQLExportUploadArc = $FALSE,	# Архивирование бэкапа для заливки на сервер
-    [int]$SQLExportUploadArcPart = 100,		# Нарезка архива на части = размер части в МБ, 0 = одним куском
-    [switch]$SQLExportUpload = $FALSE,		# Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
-    [string]$SQLExportUploadPath = "\\172.16.30.139\Share\Exp",	# Путь куда заливать
-    [array]$SQLExportUploadCred = ("UserName","password"),		# Логин и пароль для заливки
-	[array]$SQLBackUpFileMask = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
-	#[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
-	[int]$SQLBackUpDaily = "7",			# Days
-	[int]$SQLBackUp10days = "60",		# Days
-	[int]$SQLBackUpMontly = "180",		# Days
+	# +==============+
+	# |     SQL      |
+	# +==============+
+	[switch] $SQL                    = $FALSE,					    # Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
+#	[string] $SQLServerInstance      = "localhost\SQLEXPRESS",
+#	[string] $SQLDBName              = "Shturman_Metro",
+#	[string] $SQLUsername            = "BackUpOperator",
+#	[string] $SQLPassword            = "diF80noY",
+	[string] $SQLBackUpPath          = "D:\BackUp\Shturman_Metro",
+	[string] $SQLExportPath          = "D:\BackUp\2Tape",
+	[switch] $SQLExport              = $FALSE,			            # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [switch] $SQLExportUploadArc     = $FALSE,	                    # Архивирование бэкапа для заливки на сервер
+    [int]    $SQLExportUploadArcPart = 100,		                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
+    [switch] $SQLExportUpload        = $FALSE,		                # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string] $SQLExportUploadPath    = "\\172.16.30.139\Share\Exp",	# Путь куда заливать
+    [array]  $SQLExportUploadCred    = ("UserName","password"),		# Логин и пароль для заливки
+	[array]  $SQLBackUpFileMask      = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
+    #[array] $SQLLimits              = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $SQLLimits              = $NULL,                  # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	#[string]$SQLDateFormatLog       = "yyyy-MM-dd_HHmm",
 
-	# SVN
-	[switch]$SVN = $FALSE,				# Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
-	[string]$SVNRepoPath = "D:\Repositories",
-	[string]$SVNBackUpPath = "D:\BackUp\SVN",
-	[int]$SVNBackUpDaily = "7",			# Days
-	[int]$SVNBackUp10days = "30",		# Days
-	[int]$SVNBackUpMontly = "90",		# Days
+	# +==============+
+	# |    MySQL     |
+	# +==============+
+	[switch] $MySQL                    = $FALSE,					                # Бэкап и обслуживание MySQL ( без этого колюча остальыне из группы MySQL* игнорируются)
+    [string] $MySQLDumperPath          = "C:\Redmine\mysql\bin\mysqldump.exe",		# То чем создавать дампы
+    [array]  $MySQLCred                = ("UserName","password"),		            # Логин и пароль для заливки
+	[array]  $MySQL_DB                 = ("db_name_1","db_name_2"),                 # Список баз для бэкапа
+	#[string]$SQLDateFormatLog         = "yyyy-MM-dd_HHmm",
+	[string] $MySQLBackUpPath          = "\MySQL",
+    [string] $MySQLBackUpPrefix        = "MySQL_",	                                # Префикс названия создаваемого файла
+    #[array]  $MySQLLimits              = (10, 60, 180, 365, 0),                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array] $MySQLLimits              = $NULL,                                      # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[switch] $MySQLExport              = $FALSE,			                        # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [int]    $MySQLExportUploadArcPart = 0,		                                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
 
-	# Redmine
-	[switch]$Redmine = $FALSE,			# Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+	# +==============+
+	# |     SVN      |
+	# +==============+
+	[switch] $SVN            = $FALSE,				    # Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
+	[string] $SVNRepoPath    = "D:\Repositories",
+	[string] $SVNBackUpPath  = "D:\BackUp\SVN",
+    #[array] $SVNLimits      = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $SVNLimits      = $NULL,                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [switch] $SVNExport      = $FALSE,                  # Выкладывать последний архив в каталог для переноса на другую машину 
 
-	[string]$BackUpDaily = "14",		# Days
-	[string]$BackUpWeekly = "13",		# Weeks
-#	[string]$BackUpMontly = "14",		# Days
-#	[string]$AppPath = "C:\Shturman\",
+	# +==============+
+	# |    Redmine   |
+	# +==============+
+	#[switch]$Redmine             = $TRUE			                         # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+	[switch] $Redmine             = $FALSE,			                         # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+    [string] $RedmineBackUpPrefix = "Redmine",
+    [string] $RedmineBackUpPath   =  "\Redmine",                             # Место куда складывать бекапы
+    #[array] $RedmineLimits       = (10, 60, 180, 365, 0),                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $RedmineLimits       = $NULL,                                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[string] $RedmineDB           = "bitnami_redmine",			             # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+    [switch] $RedmineExport       = $FALSE,                                  # Запаковывать последний архив и выкладывать его в каталог для переноса на другую машину 
+	[string] $RedminePath         = "C:\redmine\apps\redmine\htdocs\files",  # Место где живут файлы которые необходимо забекапить (аттачи)
 
 
-    # Files and folders
-	#[switch]$FilesON = $TRUE,		# Создавать бекапы файлов/каталогов
-	[switch]$FilesON = $FALSE,		# Создавать бекапы файлов/каталогов
-    [string]$FilesDateFormat = "yyy-MM-dd_HHmm",
-	[string]$FilesBackUpPahth = "D:\BackUp\Shturman_Metro\Files",  # Место куда сладируются сделанные бекапы
-	[array]$FilesFileName = (
-                                # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
+	# +=========================+
+    # |    Files and folders    |
+	# +=========================+
+	#[switch]$FilesON = $TRUE,		                                         # Создавать бекапы файлов/каталогов
+	[switch] $FilesON = $FALSE,		                                         # Создавать бекапы файлов/каталогов
+    [string] $FilesDateFormat = "yyy-MM-dd_HHmm",
+	[string] $FilesBackUpPahth = "D:\BackUp\Shturman_Metro\Files",           # Место куда сладируются сделанные бекапы
+	[array]  $FilesFileName = (
+                                  # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
                                   # --TODO --"Mask Include", "Mask Exclude" - маски файлов
                                 ("TargetFolderForBackUpFile", "FilePatch", "ID", "Compress"), 
                                 ("TargetFolderForBackUpFile", "FilePatch", "ID", "Compress")
                              ),		# единичные файлы
-	[array]$FilesFolderName =  (
-                                    # имя фолдера задаваемого в $FilesBackUpPath , каталог который необходимо забекапить, Compress | $FALSE - сжммать, Уровень сжатия [0-9], Маска включаемых файлов, Маска исключаемых
+	[array]  $FilesFolderName =  (
+                                      # имя фолдера задаваемого в $FilesBackUpPath , каталог который необходимо забекапить, Compress | $FALSE - сжммать, Уровень сжатия [0-9], Маска включаемых файлов, Маска исключаемых
                                       # "Mask Include", "Mask Exclude" - маски файлов
                                     ("TargetFolderForFolder", "FolderPatch", "ID", "Compress", "Mask Include", "Mask Exclude"), 
                                     ("TargetFolderForFolder", "FolderPatch", "ID", "Compress", "Mask Include", "Mask Exclude")
                                 ),		# фолдеры целиком
 	# Удаление старых архивов (как и логов) или нет?
-	[int]$FilesBackUpDaily = "7",			# Days
-	[int]$FilesBackUp10days = "60",			# Days
-	[int]$FilesBackUpMontly = "180",		# Days
-	[string]$FilesExportPath = "D:\BackUp\2Tape",
-    [switch]$FilesExport = $FALSE,			# Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-    [int]$FilesExportUploadArcPart = 100,		# Нарезка архива на части = размер части в МБ, 0 = одним куском
-    [switch]$FilesExportUpload = $FALSE,		# Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
-    [string]$FilesExportUploadPath = "\\172.16.30.139\Share\Exp",	# Путь куда заливать
-    [array]$FilesExportUploadCred = ("UserName","password"),		# Логин и пароль для заливки
-	#[array]$FilesBackUpFileMask = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
+    #[array] $FilesLimits              = (10, 60, 180, 365, 0),               # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $FilesLimits              = $NULL,                               # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[string] $FilesExportPath          = "D:\BackUp\2Tape",
+    [switch] $FilesExport              = $FALSE,			                  # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [int]    $FilesExportUploadArcPart = 100,		                          # Нарезка архива на части = размер части в МБ, 0 = одним куском
+    [switch] $FilesExportUpload        = $FALSE,		                      # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string] $FilesExportUploadPath    = "\\172.16.30.139\Share\Exp",	      # Путь куда заливать
+    [array]  $FilesExportUploadCred    = ("UserName","password"),		      # Логин и пароль для заливки
+	#[array] $FilesBackUpFileMask      = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
+
+	# +==========================================+
+	# |     Collect BackUp's from Computers      |
+	# +==========================================+
+	[switch] $Collect = $FALSE,				           # Сбор бекапов с разнеызх компов и складирование их у себя
+	[array]  $Collect_Data = (
+                                ("\\HostName.domain.local\Share\Path", "BackUp_Mask", (14,60,365,720,0) ),
+                                ("\\HostName.domain.local\Share\Path", "BackUp_Mask", $NULL )
+                            ),
+	[string] $Collect_Folder = "D:\BackUp\FromComputers",
+    #[array] $CollectLimits = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $CollectLimits = $NULL,                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
 
 
-        # Common
-	[switch]$SheduledTaskCreate = $FALSE,		# Создание Шедульной таски для автоматического запуска скрипта
-	[switch]$UseSettingsFile = $FALSE,			# использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
-	[switch]$HighestPrivelegesIsRequired = $FALSE,   #Проверять есть ли админские права. модт быть необходимо работы с файлами
+	# +==============+
+    # |    Common    |
+	# +==============+
+    # Значения по умолчанию для хранения бекапов
+    [int]$Store_Daily    = 14,                       # Дней хранятся ежедневные бэкапы
+    [int]$Store_10days   = 60,                       # Дней хранятся бэкапы от 01, 10 и 20 числа
+    [int]$Store_Montly   = 365,                      # Дней хранятся ежемесячные бэкапы (01.хх.хх)
+    [int]$Store_Quartal  = 720,                      # Дней хранятся ежеквартальные бэкапы (01.01.хх 01.04.хх 01.07.хх 01.10.хх)
+    [int]$Store_Years    = 0,                        # Дней хранятся ежегодовые бэкапы (01.01.хх)
 
+	[switch]$SheduledTaskCreate = $FALSE,		     # Создание Шедульной таски для автоматического запуска скрипта
+	[switch]$UseSettingsFile = $FALSE,			     # использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
+	[string]$SettingsFile = $NULL,			         # использоватать указанный файл настроек (копия BackUpSettings.ps1) файл либо находится в фолдере скрипта либо указать полный путь. 
+	[switch]$HighestPrivelegesIsRequired = $FALSE,   # Проверять есть ли админские права. модт быть необходимо работы с файлами
 
-	[string]$UploadCahnnelType = "VPN",			# VPN | FTP | NO .... - Канал для загрузки файлов на внешний сервер
-	[string]$VPNName = "ST",					# 
-#	[string]$VPNUserName = "username",			# 
-#	[string]$VPNPassword= "password",			# 
+    [string]$BackUpPath = "D:\BackUp",               # каталог для бекапов по умолчанию
+    [string]$ExportPath = "D:\BackUp\2Tape",         # каталог для экспорта бекапов по умолчанию
+    [string]$Export = $FALSE,                        # Если включено то все бэкапы будут экспортиться. независимо от местных настроек
 
-	[switch]$Debug = $FALSE		# в консоль все события лога пишет
+	[string]$UploadCahnnelType = "VPN",		     	 # VPN | FTP | NO .... - Канал для загрузки файлов на внешний сервер
+	[string]$VPNName = "ST",					     # 
+#	[string]$VPNUserName = "username",			     # 
+#	[string]$VPNPassword= "password",			     # 
+
+	[switch]$Debug = $FALSE	    # в консоль все события лога пишет
 #	[switch]$Debug = $TRUE		# в консоль все события лога пишет
 )
 
-$version = "1.0.10";
+$version = "1.0.11";
+
+# +==================+
+# |       Common     |
+# +==================+
+[array]$DefaultStoreLimits = ($Store_Daily, $Store_10days, $Store_Montly, $Store_Quartal, $Store_Years)   # теже лимиты но в массиве, для простоты обработки
+$CurrDate = Get-Date -Format "yyyy-MM-dd"
+$CurrTime = Get-Date -Format "HHmm"
 
 
 
@@ -215,6 +297,7 @@ WriteLog "Script version: [$version]" "INFO"
 
 
 [string]$ParamsPath = "$ScriptDir\BackUpSettings.ps1";
+[string]$ParamsPathCustom = "$ScriptDir\$SettingsFile";
 
 # Если в каталоге скрипта присуствует файл BackUpSettings.ps1 - подсасываем из него персонализинованные параметры
 if ((test-path $ParamsPath) -and ($UseSettingsFile))
@@ -222,6 +305,11 @@ if ((test-path $ParamsPath) -and ($UseSettingsFile))
 	# инклюдим параметры (список сервисов, инстанс SQL и пр что обычно в блоке params
 	WriteLog "Чтение настроек скрипта [$ParamsPath]" "INFO"
 	."$ParamsPath"
+}
+ElseIf ( ($SettingsFile.Length -gt 3) -and (test-path -Path $ParamsPathCustom) )
+{
+	WriteLog "Чтение настроек скрипта [$ParamsPathCustom]" "INFO"
+    ."$ParamsPathCustom"
 }
 ElseIf (-not $UseSettingsFile)
 {
@@ -536,7 +624,9 @@ function ArchiveFiles ()
 
  
 
-    "D:\Prog\7-zip\7za.exe $SizeVolume $ArcivationDensity a $arcPath $DelSourceFile $Path"
+ 	WriteLog "$FuncName Exec[D:\Prog\7-zip\7za.exe $SizeVolume $ArcivationDensity a $arcPath $DelSourceFile $Path]" "DUMP"
+
+    
 
     # Проверяем возможные пути расположения архиватора
     if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
@@ -598,11 +688,454 @@ function ArchiveFiles ()
     }
 }
 
-<#
-function  SQLBackup ($SQLDBName, $SQLUsername, $SQLPassword, $SQLBackUpPath)
+
+function purge_oldBackUp ()
+{
+    # Архивирование файлов
+	param (
+		[string]$Path = "",
+		[string]$FileMask = "",
+        [array]$Limits = $NULL,                           #Array()  Daily / TenDays / Montly / Quartal / Years
+        #[array]$DefaultLimits = (30, 90, 181, 365, 720),    # Daily / TenDays / Montly / Quartal / Years
+		#[int]$Daily   = $NULL,		# days
+		#[int]$TenDays = $NULL,		# days
+		#[int]$Montly  = $NULL,		# days
+        #[int]$Quartal = $NULL,	    # days
+        #[int]$Years   = $NULL,		# days
+		[switch]$Verbose = $FALSE		    # в консоль все события лога пишет
+	)
+
+
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    if ( $Limits )
+    {
+        $arr = $Limits
+    }
+    else
+    {
+        $arr = $DefaultStoreLimits
+    }
+        
+    # заменить на это после искоренения
+   	[int]$Daily   = $arr[0] 	# days
+	[int]$TenDays = $arr[1]		# days
+	[int]$Montly  = $arr[2]		# days
+    [int]$Quartal = $arr[3]	    # days
+    [int]$Years   = $arr[4]
+
+
+    WriteLog "$FuncName Purge old BackUps [ $Daily / $TenDays / $Montly / $Quartal / $Years ] Daily / TenDays / Montly / Quartal / Years by mask [$FileMask]" "INFO" $Verbose
+
+    #//echo "$Path\$FileMask"
+    $Files = Get-ChildItem -Path "$Path\$FileMask*"
+
+    ForEach ($file in $Files) 
+    {
+        $FileName = $file.Name
+        $FileFullName = $file.FullName
+
+        $match = [regex]::Match($FileName,"(\d){4}-(\d){2}-(\d){2}") # ищем в формате yyyy-MM-dd.
+    	#$match
+    	#$match.Value
+
+    		# если в файле небыло ничего похожего на дату - пропустим этот файл
+		    if ($match.Value -ne "")
+		    {
+       			$FileDate =  get-date ($match.Value)
+
+                <#
+                if ($FileMaxDate -lt $FileDate) 
+                { 
+                    $FileMaxDate = $FileDate;
+                    $LastFile = $File;
+                }
+                #>
+
+    			# сравниваем даты. Пропускаем и не удаяем файлы младше требуемой даты.
+			    if ($FileDate -lt (Get-Date).AddDays(-$Daily))
+			    {
+                    $delfile = $FALSE
+
+                    #write-host $FileDate + "---" + $Years + "---" + ((Get-Date).AddDays(-$Years)) + ((Get-Date).AddDays(-$Quartal))
+
+                    # Старше $Years - удаляем, но только если не 0 (т.е. анлимитед)
+                    if ( ($Years -ne 0) -and ($FileDate -lt (Get-Date).AddDays(-$Years)) )    { $delfile = $TRUE }
+
+                    # Оставаляем годовые - Старше $Quartal, но не 01.01.хх - удаляем
+                    if ( ($FileDate -lt (Get-Date).AddDays(-$Quartal)) -and ( ($FileDate.Day -notin 1) -or ($FileDate.Month -notin 1) ) )    { $delfile = $TRUE }
+
+                    # Оставаляем квартальные - Старше $Montly, но не 01.хх.хх - удаляем
+                    if ( ($FileDate -lt (Get-Date).AddDays(-$Montly)) -and ( ($FileDate.Day -notin 1) -or ($FileDate.Month -notin 1,4,7,10) ) )    { $delfile = $TRUE }
+
+                    # Оставаляем месячные - Старше $TenDays, но не 01.хх.хх - удаляем
+                    if ( ($FileDate -lt (Get-Date).AddDays(-$TenDays)) -and ( ($FileDate.Day -notin 1) ) )    { $delfile = $TRUE }
+
+
+                    # Оставаляем 10-тидневки - Старше $Daily, но не 01.хх.хх - удаляем
+                    if ( ($FileDate -lt (Get-Date).AddDays(-$Daily)) -and ( ($FileDate.Day -notin 1,10,20) ) )    { $delfile = $TRUE }
+
+                    
+                    if ( $delfile )
+                    {
+                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] from [$FileDate]" "DUMP"
+                        DeleteFile -File $FileFullName -Verbose
+                    }
+                                        
+                    <#
+                    # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUpDaily до $SQLBackUp10days - удаляем
+                    if (($FileDate -lt (Get-Date).AddDays(-$Daily)) -and ($FileDate.Day -notin 1, 10, 20) )
+                    {
+                        #$File.Name;
+                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:1]" "DUMP"
+                        DeleteFile -File $FileFullName -Verbose
+                        #$FileDate
+                    }
+
+                    # если файл не от первого числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpMontly - удаляем
+                    if (($FileDate -lt (Get-Date).AddDays(-$TenDays)) -and ($FileDate.Day -notin 1) )
+                    {
+                        #$File.Name;
+                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:2]" "DUMP"
+                        DeleteFile -File $FileFullName -Verbose
+                        #$File.Name;
+                        #$FileDate
+                    }
+
+                    # если файл старше даты $SQLBackUpMontly - удаляем
+                    if ( ($FileDate -lt (Get-Date).AddDays(-$Montly)) -and $Montly -gt 0 )
+                    {
+                        #$File.Name;
+                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:3]" "DUMP"
+                        DeleteFile -File $FileFullName -Verbose
+                        #$FileDate
+                    }
+
+
+   	[int]$Daily   = $arr[0] 	# days
+	[int]$TenDays = $arr[1]		# days
+	[int]$Montly  = $arr[2]		# days
+    [int]$Quartal = $arr[3]	    # days
+    [int]$Years   = $arr[4]
+    #>
+
+                }
+            }
+
+    }
+}
+#$DefaultStoreLimits = (30, 90, 181, 365, 0)
+#purge_oldBackUp -Path "C:\BackUp\FromComputers\st-nas\" -FileMask "" -Limits (10, 60, 180, 365, 0) -Verbose
+#break 
+
+function export_backup ()
+{
+
+    # Архивирование файлов
+	param (
+		[string]$Source = "",         # каталог - из которого взять
+		[string]$Target = "",         # каталог - куда положить
+		[string]$Mask = "",           #маска по которой будут удалены предыдущие
+		[switch]$Verbose = $FALSE		    # в консоль все события лога пишет
+	)
+
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    WriteLog "$FuncName Export new Backup [$Source] to [$Target]" "INFO" $Verbose
+
+    # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+	        #WriteLog "Create a latest copy of SQL backup(s) in Export folder [$SQLExportPath]" "DUMP"
+    
+    # Проверка наличия пути без создания оного.
+    #TestFolderPath -Path $Target #-Verbose
+
+    if ( (test-path -Path $Source -ErrorAction SilentlyContinue) -and (TestFolderPath -Path $Target) )
+    {
+
+        $file = Split-Path -Path $Source -Leaf  # имя файла
+
+        #delete old by mask
+        #echo "Get-ChildItem -Path $Target -filter $Mask*"
+        $Files = Get-ChildItem -Path $Target -filter "$Mask*"
+        
+        foreach ( $File_d in $Files )
+        {
+            DeleteFile -File $File_d.FullName -Verbose
+        }
+        #$Files
+
+        #echo "Remove-Item -Path `"$Target\*`" -include `"$Mask*`" -WhatIf"
+        #Remove-Item -Path "$Target\*" -filter $Mask* -WhatIf
+        #Get-ChildItem -Path $Target -Filter $Mask | Remove-Item -Path $_
+        #DeleteFile -File "$Target\$Mask*" -Verbose
+
+        # try to create hardlink
+                   # Пробуем создать хардлинк
+
+                    #WriteLog "Try to create New file for export is [$LastFile] will replace old file [$Target\$file]" "DUMP"
+                    $command = "cmd /c mklink /H `"$Target\$file`" `"$Source`""
+                    #echo $command
+                    invoke-expression $command
+
+                    if (-not (Test-Path -Path $Target\$file -ErrorAction SilentlyContinue) )
+                    {
+                        # Если не удалось создать хардлинк пробуем скопировать
+                        WriteLog "Did not create HardLink of file for export [$Target\$file], try to create a copy" "DUMP"
+                                
+                        # Проверка наличия свободного места на диске под копию файла
+                        if ( CheckFreeSpace -Path $Target -Size $Source.Length  ) #-Verbose
+                        {
+                            # Копирование файла если место есть
+                            Copy-Item -Path $Source -Destination $Target
+                        }
+                    }
+                    # Финальная проверка что создалась копия
+                    if (Test-Path -Path $Target\$file -ErrorAction SilentlyContinue )
+                    {
+                        WriteLog "Created hardlink or copy of file for export (to Tape) [$Target\$file]" "MESS"
+                    }
+                    else 
+                    {
+                        # Если не удалось создать и копии тоже - ругаемся красненьким
+                        WriteLog "Did not create file for export [$Target\$file] (HardLink or Copy)" "ERRr"
+                    }
+        # copy if impossible
+
+        WriteLog "$FuncName Soource file [$Source] target folder [$Target] mask [$Mask]" "MESS" $Verbose
+
+    }
+    else
+    {
+        WriteLog "$FuncName Source file [$Source] or target folder [$Target] does not exist" "ERR" $Verbose
+    }
+
+     <#   
+            # Проверка что есть более свежая версия файла, если нет, то дальнейшая работа не имеет смысла. 
+
+    	    $arr = Get-ChildItem -Path $SQLExportPath -Force -Filter $SQLBackUpFileMask[$i]
+
+            # Берем максимальную дату из имеющихся файлов (попавших под маску), если нет файлов в таргетном каталоге считаем что дата последней выкладки 01-01-1970.
+            # Сбрасываем значение даты, заоодно если нет файлов в каталоге для экспорта - считаем что там очень старый файл.
+            $FileDate = get-date ("1970/01/01");
+
+       	    Foreach ($File in $arr) 
+            {
+
+                WriteLog ("Extract date from file name [" + $File.FullName + "]") "DUMP"             
+
+                #Extract date from file name
+                $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
+                #$match
+                #$match.Value
+        
+                # если в файле небыло ничего похожего на дату - пропустим этот файл
+                if ($match.Value -ne "")
+                {
+                    $nfDate = get-date ($match.Value)
+                    if ($FileDate -lt $nfDate)
+                    {
+                        $FileDate = $nfDate
+                    }
+                }
+            }
+
+#-------
+            if ($FileDate -lt $FileMaxDate)
+            {
+                WriteLog "New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
+
+                $SQLBackUpFileMask[$i]
+                # Удаляем неактуальную версию
+                $File = $SQLExportPath + "\" + $SQLBackUpFileMask[$i]
+                DeleteFile -File $File -Verbose
+
+                #Test-Path -Path $SQLExportPath
+                if (Test-Path -Path $SQLExportPath)
+                {
+                    # Пробуем создать хардлинк
+                    #New-Item -ItemType HardLink -Name "$SQLExportPath\$LastFile" -Value "$SQLBackUpPath\$LastFile"
+                    #$command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+
+                    WriteLog "Try to create New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
+                    $command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
+                    invoke-expression $command
+
+                    if (-not (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue) )
+                    {
+                        # Если не удалось создать хардлинк пробуем скопировать
+                        WriteLog "Did not create HardLink of file for export [$SQLExportPath\$LastFile], try to create a copy" "DUMP"
+                                
+                        # Проверка наличия свободного места на диске под копию файла
+                        if ( CheckFreeSpace -Path $SQLExportPath -Size $File.Length  ) #-Verbose
+                        {
+                            # Копирование файла если место есть
+                            Copy-Item -Path $SQLBackUpPath\$LastFile -Destination $SQLExportPath\$LastFile
+                        }
+                    }
+                    # Финальная проверка что создалась копия
+                    if (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue )
+                    {
+                        WriteLog "Created copy of file for export (to Tape) [$SQLExportPath\$LastFile]" "MESS"
+                    }
+                    else 
+                    {
+                        # Если не удалось создать и копии тоже - ругаемся красненьким
+                        WriteLog "Did not create file for export [$SQLExportPath\$LastFile] (HardLink or Copy)" "ERRr"
+                    }
+                }
+                else
+                {
+                    WriteLog "Export folder does not exist [$SQLExportPath]" "ERRr"
+                }
+            }
+            Else 
+            {
+                WriteLog "NO New file for export. Last file [$LastFile] is same as old file [$SQLExportPath\$File]" "DUMP"
+            }
+            <# #>
+}
+
+
+function add_Subfolder_to_Path ()
+{
+    # Add subfolder to path and create if not exist
+    param (
+		[string]$Path = "",             # Исходный фолдер
+		[string]$SubFolderName = "",		    # Сабфолдер.
+		[switch]$Create = $FALSE,		# Создать если такого нет.
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+
+	# имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+
+    $x = TestFolderPath -Path $Path
+
+    if ( ($Path.Length -gt 3) -and ($SubFolderName.Length -gt 0) )
+    {
+        if ( $SubFolderName.Substring(0,1) -eq "\" ) 
+        {
+            $SubFolderName = $SubFolderName.Substring(1)
+        }
+        
+        $CombinedPath = "$Path\$SubFolderName"
+        
+        if ( $Create )
+        {
+            $x = TestFolderPath -Path $CombinedPath -Create
+        }
+        else
+        {
+            $x = TestFolderPath -Path $CombinedPath
+        }
+
+        #$CombinedPath
+        
+        return $CombinedPath
+    }
+    else
+    {
+        WriteLog "$FuncName Path or SubfolderName is shortly [$Path] / [$SubFolderName]" "INFO" $Verbose
+
+    }
+
+    return $FALSE
+    
+
+}
+
+#add_Subfolder_to_Path -Path "C:\BackUp" -SubFolderName "ffff5"
+#break
+
+
+function get_BackUpPath ()
+{
+    # из глобальной и локальной BackUpPath - выбирает актуальную либо склеивает в одну
+    # - если не указана локальная - используется глобальная
+    # - если локальная относительная "\addPath" (обязательно с ведущим бэк-слешем - добавит ее к глобальной
+    # - если указана локальная и начинается не со слеша - она считается правильной и берется
+	param (
+		[string]$Path = "",
+		[switch]$Create = $FALSE,		# Создать если такого нет.
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+
+    if ( ($Path.Length -gt 1) -and ( $Path.Substring(0,1) -eq "\") )
+    {
+        $CombinedPath = add_Subfolder_to_Path -Path $BackUpPath -SubFolderName $Path -Create -Verbose
+        #$CombinedPath = $BackUpPath + $Path
+    }
+    elseif ( ($MySQLBackUpPath.Length -gt 0) -and ( $Path.Substring(0,1) -ne "\") )
+    {
+        $CombinedPath = $Path
+    }
+    else
+    {
+        $CombinedPath = $BackUpPath
+    }
+
+    if ( $Create )
+    {
+        $x = TestFolderPath -Path $CombinedPath -Create
+    }
+
+    return $CombinedPath
+
+}
+
+
+function MySQLBackUp ()
+{
+	param (
+		[string]$User = "",
+		[string]$Password = "",
+		[string]$DataBase = "",
+		[string]$File = "",
+		[switch]$Verbose = $FALSE		# в консоль все события лога пишет
+	)
+	
+    # имя функции
+	$FuncName = $MyInvocation.MyCommand;
+	$FuncName = "$FuncName" + ":";
+    
+    WriteLog "$FuncName Create MySQL dump from [$DataBase] to [$File]" "INFO" $Verbose
+
+    TestFolderPath -Path (Split-Path -Path $File -Parent) -Create
+
+    # Создать такой логин пач можно командой:
+    # mysql_config_editor set --login-path="backup-lp" --host="localhost" --user="backup" --password
+
+    $command = "cmd /c $MySQLDumperPath -u $User -p$Password $DataBase > $File"
+    #$command = "cmd /c $MySQLDumperPath --login-path=backuplp $DataBase > $File"
+    
+    WriteLog "$FuncName Exec: [$command]" "DUMP" $Verbose
+    #echo $command
+    invoke-expression $command
+
+    $FileCreated = Get-ChildItem -Path $File
+    
+    #$FileCreated.Length
+
+    if ( (Test-Path -Path $File) -and ($FileCreated.Length -gt 0) )
+    {
+        WriteLog "$FuncName Succesfully created Back Up of DB [$DataBase] in to [$File]" "MESS" $Verbose
+    }
+    else
+    {
+        WriteLog "$FuncName Failed dump DB [$DataBase] in to [$File]" "ERRr" $Verbose
+    }
+
+}
+
+
+
+function  SQLBackup ()
 {
 }
-#>
+
 
 # Создание Шедульной таски для автоматического запуска скрипта
 #$SheduledTaskCreate = $TRUE
@@ -1006,21 +1539,139 @@ if ($Errors)
 
 }
 
+<#
+	# +==============+
+	# |    MySQL     |
+	# +==============+
+	[switch]  $MySQL = $TRUE					# Бэкап и обслуживание MySQL ( без этого колюча остальыне из группы MySQL* игнорируются)
+    [array]   $MySQLCred = ("backup","E5-Pk+Tz-rz=aT!Ze@Tw")		# Логин и пароль для заливки
+	[array]   $MySQL_DB = ("bitnami_redmine","r2d2","shturman") # Список баз для бэкапа
+	#[string]$SQLDateFormatLog = "yyyy-MM-dd_HHmm",
+	[int]     $MySQLBackUpDaily = "7"			# Days
+	[int]     $MySQLBackUp10days = "60"		# Days
+	[int]     $MySQLBackUpMontly = "180"		# Days
+	[switch]  $MySQLExport = $FALSE			# Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    $MySQLBackUpPath = "\MySQL"
+    $Export = $TRUE
 
+    [string]$BackUpPath = "C:\BackUp"          # каталог для бекапов по умолчанию
+    [string]$ExportPath = "C:\BackUp\2Tape"    # каталог для экспорта бекапов по умолчанию
+
+    #E5PkTzrzaTZeTw
+    #>
+
+if ( $MySQL )
+{
+    WriteLog "MySQL BackUp: DB list: [$MySQL_DB]" "INFO"
+
+    $CurrentBackUpFolder = get_BackUpPath -Path $MySQLBackUpPath
+
+    #WriteLog ("MySQL_DB.Length1:" + $MySQL_DB.Length) "DUMP"
+    
+    if ( $MySQL_DB.Length )
+    {
+        #WriteLog ("MySQL_DB.Length2:" + $MySQL_DB.Length) "DUMP"
+        foreach ($db in $MySQL_DB)
+        {
+            WriteLog ("db:" + $db) "DUMP"
+            $BackUpNameMask =  $MySQLBackUpPrefix + $db
+            $BackUpName =  $BackUpNameMask + "_$CurrDate" + "_$CurrTime" + ".sql"
+            $CurrentBackUpFilePath = "$CurrentBackUpFolder\$BackUpName"
+            MySQLBackUp -User $MySQLCred[0] -Password $MySQLCred[1] -DataBase $db -File $CurrentBackUpFilePath -Verbose
+            #MySQLBackUp -DataBase $db -File $CurrentBackUpFilePath -Verbose
+
+            $FileCreated = Get-ChildItem -Path $CurrentBackUpFilePath
+    
+            if ( (Test-Path -Path $CurrentBackUpFilePath) -and ($FileCreated.Length -gt 0) )
+            #if ( Test-Path -Path $CurrentBackUpFilePath )
+            {
+                WriteLog "MySQL: Created BackUp of DB [$db] in to [$CurrentBackUpFilePath]" "MESS"
+
+                $arcPath = "$CurrentBackUpFilePath.7z"
+                ArchiveFiles -Path $CurrentBackUpFilePath -arcPath $arcPath -DelSource -Verbose
+
+                if ( $Export -or $MySQLExport )
+                {
+                    export_backup -Source $arcPath -Target $ExportPath -Mask $BackUpNameMask -Verbose
+                }
+
+            }
+            else
+            {
+                WriteLog "MySQL: Can not create BackUp of DB [$db] in to [$CurrentBackUpFilePath]" "ERR"
+            }
+
+            #purge_oldBackUp -Path $CurrentBackUpFolder -FileMask $BackUpNameMask -Daily $MySQLBackUpDaily -TenDays $MySQLBackUp10days -Montly $MySQLBackUpMontly -Verbose
+            purge_oldBackUp -Path $CurrentBackUpFolder -FileMask $BackUpNameMask -Limits $MySQLLimits -Verbose
+
+        }
+    }
+
+}
+
+
+if ( $Redmine )
+{
+    WriteLog "Redmine BackUp" "INFO"
+
+    # Куда класть итоговый бекап
+    # название файла/каталога бекапа
+    # название архива
+    # маска для удаления старья
+
+    $Current_BackUpPath = get_BackUpPath -Path $RedmineBackUpPath -Create -Verbose
+    #$Current_BackUpPath
+
+    #Create folder
+    $Current_BackUpNameMask =  $RedmineBackUpPrefix
+    #$Current_BackUpName   = $Current_BackUpNameMask + "_$CurrDate" + "_$CurrTime"
+    $Current_BackUpFolder = $Current_BackUpNameMask + "_$CurrDate" + "_$CurrTime"
+    #$Current_BackUpFilePath = "$CurrentBackUpFolder\$BackUpName"
+    $Current_BackUpFolderPath = add_Subfolder_to_Path -Path $Current_BackUpPath -SubFolderName $Current_BackUpFolder -Create -Verbose 
+    #"$CurrentBackUpFolder\$BackUpName"
+    $RedmineDB_DumpFileName = "$Current_BackUpFolderPath\RedmineDB" + "_$CurrDate" + "_$CurrTime" + ".sql"
+
+
+    #Copy Files
+    copy_files_and_folders -Path "$RedminePath\*" -Destination $Current_BackUpFolderPath -Recurse -Check -Verbose
+    
+    #Dump DB
+    MySQLBackUp -User $MySQLCred[0] -Password $MySQLCred[1] -DataBase $RedmineDB -File $RedmineDB_DumpFileName -Verbose
+
+    #Archive backup
+    $arcPath = "$Current_BackUpPath\$Current_BackUpFolder.7z"
+    ArchiveFiles -Path $Current_BackUpFolderPath -arcPath $arcPath -DelSource -Verbose
+
+    #Purge if backup created
+    #purge_oldBackUp -Path $Current_BackUpPath -FileMask $Current_BackUpNameMask -Daily $RedmineBackUpDaily -TenDays $RedmineBackUp10days -Montly $RedmineBackUpMontly -Verbose
+    purge_oldBackUp -Path $Current_BackUpPath -FileMask $Current_BackUpNameMask -Limits $RedmineLimits -Verbose
+
+    #Export
+    export_backup -Source $arcPath -Target $ExportPath -Mask $Current_BackUpNameMask -Verbose
+
+}
 
 if ($SVN)     #BackUp SVN Repositories
 {
+    # SVN
+    WriteLog "SVN BackUp: Repositories: [$SVNRepoPath]" "INFO"
+
     #BackUp SVN Repository
     $CurrDate = Get-Date -Format "yyyy-MM-dd"
     $CurrTime = Get-Date -Format "HHmm"
-    $SVNBackUpPathCurrent = "$SVNBackUpPath\SVN_$CurrDate" + "_$CurrTime"
+    $BackUpFolderName = "SVN_$CurrDate" + "_$CurrTime"
+    $SVNBackUpPathCurrent = "$SVNBackUpPath\$BackUpFolderName"
 
     #TestFolderPath -Path $SVNBackUpPathCurrent  -Create #-Verbose
     TestFolderPath -Path "$SVNBackUpPathCurrent\Conf"  -Create #-Verbose
 
 
     # Purge old BackUp
-   	$arr = Get-ChildItem -Path $SVNBackUpPath -Force -Directory
+
+   <#	
+   $arr = Get-ChildItem -Path $SVNBackUpPath -Force -Directory
+
+    #$arr
 
    	Foreach ($File in $arr) 
    	{
@@ -1091,8 +1742,9 @@ if ($SVN)     #BackUp SVN Repositories
 
 
     }
+    #>
 
-    break;
+    #break;
     
     # Copy SVN Config Files
 	WriteLog "Try to copy SVN configuration files" "DUMP"
@@ -1109,10 +1761,15 @@ if ($SVN)     #BackUp SVN Repositories
     
   	Foreach ($File in $arr) 
    	{
-    	WriteLog "Try to create dump of repository [$SVNRepoPath\$File]" "DUMP"
+    	WriteLog "Try to create dump of repository [$SVNRepoPath\$File] to [$SVNBackUpPathCurrent\$File.dump]" "DUMP"
 
         # дампим репы средствами 
-        svnadmin dump $SVNRepoPath\$File > $SVNBackUpPathCurrent\$File.dump
+
+        $command = "cmd /c svnadmin dump $SVNRepoPath\$File > $SVNBackUpPathCurrent\$File.dump"
+        WriteLog "exec [$command]" "DUMP"
+        invoke-expression $command
+        
+        #svnadmin dump $SVNRepoPath\$File > $SVNBackUpPathCurrent\$File.dump
 
         # проверка бессмысленная т.к. файл оно создает в любом случае
         # TODO сделать осмысленую проверку
@@ -1126,257 +1783,25 @@ if ($SVN)     #BackUp SVN Repositories
         }
     }
 
+    $arcPath = "$SVNBackUpPath\$BackUpFolderName.7z"
+
+    ArchiveFiles -Path $SVNBackUpPathCurrent -arcPath $arcPath -Size 0 -StoreArchive -DelSource -Verbose
+
+    # Export last BackUp
+    if ( $SVNExport )
+    {
+        export_backup -Source $arcPath -Target $ExportPath -Mask "SVN_" -Verbose
+    }
+
+    # чистим старье
+    #purge_oldBackUp -Path $SVNBackUpPath -FileMask "SVN_" -Daily $SVNBackUpDaily -TenDays $SVNBackUp10days -Montly $SVNBackUpMontly -Verbose 
+    purge_oldBackUp -Path $SVNBackUpPath -FileMask "SVN_" -Limits $SVNLimits -Verbose
+
+
 
 }
 
 
-function purge_oldBackUp ()
-{
-    # Архивирование файлов
-	param (
-		[string]$Path = "",
-		[string]$FileMask = "",
-		[int]$Daily = 30,		# days
-		[int]$TenDays = 90,		# days
-		[int]$Montly = 0,		# days
-		[switch]$Verbose = $FALSE		    # в консоль все события лога пишет
-	)
-
-
-	$FuncName = $MyInvocation.MyCommand;
-	$FuncName = "$FuncName" + ":";
-
-    WriteLog "$FuncName Purge old BackUps [ $Daily / $TenDays / $Montly ] Daily / TenDays / Montly by mask [$FileMask]" "INFO" $Verbose
-    
-    #//echo "$Path\$FileMask"
-    $Files = Get-ChildItem -Path "$Path\$FileMask*"
-
-    ForEach ($file in $Files) 
-    {
-        $FileName = $file.Name
-        $FileFullName = $file.FullName
-
-        $match = [regex]::Match($FileName,"(\d){4}-(\d){2}-(\d){2}") # ищем в формате yyyy-MM-dd.
-    	#$match
-    	#$match.Value
-
-    		# если в файле небыло ничего похожего на дату - пропустим этот файл
-		    if ($match.Value -ne "")
-		    {
-       			$FileDate =  get-date ($match.Value)
-
-                <#
-                if ($FileMaxDate -lt $FileDate) 
-                { 
-                    $FileMaxDate = $FileDate;
-                    $LastFile = $File;
-                }
-                #>
-
-    			# сравниваем даты. Пропускаем и не удаяем файлы младше требуемой даты.
-			    if ($FileDate -lt (Get-Date).AddDays(-$Daily))
-			    {
-
-                    # если файл не от 1/10/20 числа месяца и находится в диапазоне дат от $SQLBackUpDaily до $SQLBackUp10days - удаляем
-                    if (($FileDate -lt (Get-Date).AddDays(-$Daily)) -and ($FileDate.Day -notin 1, 10, 20) )
-                    {
-                        #$File.Name;
-                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:1]" "DUMP"
-                        DeleteFile -File $FileFullName -Verbose
-                        #$FileDate
-                    }
-
-                    # если файл не от первого числа месяца и находится в диапазоне дат от $SQLBackUp10days до $SQLBackUpMontly - удаляем
-                    if (($FileDate -lt (Get-Date).AddDays(-$TenDays)) -and ($FileDate.Day -notin 1) )
-                    {
-                        #$File.Name;
-                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:2]" "DUMP"
-                        DeleteFile -File $FileFullName -Verbose
-                        #$File.Name;
-                        #$FileDate
-                    }
-
-                    # если файл старше даты $SQLBackUpMontly - удаляем
-                    if ( ($FileDate -lt (Get-Date).AddDays(-$Montly)) -and $Montly -gt 0 )
-                    {
-                        #$File.Name;
-                        WriteLog "$FuncName Delete old BackUp: [$FileFullName] by [if:3]" "DUMP"
-                        DeleteFile -File $FileFullName -Verbose
-                        #$FileDate
-                    }
-                }
-            }
-
-    }
-}
-
-function export_backup ()
-{
-
-    # Архивирование файлов
-	param (
-		[string]$Source = "",         # каталог - из которого взять
-		[string]$Target = "",         # каталог - куда положить
-		[string]$Mask = "",           #маска по которой будут удалены предыдущие
-		[switch]$Verbose = $FALSE		    # в консоль все события лога пишет
-	)
-
-	$FuncName = $MyInvocation.MyCommand;
-	$FuncName = "$FuncName" + ":";
-
-    WriteLog "$FuncName Export new Backup [$Source] to [$Target]" "INFO" $Verbose
-
-    # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-	        #WriteLog "Create a latest copy of SQL backup(s) in Export folder [$SQLExportPath]" "DUMP"
-    
-    # Проверка наличия пути без создания оного.
-    #TestFolderPath -Path $Target #-Verbose
-
-    if ( (test-path -Path $Source -ErrorAction SilentlyContinue) -and (TestFolderPath -Path $Target) )
-    {
-
-        $file = Split-Path -Path $Source -Leaf  # имя файла
-
-        #delete old by mask
-        #echo "Get-ChildItem -Path $Target -filter $Mask*"
-        $Files = Get-ChildItem -Path $Target -filter "$Mask*"
-        
-        foreach ( $File_d in $Files )
-        {
-            DeleteFile -File $File_d.FullName -Verbose
-        }
-        #$Files
-
-        #echo "Remove-Item -Path `"$Target\*`" -include `"$Mask*`" -WhatIf"
-        #Remove-Item -Path "$Target\*" -filter $Mask* -WhatIf
-        #Get-ChildItem -Path $Target -Filter $Mask | Remove-Item -Path $_
-        #DeleteFile -File "$Target\$Mask*" -Verbose
-
-        # try to create hardlink
-                   # Пробуем создать хардлинк
-
-                    #WriteLog "Try to create New file for export is [$LastFile] will replace old file [$Target\$file]" "DUMP"
-                    $command = "cmd /c mklink /H `"$Target\$file`" `"$Source`""
-                    echo $command
-                    invoke-expression $command
-
-                    if (-not (Test-Path -Path $Target\$file -ErrorAction SilentlyContinue) )
-                    {
-                        # Если не удалось создать хардлинк пробуем скопировать
-                        WriteLog "Did not create HardLink of file for export [$Target\$file], try to create a copy" "DUMP"
-                                
-                        # Проверка наличия свободного места на диске под копию файла
-                        if ( CheckFreeSpace -Path $Target -Size $Source.Length  ) #-Verbose
-                        {
-                            # Копирование файла если место есть
-                            Copy-Item -Path $Source -Destination $Target
-                        }
-                    }
-                    # Финальная проверка что создалась копия
-                    if (Test-Path -Path $Target\$file -ErrorAction SilentlyContinue )
-                    {
-                        WriteLog "Created hardlink or copy of file for export (to Tape) [$Target\$file]" "MESS"
-                    }
-                    else 
-                    {
-                        # Если не удалось создать и копии тоже - ругаемся красненьким
-                        WriteLog "Did not create file for export [$Target\$file] (HardLink or Copy)" "ERRr"
-                    }
-        # copy if impossible
-
-        WriteLog "$FuncName Soource file [$Source] target folder [$Target] mask [$Mask]" "MESS" $Verbose
-
-    }
-    else
-    {
-        WriteLog "$FuncName Source file [$Source] or target folder [$Target] does not exist" "ERR" $Verbose
-    }
-
-     <#   
-            # Проверка что есть более свежая версия файла, если нет, то дальнейшая работа не имеет смысла. 
-
-    	    $arr = Get-ChildItem -Path $SQLExportPath -Force -Filter $SQLBackUpFileMask[$i]
-
-            # Берем максимальную дату из имеющихся файлов (попавших под маску), если нет файлов в таргетном каталоге считаем что дата последней выкладки 01-01-1970.
-            # Сбрасываем значение даты, заоодно если нет файлов в каталоге для экспорта - считаем что там очень старый файл.
-            $FileDate = get-date ("1970/01/01");
-
-       	    Foreach ($File in $arr) 
-            {
-
-                WriteLog ("Extract date from file name [" + $File.FullName + "]") "DUMP"             
-
-                #Extract date from file name
-                $match = [regex]::Match($File,"(\d){4}-(\d){2}-(\d){2}") # ищем в аормате yyyy-MM-dd.
-                #$match
-                #$match.Value
-        
-                # если в файле небыло ничего похожего на дату - пропустим этот файл
-                if ($match.Value -ne "")
-                {
-                    $nfDate = get-date ($match.Value)
-                    if ($FileDate -lt $nfDate)
-                    {
-                        $FileDate = $nfDate
-                    }
-                }
-            }
-
-#-------
-            if ($FileDate -lt $FileMaxDate)
-            {
-                WriteLog "New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
-
-                $SQLBackUpFileMask[$i]
-                # Удаляем неактуальную версию
-                $File = $SQLExportPath + "\" + $SQLBackUpFileMask[$i]
-                DeleteFile -File $File -Verbose
-
-                #Test-Path -Path $SQLExportPath
-                if (Test-Path -Path $SQLExportPath)
-                {
-                    # Пробуем создать хардлинк
-                    #New-Item -ItemType HardLink -Name "$SQLExportPath\$LastFile" -Value "$SQLBackUpPath\$LastFile"
-                    #$command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
-
-                    WriteLog "Try to create New file for export is [$LastFile] will replace old file [$SQLExportPath\$File]" "DUMP"
-                    $command = "cmd /c mklink /h $SQLExportPath\$LastFile $SQLBackUpPath\$LastFile"
-                    invoke-expression $command
-
-                    if (-not (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue) )
-                    {
-                        # Если не удалось создать хардлинк пробуем скопировать
-                        WriteLog "Did not create HardLink of file for export [$SQLExportPath\$LastFile], try to create a copy" "DUMP"
-                                
-                        # Проверка наличия свободного места на диске под копию файла
-                        if ( CheckFreeSpace -Path $SQLExportPath -Size $File.Length  ) #-Verbose
-                        {
-                            # Копирование файла если место есть
-                            Copy-Item -Path $SQLBackUpPath\$LastFile -Destination $SQLExportPath\$LastFile
-                        }
-                    }
-                    # Финальная проверка что создалась копия
-                    if (Test-Path -Path $SQLExportPath\$LastFile -ErrorAction SilentlyContinue )
-                    {
-                        WriteLog "Created copy of file for export (to Tape) [$SQLExportPath\$LastFile]" "MESS"
-                    }
-                    else 
-                    {
-                        # Если не удалось создать и копии тоже - ругаемся красненьким
-                        WriteLog "Did not create file for export [$SQLExportPath\$LastFile] (HardLink or Copy)" "ERRr"
-                    }
-                }
-                else
-                {
-                    WriteLog "Export folder does not exist [$SQLExportPath]" "ERRr"
-                }
-            }
-            Else 
-            {
-                WriteLog "NO New file for export. Last file [$LastFile] is same as old file [$SQLExportPath\$File]" "DUMP"
-            }
-            <# #>
-}
 
 if ($FilesON)
 {
@@ -1455,7 +1880,8 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            #purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Limits $FilesLimits -Verbose
         }
         else 
         {
@@ -1532,14 +1958,15 @@ if ($FilesON)
                 $arcPath
                 ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
-            # выкладываем / заливаем
-            if ( $FilesExport )
-            {
-                export_backup -Source $arcPath -Target $FilesExportPath -Mask $BackFileMaskName -Verbose
-            }
+                # выкладываем / заливаем
+                if ( $FilesExport )
+                {
+                    export_backup -Source $arcPath -Target $FilesExportPath -Mask $BackFileMaskName -Verbose
+                }
     
-            # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+                # чистим старье
+                #purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+                purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Limits $FilesLimits -Verbose
                 
             }
 
@@ -1557,10 +1984,51 @@ if ($FilesON)
             }
 
             # чистим старье
-            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            #purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Daily $FilesBackUpDaily -TenDays $FilesBackUp10days -Montly $FilesBackUpMontly -Verbose 
+            #purge_oldBackUp -Path "C:\BackUp\FromComputers\st-nas\" -FileMask "" -Limits $FilesLimits -Verbose
+            purge_oldBackUp -Path $BackUpFolder -FileMask $BackFileMaskName -Limits $FilesLimits -Verbose
 
         }
 
     }
 
+}
+
+
+# Сбор бекапов с других серверов
+if ( $Collect )
+{
+    WriteLog "Collect BackUp's from Computers to [$Collect_Folder]" "INFO"
+
+    foreach ( $item in $Collect_Data )
+    {
+        $Share = $item[0]
+        $Mask  = $item[1]
+        $days  = $item[2]
+
+        #$host
+        $Uri = [System.Uri]$Share
+        $curr_Host = $Uri.Host
+
+        $Current_Collect_Folder = "$Collect_Folder\$curr_Host"
+
+        if ( Test-Path -Path $Share )
+        {
+            WriteLog "Process [$Share] with mask [$Mask]; days: [$days]; To $Current_Collect_Folder" "INFO"
+
+            $x = TestFolderPath -Path $Collect_Folder -Create -Verbose
+            $x = TestFolderPath -Path $Current_Collect_Folder -Create -Verbose
+
+            $src_mask = "$Share\$Mask*"
+
+            $x = move_files -Path $src_mask -Destination $Current_Collect_Folder -Verbose
+
+            #$x = purge_oldBackUp -Path $Current_Collect_Folder -FileMask $Mask -Daily $Store_Daily -TenDays $Store_10days -Montly $Store_Montly -Quartal $Store_Quartal -Years $Store_Years -Verbose
+            $x = purge_oldBackUp -Path $Current_Collect_Folder -FileMask $Mask -Limits $CollectLimits -Verbose
+        }
+        else
+        {
+            WriteLog "Source share [$Share] does not exist or not accessible" "ERRr"
+        }
+    }
 }
