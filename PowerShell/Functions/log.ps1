@@ -52,7 +52,15 @@ function WriteLog
 		{
 			[string]$color = "Red"
 		}
-		"MESS"
+		"ERR"
+		{
+			[string]$color = "Red"
+		}
+		"ERROR"
+		{
+			[string]$color = "Red"
+		}		
+        "MESS"
 		{
 			[string]$color = "Green"
 		}
@@ -65,7 +73,7 @@ function WriteLog
 	# В консоль 
 	if ($messagetype -match $HostErrorLevel)
 	{
-		if ($Verbose -or ($messagetype -eq "ERRr") -or ($messagetype -eq "WARN"))
+		if ($Verbose -or ($messagetype -eq "ERRr") -or ($messagetype -eq "ERR") -or ($messagetype -eq "ERROR") -or ($messagetype -eq "WARN"))
 		{
 			Write-Host "[ $messagetype ] $message" -foregroundcolor $color;
 			#Write-Host "Write-Host [ $messagetype ] $message -foregroundcolor $color";
