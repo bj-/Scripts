@@ -1,6 +1,8 @@
-﻿if ( -not $InScript ) { .\Backup.ps1 -UseSettingsFile -Debug;  break }
+﻿if ( -not $InScript ) { $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path; .$ScriptDir"\Backup.ps1" -Debug;  break }
+WriteLog "Imported Module [BackUp_Files.ps1]" "INFO"
 
-function BackUp_FilesAndFolders()
+
+function local:BackUp_FilesAndFolders ()
 {
 
 	param (
@@ -32,15 +34,38 @@ function BackUp_FilesAndFolders()
     [string] $FilesExportPath = if ( $ExportPath -ne "" ) { $ExportPath } else { $FilesExportPath }
     [switch] $FilesExport     = if ( -not $Export )          { $TRUE }       else { $FALSE }
     #>
+    if ( $Debug )
+    {
+        WriteLog  "`$DateFormat:              [$DateFormat]" "DUMP"
+        WriteLog  "`$FilesDateFormat:              [$FilesDateFormat]" "DUMP"
+        WriteLog  "`$BackUpPath:              [$BackUpPath]" "DUMP"
+        WriteLog  "`$FilesList:              [$FilesList]" "DUMP"
+        WriteLog  "`$FolderList:              [$FolderList]" "DUMP"
+        WriteLog  "`$Limits:              [$Limits]" "DUMP"
+        WriteLog  "`$FilesLimits:              [$FilesLimits]" "DUMP"
+        WriteLog  "`$ExportPath:              [$ExportPath]" "DUMP"
+        WriteLog  "`$FilesExportPath:              [$FilesExportPath]" "DUMP"
+        WriteLog  "`----" "DUMP"
+    }
+
     [string] $FilesDateFormat = if ( $DateFormat -ne "" ) { $DateFormat } else { $FilesDateFormat }
     [string] $FilesBackUpPath = $BackUpPath
     
     [array]  $FilesFileName   = $FilesList
     [array]  $FilesFolderName = $FolderList
-    
+    $FilesExportPath
     [array]  $FilesLimits     = if ( $Limits.Count -gt 0 ) { $Limits } else { $FilesLimits }
-    [string] $FilesExportPath = if ( $ExportPath -ne "" ) { $ExportPath } else {$FilesExportPath}
+    [string] $FilesExportPath = if ( $ExportPath -ne "" ) { $ExportPath } else { $FilesExportPath  }
     [switch] $FilesExport     = $Export
+
+    #$l_ExportPath
+    $ExportPath
+
+    #$FilesExportPath = "ffffffffffff111"
+    #$ExportPath = "ffffffffffff111"
+    #$Files:FilesExportPath
+    #xExit
+    "fff"
 
     $ModVer = "1.0.2"
     $ModName = "Files and folders"
@@ -97,6 +122,9 @@ function BackUp_FilesAndFolders()
     #for($i=0; $i -lt $FilesFileName.Count; $i++)
     foreach ( $FileItem in $FilesFileName )
     {
+
+        if ( $FileItem[1].Length -eq 0 ) { continue; }
+        
         #echo $FilesFileName[$i] 
         #echo $FileItem
 

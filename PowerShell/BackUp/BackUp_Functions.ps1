@@ -1,9 +1,23 @@
-﻿# ===============================================
+﻿$InScript
+if ( -not $InScript ) { $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path; .$ScriptDir"\Backup.ps1" -Debug;  break }
+WriteLog "Imported Functions [BackUp_Functions.ps1]" "INFO"
+
+# ===============================================
 #                   Functions
 # ===============================================
 $ModVer = "1.0.1"
 $ModName = "Functions"
 WriteLog "Module [$ModName] version: [$ModVer]" "INFO"
+
+function xExit ()
+{
+    $InScript = $FALSE
+    WriteLog "Exit by command (xExit) (InSctipt [$InScript]" "WARN"
+     $InScript = $FALSE
+    
+    exit
+}
+
 
 function FilePurge ()
 {
@@ -293,7 +307,20 @@ function ArchiveFiles ()
     
 
     # Проверяем возможные пути расположения архиватора
-    if (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
+    #$sZipPath
+    if ( Test-Path -Path $sZipPath )
+    {
+     	#WriteLog "$FuncName Exec [$sZipPath $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path]" "DUMP"
+
+        $command = "cmd /c $sZipPath $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path"
+        WriteLog "$FuncName Exec [$command]" "DUMP"
+        $res = invoke-expression $command
+
+
+		#$res = $sZipPath $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path
+		#$res = $sZipPath $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path
+    }
+    ElseIf (test-path -Path "D:\Prog\7-zip\7za.exe" -ErrorAction SilentlyContinue)
     {
      	WriteLog "$FuncName Exec [D:\Prog\7-zip\7za.exe $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path]" "DUMP"
 		$res = D:\Prog\7-zip\7za.exe $ArcivationDensity $SizeVolume a $arcPath $DelSourceFile $Path

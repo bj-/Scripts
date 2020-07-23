@@ -65,6 +65,9 @@
 
 
 New:
+1.1.3
+    - Автовыбор файла настроек (первый встречный по маске "Settings*"
+      Первым делом ищет файл Settings_[HostName].ps1, затем Settings.ps1, затем первый встречный по маске "Settings*"
 1.1.2
     - Багфиксинг
 1.1.1
@@ -134,119 +137,129 @@ New:
 
 
 param (
+	[switch] $SheduledTaskCreate = $FALSE,	    # Создание Шедульной таски для автоматического запуска скрипта
+	[switch] $Debug = $FALSE	                # в консоль все события лога НЕпишет
+#	[switch] $Debug = $TRUE		                # в консоль все события лога пишет
+)
+
+$version = "1.1.2";
+$InScript = $TRUE
+
+# Дефолтные настройки
+
 	# +==============+
     # |   Log Files  |
 	# +==============+  
-	[switch] $Log                  = $FALSE,					     # Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
-	[string] $DateFormatLog        = "yy-MM-dd",
-	[string] $LogFilePath          = "D:\Shturman\Bin\Log",
-	[string] $LogFilePathOld       = "D:\Shturman\Bin\Log\Old",
-    [string] $LogFolderForArchives = $env:computername,
-	[string] $LogFilePurgeDays     = "30",		                     # Days
-	[switch] $PurgeLogFiles        = $FALSE,		                 # похоронить архивы старше  $LogFilePurgeDays дней
-#	[switch] $UploadLogFiles       = $FALSE,		                 # Заливка лог файлов на сервер.
-	[switch] $FastArcive           = $FALSE,		                 # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
-	[switch] $LogFileAll2Arc       = $FALSE,		                 # заставляет упаковывать все лог файлы. включая сегоднящние 
+	#[switch] $Log                  = $FALSE,					     # Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
+	[string] $DateFormatLog        = "yy-MM-dd"
+	[string] $LogFilePath          = "D:\Shturman\Bin\Log"
+	[string] $LogFilePathOld       = "D:\Shturman\Bin\Log\Old"
+    [string] $LogFolderForArchives = $env:computername
+	[string] $LogFilePurgeDays     = "30"		                     # Days
+	[switch] $PurgeLogFiles        = $FALSE 		                 # похоронить архивы старше  $LogFilePurgeDays дней
+#	[switch] $UploadLogFiles       = $FALSE 		                 # Заливка лог файлов на сервер.
+	[switch] $FastArcive           = $FALSE 		                 # более легковесный упаковщик. без флага - пакует по максимому, что в Х раз дольше. но немного меньше места занимает
+	[switch] $LogFileAll2Arc       = $FALSE 		                 # заставляет упаковывать все лог файлы. включая сегоднящние 
 
     # Errors log Archiver 
-	[switch] $Errors               = $FALSE,						 # Архивирование Errors файлов
-	[string] $ErrorsPath           = "D:\Shturman\Bin\Errors",	  	 # Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
+	#[switch] $Errors               = $FALSE,						 # Архивирование Errors файлов
+	[string] $ErrorsPath           = "D:\Shturman\Bin\Errors"	  	 # Папка где лежат Errors, запакует все в каталог $LogFilePathOld\Errors с именем Errors_yyyy_MM_dd.7z
 
 	# +==============+
 	# |     SQL      |
 	# +==============+
-	[switch] $SQL                    = $FALSE,					    # Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
+	#[switch] $SQL                    = $FALSE					    # Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 #	[string] $SQLServerInstance      = "localhost\SQLEXPRESS",
 #	[string] $SQLDBName              = "Shturman_Metro",
 #	[string] $SQLUsername            = "BackUpOperator",
 #	[string] $SQLPassword            = "diF80noY",
-	[string] $SQLBackUpPath          = "D:\BackUp\Shturman_Metro",
-	[string] $SQLExportPath          = "D:\BackUp\2Tape",
-	[switch] $SQLExport              = $FALSE,			            # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-    [switch] $SQLExportUploadArc     = $FALSE,	                    # Архивирование бэкапа для заливки на сервер
-    [int]    $SQLExportUploadArcPart = 100,		                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
-    [switch] $SQLExportUpload        = $FALSE,		                # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
-    [string] $SQLExportUploadPath    = "\\172.16.30.139\Share\Exp",	# Путь куда заливать
-    [array]  $SQLExportUploadCred    = ("UserName","password"),		# Логин и пароль для заливки
-	[array]  $SQLBackUpFileMask      = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
-    #[array] $SQLLimits              = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $SQLLimits              = $NULL,                  # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-	#[string]$SQLDateFormatLog       = "yyyy-MM-dd_HHmm",
+	[string] $SQLBackUpPath          = "D:\BackUp\Shturman_Metro"
+	[string] $SQLExportPath          = "D:\BackUp\2Tape"
+	[switch] $SQLExport              = $FALSE			            # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [switch] $SQLExportUploadArc     = $FALSE	                    # Архивирование бэкапа для заливки на сервер
+    [int]    $SQLExportUploadArcPart = 100		                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
+    [switch] $SQLExportUpload        = $FALSE		                # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string] $SQLExportUploadPath    = "\\172.16.30.139\Share\Exp"	# Путь куда заливать
+    [array]  $SQLExportUploadCred    = ("UserName","password")		# Логин и пароль для заливки
+	[array]  $SQLBackUpFileMask      = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak")
+    #[array] $SQLLimits              = (10, 60, 180, 365, 0)   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $SQLLimits              = $NULL                  # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	#[string]$SQLDateFormatLog       = "yyyy-MM-dd_HHmm"
 
 	# +==============+
 	# |    MySQL     |
 	# +==============+
-	[switch] $MySQL                    = $FALSE,					                # Бэкап и обслуживание MySQL ( без этого колюча остальыне из группы MySQL* игнорируются)
-    [string] $MySQLDumperPath          = "C:\Redmine\mysql\bin\mysqldump.exe",		# То чем создавать дампы
-    [array]  $MySQLCred                = ("UserName","password"),		            # Логин и пароль для заливки
-	[array]  $MySQL_DB                 = ("db_name_1","db_name_2"),                 # Список баз для бэкапа
-	#[string]$SQLDateFormatLog         = "yyyy-MM-dd_HHmm",
-	[string] $MySQLBackUpPath          = "\MySQL",
-    [string] $MySQLBackUpPrefix        = "MySQL_",	                                # Префикс названия создаваемого файла
-    #[array]  $MySQLLimits              = (10, 60, 180, 365, 0),                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $MySQLLimits              = $NULL,                                     # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-	[switch] $MySQLExport              = $FALSE,			                        # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-    [int]    $MySQLExportUploadArcPart = 0,		                                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
+	#[switch] $MySQL                    = $FALSE,					                # Бэкап и обслуживание MySQL ( без этого колюча остальыне из группы MySQL* игнорируются)
+    [string] $MySQLDumperPath          = "C:\Redmine\mysql\bin\mysqldump.exe"		# То чем создавать дампы
+    [array]  $MySQLCred                = ("UserName","password")		            # Логин и пароль для заливки
+	[array]  $MySQL_DB                 = ("db_name_1","db_name_2")                  # Список баз для бэкапа
+	#[string]$SQLDateFormatLog         = "yyyy-MM-dd_HHmm"
+	[string] $MySQLBackUpPath          = "\MySQL"
+    [string] $MySQLBackUpPrefix        = "MySQL_"	                                # Префикс названия создаваемого файла
+    #[array]  $MySQLLimits              = (10, 60, 180, 365, 0)                     # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $MySQLLimits              = $NULL                                      # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[switch] $MySQLExport              = $FALSE			                            # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [int]    $MySQLExportUploadArcPart = 0		                                    # Нарезка архива на части = размер части в МБ, 0 = одним куском
 
 	# +==============+
 	# |     SVN      |
 	# +==============+
-	[switch] $SVN            = $FALSE,				    # Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
-	[string] $SVNRepoPath    = "D:\Repositories",
-	[string] $SVNBackUpPath  = "D:\BackUp\SVN",
-    #[array] $SVNLimits      = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $SVNLimits      = $NULL,                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [switch] $SVNExport      = $FALSE,                  # Выкладывать последний архив в каталог для переноса на другую машину 
+	#[switch] $SVN            = $FALSE,				    # Бэкап и обслуживание SVN ( без этого колюча остальные из группы SVN* игнорируются)
+	[string] $SVNRepoPath    = "D:\Repositories"
+	[string] $SVNBackUpPath  = "D:\BackUp\SVN"
+    #[array] $SVNLimits      = (10, 60, 180, 365, 0)    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $SVNLimits      = $NULL                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [switch] $SVNExport      = $FALSE                   # Выкладывать последний архив в каталог для переноса на другую машину 
 
 	# +==============+
 	# |    Redmine   |
 	# +==============+
 	#[switch]$Redmine             = $TRUE			                         # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
-	[switch] $Redmine             = $FALSE,			                         # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
-    [string] $RedmineBackUpPrefix = "Redmine",
-    [string] $RedmineBackUpPath   =  "\Redmine",                             # Место куда складывать бекапы
-    #[array] $RedmineLimits       = (10, 60, 180, 365, 0),                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $RedmineLimits       = $NULL,                                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-	[string] $RedmineDB           = "bitnami_redmine",			             # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
-    [switch] $RedmineExport       = $FALSE,                                  # Запаковывать последний архив и выкладывать его в каталог для переноса на другую машину 
-	[string] $RedminePath         = "C:\redmine\apps\redmine\htdocs\files",  # Место где живут файлы которые необходимо забекапить (аттачи)
+	#[switch] $Redmine             = $FALSE 		                         # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+    [string] $RedmineBackUpPrefix = "Redmine"
+    [string] $RedmineBackUpPath   =  "\Redmine"                              # Место куда складывать бекапы
+    #[array] $RedmineLimits       = (10, 60, 180, 365, 0)                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $RedmineLimits       = $NULL                                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[string] $RedmineDB           = "bitnami_redmine" 			             # Бэкап и обслуживание Redmine ( бех этого колюча остальные из группы Redmine* игнорируются)
+    [switch] $RedmineExport       = $FALSE                                   # Запаковывать последний архив и выкладывать его в каталог для переноса на другую машину 
+	[string] $RedminePath         = "C:\redmine\apps\redmine\htdocs\files"   # Место где живут файлы которые необходимо забекапить (аттачи)
 
 
 	# +=========================+
     # |    Files and folders    |
 	# +=========================+
 	#[switch]$FilesON = $TRUE,		                                         # Создавать бекапы файлов/каталогов
-	[switch] $FilesON = $FALSE,		                                         # Создавать бекапы файлов/каталогов
-    [string] $FilesDateFormat = "yyy-MM-dd_HHmm",
-	[string] $FilesBackUpPath = "D:\BackUp\Files",           # Место куда сладируются сделанные бекапы
+	#[switch] $FilesON = $FALSE,		                                         # Создавать бекапы файлов/каталогов
+    [string] $FilesDateFormat = "yyy-MM-dd_HHmm"
+	[string] $FilesBackUpPath = "D:\BackUp\Files"           # Место куда сладируются сделанные бекапы
 	[array]  $FilesFileName = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
                                   # --TODO --"Mask Include", "Mask Exclude" - маски файлов
                                 ("TargetFolderForBackUpFile", "FilePatch", "ID", "Compress"), 
                                 ("TargetFolderForBackUpFile", "FilePatch", "ID", "Compress")
-                             ),		# единичные файлы
+                             )		# единичные файлы
 	[array]  $FilesFolderName =  (
                                       # имя фолдера задаваемого в $FilesBackUpPath , каталог который необходимо забекапить, Compress | $FALSE - сжммать, Уровень сжатия [0-9], Маска включаемых файлов, Маска исключаемых
                                       # "Mask Include", "Mask Exclude" - маски файлов
                                     ("TargetFolderForFolder", "FolderPatch", "ID", "Compress", "Mask Include", "Mask Exclude"), 
                                     ("TargetFolderForFolder", "FolderPatch", "ID", "Compress", "Mask Include", "Mask Exclude")
-                                ),		# фолдеры целиком
+                                )		# фолдеры целиком
 	# Удаление старых архивов (как и логов) или нет?
-    #[array] $FilesLimits              = (10, 60, 180, 365, 0),               # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $FilesLimits              = $NULL,                               # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-	[string] $FilesExportPath          = $NULL,
-    [switch] $FilesExport              = $FALSE,			                  # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
-    [int]    $FilesExportUploadArcPart = 100,		                          # Нарезка архива на части = размер части в МБ, 0 = одним куском
-    [switch] $FilesExportUpload        = $FALSE,		                      # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
-    [string] $FilesExportUploadPath    = "\\172.16.30.139\Share\Exp",	      # Путь куда заливать
-    [array]  $FilesExportUploadCred    = ("UserName","password"),		      # Логин и пароль для заливки
+    #[array] $FilesLimits              = (10, 60, 180, 365, 0)                # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $FilesLimits              = $NULL                                # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+	[string] $FilesExportPath          = $NULL
+    [switch] $FilesExport              = $FALSE 			                  # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+    [int]    $FilesExportUploadArcPart = 100 		                          # Нарезка архива на части = размер части в МБ, 0 = одним куском
+    [switch] $FilesExportUpload        = $FALSE 		                      # Заливка последнего бекапа на сервак, (если он отличается от предыдущего)
+    [string] $FilesExportUploadPath    = "\\172.16.30.139\Share\Exp" 	      # Путь куда заливать
+    [array]  $FilesExportUploadCred    = ("UserName","password") 		      # Логин и пароль для заливки
 	#[array] $FilesBackUpFileMask      = ("Shturman_Metro_2*.bak","Shturman_Metro_Anal_2*.bak"),
 
 	# +===================================+
     # |    Purge Old Files/folders        |
 	# +===================================+
 	#[switch]$Purge = $TRUE,		                                         # Создавать бекапы файлов/каталогов
-	[switch] $Purge = $FALSE,		                                         # Создавать бекапы файлов/каталогов
+	#[switch] $Purge = $FALSE,		                                         # Создавать бекапы файлов/каталогов
 	[array]  $PurgeList = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
                                   # "Path" - "Путь к месту хранения", "Mask" - маски файлов, ("Limits") - правила удаления (10, 60, 180, 365, 0) - d / 10d / m / q / y
@@ -254,54 +267,48 @@ param (
                                 ("Path", "Mask", ($NULL))
                                 #("c:\BackUp", "SomeFile_", ($NULL)),
                                 #("c:\BackUp", "SomeFile_", (10, 60, 180, 365, 0))
-                             ),		# единичные файлы
+                             )		# единичные файлы
     
 
 	# +==========================================+
 	# |     Collect BackUp's from Computers      |
 	# +==========================================+
-	[switch] $Collect = $FALSE,				           # Сбор бекапов с разнеызх компов и складирование их у себя
+	#[switch] $Collect = $FALSE				           # Сбор бекапов с разнеызх компов и складирование их у себя
 	[array]  $Collect_Data = (
                                 ("\\HostName.domain.local\Share\Path", "BackUp_Mask", (14,60,365,720,0) ),
                                 ("\\HostName.domain.local\Share\Path", "BackUp_Mask", $NULL )
-                            ),
-	[string] $Collect_Folder = "D:\BackUp\FromComputers",
+                            )
+	[string] $Collect_Folder = "D:\BackUp\FromComputers"
     #[array] $CollectLimits = (10, 60, 180, 365, 0),   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
-    [array]  $CollectLimits = $NULL,                   # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
+    [array]  $CollectLimits = $NULL                    # [(Days, 10day, Mon, Quartal, Year)] example [(10, 60, 180, 365, 0)]
 
 
 	# +==============+
     # |    Common    |
 	# +==============+
     # Значения по умолчанию для хранения бекапов
-    [int]    $Store_Daily    = 14,                    # Дней хранятся ежедневные бэкапы
-    [int]    $Store_10days   = 60,                    # Дней хранятся бэкапы от 01, 10 и 20 числа
-    [int]    $Store_Montly   = 365,                   # Дней хранятся ежемесячные бэкапы (01.хх.хх)
-    [int]    $Store_Quartal  = 720,                   # Дней хранятся ежеквартальные бэкапы (01.01.хх 01.04.хх 01.07.хх 01.10.хх)
-    [int]    $Store_Years    = 0,                     # Дней хранятся ежегодовые бэкапы (01.01.хх)
+    [int]    $Store_Daily    = 14                     # Дней хранятся ежедневные бэкапы
+    [int]    $Store_10days   = 60                     # Дней хранятся бэкапы от 01, 10 и 20 числа
+    [int]    $Store_Montly   = 365                    # Дней хранятся ежемесячные бэкапы (01.хх.хх)
+    [int]    $Store_Quartal  = 720                    # Дней хранятся ежеквартальные бэкапы (01.01.хх 01.04.хх 01.07.хх 01.10.хх)
+    [int]    $Store_Years    = 0                      # Дней хранятся ежегодовые бэкапы (01.01.хх)
 
-	[switch] $SheduledTaskCreate = $FALSE,		      # Создание Шедульной таски для автоматического запуска скрипта
-	[switch] $UseSettingsFile = $FALSE,			      # использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
-	[string] $SettingsFile = $NULL,			          # использоватать указанный файл настроек (копия BackUpSettings.ps1) файл либо находится в фолдере скрипта либо указать полный путь. 
-	[switch] $HighestPrivelegesIsRequired = $FALSE,   # Проверять есть ли админские права. модт быть необходимо работы с файлами
+	#[switch] $UseSettingsFile = $FALSE			      # использоватать файл настроек BackUpSettings.ps1 (находится в фолдере скрипта). Настройки аналогичны данному блоку PARAM.
+	#[string] $SettingsFile = $NULL			          # использоватать указанный файл настроек (копия BackUpSettings.ps1) файл либо находится в фолдере скрипта либо указать полный путь. 
+	[switch] $HighestPrivelegesIsRequired = $FALSE    # Проверять есть ли админские права. модт быть необходимо работы с файлами
 
-    [string] $TempPath = "D:\BackUp",                 # каталог для бекапов по умолчанию
+    [string] $TempPath = "D:\BackUp"                 # каталог для бекапов по умолчанию
 
-    [string] $BackUpPath = "D:\BackUp",               # каталог для бекапов по умолчанию
-    [string] $ExportPath = "D:\BackUp\2Tape",         # каталог для экспорта бекапов по умолчанию
-    [switch] $Export     = $FALSE,                    # Если включено то все бэкапы будут экспортиться. независимо от местных настроек
+    [string] $BackUpPath = "D:\BackUp"               # каталог для бекапов по умолчанию
+    [string] $ExportPath = "D:\BackUp\2Tape"         # каталог для экспорта бекапов по умолчанию
+    [switch] $Export     = $FALSE                    # Если включено то все бэкапы будут экспортиться. независимо от местных настроек
 
-	[string] $UploadCahnnelType = "VPN",		      # VPN | FTP | NO .... - Канал для загрузки файлов на внешний сервер
-	[string] $VPNName = "ST",					      # 
-#	[string] $VPNUserName = "username",			      # 
-#	[string] $VPNPassword= "password",			      # 
+	[string] $UploadCahnnelType = "VPN"		      # VPN | FTP | NO .... - Канал для загрузки файлов на внешний сервер
+	[string] $VPNName = "ST"					      # 
+#	[string] $VPNUserName = "username"			      # 
+#	[string] $VPNPassword= "password"			      # 
 
-	[switch] $Debug = $FALSE	    # в консоль все события лога пишет
-#	[switch] $Debug = $TRUE		# в консоль все события лога пишет
-)
 
-$version = "1.1.2";
-$InScript = $TRUE
 
 # +==================+
 # |       Common     |
@@ -311,16 +318,13 @@ $CurrDate = Get-Date -Format "yyyy-MM-dd"
 $CurrTime = Get-Date -Format "HHmm"
 $CurrDateTime = Get-Date -Format "yyyy-MM-dd_HHmm"
 
-# // Files //
-$FilesBackUpPath = if ( $FilesBackUpPath -ne "" ) { $FilesBackUpPath } else { $BackUpPath }           # Место куда сладируются сделанные бекапы
-$FilesLimits     = if ( $FilesLimits.Count )      { $FilesLimits } else { $DefaultStoreLimits }           
-$FilesExportPath = if ( $FilesExportPath -ne "" ) { $FilesExportPath } else { $ExportPath }           
-$FilesExport     = if ( $FilesExport )            { $FilesExport } else { $Export }           
+$ComputerName = $env:computername
 
 
 # Determine script location for PowerShell
 $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 $ScriptFullPath = $ScriptDir + "\" + $script:MyInvocation.MyCommand.Name
+$sZipPath = $ScriptDir + "\7-Zip\7za.exe"
 
 # Include SubScripts
 .$ScriptDir"\..\Functions\Functions.ps1"
@@ -332,6 +336,55 @@ WriteLog "Archive Log Files, purge old archives and upload archives to Server" "
 WriteLog "Script version: [$version]" "INFO"
 
 
+# Поиск сеттингс файла
+$SettingsFilesArr = Get-ChildItem -Path $ScriptDir -Filter "Settings*"
+if ( Test-Path -Path "$ScriptDir\Settings_$ComputerName.ps1" )
+{
+    $SettingsFilePath = "$ScriptDir\Settings_$ComputerName.ps1"
+}
+elseif ( Test-Path -Path "$ScriptDir\Settings.ps1" )
+{
+    $SettingsFilePath = "$ScriptDir\Settings.ps1"
+}
+elseif ( $SettingsFilesArr.Length -gt 1 )
+{
+    $SettingsFilePath = $SettingsFilesArr[0].FullName
+}
+else
+{
+    WriteLog "Не найден файл настроек, заплатите разработчику." "ERRr"
+    exit
+}
+if ( $SettingsFilePath.Length -ne 0 )
+{
+    if ( Test-Path -Path $SettingsFilePath )
+    {
+	    # инклюдим параметры (список сервисов, инстанс SQL и пр что обычно в блоке params
+	    WriteLog "Чтение настроек скрипта [$SettingsFilePath]" "INFO"
+	    ."$SettingsFilePath"
+    }
+    else 
+    {
+        WriteLog "Невозможна ошибка [SettingsFilePath]; Ухожу." "ERRr" 
+        exit
+    }
+}
+else 
+{
+    WriteLog "Невозможна ошибка [SettingsFilePath]; Ухожу." "ERRr" 
+    exit
+}
+
+
+# // Files //
+$FilesBackUpPath = if ( $FilesBackUpPath -ne "" ) { $FilesBackUpPath } else { $BackUpPath }           # Место куда сладируются сделанные бекапы
+$FilesLimits     = if ( $FilesLimits.Count )      { $FilesLimits } else { $DefaultStoreLimits }           
+$FilesExportPath = if ( $FilesExportPath -ne "" ) { $FilesExportPath } else { $ExportPath }           
+$FilesExport     = if ( $FilesExport -ne "" )     { $FilesExport } else { $Export }           
+
+
+#exit 
+<#
 if ( $SettingsFile.Length -gt 3 )
 {
     [string]$ParamsPath = "$ScriptDir\$SettingsFile";
@@ -344,6 +397,11 @@ else
 {
     $ParamsPath = $NULL
 }
+
+echo "sdfsdf"
+
+exit;
+break;
 
 if ( $ParamsPath.Length -ne 0 )
 {
@@ -362,6 +420,7 @@ else
 {
 	WriteLog "Скрипт запущен с дефолтными настройками" "INFO"
 }
+#>
 
 <#
 Старый варианта выбора файла настроек
@@ -410,24 +469,32 @@ if ( $HighestPrivelegesIsRequired )
 
 # Создание Шедульной таски для автоматического запуска скрипта
 #$SheduledTaskCreate = $TRUE
-if ($SheduledTaskCreate) { .$ScriptDir"\BackUp_Sheduled-Task.ps1";  BackUp_SheduledTask;  }
+if ($SheduledTaskCreate) { 
+    .$ScriptDir"\BackUp_Sheduled-Task.ps1";  
+    BackUp_SheduledTask; 
+    exit;  
+}
 
-if ( Test-Path -Path "ScriptDir\BackUp_SQL.ps1" )     { .$ScriptDir"\BackUp_SQL.ps1";     }
-if ( Test-Path -Path "ScriptDir\BackUp_Log.ps1" )     { .$ScriptDir"\BackUp_Log.ps1";     }
-if ( Test-Path -Path "ScriptDir\BackUp_Errors.ps1" )  { .$ScriptDir"\BackUp_Errors.ps1";  }
-if ( Test-Path -Path "ScriptDir\BackUp_MySQL.ps1" )   { .$ScriptDir"\BackUp_MySQL.ps1";   }
-if ( Test-Path -Path "ScriptDir\BackUp_Redmine.ps1" ) { .$ScriptDir"\BackUp_Redmine.ps1"; }
-if ( Test-Path -Path "ScriptDir\BackUp_SVN.ps1" )     { .$ScriptDir"\BackUp_SVN.ps1";     }
-if ( Test-Path -Path "ScriptDir\BackUp_Files.ps1" )   { .$ScriptDir"\BackUp_Files.ps1";   }
-if ( Test-Path -Path "ScriptDir\BackUp_Purger.ps1" )  { .$ScriptDir"\BackUp_Purger.ps1";  }
-if ( Test-Path -Path "ScriptDir\BackUp_Collect.ps1" ) { .$ScriptDir"\BackUp_Collect.ps1"; }
+
+if ( Test-Path -Path "$ScriptDir\BackUp_SQL.ps1" )     { .$ScriptDir"\BackUp_SQL.ps1";     }
+if ( Test-Path -Path "$ScriptDir\BackUp_Log.ps1" )     { .$ScriptDir"\BackUp_Log.ps1";     }
+if ( Test-Path -Path "$ScriptDir\BackUp_Errors.ps1" )  { .$ScriptDir"\BackUp_Errors.ps1";  }
+if ( Test-Path -Path "$ScriptDir\BackUp_MySQL.ps1" )   { .$ScriptDir"\BackUp_MySQL.ps1";   }
+if ( Test-Path -Path "$ScriptDir\BackUp_Redmine.ps1" ) { .$ScriptDir"\BackUp_Redmine.ps1"; }
+if ( Test-Path -Path "$ScriptDir\BackUp_SVN.ps1" )     { .$ScriptDir"\BackUp_SVN.ps1";     }
+if ( Test-Path -Path "$ScriptDir\BackUp_Files.ps1" )   { .$ScriptDir"\BackUp_Files.ps1";   }
+if ( Test-Path -Path "$ScriptDir\BackUp_Purger.ps1" )  { .$ScriptDir"\BackUp_Purger.ps1";  }
+if ( Test-Path -Path "$ScriptDir\BackUp_Collect.ps1" ) { .$ScriptDir"\BackUp_Collect.ps1"; }
 
 #"[$Debug]"
 #$Debug = $TRUE
 #"[$Debug]"
 #"fffff3"
 
-# Custom Scenarios (in settings.ps1)
+# Run Custom Scenarios (in settings.ps1)
+Custom_Scenario
+
+<#
 if ( ($SettingsFile.Length -gt 3) -or $UseSettingsFile )
 {
     Custom_Scenario
@@ -447,7 +514,7 @@ else
     if ( $Purge   ) { BackUp_Purger;           } # Purger old backup (bastd on files and folders)
     if ( $Collect ) { BackUp_Collect;          } # Сбор бекапов с других серверов
 }
-
+#>
 # Custom Scenarios (in settings.ps1)
 #if ( ($SettingsFile.Length -gt 3) -or $UseSettingsFile )
 #{
@@ -455,3 +522,5 @@ else
 #}
 
 $InScript = $FALSE
+
+WriteLog "Работа окончена. Всем спасибо, расходимся." "MESS"

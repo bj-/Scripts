@@ -1,4 +1,4 @@
-if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
+if ( -not $InScript ) { $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path; .$ScriptDir"\Backup.ps1" -Debug;  break }
 # Файл настроек скрипта BackUp.ps1
 
 	# +==============+
@@ -28,11 +28,12 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# +=========================+
 	#[switch]$FilesON = $TRUE,		                                         # Создавать бекапы файлов/каталогов
 	#[switch] $FilesON = $TRUE		                                         # Создавать бекапы файлов/каталогов
-	[string] $FilesBackUpPath = "D:\BackUp\Files"           # Место куда сладируются сделанные бекапы
+	[string] $FilesBackUpPath = "C:\BackUp\Files"           # Место куда сладируются сделанные бекапы
 	[array]  $FilesFileName = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
                                   # --TODO --"Mask Include", "Mask Exclude" - маски файлов
-                                ("", "D:\Shturman4\BIN\Shturman.ini", "Anal", "Compress"),
+                                #("", "D:\Shturman4\BIN\Shturman.ini", "Anal", "Compress"),
+                                ("", "", "", ""),
                                 ("", "", "", "")
                              )		# единичные файлы
 	[array]  $FilesFolderName =  (
@@ -43,14 +44,17 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
                                     #("", "C:\inetpub\wwwroot\request", "",   "Compress", "", ""), 
                                     #("", "C:\inetpub\wwwroot\script", "",    "Compress", "", ""), 
                                     #("", "C:\inetpub\wwwroot\templates", "", "Compress", "", ""), 
-                                    ("", "D:\BackUp\Temp\Portal_Anal", "", "", "", ""), 
+                                    #("", "D:\BackUp\Temp\Portal_Anal", "", "", "", ""), 
+                                    #("", "C:\redmine\apache2\htdocs", "", "", "", ""), 
+                                    ("", "C:\redmine\apache2\htdocs\admin", "", "", "", ""), 
                                     ("", "", "", "", "", "")
 #                                    ("TargetFolderForFolder", "FolderPatch", "ID", "Compress", "Mask Include", "Mask Exclude")
                                 )		# фолдеры целиком
 	# Удаление старых архивов (как и логов) или нет?
 	#[string] $FilesExportPath          = "D:\BackUp\2Tape"
-	[string] $FilesExportPath          = "D:\BackUp\2Export"
-	[switch] $FilesExport              = $TRUE			                  # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
+	#[string] $FilesExportPath          = $NULL
+	#[string] $FilesExportPath          = "D:\BackUp\2Export"
+	#[switch] $FilesExport              = $TRUE			                  # Выложить последний файл в каталог для экспорта (хардлинк по возможности)
 
 
 	# +===================================+
@@ -82,8 +86,8 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# |    Common    |
 	# +==============+
 
-	[string]$BackUpPath = "D:\BackUp"          # каталог для бекапов по умолчанию
-	[string]$ExportPath = "D:\BackUp\2Export"    # каталог для экспорта бекапов по умолчанию
+	[string]$BackUpPath = "C:\BackUp"          # каталог для бекапов по умолчанию
+	[string]$ExportPath = "C:\BackUp\2Export"    # каталог для экспорта бекапов по умолчанию
 	[string]$Export = $TRUE                    # Если включено то все бэкапы будут экспортиться. независимо от местных настроек
 
 
@@ -97,21 +101,22 @@ function Custom_Scenario()
     #===================================================
     #$currDate
     #Scenario
+    <#
     $x_folders = (
-                    ("", "C:\inetpub\wwwroot\dynamic", "",  "Compress", "", ""), 
-                    ("", "C:\inetpub\wwwroot\includes", "",  "Compress", "", ""), 
-                    ("", "C:\inetpub\wwwroot\request", "",   "Compress", "", ""), 
-                    ("", "C:\inetpub\wwwroot\script", "",    "Compress", "", ""), 
-                    ("", "C:\inetpub\wwwroot\templates", "", "Compress", "", "")
+                    ("", "C:\redmine\apache2\htdocs\dynamic", "",  "Compress", "", ""), 
+                    ("", "C:\redmine\apache2\htdocs\includes", "",  "Compress", "", ""), 
+                    ("", "C:\redmine\apache2\htdocs\request", "",   "Compress", "", ""), 
+                    ("", "C:\redmine\apache2\htdocs\script", "",    "Compress", "", ""), 
+                    ("", "C:\redmine\apache2\htdocs\templates", "", "Compress", "", "")
                  )
-    BackUp_FilesAndFolders -BackUpPath "D:\BackUp\Temp\Portal_Anal" -FolderList $x_folders
-    $Mask = "Portal_Anal"
-    $path = "D:\BackUp\Temp\Portal_Anal"
+    BackUp_FilesAndFolders -BackUpPath "C:\BackUp\Temp\Portal_Anal" -FolderList $x_folders
+    $Mask = "ST-Tracker_wwwroot"
+    $path = "C:\BackUp\Temp\$Mask"
     $arcPath = "$FilesBackUpPath\$Mask" + "_" + $CurrDateTime + ".7z"
     ArchiveFiles -Path $path -arcPath $arcPath -StoreArchive -DelSource -Verbose
     export_backup -Source $arcPath -Target $ExportPath -Mask $Mask -Verbose
     #purge_oldBackUp -Path $FilesBackUpPath -FileMask $Mask -Limits $Limits -Verbose
-
+    #>
     #break
     #===================================================
     WriteLog "End Custom Scenario [Before Basic] " "INFO"
@@ -127,7 +132,7 @@ function Custom_Scenario()
     #BackUp_SVN;               # SVN Repositories
     # Файлы и каталоги
     #"fffffffffffffffffffff"
-    #BackUp_FilesAndFolders -BackUpPath $FilesBackUpPath -DateFormat $FilesDateFormat -FilesList $FilesFileName -FolderList $FilesFolderName -Limits $FilesLimits -ExportPath $FilesExportPat -Export $FilesExport
+    BackUp_FilesAndFolders -BackUpPath $FilesBackUpPath -DateFormat $FilesDateFormat -FilesList $FilesFileName -FolderList $FilesFolderName -Limits $FilesLimits -ExportPath $FilesExportPath -Export $FilesExport
     #BackUp_Purger;            # Purger old backup (bastd on files and folders)
     #BackUp_Collect;           # Сбор бекапов с других серверов
 

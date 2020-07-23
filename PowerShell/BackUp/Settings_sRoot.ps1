@@ -1,10 +1,10 @@
-if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
+if ( -not $InScript ) { .\Backup.ps1 -UseSettingsFile -Debug;  break }
 # Файл настроек скрипта BackUp.ps1
 
 	# +==============+
 	# |   Log Files  |
 	# +==============+
-	#[switch] $Log                  = $TRUE 					     # Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
+	[switch] $Log                  = $TRUE 					     # Бэкап и обслуживание Log файлов ( бех этого колюча остальные из группы игнорируются)
 	[string] $LogFilePath          = "D:\Shturman4\Bin\Log"
 	[string] $LogFilePathOld       = "D:\Shturman4\Bin\Log\Old"  
 	[switch] $PurgeLogFiles        = $TRUE		                     # похоронить архивы старше  $LogFilePurgeDays дней
@@ -15,7 +15,7 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# +==============+
 	# |     SQL      |
 	# +==============+
-	#[switch] $SQL                    = $TRUE					    # Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
+	[switch] $SQL                    = $TRUE					    # Бэкап и обслуживание SQL ( без этого колюча остальыне из группы SQL* игнорируются)
 	[string] $SQLBackUpPath          = "D:\BackUp\MSSQL"
 	[string] $SQLExportPath          = "D:\BackUp\2Tape"
 	[array]  $SQLBackUpFileMask      = ("Shturman3_Anal_2*.bak")
@@ -27,7 +27,7 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# |    Files and folders    |
 	# +=========================+
 	#[switch]$FilesON = $TRUE,		                                         # Создавать бекапы файлов/каталогов
-	#[switch] $FilesON = $TRUE		                                         # Создавать бекапы файлов/каталогов
+	[switch] $FilesON = $TRUE		                                         # Создавать бекапы файлов/каталогов
 	[string] $FilesBackUpPath = "D:\BackUp\Files"           # Место куда сладируются сделанные бекапы
 	[array]  $FilesFileName = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
@@ -56,7 +56,7 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# +===================================+
     # |    Purge Old Files/folders        |
 	# +===================================+
-	#[switch]$Purge = $TRUE		                                         # Создавать бекапы файлов/каталогов
+	[switch]$Purge = $TRUE		                                         # Создавать бекапы файлов/каталогов
 	#[switch] $Purge = $FALSE,		                                         # Создавать бекапы файлов/каталогов
 	[array]  $PurgeList = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
@@ -70,7 +70,7 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	# +==========================================+
 	# |     Collect BackUp's from Computers      |
 	# +==========================================+
-	#[switch] $Collect = $FALSE				           # Сбор бекапов с разнеызх компов и складирование их у себя
+	[switch] $Collect = $FALSE				           # Сбор бекапов с разнеызх компов и складирование их у себя
 	[array]  $Collect_Data = (
                                 ("\\HostName.domain.local\Share\Path", "BackUp_Mask", (14,60,365,720,0) ),
                                 ("\\HostName.domain.local\Share\Path", "BackUp_Mask", $NULL )
@@ -85,7 +85,6 @@ if ( -not $InScript ) { .\Backup.ps1 -Debug;  break }
 	[string]$BackUpPath = "D:\BackUp"          # каталог для бекапов по умолчанию
 	[string]$ExportPath = "D:\BackUp\2Export"    # каталог для экспорта бекапов по умолчанию
 	[string]$Export = $TRUE                    # Если включено то все бэкапы будут экспортиться. независимо от местных настроек
-
 
 
 function Custom_Scenario()
@@ -118,17 +117,17 @@ function Custom_Scenario()
 
 
 
-    #Basic Scenarios
-    #BackUp_MSSQL;             # MS SQL
-    #BackUp_Logs;              # Log files
-    #BackUp_Errors;            # Error files (Special for shturman)
+    #Basic Scenario
+    BackUp_MSSQL;             # MS SQL
+    BackUp_Logs;              # Log files
+    BackUp_Errors;            # Error files (Special for shturman)
     #BackUp_MySQL;             # MySQL
     #BackUp_Redmine;           # Redmine
     #BackUp_SVN;               # SVN Repositories
     # Файлы и каталоги
     #"fffffffffffffffffffff"
     #BackUp_FilesAndFolders -BackUpPath $FilesBackUpPath -DateFormat $FilesDateFormat -FilesList $FilesFileName -FolderList $FilesFolderName -Limits $FilesLimits -ExportPath $FilesExportPat -Export $FilesExport
-    #BackUp_Purger;            # Purger old backup (bastd on files and folders)
+    BackUp_Purger;            # Purger old backup (bastd on files and folders)
     #BackUp_Collect;           # Сбор бекапов с других серверов
 
 
