@@ -2,8 +2,12 @@
 
 function BackUp_Purger()
 {
+	<#
+	 1.0.2
+		 -  Skip empty arrays
+	#>
 
-    $ModVer = "1.0.1"
+    $ModVer = "1.0.2"
     $ModName = "Purger"
     WriteLog "Module [$ModName] version: [$ModVer]" "INFO"
 
@@ -19,9 +23,16 @@ function BackUp_Purger()
         $Mask = $item[1]
         $cLimits = if ( $item[2] ) { $item[2] } else { $DefaultStoreLimits }
 
-        WriteLog "Purger procesing in [$Path] by mask [$Mask]; limits [$cLimits]" "INFO"
 
         #Purge if backup created
-        purge_oldBackUp -Path $Path -FileMask $Mask -Limits $cLimits -Verbose
+        if ( $Path -ne "" )
+        {
+            WriteLog "Purger procesing in [$Path] by mask [$Mask]; limits [$cLimits]" "INFO"
+            purge_oldBackUp -Path $Path -FileMask $Mask -Limits $cLimits -Verbose
+        }
+        else
+        {
+            WriteLog "Purger procesing nothing, becouse empty Path [$Path]; mask [$Mask]; limits [$cLimits]" "DUMP"
+        }
     }
 }
