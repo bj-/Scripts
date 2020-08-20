@@ -53,19 +53,19 @@ function local:BackUp_FilesAndFolders ()
     
     [array]  $FilesFileName   = $FilesList
     [array]  $FilesFolderName = $FolderList
-    $FilesExportPath
+    #$FilesExportPath
     [array]  $FilesLimits     = if ( $Limits.Count -gt 0 ) { $Limits } else { $FilesLimits }
     [string] $FilesExportPath = if ( $ExportPath -ne "" ) { $ExportPath } else { $FilesExportPath  }
     [switch] $FilesExport     = $Export
 
     #$l_ExportPath
-    $ExportPath
+    #$ExportPath
 
     #$FilesExportPath = "ffffffffffff111"
     #$ExportPath = "ffffffffffff111"
     #$Files:FilesExportPath
     #xExit
-    "fff"
+    #"fff"
 
     $ModVer = "1.0.2"
     $ModName = "Files and folders"
@@ -279,8 +279,8 @@ function local:BackUp_FilesAndFolders ()
                 $path = $dir.FullName
         	    $arcPath = "$BackUpFolder\$BackFileMaskName" + $id + "_" + $currDate + ".7z"
                 
-                $path
-                $arcPath
+                #$path
+                #$arcPath
                 ArchiveFiles -Path $path -arcPath $arcPath -Size $Size -Verbose
 
                 # выкладываем / заливаем

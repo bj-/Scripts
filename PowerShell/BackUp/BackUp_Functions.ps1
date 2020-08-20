@@ -1,4 +1,4 @@
-﻿$InScript
+﻿#$InScript
 if ( -not $InScript ) { $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path; .$ScriptDir"\Backup.ps1" -Debug;  break }
 WriteLog "Imported Functions [BackUp_Functions.ps1]" "INFO"
 

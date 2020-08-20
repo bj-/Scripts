@@ -308,7 +308,7 @@ $InScript = $TRUE
 #	[string] $VPNUserName = "username"			      # 
 #	[string] $VPNPassword= "password"			      # 
 
-
+#"dd"
 
 # +==================+
 # |       Common     |
@@ -325,7 +325,7 @@ $ComputerName = $env:computername
 $ScriptDir = Split-Path $script:MyInvocation.MyCommand.Path
 $ScriptFullPath = $ScriptDir + "\" + $script:MyInvocation.MyCommand.Name
 $sZipPath = $ScriptDir + "\7-Zip\7za.exe"
-
+#"gg"
 # Include SubScripts
 .$ScriptDir"\..\Functions\Functions.ps1"
 .$ScriptDir"\..\Functions\log.ps1"
