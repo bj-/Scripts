@@ -65,11 +65,13 @@ if ( -not $InScript ) { $ScriptDir = Split-Path $script:MyInvocation.MyCommand.P
 	[array]  $PurgeList = (
                                   # имя фолдера задаваемого в $FilesBackUpPath , файл который необходимо забекапить, ID - на случай архивов с одинаковыми названиями, Compress | $FALSE - сжммать
                                   # "Path" - "Путь к месту хранения", "Mask" - маски файлов, ("Limits") - правила удаления (10, 60, 180, 365, 0) - d / 10d / m / q / y
-                                ("D:\BackUp\MSSQL", "Shturman3Diag_", ($NULL)),
-                                ("D:\BackUp\MSSQL", "ShturmanDiagnostics", ($NULL)),
-                                ("D:\BackUp\MSSQL\sRoot", "Shturman3_sRoot", ($NULL)),
-                                ("D:\BackUp\Files", "Portal_Anal", ($NULL)),
-                                ("D:\BackUp\Files", "Shturman3.ini", ($NULL))
+                                #("D:\BackUp\MSSQL", "Shturman3Diag_", ($NULL)),
+                                #("D:\BackUp\MSSQL", "ShturmanDiagnostics", ($NULL)),
+                                #("D:\BackUp\MSSQL\sRoot", "Shturman3_sRoot", ($NULL)),
+                                #("D:\BackUp\Files", "Portal_Anal", ($NULL)),
+                                ("C:\BackUp\Files", "htdocs", ($NULL)),
+                                ("C:\BackUp\Files", "admin", ($NULL)),
+                                ("", "", ($NULL))
                         )
 	# +==========================================+
 	# |     Collect BackUp's from Computers      |
@@ -133,7 +135,7 @@ function Custom_Scenario()
     # Файлы и каталоги
     #"fffffffffffffffffffff"
     BackUp_FilesAndFolders -BackUpPath $FilesBackUpPath -DateFormat $FilesDateFormat -FilesList $FilesFileName -FolderList $FilesFolderName -Limits $FilesLimits -ExportPath $FilesExportPath -Export $FilesExport
-    #BackUp_Purger;            # Purger old backup (bastd on files and folders)
+    BackUp_Purger;            # Purger old backup (bastd on files and folders)
     #BackUp_Collect;           # Сбор бекапов с других серверов
 
 
